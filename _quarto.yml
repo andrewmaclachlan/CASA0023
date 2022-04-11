@@ -1,0 +1,61 @@
+project:
+  type: book
+  output-dir: docs
+
+
+book:
+  title: "CASA0023 Remotely Sensing Cities and Environments"
+  #author: Andy MacLachlan
+  image: general_images/casa_logo.jpg
+  #cover-image: general_images/casa_logo.jpg
+  #date: r Sys.Date()
+  #description: "The CASA0023 Remotely Sensing Cities and Environments practical book"
+  navbar:
+    logo: general_images/casa_logo.jpg
+    collapse: true
+    collapse-below: lg
+    background: light
+    #reader-mode: true
+    search: true
+    right:
+      - icon: github
+  sidebar:
+    title: "CASA0023"
+    style: floating
+    reader-mode: true
+  repo-url: https://github.com/quarto-dev/quarto-demo
+  repo-actions: [edit, issue]
+
+    #tools:
+    #- icon: twitter
+    #  href: https://twitter.com
+    #- icon: github
+    #  menu:
+    #    - text: Source Code
+    #      url:  https://code.com
+    #    - text: Report a Bug
+    #      url:  https://bugs.com
+    #search: true
+  #repo-url: https://github.com/jjallaire/hopr/
+  #repo-actions: [edit]
+  #sharing: [twitter, facebook]
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+  fav-icon: "assets/favicon.ico"	
+  reader-mode: true
+
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    code-copy: true
+
+  pdf:
+    documentclass: scrbook
+#editor: visual
+

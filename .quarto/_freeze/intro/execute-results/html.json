@@ -1,0 +1,14 @@
+{
+  "hash": "c454e2065bbc041a71af2ea80a0c3a85",
+  "result": {
+    "markdown": "# Getting started with remote sensing\n\n# Introduction\n\n\nSee @knuth84 for additional discussion of literate programming.\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": null
+  }
+}
