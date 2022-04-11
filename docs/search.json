@@ -19,5 +19,19 @@
     "title": "References",
     "section": "",
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "",
+    "text": "Andy MacLachlan1\nLast updated: 2022-04-11"
+  },
+  {
+    "objectID": "index.html#acknowledgement",
+    "href": "index.html#acknowledgement",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThanks to the following academics who inspired the creating of the module and various concepts within it:\n\nDr Ellie Biggs\nDr Gareth Roberts\nDr Bryan Boruff\nProfessor Ted Milton\nDr Laurie Chisholm\n\nThanks again to the following people who have either contributed directly or provided code in repositories that have helped me style this book:\n\n\nR Studio\n\nSTAT 545\nrstudio4edu\nHadley Wickham\nAlison Presmanes Hill\nDesirée De Leon\nYihui Xie\nJulia Silge\nJenny Bryan\nOthers\n\nRobin Lovelace\nTwitter for R programmers\nMatt Ng\nStatQuest with Josh Starmer\nGarrick Aden‑Buie\n\n\n\nThe R package and analysis artwork used within this book has been produced by allison_horst, whilst artwork used in information boxes has been produced by Desirée De Leon. You can find Allison’s images on the stats illustration GitHub repository and Desirée’s on the rstudio4edu GitHub repository.\nI’ve certainly learnt a lot from their open code repositories!"
   }
 ]

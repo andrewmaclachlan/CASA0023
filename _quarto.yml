@@ -53,7 +53,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-    code-copy: true
+    code-link: true
 
   pdf:
     documentclass: scrbook
