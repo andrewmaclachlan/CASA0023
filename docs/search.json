@@ -2,9 +2,9 @@
   {
     "objectID": "intro.html",
     "href": "intro.html",
-    "title": "1  Getting started with remote sensing",
+    "title": "\n1  Getting started with remote sensing\n",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Landsat, as we have seen this before in CASA0005. We will then move to Sentinel data.\nYou need to select a city of you choice and then using the image and explanation below…\n\n\n\n\n\n\n\nGo to the Copernicus Open Access Hub: https://scihub.copernicus.eu/dhus/#/home.\n\nYou will need to make a free account\n\nDraw around the study area\nSelect image filter criteria\nSelect search icon\nDownload the S2MSI2A data\n\n\n\n\n\n\n\n\n\n\n\nWithin this image we have:\n\nAllows you to either move around the global or draw a study area\nAn example of a study area\nHow to sort the image results\nSentinel mission selection :\n\n\nSentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the product specification for more details\nThe platform refers to either sentinel 2A or 2B. Theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017.\nCloud cover e.g. [0 TO 5]\n\nOnce downloaded and unzipped you’ll be presented with a load of folders! Here we are interested in the 10m bands…which are:\n\n\n\n\n\n\n\n\nYou’ll find then in the GRANULE > sensor number > IMG_DATA > R10.\nNext open them up in QGIS to explore, if there is a TCI image this is a True Colour Image of B02 (Blue), B03 (Green), and B04 (Red) Bands - open this first, it’s just a single raster layer. See the Sentinel user guide definitions for any other acronyms you might need.\n\n\n\n\n\n\n\n\nUsing the Identify tool we can create a spectral signature by changing the view option to graph (look under the graph in the image above).\nHowever the TCI values are coded between 0 and 255 which will limit what we can do with it. So we can make our own raster stack, we did this in CASA0005 in R.\nBut in QGIS it’s easier to visulaise\n\nhttps://github.com/robmarkcole/satellite-image-deep-learning#techniques\nhttps://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification"
   },
   {
     "objectID": "summary.html",
@@ -25,7 +25,7 @@
     "href": "index.html",
     "title": "CASA0023 Remotely Sensing Cities and Environments",
     "section": "",
-    "text": "Andy MacLachlan1\nLast updated: 2022-04-11"
+    "text": "Andy MacLachlan1\nLast updated: 2022-04-12"
   },
   {
     "objectID": "index.html#acknowledgement",
@@ -33,5 +33,12 @@
     "title": "CASA0023 Remotely Sensing Cities and Environments",
     "section": "Acknowledgement",
     "text": "Acknowledgement\nThanks to the following academics who inspired the creating of the module and various concepts within it:\n\nDr Ellie Biggs\nDr Gareth Roberts\nDr Bryan Boruff\nProfessor Ted Milton\nDr Laurie Chisholm\n\nThanks again to the following people who have either contributed directly or provided code in repositories that have helped me style this book:\n\n\nR Studio\n\nSTAT 545\nrstudio4edu\nHadley Wickham\nAlison Presmanes Hill\nDesirée De Leon\nYihui Xie\nJulia Silge\nJenny Bryan\nOthers\n\nRobin Lovelace\nTwitter for R programmers\nMatt Ng\nStatQuest with Josh Starmer\nGarrick Aden‑Buie\n\n\n\nThe R package and analysis artwork used within this book has been produced by allison_horst, whilst artwork used in information boxes has been produced by Desirée De Leon. You can find Allison’s images on the stats illustration GitHub repository and Desirée’s on the rstudio4edu GitHub repository.\nI’ve certainly learnt a lot from their open code repositories!"
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "Welcome",
+    "text": "Welcome\nHello  and welcome to the Term 2 module Remotely Sensing Cities and Environments.\nSimilarly, to my Term 1 MSc module, CASA0005, this website holds all the practical instructions for the module. CASA0005 Geographic Information Systems and Science is a pre-requisite of the module so concepts taught there will mainly be assumed here."
   }
 ]

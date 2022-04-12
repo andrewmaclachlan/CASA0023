@@ -1,10 +1,83 @@
 # Getting started with remote sensing
 
-# Introduction
+## Loading data
+
+To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Landsat, as we have seen this before in CASA0005. We will then move to Sentinel data.
 
 
-See @knuth84 for additional discussion of literate programming.
+You need to select **a city of you choice** and then using the image and explanation below...
+
+
+### Landsat
+
 
 ```{r}
-1 + 1
 ```
+
+### Sentinel
+
+#### Download
+
+* Go to the Copernicus Open Access Hub: https://scihub.copernicus.eu/dhus/#/home.
+
+* You will need to make a free account
+
+  * Draw around the study area
+  * Select image filter criteria 
+  * Select search icon
+  * Download the S2MSI2A data
+  
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/sentinel_data_1.png') 
+```
+
+Within this image we have:
+
+1. Allows you to either move around the global or draw a study area
+
+2. An example of a study area
+
+3. How to sort the image results 
+
+4. Sentinel mission selection : 
+
+  - Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details
+
+- The platform refers to either sentinel 2A or 2B. Theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017. 
+
+- Cloud cover e.g. [0 TO 5]
+
+#### Open
+
+Once downloaded and unzipped you'll be presented with a load of folders! Here we are interested in the 10m bands...which are:
+
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/sentinel_bands.png') 
+```
+
+You'll find then in the GRANULE > sensor number > IMG_DATA > R10.
+
+Next open them up in QGIS to explore, if there is a TCI image this is a True Colour Image of B02 (Blue), B03 (Green), and B04 (Red) Bands - open this first, it's just a single raster layer. See the [Sentinel user guide definitions](https://sentinels.copernicus.eu/ar/web/sentinel/user-guides/sentinel-2-msi/definitions) for any other acronyms you might need.
+
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/sentinel_data_cape_town_TCI.png') 
+```
+Using the Identify tool we can create a spectral signature by changing the view option to graph (look under the graph in the image above). 
+
+**However** the TCI values are coded between 0 and 255 which will limit what we can do with it. So we can make our own raster stack, we did this in CASA0005 in R.
+
+But in QGIS it's easier to visulaise 
+
+
+#### Select POIs
+
+
+
+
+
+
+https://github.com/robmarkcole/satellite-image-deep-learning#techniques 
+
+
+https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification 
+

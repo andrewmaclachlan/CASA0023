@@ -44,7 +44,7 @@ book:
     - intro.qmd
     - summary.qmd
     - references.qmd
-  fav-icon: "assets/favicon.ico"	
+  favicon: "assets/favicon.ico"	
   reader-mode: true
 
 
