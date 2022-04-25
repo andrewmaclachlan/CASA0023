@@ -7,10 +7,6 @@ To start with we are going to send some time exploring remotely sensed data read
 
 You need to select **a city of you choice** and then using the image and explanation below...
 
-
-### Landsat
-
-
 ```{r}
 ```
 
@@ -41,7 +37,9 @@ Within this image we have:
 
 4. Sentinel mission selection : 
 
-  - Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details
+  - Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details.
+  
+You can also use the Sentinel 2 toolbox to replicate the coverstion from TOA to BOA - https://sentinels.copernicus.eu/ar/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm 
 
 - The platform refers to either sentinel 2A or 2B. Theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017. 
 
@@ -64,10 +62,107 @@ knitr::include_graphics('prac_1/sentinel_data_cape_town_TCI.png')
 ```
 Using the Identify tool we can create a spectral signature by changing the view option to graph (look under the graph in the image above). 
 
-**However** the TCI values are coded between 0 and 255 which will limit what we can do with it. So we can make our own raster stack, we did this in CASA0005 in R.
+**However** the TCI values are coded between 0 and 255 which will limit what we can do with it. As the the radiometric resolution of Sentinel-2 is 12-bit, meaning brightness levels from 0 - 4095 it's not clear how this product has been made.
 
-But in QGIS it's easier to visulaise 
+So we can make our own raster stack using the BOA bands, if you recall we did this in CASA0005 in R.
 
+But in QGIS it's easier to visualise the output
+
+Find the merge tool from the Raster miscellaneous tool box and select the following:
+
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/sentinel_merge.png') 
+```
+
+Note:
+
+* The input layers are the 4 10m bands that I loaded into QGIS
+* The tick box selected meaning each raster file will be it's own layer
+* The file being saved into a `.tiff` as opposed to memory 
+
+Once merged we can created a true colour composite using the BOA data...to do so:
+
+* Right click on the merged layer in the attribute table
+* Symbology > Render type > select multiband color
+
+In remote sensing the Red, Green, Blue display options are often called colour guns that are used to display images on the screen. For a true colour composite B1=Blue, B2=Green, B3=Red.
+
+Try changing the contrast enhancement and see what happens, then [consult GIS stack exchange to understand what is happening](https://gis.stackexchange.com/questions/328356/difference-between-contrast-enhancement-options-qgis-3-rasterlayer-symbology-mul)..
+
+Of course we have only used the 10m bands so far...there are two options that we can take to use the full range of spectral data:
+
+  * Downscale the other bands to 10m forming a super-resolution
+  * Upscale the 10m to 20m 
+
+Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using  [Sen2Res](https://step.esa.int/main/snap-supported-plugins/sen2res/) that is a plug in for the [SNAP toolbox](https://step.esa.int/main/download/snap-download/). Arguably SNAP is just another GIS specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.  
+
+Upscaling aggregates the images to a more coarse resolution (e.g. 10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g. within the 20m folder there are 10 bands). However, it's not clear what method has been used, the documentation suggests nearest neighbour - https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/. 
+
+This can also be termed resampling, and nearest neighbour simply means taking the new raster resolution and then assiging the value from the closest value in the original data. Others approaches include bilinear or cubic convolution resampling.   
+
+#### SNAP
+
+SNAP stands for Sentinels Application Platform it is a collection of toolboxes specifically for pre-processing and analysing remotely sensed data. 
+
+SNAP allows us to easily do undertake many GIS raster type analysis that we've seen / discussed in other modules (like CASA0005) and that we will come across within this module including:
+
+* re sampling raster data
+* re projecting
+* masking 
+* classifying data
+* principal component analysis
+* orthorectification
+* many more methods! 
+
+Aside from these methods in a GUI the real benefit is that it's made to use remotely sensed data, unlike QGIS or R that are more standard GIS software. Let's explore some features of SNAP.
+
+##### Load data
+
+* File > Open Product > select the .zip that was downloaded. Do not rename it or unzip it before hand! 
+
+* In the side bar under Product Explorer there will be a lot on data that you can load. The remotely sensed data in under Bands and then each band is listed (e.g. B1 443nm). What does 443nm mean?
+
+##### SNAP layout
+
+The layout of SNAP isn't too different to QGIS, we have:
+
+* Products on the left side bar
+* Map info in the bottom left
+* Layer / mask managers in the right sidbar
+* Processing tools in the top tool bars
+
+
+
+
+##### Image statistics 
+
+##### Scatterplots
+
+Under the analysis button there are a variety of tools we can use to explore some image statistics....for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared  (NIR, that vegetation strongly reflects)...so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil:
+
+The output should look somewhat like a "Tasseld Cap", although this isn't the tasseled cap transformation which we will have a quick look at..
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/red_NIR.png') 
+```
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/red_NIR_lab11.png') 
+```
+
+http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf
+
+##### Histograms
+
+
+
+
+
+### Landsat
+
+
+
+Either way now we want to merge the 20m imagery  
 
 #### Select POIs
 
@@ -81,3 +176,4 @@ https://github.com/robmarkcole/satellite-image-deep-learning#techniques
 
 https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification 
 
+https://opengislab.com/blog/2018/5/14/flood-mapping-with-sentinel-1-data-using-snap-and-qgis 

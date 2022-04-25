@@ -115,8 +115,8 @@
 <li>
 <a href="#loading-data" id="toc-loading-data" class="nav-link active" data-scroll-target="#loading-data"> <span class="header-section-number">1.1</span> Loading data</a>
 <ul class="collapse">
-<li><a href="#landsat" id="toc-landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.1.1</span> Landsat</a></li>
-<li><a href="#sentinel" id="toc-sentinel" class="nav-link" data-scroll-target="#sentinel"> <span class="header-section-number">1.1.2</span> Sentinel</a></li>
+<li><a href="#sentinel" id="toc-sentinel" class="nav-link" data-scroll-target="#sentinel"> <span class="header-section-number">1.1.1</span> Sentinel</a></li>
+<li><a href="#landsat" id="toc-landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.1.2</span> Landsat</a></li>
 </ul>
 </li>
 </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/quarto-dev/quarto-demo/edit/main/intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/quarto-dev/quarto-demo/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -129,15 +129,13 @@
 <span class="header-section-number">1.1</span> Loading data</h2>
 <p>To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Landsat, as we have seen this before in CASA0005. We will then move to Sentinel data.</p>
 <p>You need to select <strong>a city of you choice</strong> and then using the image and explanation below…</p>
-<section id="landsat" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="landsat">
-<span class="header-section-number">1.1.1</span> Landsat</h3>
 <div class="cell">
 
 </div>
-</section><section id="sentinel" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="sentinel">
-<span class="header-section-number">1.1.2</span> Sentinel</h3>
-<section id="download" class="level4" data-number="1.1.2.1"><h4 data-number="1.1.2.1" class="anchored" data-anchor-id="download">
-<span class="header-section-number">1.1.2.1</span> Download</h4>
+<section id="sentinel" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="sentinel">
+<span class="header-section-number">1.1.1</span> Sentinel</h3>
+<section id="download" class="level4" data-number="1.1.1.1"><h4 data-number="1.1.1.1" class="anchored" data-anchor-id="download">
+<span class="header-section-number">1.1.1.1</span> Download</h4>
 <ul>
 <li><p>Go to the Copernicus Open Access Hub: https://scihub.copernicus.eu/dhus/#/home.</p></li>
 <li>
@@ -166,11 +164,14 @@
 <li><p>Sentinel mission selection :</p></li>
 </ol>
 <ul>
-<li><p>Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the <a href="https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document">product specification</a> for more details</p></li>
+<li>Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the <a href="https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document">product specification</a> for more details.</li>
+</ul>
+<p>You can also use the Sentinel 2 toolbox to replicate the coverstion from TOA to BOA - https://sentinels.copernicus.eu/ar/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm</p>
+<ul>
 <li><p>The platform refers to either sentinel 2A or 2B. Theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017.</p></li>
 <li><p>Cloud cover e.g.&nbsp;[0 TO 5]</p></li>
-</ul></section><section id="open" class="level4" data-number="1.1.2.2"><h4 data-number="1.1.2.2" class="anchored" data-anchor-id="open">
-<span class="header-section-number">1.1.2.2</span> Open</h4>
+</ul></section><section id="open" class="level4" data-number="1.1.1.2"><h4 data-number="1.1.1.2" class="anchored" data-anchor-id="open">
+<span class="header-section-number">1.1.1.2</span> Open</h4>
 <p>Once downloaded and unzipped you’ll be presented with a load of folders! Here we are interested in the 10m bands…which are:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -191,12 +192,99 @@
 </div>
 </div>
 <p>Using the Identify tool we can create a spectral signature by changing the view option to graph (look under the graph in the image above).</p>
-<p><strong>However</strong> the TCI values are coded between 0 and 255 which will limit what we can do with it. So we can make our own raster stack, we did this in CASA0005 in R.</p>
-<p>But in QGIS it’s easier to visulaise</p>
-</section><section id="select-pois" class="level4" data-number="1.1.2.3"><h4 data-number="1.1.2.3" class="anchored" data-anchor-id="select-pois">
-<span class="header-section-number">1.1.2.3</span> Select POIs</h4>
+<p><strong>However</strong> the TCI values are coded between 0 and 255 which will limit what we can do with it. As the the radiometric resolution of Sentinel-2 is 12-bit, meaning brightness levels from 0 - 4095 it’s not clear how this product has been made.</p>
+<p>So we can make our own raster stack using the BOA bands, if you recall we did this in CASA0005 in R.</p>
+<p>But in QGIS it’s easier to visualise the output</p>
+<p>Find the merge tool from the Raster miscellaneous tool box and select the following:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/sentinel_merge.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note:</p>
+<ul>
+<li>The input layers are the 4 10m bands that I loaded into QGIS</li>
+<li>The tick box selected meaning each raster file will be it’s own layer</li>
+<li>The file being saved into a <code>.tiff</code> as opposed to memory</li>
+</ul>
+<p>Once merged we can created a true colour composite using the BOA data…to do so:</p>
+<ul>
+<li>Right click on the merged layer in the attribute table</li>
+<li>Symbology &gt; Render type &gt; select multiband color</li>
+</ul>
+<p>In remote sensing the Red, Green, Blue display options are often called colour guns that are used to display images on the screen. For a true colour composite B1=Blue, B2=Green, B3=Red.</p>
+<p>Try changing the contrast enhancement and see what happens, then <a href="https://gis.stackexchange.com/questions/328356/difference-between-contrast-enhancement-options-qgis-3-rasterlayer-symbology-mul">consult GIS stack exchange to understand what is happening</a>..</p>
+<p>Of course we have only used the 10m bands so far…there are two options that we can take to use the full range of spectral data:</p>
+<ul>
+<li>Downscale the other bands to 10m forming a super-resolution</li>
+<li>Upscale the 10m to 20m</li>
+</ul>
+<p>Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using <a href="https://step.esa.int/main/snap-supported-plugins/sen2res/">Sen2Res</a> that is a plug in for the <a href="https://step.esa.int/main/download/snap-download/">SNAP toolbox</a>. Arguably SNAP is just another GIS specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.</p>
+<p>Upscaling aggregates the images to a more coarse resolution (e.g.&nbsp;10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g.&nbsp;within the 20m folder there are 10 bands). However, it’s not clear what method has been used, the documentation suggests nearest neighbour - https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/.</p>
+<p>This can also be termed resampling, and nearest neighbour simply means taking the new raster resolution and then assiging the value from the closest value in the original data. Others approaches include bilinear or cubic convolution resampling.</p>
+</section><section id="snap" class="level4" data-number="1.1.1.3"><h4 data-number="1.1.1.3" class="anchored" data-anchor-id="snap">
+<span class="header-section-number">1.1.1.3</span> SNAP</h4>
+<p>SNAP stands for Sentinels Application Platform it is a collection of toolboxes specifically for pre-processing and analysing remotely sensed data.</p>
+<p>SNAP allows us to easily do undertake many GIS raster type analysis that we’ve seen / discussed in other modules (like CASA0005) and that we will come across within this module including:</p>
+<ul>
+<li>re sampling raster data</li>
+<li>re projecting</li>
+<li>masking</li>
+<li>classifying data</li>
+<li>principal component analysis</li>
+<li>orthorectification</li>
+<li>many more methods!</li>
+</ul>
+<p>Aside from these methods in a GUI the real benefit is that it’s made to use remotely sensed data, unlike QGIS or R that are more standard GIS software. Let’s explore some features of SNAP.</p>
+<section id="load-data" class="level5" data-number="1.1.1.3.1"><h5 data-number="1.1.1.3.1" class="anchored" data-anchor-id="load-data">
+<span class="header-section-number">1.1.1.3.1</span> Load data</h5>
+<ul>
+<li><p>File &gt; Open Product &gt; select the .zip that was downloaded. Do not rename it or unzip it before hand!</p></li>
+<li><p>In the side bar under Product Explorer there will be a lot on data that you can load. The remotely sensed data in under Bands and then each band is listed (e.g.&nbsp;B1 443nm). What does 443nm mean?</p></li>
+</ul></section><section id="snap-layout" class="level5" data-number="1.1.1.3.2"><h5 data-number="1.1.1.3.2" class="anchored" data-anchor-id="snap-layout">
+<span class="header-section-number">1.1.1.3.2</span> SNAP layout</h5>
+<p>The layout of SNAP isn’t too different to QGIS, we have:</p>
+<ul>
+<li>Products on the left side bar</li>
+<li>Map info in the bottom left</li>
+<li>Layer / mask managers in the right sidbar</li>
+<li>Processing tools in the top tool bars</li>
+</ul></section><section id="image-statistics" class="level5" data-number="1.1.1.3.3"><h5 data-number="1.1.1.3.3" class="anchored" data-anchor-id="image-statistics">
+<span class="header-section-number">1.1.1.3.3</span> Image statistics</h5>
+</section><section id="scatterplots" class="level5" data-number="1.1.1.3.4"><h5 data-number="1.1.1.3.4" class="anchored" data-anchor-id="scatterplots">
+<span class="header-section-number">1.1.1.3.4</span> Scatterplots</h5>
+<p>Under the analysis button there are a variety of tools we can use to explore some image statistics….for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared (NIR, that vegetation strongly reflects)…so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil:</p>
+<p>The output should look somewhat like a “Tasseld Cap”, although this isn’t the tasseled cap transformation which we will have a quick look at..</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/red_NIR.png" class="img-fluid figure-img" width="250"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/red_NIR_lab11.png" class="img-fluid figure-img" width="250"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf</p>
+</section><section id="histograms" class="level5" data-number="1.1.1.3.5"><h5 data-number="1.1.1.3.5" class="anchored" data-anchor-id="histograms">
+<span class="header-section-number">1.1.1.3.5</span> Histograms</h5>
+</section></section></section><section id="landsat" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="landsat">
+<span class="header-section-number">1.1.2</span> Landsat</h3>
+<p>Either way now we want to merge the 20m imagery</p>
+<section id="select-pois" class="level4" data-number="1.1.2.1"><h4 data-number="1.1.2.1" class="anchored" data-anchor-id="select-pois">
+<span class="header-section-number">1.1.2.1</span> Select POIs</h4>
 <p>https://github.com/robmarkcole/satellite-image-deep-learning#techniques</p>
 <p>https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification</p>
+<p>https://opengislab.com/blog/2018/5/14/flood-mapping-with-sentinel-1-data-using-snap-and-qgis</p>
 
 
 
