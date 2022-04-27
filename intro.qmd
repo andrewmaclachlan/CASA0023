@@ -1,20 +1,22 @@
 # Getting started with remote sensing
 
-## Loading data
+To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Sentinel and then move to Landsat data, which we have seen before in CASA0005.
 
-To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Landsat, as we have seen this before in CASA0005. We will then move to Sentinel data.
+You need to select **a city of you choice** and then using the image and explanation below...i will use Cape Town, South Africa for the rest of the practical.
 
 
-You need to select **a city of you choice** and then using the image and explanation below...
+## Learning outcomes
 
-```{r}
-```
+By the end of this practical you should be able to:
 
-### Sentinel
+* Source, load and articulate the differences between Landsat and Sentinel data
+* Undertake basic raster image statistics and processing
+* Evaluate the (dis)advantages of each type of software you have used
+* Pull out and statistically compare spectral signatures 
 
-#### Download
+### Sentinel download
 
-* Go to the Copernicus Open Access Hub: https://scihub.copernicus.eu/dhus/#/home.
+* Go to the [Copernicus Open Access Hub](https://scihub.copernicus.eu/dhus/#/home)
 
 * You will need to make a free account
 
@@ -39,7 +41,7 @@ Within this image we have:
 
   - Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details.
   
-You can also use the Sentinel 2 toolbox to replicate the coverstion from TOA to BOA - https://sentinels.copernicus.eu/ar/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm 
+You can also use the [Sentinel 2 toolbox to replicate the conversation from TOA to BOA](https://sentinels.copernicus.eu/ar/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm)
 
 - The platform refers to either sentinel 2A or 2B. Theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017. 
 
@@ -55,7 +57,7 @@ knitr::include_graphics('prac_1/sentinel_bands.png')
 
 You'll find then in the GRANULE > sensor number > IMG_DATA > R10.
 
-Next open them up in QGIS to explore, if there is a TCI image this is a True Colour Image of B02 (Blue), B03 (Green), and B04 (Red) Bands - open this first, it's just a single raster layer. See the [Sentinel user guide definitions](https://sentinels.copernicus.eu/ar/web/sentinel/user-guides/sentinel-2-msi/definitions) for any other acronyms you might need.
+Next open them up in QGIS for some exploration, if there is a TCI image this is a True Colour Image of B02 (Blue), B03 (Green), and B04 (Red) Bands - open this first, it's just a single raster layer. See the [Sentinel user guide definitions](https://sentinels.copernicus.eu/ar/web/sentinel/user-guides/sentinel-2-msi/definitions) for any other acronyms you might need.
 
 ```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/sentinel_data_cape_town_TCI.png') 
@@ -68,15 +70,15 @@ So we can make our own raster stack using the BOA bands, if you recall we did th
 
 But in QGIS it's easier to visualise the output
 
-Find the merge tool from the Raster miscellaneous tool box and select the following:
+Find the `merge` tool from the Raster miscellaneous tool box and select the following:
 
-```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/sentinel_merge.png') 
 ```
 
 Note:
 
-* The input layers are the 4 10m bands that I loaded into QGIS
+* The input layers are the four 10m bands that I loaded into QGIS
 * The tick box selected meaning each raster file will be it's own layer
 * The file being saved into a `.tiff` as opposed to memory 
 
@@ -94,7 +96,7 @@ Of course we have only used the 10m bands so far...there are two options that we
   * Downscale the other bands to 10m forming a super-resolution
   * Upscale the 10m to 20m 
 
-Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using  [Sen2Res](https://step.esa.int/main/snap-supported-plugins/sen2res/) that is a plug in for the [SNAP toolbox](https://step.esa.int/main/download/snap-download/). Arguably SNAP is just another GIS specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.  
+Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using  [Sen2Res](https://step.esa.int/main/snap-supported-plugins/sen2res/) that is another plug in for the [SNAP toolbox](https://step.esa.int/main/download/snap-download/). Arguably SNAP is just a difference type of GIS software specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.  
 
 Upscaling aggregates the images to a more coarse resolution (e.g. 10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g. within the 20m folder there are 10 bands). However, it's not clear what method has been used, the documentation suggests nearest neighbour - https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/. 
 
@@ -114,7 +116,7 @@ SNAP allows us to easily do undertake many GIS raster type analysis that we've s
 * orthorectification
 * many more methods! 
 
-Aside from these methods in a GUI the real benefit is that it's made to use remotely sensed data, unlike QGIS or R that are more standard GIS software. Let's explore some features of SNAP.
+Aside from these methods in a GUI the real benefit is that it's made to use remotely sensed data. Let's explore some features of SNAP.
 
 ##### Load data
 
@@ -122,25 +124,49 @@ Aside from these methods in a GUI the real benefit is that it's made to use remo
 
 * In the side bar under Product Explorer there will be a lot on data that you can load. The remotely sensed data in under Bands and then each band is listed (e.g. B1 443nm). What does 443nm mean?
 
+* Double right click on a layer and it will appear in the viewer area
+
 ##### SNAP layout
 
 The layout of SNAP isn't too different to QGIS, we have:
 
 * Products on the left side bar
 * Map info in the bottom left
-* Layer / mask managers in the right sidbar
+    * additional panes of info can be added through view >toolbar windows
+    * note i have added pixel info (updates when moving the cursor) and world map
+* Layer / mask managers in the right sidebar
 * Processing tools in the top tool bars
 
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/SNAP.png') 
+```
 
 
+Here, i have also the two link buttons selected (bottom left window) these mean that if i move to another band i will still be in the same position on the image. 
+
+##### Colour composites 
+
+To re-created a true colour composite, right click on the data product and open RGB image
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/SNAP_colour_comp.png') 
+```
+
+There are a variety of other band combinations that we can use to show certain aspects of Earth's surface based on the absorption and reflection properties of the materials in the wavelengths of the bands we display "through the colour guns", for example:
+
+* The false colour composite: B8, B4, B3. Plants reflect near-infrared and green light whilst absorbing red.... 
+
+* Atmospheric penetration composite: B12, B11, B8A with no visible bands to penetrate atmospheric particles. Vegetation = blue, urban area = white, gray cyan or purple.
+
+* The short-wave infrared composite: B12, B8A and B4 shows vegetation in green, the darker the greener the denser it is and brown shows built up or bare soil  
+
+For other band colour combinations [consult gisgeogrpahy](https://gisgeography.com/sentinel-2-bands-combinations/)
 
 ##### Image statistics 
 
-##### Scatterplots
+###### Scatterplots
 
 Under the analysis button there are a variety of tools we can use to explore some image statistics....for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared  (NIR, that vegetation strongly reflects)...so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil:
-
-The output should look somewhat like a "Tasseld Cap", although this isn't the tasseled cap transformation which we will have a quick look at..
 
 ```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/red_NIR.png') 
@@ -152,19 +178,79 @@ knitr::include_graphics('prac_1/red_NIR_lab11.png')
 
 http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf
 
-##### Histograms
+###### Tasseled Caps
 
+The output should look somewhat like a "Tasseled Cap" (a wizards hat at an angle), although this is different to the tasseled cap *transformation* which was proposed by Kauth and Thomas (1976). The tasseled cap transformation was originally applied to Landsat data being composed of brightness, greeness, yellow stuff (yes!) and none-such. It was then modified in 1968 to brightness, greeness and wetness. This can can useful for identifying urban areas, they are **usually** bright (although Andy will have more to say on this), high biomass will show in the greeness and moisture in the wetness. The tasseled cap comes from the plot between brightness on the x axis and greenness on the y axis. 
 
+Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it...
 
+$$Brightness = 0.3037(B2)+0.2793(B3)+0.4743(B4)+0.5585(B8)+0.5082(B11)+0.1863(B12)$$
+$$Greeness = −0.2848(B2)−0.2435(B3)−0.5436(B4)+0.7243(B8)+0.0840(B11)−0.1800(B12)$$
+$$Wetness = 0.1509(B2)+0.1973(B3)+0.3279(B4)+0.3406(B8)−0.7112(B11)−0.4572(B12)$$
 
+Now, this is fairly straight forward to do in SNAP (or R) using Band Maths (Raster > Band Maths) and then clicking edit expression, before we can apply this we have two problems:
+
+* B11 and B12 are at a 20 meter resolution where as all the others at a 10 meter resolution, to fix this we must re-sample to 20m
+
+* Using the image provided will mean that the entire tile is computed when we really only care about our study area
+
+Note, that there are many spatial indexes that can be applied to remotely sensed data, the [Index DataBase](https://www.indexdatabase.de/) holds them all or Chapter 8, pages 325 from Jensen is a good place to start.
+
+##### Masking and resampling
+
+This is sometimes also called clipping in CASA0005 we saw cropping (to the extent of a polygon) and then masking. Here I am only interested in a study area of the City of Cape Town District Municipality, which is in the gadm40_ZAF_2 [GADM data](https://gadm.org/), it also appears in the gadm40_ZAF_3 data too!  
+
+Explore the GADM data in QGIS to work out what spatial aggregation you can use to mask your study area. For the sake of this example you might want to use the smallest spatial unit, GADM level 4, which for South Africa is wards. 
+
+SNAP only permits ESRI shapefile to be loaded! To do so you must select the product on interest in the product explorer > Vector > Import > ESRI Shapefile 
+
+When you open a Shapefile in SNAP each polygon within your current extent will be made into an individual feature, opening the feature (from the Vector Data folder) will open the attribute table for the row of that polygon. 
+
+In my case the City of Capetown has been called ZAF_2 and now i will clip the raster to the polygon through the Land/Sea Mask...from Raster > Masks
+
+However, the problem here is that we can only mask bands on the same spatial resolution, so we need to re sample bands 2,3,4 and 8 to 20m...here, we can use the Sentinel 2 resampling toolbox to resample the image.
+
+There are two options to resample within SNAP, a traditional resample which just considers the neighbouring pixels or the Sentinel 2 products resample to account for the particularities of the angle (satellite viewing) bands. For the sake of time we will use the traditional resample to generate a 20m raster dataset...Raster > Geometric > Resampling...
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/resample.png') 
+```
+
+Note that there will be both upsampling and downsampling here as i've selected a 20m output.
+
+This will create a new product in the product explorer so make sure you use that from now we, next we can mask out the all the bands we need:
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/mask.png') 
+```
+
+To mask out our study area use the Land/Sea mask (Raster > Masks > Land/Sea mask) and select the vector to use as the mask. Here, i only take forward the bands i need:
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/mask.png') 
+```
+
+Then compute the tasseled cap transformation (Raster > Band Maths) with the equations above. Note that when using a subtraction (-) you might get invalid expression so use the inbuilt subtraction within the edit expression button.
+
+We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier. 
+
+At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show?
+
+```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/tass_cap.png') 
+```
 
 ### Landsat
 
+We have seen in [CASA0005 how to access Landsat imagery](https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html#raster-data-landsat). Now go and source some cloud free Landsat 8 Collection 1 level 2 imagery (surface reflectance data) for your city...
 
 
-Either way now we want to merge the 20m imagery  
+
 
 #### Select POIs
+
+
+### Spectral signatures 
 
 
 
