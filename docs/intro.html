@@ -466,16 +466,19 @@
 <p>I will do the second option here:</p>
 <ul>
 <li><p>Right clicking on the vector containers will allow export to shapefile - do this for all the land covers you have</p></li>
-<li>
-</li></ul></section><section id="using-r" class="level3" data-number="1.1.4"><h3 data-number="1.1.4" class="anchored" data-anchor-id="using-r">
+<li><p>To export the “product” which is what your image will be un SNAP. Select it (just click it) then go File &gt; Export &gt; GeoTIFF. When exporting the Landsat data click the subset button in the save box &gt; band subset (select only spectral bands) and then metadata subset and remove all the selection.</p></li>
+<li><p>Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS &gt; Symbology &gt; expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B4 is red, B3 is green and B2 is blue. This does not change the values of the pixels, just how they are displayed on a colour screen.</p></li>
+</ul></section><section id="using-r" class="level3" data-number="1.1.4"><h3 data-number="1.1.4" class="anchored" data-anchor-id="using-r">
 <span class="header-section-number">1.1.4</span> Using R</h3>
+<p>Load, clip, plot signatures</p>
 </section><section id="review-questions" class="level3" data-number="1.1.5"><h3 data-number="1.1.5" class="anchored" data-anchor-id="review-questions">
 <span class="header-section-number">1.1.5</span> Review questions</h3>
 <p>Write around 2-3 paragraphs on the following:</p>
 <ul>
 <li>Briefly explain the process of sourcing, loading and manipulating remotely sensed datasets</li>
-<li>
-</li></ul>
+<li>Consider the assumption made in comparing the spectral reflectance from Sentinel and Landsat</li>
+<li>Reflect on why differences in the reflectance might occur.</li>
+</ul>
 <p>https://github.com/robmarkcole/satellite-image-deep-learning#techniques</p>
 <p>https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification</p>
 <p>https://opengislab.com/blog/2018/5/14/flood-mapping-with-sentinel-1-data-using-snap-and-qgis</p>
