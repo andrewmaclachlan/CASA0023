@@ -118,6 +118,8 @@
 <li><a href="#sentinel-download" id="toc-sentinel-download" class="nav-link" data-scroll-target="#sentinel-download"> <span class="header-section-number">1.1.1</span> Sentinel download</a></li>
 <li><a href="#landsat" id="toc-landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.1.2</span> Landsat</a></li>
 <li><a href="#spectral-signatures" id="toc-spectral-signatures" class="nav-link" data-scroll-target="#spectral-signatures"> <span class="header-section-number">1.1.3</span> Spectral signatures</a></li>
+<li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"> <span class="header-section-number">1.1.4</span> Using R</a></li>
+<li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">1.1.5</span> Review questions</a></li>
 </ul>
 </li>
 </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/quarto-dev/quarto-demo/edit/main/intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/quarto-dev/quarto-demo/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -180,7 +182,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/sentinel_bands.png" class="img-fluid figure-img" width="500"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_bands.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -190,7 +192,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/sentinel_data_cape_town_TCI.png" class="img-fluid figure-img" width="500"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_data_cape_town_TCI.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -203,7 +205,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/sentinel_merge.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_merge.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -266,7 +268,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/SNAP.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/SNAP.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -278,7 +280,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/SNAP_colour_comp.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/SNAP_colour_comp.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -290,15 +292,31 @@
 <li><p>The short-wave infrared composite: B12, B8A and B4 shows vegetation in green, the darker the greener the denser it is and brown shows built up or bare soil</p></li>
 </ul>
 <p>For other band colour combinations <a href="https://gisgeography.com/sentinel-2-bands-combinations/">consult gisgeogrpahy</a></p>
-</section><section id="image-statistics" class="level5" data-number="1.1.1.2.4"><h5 data-number="1.1.1.2.4" class="anchored" data-anchor-id="image-statistics">
-<span class="header-section-number">1.1.1.2.4</span> Image statistics</h5>
-<section id="scatterplots" class="level6" data-number="1.1.1.2.4.1"><h6 data-number="1.1.1.2.4.1" class="anchored" data-anchor-id="scatterplots">
-<span class="header-section-number">1.1.1.2.4.1</span> Scatterplots</h6>
+</section><section id="creating-a-project" class="level5" data-number="1.1.1.2.4"><h5 data-number="1.1.1.2.4" class="anchored" data-anchor-id="creating-a-project">
+<span class="header-section-number">1.1.1.2.4</span> Creating a project</h5>
+<p>Before we go any further we should create a project, that way all our processed outputs will be stored within the projected and loaded again when we open it in future - like projects in any other software such as QGIS or R. Go File &gt; Project &gt; Save project. A project tab next to the product explorer tab will appear, but not you can’t access the bands from within the project that must be done through the product explorer.</p>
+</section><section id="image-statistics" class="level5" data-number="1.1.1.2.5"><h5 data-number="1.1.1.2.5" class="anchored" data-anchor-id="image-statistics">
+<span class="header-section-number">1.1.1.2.5</span> Image statistics</h5>
+</section><section id="image-histogram" class="level5" data-number="1.1.1.2.6"><h5 data-number="1.1.1.2.6" class="anchored" data-anchor-id="image-histogram">
+<span class="header-section-number">1.1.1.2.6</span> Image histogram</h5>
+<p>When we open an RGB image in SNAP the histogram is clipped by <a href="https://forum.step.esa.int/t/rgb-generation-in-snap/9066">1% at the lower end and 4% at the upper end</a> and then mapped in bins between 0 and 255 for display. A computer screen in full RGB displays colours between 0 and 255, hence why this is done.</p>
+<p>This is similar to the contrast enhancement we saw in QGIS and we can manually change it here again through View &gt; Tool Windows &gt; Colour Manipulation.</p>
+<p>Changing the distribution displayed will impact the colour of the image - try using the sliders or selecting 95% and 100% of all pixels to display. To reset click the back arrow button.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/colour.png" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="scatterplots" class="level6" data-number="1.1.1.2.6.1"><h6 data-number="1.1.1.2.6.1" class="anchored" data-anchor-id="scatterplots">
+<span class="header-section-number">1.1.1.2.6.1</span> Scatterplots</h6>
 <p>Under the analysis button there are a variety of tools we can use to explore some image statistics….for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared (NIR, that vegetation strongly reflects)…so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/red_NIR.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/red_NIR.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -306,36 +324,42 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/red_NIR_lab11.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/red_NIR_lab11.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf">Remote Sensing 4113</a></figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf</p>
-</section><section id="tasseled-caps" class="level6" data-number="1.1.1.2.4.2"><h6 data-number="1.1.1.2.4.2" class="anchored" data-anchor-id="tasseled-caps">
-<span class="header-section-number">1.1.1.2.4.2</span> Tasseled Caps</h6>
+<p>In remote sensing this can be called “spectral feature space”, more on this later in the term. You might see the software ENVI in the source above - ENVI is propriety software that is similar to SNAP.</p>
+</section><section id="tasseled-caps" class="level6" data-number="1.1.1.2.6.2"><h6 data-number="1.1.1.2.6.2" class="anchored" data-anchor-id="tasseled-caps">
+<span class="header-section-number">1.1.1.2.6.2</span> Tasseled Caps</h6>
 <p>The output should look somewhat like a “Tasseled Cap” (a wizards hat at an angle), although this is different to the tasseled cap <em>transformation</em> which was proposed by Kauth and Thomas (1976). The tasseled cap transformation was originally applied to Landsat data being composed of brightness, greeness, yellow stuff (yes!) and none-such. It was then modified in 1968 to brightness, greeness and wetness. This can can useful for identifying urban areas, they are <strong>usually</strong> bright (although Andy will have more to say on this), high biomass will show in the greeness and moisture in the wetness. The tasseled cap comes from the plot between brightness on the x axis and greenness on the y axis.</p>
 <p>Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it…</p>
-<p><span class="math display">\[Brightness = 0.3037(B2)+0.2793(B3)+0.4743(B4)+0.5585(B8)+0.5082(B11)+0.1863(B12)\]</span> <span class="math display">\[Greeness = −0.2848(B2)−0.2435(B3)−0.5436(B4)+0.7243(B8)+0.0840(B11)−0.1800(B12)\]</span> <span class="math display">\[Wetness = 0.1509(B2)+0.1973(B3)+0.3279(B4)+0.3406(B8)−0.7112(B11)−0.4572(B12)\]</span></p>
+<p><span class="math display">\[Brightness = 0.3037(B2)+0.2793(B3)+
+0.4743(B4)+0.5585(B8)+
+0.5082(B11)+0.1863(B12)\]</span> <span class="math display">\[Greeness = −0.2848(B2)−0.2435(B3)
+−0.5436(B4)+0.7243(B8)+
+0.0840(B11)−0.1800(B12)\]</span> <span class="math display">\[Wetness = 0.1509(B2)+0.1973(B3)
++0.3279(B4)+0.3406(B8)−
+0.7112(B11)−0.4572(B12)\]</span></p>
 <p>Now, this is fairly straight forward to do in SNAP (or R) using Band Maths (Raster &gt; Band Maths) and then clicking edit expression, before we can apply this we have two problems:</p>
 <ul>
 <li><p>B11 and B12 are at a 20 meter resolution where as all the others at a 10 meter resolution, to fix this we must re-sample to 20m</p></li>
 <li><p>Using the image provided will mean that the entire tile is computed when we really only care about our study area</p></li>
 </ul>
 <p>Note, that there are many spatial indexes that can be applied to remotely sensed data, the <a href="https://www.indexdatabase.de/">Index DataBase</a> holds them all or Chapter 8, pages 325 from Jensen is a good place to start.</p>
-</section></section><section id="masking-and-resampling" class="level5" data-number="1.1.1.2.5"><h5 data-number="1.1.1.2.5" class="anchored" data-anchor-id="masking-and-resampling">
-<span class="header-section-number">1.1.1.2.5</span> Masking and resampling</h5>
+</section></section><section id="masking-and-resampling" class="level5" data-number="1.1.1.2.7"><h5 data-number="1.1.1.2.7" class="anchored" data-anchor-id="masking-and-resampling">
+<span class="header-section-number">1.1.1.2.7</span> Masking and resampling</h5>
 <p>This is sometimes also called clipping in CASA0005 we saw cropping (to the extent of a polygon) and then masking. Here I am only interested in a study area of the City of Cape Town District Municipality, which is in the gadm40_ZAF_2 <a href="https://gadm.org/">GADM data</a>, it also appears in the gadm40_ZAF_3 data too!</p>
 <p>Explore the GADM data in QGIS to work out what spatial aggregation you can use to mask your study area. For the sake of this example you might want to use the smallest spatial unit, GADM level 4, which for South Africa is wards.</p>
 <p>SNAP only permits ESRI shapefile to be loaded! To do so you must select the product on interest in the product explorer &gt; Vector &gt; Import &gt; ESRI Shapefile</p>
-<p>When you open a Shapefile in SNAP each polygon within your current extent will be made into an individual feature, opening the feature (from the Vector Data folder) will open the attribute table for the row of that polygon.</p>
-<p>In my case the City of Capetown has been called ZAF_2 and now i will clip the raster to the polygon through the Land/Sea Mask…from Raster &gt; Masks</p>
-<p>However, the problem here is that we can only mask bands on the same spatial resolution, so we need to re sample bands 2,3,4 and 8 to 20m…here, we can use the Sentinel 2 resampling toolbox to resample the image.</p>
+<p>When you open a Shapefile in SNAP each polygon within your current extent will be made into an individual feature, opening the feature (from the Vector Data folder) will open the attribute table for the row of that polygon. You also might notice that the shapefile may have a larger extent than the image, this means we’d need to find another image and “mosaic” (merge or join together) them but we will see this later in the module, for now just accept that some area might be missing.</p>
+<p>In my case the City of Capetown has been called ZAF_1 and now i will clip the raster to the polygon. However, the problem here is that we can only mask bands on the same spatial resolution, so we need to re sample bands 2,3,4 and 8 to 20m…here, we can use the Sentinel 2 resampling toolbox to resample the image and then move to masking it.</p>
 <p>There are two options to resample within SNAP, a traditional resample which just considers the neighbouring pixels or the Sentinel 2 products resample to account for the particularities of the angle (satellite viewing) bands. For the sake of time we will use the traditional resample to generate a 20m raster dataset…Raster &gt; Geometric &gt; Resampling…</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/resample.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/resample.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -345,7 +369,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/mask.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/mask.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -354,29 +378,104 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/mask.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/mask.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>At this stage you may want to remove the shapefile that will still be within the new product created. Under the vector folder remove the relevant polygons.</p>
 <p>Then compute the tasseled cap transformation (Raster &gt; Band Maths) with the equations above. Note that when using a subtraction (-) you might get invalid expression so use the inbuilt subtraction within the edit expression button.</p>
 <p>We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier.</p>
-<p>At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image…what do the values and colours show?</p>
+<p>At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image…what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/2.7/help/analysis/raster-functions/tasseled-cap-function.htm#:~:text=The%20Tasseled%20Cap%20(Kauth%2DThomas,the%20graphical%20distribution%20of%20data.) from ArcPro will help explain this further.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/tass_cap.png" class="img-fluid figure-img" width="250"></p>
+<figure class="figure"><p><img src="prac_1/tass_cap.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
 </div>
 </section></section></section><section id="landsat" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="landsat">
 <span class="header-section-number">1.1.2</span> Landsat</h3>
-<p>We have seen in <a href="https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html#raster-data-landsat">CASA0005 how to access Landsat imagery</a>. Now go and source some cloud free Landsat 8 Collection 1 level 2 imagery (surface reflectance data) for your city…</p>
+<p>We have seen in <a href="https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html#raster-data-landsat">CASA0005 how to access Landsat imagery</a>. Now go and source some cloud free Landsat 8 Collection 2 level 2 imagery (surface reflectance data) for your city…and unzip it.</p>
+<p>In SNAP go File &gt; Open Product, navigate to the <code>.MTL</code> and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can e explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.</p>
+<p>To see the bands (or RGB images) side by side use the window dividers in the top right …</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/views.png" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the next part of the practical we will compare the spectral signatures from both Sentinel and Landsat. To do so we need to generate a series of points of interest (called POIs) that are coincident in both images. First we need to do two things:</p>
+<ul>
+<li>Clip all the spectral data from the Sentinel image to the vector outline
+<ul>
+<li>we will need to resample the Sentinel data to the same pixel size so consider what you want to do here
+<ul>
+<li>upscale or downscale ?</li>
+<li>What bands over Sentinel and Landsat actually overlap, do you need all of them<br>
+</li>
+<li>what resolution is useful</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Clip the Landsat image to the same vector outline as the Sentinel image, during the mask you can select the bands to mask and output</li>
+</ul>
 <section id="select-pois" class="level4" data-number="1.1.2.1"><h4 data-number="1.1.2.1" class="anchored" data-anchor-id="select-pois">
 <span class="header-section-number">1.1.2.1</span> Select POIs</h4>
-</section></section><section id="spectral-signatures" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" class="anchored" data-anchor-id="spectral-signatures">
+<ul>
+<li><p>To create points of interest we want select pixels representative of certain land cover types (e.g.&nbsp;Bare earth, water, grass, forest, urban) so we can compare them from both Landsat and Sentinel. Of course the pixels need to be present in both datasets.</p></li>
+<li><p>We can select pixels through QGIS, R or SNAP. I’ll focus on the latter here.</p></li>
+<li><p>Make a new vector data container for a land cover type (icon on the right in the image below). Note that it will be created within the data product that is selected.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/vector_container.png" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Next use a drawing tool to draw around areas of land cover, when you select the drawing tool you will be asked which landcover the polygon is for, make sure the area is in both imagery - switch between them as we have done or display them side by side. Whilst doing this it is useful to have the spectrum view open (View &gt; Tool Windows &gt; Optical &gt; :</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/spectrum.PNG" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Once done create another vector data container and repeat for the next land cover type.</p></li>
+<li><p>Consider have a separate class for highly reflective urban (e.g.&nbsp;industrial areas)</p></li>
+</ul></section></section><section id="spectral-signatures" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" class="anchored" data-anchor-id="spectral-signatures">
 <span class="header-section-number">1.1.3</span> Spectral signatures</h3>
+<p>To compare out spectral signatures we have a few options</p>
+<ul>
+<li>right click on the image in SNAP and then export mask pixels as a <code>.txt</code>, but you will need to do this for each land cover class and for each image (Sentinel and Landsat).</li>
+</ul>
+<p>or</p>
+<ul>
+<li>export the imagery (to Geotiff) and vector files (to shapefiles) and then subset in R</li>
+</ul>
+<p>I will do the second option here:</p>
+<ul>
+<li><p>Right clicking on the vector containers will allow export to shapefile - do this for all the land covers you have</p></li>
+<li>
+</li></ul></section><section id="using-r" class="level3" data-number="1.1.4"><h3 data-number="1.1.4" class="anchored" data-anchor-id="using-r">
+<span class="header-section-number">1.1.4</span> Using R</h3>
+</section><section id="review-questions" class="level3" data-number="1.1.5"><h3 data-number="1.1.5" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">1.1.5</span> Review questions</h3>
+<p>Write around 2-3 paragraphs on the following:</p>
+<ul>
+<li>Briefly explain the process of sourcing, loading and manipulating remotely sensed datasets</li>
+<li>
+</li></ul>
 <p>https://github.com/robmarkcole/satellite-image-deep-learning#techniques</p>
 <p>https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification</p>
 <p>https://opengislab.com/blog/2018/5/14/flood-mapping-with-sentinel-1-data-using-snap-and-qgis</p>

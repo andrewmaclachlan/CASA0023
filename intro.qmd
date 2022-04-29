@@ -51,7 +51,7 @@ You can also use the [Sentinel 2 toolbox to replicate the conversation from TOA 
 
 Once downloaded and unzipped you'll be presented with a load of folders! Here we are interested in the 10m bands...which are:
 
-```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/sentinel_bands.png') 
 ```
 
@@ -59,7 +59,7 @@ You'll find then in the GRANULE > sensor number > IMG_DATA > R10.
 
 Next open them up in QGIS for some exploration, if there is a TCI image this is a True Colour Image of B02 (Blue), B03 (Green), and B04 (Red) Bands - open this first, it's just a single raster layer. See the [Sentinel user guide definitions](https://sentinels.copernicus.eu/ar/web/sentinel/user-guides/sentinel-2-msi/definitions) for any other acronyms you might need.
 
-```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/sentinel_data_cape_town_TCI.png') 
 ```
 Using the Identify tool we can create a spectral signature by changing the view option to graph (look under the graph in the image above). 
@@ -72,7 +72,7 @@ But in QGIS it's easier to visualise the output
 
 Find the `merge` tool from the Raster miscellaneous tool box and select the following:
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/sentinel_merge.png') 
 ```
 
@@ -137,7 +137,7 @@ The layout of SNAP isn't too different to QGIS, we have:
 * Layer / mask managers in the right sidebar
 * Processing tools in the top tool bars
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/SNAP.png') 
 ```
 
@@ -148,7 +148,7 @@ Here, i have also the two link buttons selected (bottom left window) these mean 
 
 To re-created a true colour composite, right click on the data product and open RGB image
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/SNAP_colour_comp.png') 
 ```
 
@@ -162,21 +162,37 @@ There are a variety of other band combinations that we can use to show certain a
 
 For other band colour combinations [consult gisgeogrpahy](https://gisgeography.com/sentinel-2-bands-combinations/)
 
+##### Creating a project
+
+Before we go any further we should create a project, that way all our processed outputs will be stored within the projected and loaded again when we open it in future - like projects in any other software such as QGIS or R. Go File > Project > Save project. A project tab next to the product explorer tab will appear, but not you can't access the bands from within the project that must be done through the product explorer.   
+
 ##### Image statistics 
+
+##### Image histogram
+
+When we open an RGB image in SNAP the histogram is clipped by [1% at the lower end and 4% at the upper end](https://forum.step.esa.int/t/rgb-generation-in-snap/9066) and then mapped in bins between 0 and 255 for display. A computer screen in full RGB displays colours between 0 and 255, hence why this is done. 
+
+This is similar to the contrast enhancement we saw in QGIS and we can manually change it here again through View > Tool Windows > Colour Manipulation.
+
+Changing the distribution displayed will impact the colour of the image - try using the sliders or selecting 95% and 100% of all pixels to display. To reset click the back arrow button.
+
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/colour.png') 
+```
 
 ###### Scatterplots
 
 Under the analysis button there are a variety of tools we can use to explore some image statistics....for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared  (NIR, that vegetation strongly reflects)...so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil:
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/red_NIR.png') 
 ```
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [Remote Sensing 4113](http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf)"}
 knitr::include_graphics('prac_1/red_NIR_lab11.png') 
 ```
 
-http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf
+In remote sensing this can be called "spectral feature space", more on this later in the term. You might see the software ENVI in the source above - ENVI is propriety software that is similar to SNAP. 
 
 ###### Tasseled Caps
 
@@ -184,9 +200,15 @@ The output should look somewhat like a "Tasseled Cap" (a wizards hat at an angle
 
 Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it...
 
-$$Brightness = 0.3037(B2)+0.2793(B3)+0.4743(B4)+0.5585(B8)+0.5082(B11)+0.1863(B12)$$
-$$Greeness = −0.2848(B2)−0.2435(B3)−0.5436(B4)+0.7243(B8)+0.0840(B11)−0.1800(B12)$$
-$$Wetness = 0.1509(B2)+0.1973(B3)+0.3279(B4)+0.3406(B8)−0.7112(B11)−0.4572(B12)$$
+$$Brightness = 0.3037(B2)+0.2793(B3)+
+0.4743(B4)+0.5585(B8)+
+0.5082(B11)+0.1863(B12)$$
+$$Greeness = −0.2848(B2)−0.2435(B3)
+−0.5436(B4)+0.7243(B8)+
+0.0840(B11)−0.1800(B12)$$
+$$Wetness = 0.1509(B2)+0.1973(B3)
++0.3279(B4)+0.3406(B8)−
+0.7112(B11)−0.4572(B12)$$
 
 Now, this is fairly straight forward to do in SNAP (or R) using Band Maths (Raster > Band Maths) and then clicking edit expression, before we can apply this we have two problems:
 
@@ -204,15 +226,13 @@ Explore the GADM data in QGIS to work out what spatial aggregation you can use t
 
 SNAP only permits ESRI shapefile to be loaded! To do so you must select the product on interest in the product explorer > Vector > Import > ESRI Shapefile 
 
-When you open a Shapefile in SNAP each polygon within your current extent will be made into an individual feature, opening the feature (from the Vector Data folder) will open the attribute table for the row of that polygon. 
+When you open a Shapefile in SNAP each polygon within your current extent will be made into an individual feature, opening the feature (from the Vector Data folder) will open the attribute table for the row of that polygon. You also might notice that the shapefile may have a larger extent than the image, this means we'd need to find another image and "mosaic" (merge or join together) them but we will see this later in the module, for now just accept that some area might be missing. 
 
-In my case the City of Capetown has been called ZAF_2 and now i will clip the raster to the polygon through the Land/Sea Mask...from Raster > Masks
-
-However, the problem here is that we can only mask bands on the same spatial resolution, so we need to re sample bands 2,3,4 and 8 to 20m...here, we can use the Sentinel 2 resampling toolbox to resample the image.
+In my case the City of Capetown has been called ZAF_1 and now i will clip the raster to the polygon. However, the problem here is that we can only mask bands on the same spatial resolution, so we need to re sample bands 2,3,4 and 8 to 20m...here, we can use the Sentinel 2 resampling toolbox to resample the image and then move to masking it.
 
 There are two options to resample within SNAP, a traditional resample which just considers the neighbouring pixels or the Sentinel 2 products resample to account for the particularities of the angle (satellite viewing) bands. For the sake of time we will use the traditional resample to generate a 20m raster dataset...Raster > Geometric > Resampling...
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/resample.png') 
 ```
 
@@ -220,40 +240,98 @@ Note that there will be both upsampling and downsampling here as i've selected a
 
 This will create a new product in the product explorer so make sure you use that from now we, next we can mask out the all the bands we need:
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/mask.png') 
 ```
 
 To mask out our study area use the Land/Sea mask (Raster > Masks > Land/Sea mask) and select the vector to use as the mask. Here, i only take forward the bands i need:
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "400pxpx", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/mask.png') 
 ```
+
+At this stage you may want to remove the shapefile that will still be within the new product created. Under the vector folder remove the relevant polygons.
 
 Then compute the tasseled cap transformation (Raster > Band Maths) with the equations above. Note that when using a subtraction (-) you might get invalid expression so use the inbuilt subtraction within the edit expression button.
 
 We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier. 
 
-At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show?
+At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/2.7/help/analysis/raster-functions/tasseled-cap-function.htm#:~:text=The%20Tasseled%20Cap%20(Kauth%2DThomas,the%20graphical%20distribution%20of%20data.) from ArcPro will help explain this further. 
 
-```{r echo=FALSE, out.width = "250px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/tass_cap.png') 
 ```
 
 ### Landsat
 
-We have seen in [CASA0005 how to access Landsat imagery](https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html#raster-data-landsat). Now go and source some cloud free Landsat 8 Collection 1 level 2 imagery (surface reflectance data) for your city...
+We have seen in [CASA0005 how to access Landsat imagery](https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html#raster-data-landsat). Now go and source some cloud free Landsat 8 Collection 2 level 2 imagery (surface reflectance data) for your city...and unzip it.
 
+In SNAP go File > Open Product, navigate to the `.MTL` and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can e explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
 
+To see the bands (or RGB images) side by side use the window dividers in the top right ...
 
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/views.png') 
+```
+
+For the next part of the practical we will compare the spectral signatures from both Sentinel and Landsat. To do so we need to generate a series of points of interest (called POIs) that are coincident in both images. First we need to do two things:
+
+* Clip all the spectral data from the Sentinel image to the vector outline
+  * we will need to resample the Sentinel data to the same pixel size so consider what you want to do here
+    * upscale or downscale ?
+    * What bands over Sentinel and Landsat actually overlap, do you need all of them  
+    * what resolution is useful
+
+* Clip the Landsat image to the same vector outline as the Sentinel image, during the mask you can select the bands to mask and output
 
 #### Select POIs
 
+* To create points of interest we want select pixels representative of certain land cover types (e.g. Bare earth, water, grass, forest, urban) so we can compare them from both Landsat and Sentinel. Of course the pixels need to be present in both datasets. 
+
+* We can select pixels through QGIS, R or SNAP. I'll focus on the latter here.
+
+* Make a new vector data container for a land cover type (icon on the right in the image below). Note that it will be created within the data product that is selected. 
+
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/vector_container.png') 
+```
+* Next use a drawing tool to  draw around areas of land cover, when you select the drawing tool you will be asked which landcover the polygon is for, make sure the area is in both imagery - switch between them as we have done or display them side by side. Whilst doing this it is useful to have the spectrum view open (View > Tool Windows > Optical >  : 
+
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/spectrum.PNG') 
+```
+
+* Once done create another vector data container and repeat for the next land cover type. 
+
+* Consider have a separate class for highly reflective urban (e.g. industrial areas)
 
 ### Spectral signatures 
 
+To compare out spectral signatures we have a few options
+
+* right click on the image in SNAP and then export mask pixels as a `.txt`, but you will need to do this for each land cover class and for each image (Sentinel and Landsat). 
+
+or
+
+* export the imagery (to Geotiff) and vector files (to shapefiles) and then subset in R
+
+I will do the second option here:
+
+* Right clicking on the vector containers will allow export to shapefile - do this for all the land covers you have
+
+* 
+
+### Using R
 
 
+
+
+### Review questions 
+
+Write around 2-3 paragraphs on the following:
+
+* Briefly explain the process of sourcing, loading and manipulating remotely sensed datasets
+* 
 
 
 
