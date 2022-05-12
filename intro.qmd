@@ -295,10 +295,10 @@ For the next part of the practical we will compare the spectral signatures from 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/vector_container.png') 
 ```
-* Next use a drawing tool to  draw around areas of land cover, when you select the drawing tool you will be asked which landcover the polygon is for, make sure the area is in both imagery - switch between them as we have done or display them side by side. Whilst doing this it is useful to have the spectrum view open (View > Tool Windows > Optical >  : 
+* Next use a drawing tool to  draw around areas of land cover, when you select the drawing tool you will be asked which landcover the polygon is for, make sure the area is in both imagery - switch between them as we have done or display them side by side. Whilst doing this it is useful to have the spectrum view open (View > Tool Windows > Optical >Spectrum Viewer: 
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
-knitr::include_graphics('prac_1/spectrum.PNG') 
+knitr::include_graphics('prac_1/spectrum.png') 
 ```
 
 * Once done create another vector data container and repeat for the next land cover type. 
@@ -321,11 +321,164 @@ I will do the second option here:
 
 * To export the "product" which is what your image will be un SNAP. Select it (just click it) then go File > Export > GeoTIFF. When exporting the Landsat data click the subset button in the save box > band subset (select only spectral bands) and then metadata subset and remove all the selection. 
 
-* Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS > Symbology > expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B4 is red, B3 is green and B2 is blue. This does not change the values of the pixels, just how they are displayed on a colour screen. 
+* Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS > Symbology > expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B3 is red, B2 is green and B1 is blue. This **does not change the values of the pixels**, just *how they are displayed on a colour screen*. 
 
 ### Using R
 
-Load, clip, plot signatures 
+Remember that before we deal with large data sets in R, we **must** sort out the .gitignore file, if we intend to use Git and GitHub at any stage (hint: you will for the assessment). Go [back to CASA0005 to remember how if you need to](https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html)
+
+Raster packages in R have and are still evolving rapidly, we have probably seen and used the `raster` package and may have seen the `terra` or `stars` packages. All can handle raster data and do the same analysis (pretty much).
+
+In 2023 some key packages will retire like `maptools`, `rgdal` and `rgeos` as their maintainer, Roger Bivand will retire. `raster` uses `sp` objects for vector data and also the `rgdal` package - the Geospatial Data Abstraction Library (GDAL) for reading, writing and converting between spatial formats. `sp` (that we saw in CASA0005) also uses `rgdal` and suggests `rgeos`. 
+
+The `terra` package (2020) is somewhat mixed with `raster`, however the retiring packages are only needed by `raster`, with the `terra` package replacing `raster`. Terra is much faster than `raster` as datasets that can't be loaded into RAM are stored on disc and when loaded doesn't read the values. Then when computations occur the do so in chunks. Terra is very well documented and the functions are very similar to raster - https://rspatial.org/terra/pkg/index.html  
+
+The `stars` package (2018) works with `sf`!!, this means many of the functions we've seen and are familiar with it will work - e.g. `st_transform()` which is much easier than doing it in raster. The real benefit of `stars` is its ability to handle large data (like satellite data) that can't fit into memory. It does this through not loading the pixel values but keeping a reference to them through a proxy and only loading / running computations when specifically needed (e.g. plotting, will only plot the pixels that can be seen)! The [stars section from Spatial Data Science](https://keen-swartz-3146c4.netlify.app/large.html#raster-data-stars) in Pebesma and Bivnad 2022 gives a good overview with examples 
+
+Stars is faster than terra, terra is faster than raster. 
+
+#### Data loading
+
+```{r}
+library(sf)
+library(stars)
+library(terra)
+library(raster)
+```
+
+```{r, message=FALSE, eval=FALSE}
+bare_earth <- st_read("prac_1/Bare earth_Polygon.shp")
+grass <- st_read("prac_1/Grass_Polygon.shp")
+forest <- st_read("prac_1/Forest_Polygon.shp")
+urban <- st_read("prac_1/Urban_Polygon.shp")
+high_urban <- st_read("prac_1/high_albedo_urban_Polygon.shp")
+
+```
+
+```{r, message=FALSE}
+
+sentinel <- rast("prac_1/S2A_MSIL2A_20220214T082031_N0400_R121_T34HBH_20220214T112437_spectral_compare.tif")
+
+landsat<-rast("prac_1/subset_LC09_L2SP_175083_20220306_20220308_02_T1_msk2.tif")
+```
+Here i have chosen to use `terra`, this is because i want to extract the pixel values from within the polygons and at the moment `stars` will only permit aggregation - e.g. the mean of the pixels in the polygons. This is fine unless you want to explore the variation in signatures! then you will need the values. 
+
+To use a vector layer in `terra` it needs to be in a SpatVector (in `terra` the raster is a SpatRaster). Now there are two ways we can do this...the first is with the `vect()` function from `terra`:
+
+```{r, eval=FALSE}
+urban <- vect(urban)
+```
+
+In the second we can actually convert the SpatRaster to a raster and then just use the `sf` object! I know, i know, how many formats do we need here! **But** this will mean we have a raster brick as we have all of our bands and a raster brick won't work here.
+
+```{r, eval=FALSE}
+landsat <- as(landsat, "Raster")
+```
+
+Of course, we can just do this straight from loading the data with the pipe...
+
+```{r}
+bare_earth <- st_read("prac_1/Bare earth_Polygon.shp") %>%
+  vect()
+grass <- st_read("prac_1/Grass_Polygon.shp")%>%
+    vect()
+forest <- st_read("prac_1/Forest_Polygon.shp")%>%
+    vect()
+urban <- st_read("prac_1/Urban_Polygon.shp")%>%
+    vect()
+high_urban <- st_read("prac_1/high_albedo_urban_Polygon.shp")%>%
+    vect()
+
+```
+
+Before we can start the extraction you might have seen that my Landsat data is not in the same CRS as the rest of the data, it's close, but different. We can also just use the raster to get the CRS info, like
+
+
+```{r}
+crs(landsat)
+crs(sentinel)
+
+# reproject landsat
+landsat <- project(landsat, sentinel)
+```
+
+Now let's pull out those values, and get the mean and standard deviation, starting with urban from sentinel data... 
+
+```{r}
+library(tidyverse)
+sen_urban<- terra::extract(sentinel, urban, progress = F)%>%
+  as_tibble()%>%
+  pivot_longer(cols = 2:7, 
+               names_to="bands", 
+               values_to="band_values")%>%
+  group_by(bands)%>%
+  summarise(Mean=mean(band_values), Std=sd(band_values))
+
+
+```
+
+Now, because this process will be the same for the other landcover types we can make a function...this is the **exact** same code as above but i've replaced two arguments with sensor and lancover that i can now change for each version (e.g. bare earth in Landsat or forest in Sentinel)
+
+```{r}
+band_fun <- function(sensor, landcover) {
+  sen_urban<- terra::extract(sensor, landcover, progress = F)%>%
+    as_tibble()%>%
+    pivot_longer(cols = 2:7, 
+               names_to="bands", 
+               values_to="band_values")%>%
+    group_by(bands)%>%
+    summarise(Mean=mean(band_values), Std=sd(band_values))
+}
+```
+
+Then it's simply...
+
+```{r}
+sen_bare <- band_fun(sentinel, bare_earth)
+sen_grass<- band_fun(sentinel, grass) 
+sen_forest<- band_fun(sentinel, forest) 
+
+
+```
+
+```
+sen_bare<- terra::extract(sentinel, bare_earth, progress = F)  
+sen_grass<- terra::extract(sentinel, grass, progress = F)  
+sen_forest<- terra::extract(sentinel, forest, progress = F)  
+sen_high_urban<- terra::extract(sentinel, high_urban, progress = F)  
+
+lsat_urban<- terra::extract(landsat, urban, progress = F)
+lsat_bare<- terra::extract(landsat, bare_earth, progress = F)  
+lsat_grass<- terra::extract(landsat, grass, progress = F)  
+lsat_forest<- terra::extract(landsat, forest, progress = F)  
+lsat_high_urban<- terra::extract(landsat, high_urban, progress = F)  
+```
+
+Put them into a tibble 
+
+```{r, eval=FALSE}
+library(tidyverse)
+sen <- as_tibble(sen_urban, sen_bare, sen_grass, sen_forest, sen_high_urban)%>%
+   summarise(S2A_1  = mean(S2A_1),
+            band2 = mean(band2),
+            band3 = mean(band3),
+            band4 = mean(band4),
+            band5 = mean(band5),
+            band6 = mean(band6),
+            band7 = mean(band7),
+            band8 = mean(band8),
+            band9 = mean(band9),
+            band10 = mean(band10),
+            band11 = mean(band11))
+
+```
+
+
+
+
+
+
+
 
 ### Review questions 
 

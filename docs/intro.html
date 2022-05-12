@@ -12,6 +12,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><link href="./summary.html" rel="next">
@@ -55,7 +118,7 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/quarto-dev/quarto-demo"><i class="bi bi-github" role="img" aria-label="Source Code">
+    <a class="nav-link" href="https://github.com/quarto-dev/quarto-demo"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
@@ -440,12 +503,12 @@
 </div>
 </div>
 <ul>
-<li>Next use a drawing tool to draw around areas of land cover, when you select the drawing tool you will be asked which landcover the polygon is for, make sure the area is in both imagery - switch between them as we have done or display them side by side. Whilst doing this it is useful to have the spectrum view open (View &gt; Tool Windows &gt; Optical &gt; :</li>
+<li>Next use a drawing tool to draw around areas of land cover, when you select the drawing tool you will be asked which landcover the polygon is for, make sure the area is in both imagery - switch between them as we have done or display them side by side. Whilst doing this it is useful to have the spectrum view open (View &gt; Tool Windows &gt; Optical &gt;Spectrum Viewer:</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_1/spectrum.PNG" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/spectrum.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -467,11 +530,208 @@
 <ul>
 <li><p>Right clicking on the vector containers will allow export to shapefile - do this for all the land covers you have</p></li>
 <li><p>To export the “product” which is what your image will be un SNAP. Select it (just click it) then go File &gt; Export &gt; GeoTIFF. When exporting the Landsat data click the subset button in the save box &gt; band subset (select only spectral bands) and then metadata subset and remove all the selection.</p></li>
-<li><p>Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS &gt; Symbology &gt; expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B4 is red, B3 is green and B2 is blue. This does not change the values of the pixels, just how they are displayed on a colour screen.</p></li>
+<li><p>Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS &gt; Symbology &gt; expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B3 is red, B2 is green and B1 is blue. This <strong>does not change the values of the pixels</strong>, just <em>how they are displayed on a colour screen</em>.</p></li>
 </ul></section><section id="using-r" class="level3" data-number="1.1.4"><h3 data-number="1.1.4" class="anchored" data-anchor-id="using-r">
 <span class="header-section-number">1.1.4</span> Using R</h3>
-<p>Load, clip, plot signatures</p>
-</section><section id="review-questions" class="level3" data-number="1.1.5"><h3 data-number="1.1.5" class="anchored" data-anchor-id="review-questions">
+<p>Remember that before we deal with large data sets in R, we <strong>must</strong> sort out the .gitignore file, if we intend to use Git and GitHub at any stage (hint: you will for the assessment). Go <a href="https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html">back to CASA0005 to remember how if you need to</a></p>
+<p>Raster packages in R have and are still evolving rapidly, we have probably seen and used the <code>raster</code> package and may have seen the <code>terra</code> or <code>stars</code> packages. All can handle raster data and do the same analysis (pretty much).</p>
+<p>In 2023 some key packages will retire like <code>maptools</code>, <code>rgdal</code> and <code>rgeos</code> as their maintainer, Roger Bivand will retire. <code>raster</code> uses <code>sp</code> objects for vector data and also the <code>rgdal</code> package - the Geospatial Data Abstraction Library (GDAL) for reading, writing and converting between spatial formats. <code>sp</code> (that we saw in CASA0005) also uses <code>rgdal</code> and suggests <code>rgeos</code>.</p>
+<p>The <code>terra</code> package (2020) is somewhat mixed with <code>raster</code>, however the retiring packages are only needed by <code>raster</code>, with the <code>terra</code> package replacing <code>raster</code>. Terra is much faster than <code>raster</code> as datasets that can’t be loaded into RAM are stored on disc and when loaded doesn’t read the values. Then when computations occur the do so in chunks. Terra is very well documented and the functions are very similar to raster - https://rspatial.org/terra/pkg/index.html</p>
+<p>The <code>stars</code> package (2018) works with <code>sf</code>!!, this means many of the functions we’ve seen and are familiar with it will work - e.g.&nbsp;<code><a href="https://r-spatial.github.io/stars/reference/st_transform.html">st_transform()</a></code> which is much easier than doing it in raster. The real benefit of <code>stars</code> is its ability to handle large data (like satellite data) that can’t fit into memory. It does this through not loading the pixel values but keeping a reference to them through a proxy and only loading / running computations when specifically needed (e.g.&nbsp;plotting, will only plot the pixels that can be seen)! The <a href="https://keen-swartz-3146c4.netlify.app/large.html#raster-data-stars">stars section from Spatial Data Science</a> in Pebesma and Bivnad 2022 gives a good overview with examples</p>
+<p>Stars is faster than terra, terra is faster than raster.</p>
+<section id="data-loading" class="level4" data-number="1.1.4.1"><h4 data-number="1.1.4.1" class="anchored" data-anchor-id="data-loading">
+<span class="header-section-number">1.1.4.1</span> Data loading</h4>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>Linking to GEOS 3.9.1, GDAL 3.2.1, PROJ 7.2.1; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/">stars</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>Loading required package: abind</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra">terra</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>terra version 1.2.5</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>Loading required package: sp</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">bare_earth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Bare earth_Polygon.shp"</span><span class="op">)</span>
+<span class="va">grass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Grass_Polygon.shp"</span><span class="op">)</span>
+<span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Forest_Polygon.shp"</span><span class="op">)</span>
+<span class="va">urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Urban_Polygon.shp"</span><span class="op">)</span>
+<span class="va">high_urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/high_albedo_urban_Polygon.shp"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">sentinel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="st">"prac_1/S2A_MSIL2A_20220214T082031_N0400_R121_T34HBH_20220214T112437_spectral_compare.tif"</span><span class="op">)</span>
+
+<span class="va">landsat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="st">"prac_1/subset_LC09_L2SP_175083_20220306_20220308_02_T1_msk2.tif"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here i have chosen to use <code>terra</code>, this is because i want to extract the pixel values from within the polygons and at the moment <code>stars</code> will only permit aggregation - e.g.&nbsp;the mean of the pixels in the polygons. This is fine unless you want to explore the variation in signatures! then you will need the values.</p>
+<p>To use a vector layer in <code>terra</code> it needs to be in a SpatVector (in <code>terra</code> the raster is a SpatRaster). Now there are two ways we can do this…the first is with the <code><a href="https://rdrr.io/pkg/terra/man/vect.html">vect()</a></code> function from <code>terra</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">urban</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the second we can actually convert the SpatRaster to a raster and then just use the <code>sf</code> object! I know, i know, how many formats do we need here! <strong>But</strong> this will mean we have a raster brick as we have all of our bands and a raster brick won’t work here.</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">landsat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/coerce-methods.html">as</a></span><span class="op">(</span><span class="va">landsat</span>, <span class="st">"Raster"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Of course, we can just do this straight from loading the data with the pipe…</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">bare_earth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Bare earth_Polygon.shp"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Reading layer `Bare earth_Polygon' from data source 
+  `C:\Users\Andy\OneDrive - University College London\Teaching\CASA0023\CASA0023 practical book\CASA0023 practical book\prac_1\Bare earth_Polygon.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 4 features and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 267432.5 ymin: 6257672 xmax: 288787.2 ymax: 6259819
+Projected CRS: WGS 84 / UTM zone 34S</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">grass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Grass_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Reading layer `Grass_Polygon' from data source 
+  `C:\Users\Andy\OneDrive - University College London\Teaching\CASA0023\CASA0023 practical book\CASA0023 practical book\prac_1\Grass_Polygon.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 4 features and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 278249.7 ymin: 6263712 xmax: 282905.1 ymax: 6269399
+Projected CRS: WGS 84 / UTM zone 34S</code></pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Forest_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Reading layer `Forest_Polygon' from data source 
+  `C:\Users\Andy\OneDrive - University College London\Teaching\CASA0023\CASA0023 practical book\CASA0023 practical book\prac_1\Forest_Polygon.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 4 features and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 276215.1 ymin: 6248998 xmax: 277411 ymax: 6251248
+Projected CRS: WGS 84 / UTM zone 34S</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Urban_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Reading layer `Urban_Polygon' from data source 
+  `C:\Users\Andy\OneDrive - University College London\Teaching\CASA0023\CASA0023 practical book\CASA0023 practical book\prac_1\Urban_Polygon.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 4 features and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 272878.1 ymin: 6248261 xmax: 274459.4 ymax: 6249967
+Projected CRS: WGS 84 / UTM zone 34S</code></pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">high_urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/high_albedo_urban_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>Reading layer `high_albedo_urban_Polygon' from data source 
+  `C:\Users\Andy\OneDrive - University College London\Teaching\CASA0023\CASA0023 practical book\CASA0023 practical book\prac_1\high_albedo_urban_Polygon.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3 features and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 270154.1 ymin: 6246892 xmax: 285657.1 ymax: 6250286
+Projected CRS: WGS 84 / UTM zone 34S</code></pre>
+</div>
+</div>
+<p>Before we can start the extraction you might have seen that my Landsat data is not in the same CRS as the rest of the data, it’s close, but different. We can also just use the raster to get the CRS info, like</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/projection.html">crs</a></span><span class="op">(</span><span class="va">landsat</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "PROJCRS[\"WGS 84 / UTM zone 34N\",\n    BASEGEOGCRS[\"WGS 84\",\n        DATUM[\"World Geodetic System 1984\",\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 34N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",21,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Engineering survey, topographic mapping.\"],\n        AREA[\"Between 18Â°E and 24Â°E, northern hemisphere between equator and 84Â°N, onshore and offshore. Albania. Belarus. Bosnia and Herzegovina. Bulgaria. Central African Republic. Chad. Croatia. Democratic Republic of the Congo (Zaire). Estonia. Finland. Greece. Hungary. Italy. Kosovo. Latvia. Libya. Lithuania. Montenegro. North Macedonia. Norway, including Svalbard and Bjornoys. Poland. Romania. Russian Federation. Serbia. Slovakia. Sudan. Sweden. Ukraine.\"],\n        BBOX[0,18,84,24]],\n    ID[\"EPSG\",32634]]"</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/projection.html">crs</a></span><span class="op">(</span><span class="va">sentinel</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] "PROJCRS[\"WGS 84 / UTM zone 34S\",\n    BASEGEOGCRS[\"WGS 84\",\n        DATUM[\"World Geodetic System 1984\",\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 34S\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",21,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",10000000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Engineering survey, topographic mapping.\"],\n        AREA[\"Between 18Â°E and 24Â°E, southern hemisphere between 80Â°S and equator, onshore and offshore. Angola. Botswana. Democratic Republic of the Congo (Zaire). Namibia. South Africa. Zambia.\"],\n        BBOX[-80,18,0,24]],\n    ID[\"EPSG\",32734]]"</code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># reproject landsat</span>
+<span class="va">landsat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/project.html">project</a></span><span class="op">(</span><span class="va">landsat</span>, <span class="va">sentinel</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now let’s pull out those values, and get the mean and standard deviation, starting with urban from sentinel data…</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>-- Attaching packages --------------------------------------- tidyverse 1.3.1 --</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>v ggplot2 3.3.5     v purrr   0.3.4
+v tibble  3.1.0     v dplyr   1.0.5
+v tidyr   1.2.0     v stringr 1.4.0
+v readr   2.1.2     v forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x tidyr::expand()   masks terra::expand()
+x tidyr::extract()  masks raster::extract(), terra::extract()
+x dplyr::filter()   masks stats::filter()
+x dplyr::lag()      masks stats::lag()
+x dplyr::near()     masks terra::near()
+x tidyr::pack()     masks terra::pack()
+x dplyr::select()   masks raster::select()
+x tidyr::separate() masks terra::separate()</code></pre>
+</div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">urban</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, 
+               names_to<span class="op">=</span><span class="st">"bands"</span>, 
+               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bands</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span>, Std<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, because this process will be the same for the other landcover types we can make a function…this is the <strong>exact</strong> same code as above but i’ve replaced two arguments with sensor and lancover that i can now change for each version (e.g.&nbsp;bare earth in Landsat or forest in Sentinel)</p>
+<div class="cell">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">band_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, 
+               names_to<span class="op">=</span><span class="st">"bands"</span>, 
+               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bands</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span>, Std<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then it’s simply…</p>
+<div class="cell">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">sen_bare</span> <span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">bare_earth</span><span class="op">)</span>
+<span class="va">sen_grass</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">grass</span><span class="op">)</span> 
+<span class="va">sen_forest</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">forest</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>sen_bare&lt;- terra::extract(sentinel, bare_earth, progress = F)  
+sen_grass&lt;- terra::extract(sentinel, grass, progress = F)  
+sen_forest&lt;- terra::extract(sentinel, forest, progress = F)  
+sen_high_urban&lt;- terra::extract(sentinel, high_urban, progress = F)  
+
+lsat_urban&lt;- terra::extract(landsat, urban, progress = F)
+lsat_bare&lt;- terra::extract(landsat, bare_earth, progress = F)  
+lsat_grass&lt;- terra::extract(landsat, grass, progress = F)  
+lsat_forest&lt;- terra::extract(landsat, forest, progress = F)  
+lsat_high_urban&lt;- terra::extract(landsat, high_urban, progress = F)  </code></pre>
+<p>Put them into a tibble</p>
+<div class="cell">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="va">sen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">sen_urban</span>, <span class="va">sen_bare</span>, <span class="va">sen_grass</span>, <span class="va">sen_forest</span>, <span class="va">sen_high_urban</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>S2A_1  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">S2A_1</span><span class="op">)</span>,
+            band2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band2</span><span class="op">)</span>,
+            band3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band3</span><span class="op">)</span>,
+            band4 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band4</span><span class="op">)</span>,
+            band5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band5</span><span class="op">)</span>,
+            band6 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band6</span><span class="op">)</span>,
+            band7 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band7</span><span class="op">)</span>,
+            band8 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band8</span><span class="op">)</span>,
+            band9 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band9</span><span class="op">)</span>,
+            band10 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band10</span><span class="op">)</span>,
+            band11 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band11</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="review-questions" class="level3" data-number="1.1.5"><h3 data-number="1.1.5" class="anchored" data-anchor-id="review-questions">
 <span class="header-section-number">1.1.5</span> Review questions</h3>
 <p>Write around 2-3 paragraphs on the following:</p>
 <ul>
