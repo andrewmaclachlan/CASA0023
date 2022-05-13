@@ -42,6 +42,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
+    - 2_portfolio.qmd
     - resources.qmd
     - summary.qmd
     - references.qmd
