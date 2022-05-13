@@ -263,7 +263,7 @@ Then compute the tasseled cap transformation (Raster > Band Maths) with the equa
 
 We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier. 
 
-At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/2.7/help/analysis/raster-functions/tasseled-cap-function.htm#:~:text=The%20Tasseled%20Cap%20(Kauth%2DThomas,the%20graphical%20distribution%20of%20data.) from ArcPro will help explain this further. 
+At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/2.7/help/analysis/raster-functions/tasseled-cap-function.htm#:~:text=The%20Tasseled%20Cap%20(Kauth%2DThomas,the%20graphical%20distribution%20of%20data) from ArcPro will help explain this further. 
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/tass_cap.png') 
