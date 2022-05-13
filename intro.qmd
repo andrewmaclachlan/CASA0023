@@ -200,14 +200,11 @@ The output should look somewhat like a "Tasseled Cap" (a wizards hat at an angle
 
 Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it...
 
-$$Brightness = 0.3037(B2)+0.2793(B3)+
-0.4743(B4)+0.5585(B8)+
+$$Brightness = 0.3037(B2)+0.2793(B3)+\\0.4743(B4)+0.5585(B8)+\\
 0.5082(B11)+0.1863(B12)$$
-$$Greeness = −0.2848(B2)−0.2435(B3)
-−0.5436(B4)+0.7243(B8)+
+$$Greeness = −0.2848(B2)−0.2435(B3)\\−0.5436(B4)+0.7243(B8)+\\
 0.0840(B11)−0.1800(B12)$$
-$$Wetness = 0.1509(B2)+0.1973(B3)
-+0.3279(B4)+0.3406(B8)−
+$$Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 0.7112(B11)−0.4572(B12)$$
 
 Now, this is fairly straight forward to do in SNAP (or R) using Band Maths (Raster > Band Maths) and then clicking edit expression, before we can apply this we have two problems:
@@ -339,14 +336,14 @@ Stars is faster than terra, terra is faster than raster.
 
 #### Data loading
 
-```{r}
+```{r, message=FALSE}
 library(sf)
 library(stars)
 library(terra)
 library(raster)
 ```
 
-```{r, message=FALSE, eval=FALSE}
+```{r, message=FALSE, eval=FALSE, results='hide'}
 bare_earth <- st_read("prac_1/Bare earth_Polygon.shp")
 grass <- st_read("prac_1/Grass_Polygon.shp")
 forest <- st_read("prac_1/Forest_Polygon.shp")
@@ -384,7 +381,7 @@ landsat <- as(landsat, "Raster")
 
 Of course, we can just do this straight from loading the data with the pipe...
 
-```{r}
+```{r, message=FALSE, results='hide'}
 bare_earth <- st_read("prac_1/Bare earth_Polygon.shp") %>%
   vect()
 grass <- st_read("prac_1/Grass_Polygon.shp")%>%
@@ -401,7 +398,7 @@ high_urban <- st_read("prac_1/high_albedo_urban_Polygon.shp")%>%
 Before we can start the extraction you might have seen that my Landsat data is not in the same CRS as the rest of the data, it's close, but different. We can also just use the raster to get the CRS info, like
 
 
-```{r}
+```{r, results='hide'}
 crs(landsat)
 crs(sentinel)
 
@@ -411,7 +408,7 @@ landsat <- project(landsat, sentinel)
 
 Now let's pull out those values, and get the mean and standard deviation, starting with urban from sentinel data... 
 
-```{r}
+```{r, message=FALSE, results='hide'}
 library(tidyverse)
 sen_urban<- terra::extract(sentinel, urban, progress = F)%>%
   as_tibble()%>%
@@ -475,9 +472,9 @@ lsat_high_urban <- band_fun(sentinel, high_urban)
 
 Think about what this has given us?
 
-The next stage is to put then into a tibble:
-```{r, eval=TRUE}
+The next stage is to put then into a tibble...
 
+```{r, eval=TRUE}
 
 sen_lsat <- bind_rows(sen_urban, sen_bare, sen_grass,
                       sen_forest, sen_high_urban,
@@ -487,7 +484,7 @@ sen_lsat <- bind_rows(sen_urban, sen_bare, sen_grass,
 
 The next stage is to get the mean (and standard deviation) values for each band per sensor and land cover type:
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, message=FALSE}
 means<- sen_lsat%>%
   group_by(bands, sensor, land)%>%
   summarise(Mean=mean(band_values), Std=sd(band_values))
@@ -509,7 +506,7 @@ p1
 ```
 We can also look at a density plot....ideally each land cover has a clear and separate historgram... 
 
-```{r}
+```{r, fig.cap= "Thanks to Sydney Goldstein for [some of this code](https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification)"}
 p2 <- sen_lsat %>%
   filter(sensor=="sentinel") %>%
 ggplot(., aes(x=band_values, group=land, fill=land)) + 
@@ -522,15 +519,40 @@ p2
 ```
 Remember this mean vertical line is for all values per land cover, it's not band specific.
 
+Andy will talk about these outputs.
+
 We can arrange our grids nicely with the `cowplot` package...
 
 ```{r}
 library(cowplot)
 
-plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12, ncol=1)
+output<-plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12, ncol=1)
 
+output
+```
+We can also export this if we wanted with `ggsave()` to,[`ggsave` has a lot of options](https://ggplot2.tidyverse.org/reference/ggsave.html) and can output to most formats, it also gives examples of not using `ggsave`
+
+```{r, eval=FALSE}
+ggsave("spectral_reflectance.pdf", width = 20, height = 20, units = "cm")
 ```
 
+Here, i have just shown the process for Sentinel data. Your task is to respond to the review questions which will include doing a bit similar analysis of the Landsat data / some comparisons...perhaps even a statistical test (e.g. a t-test) to compare the difference between the reflectance of Landsat and Sentinel data e.g..
+
+```{r}
+t1<- sen_lsat %>%
+           filter(sensor=="sentinel" & land =="urban")%>%
+           select(band_values)%>%
+           pull()
+
+t2<- sen_lsat %>%
+           filter(sensor=="landsat" & land =="urban")%>%
+           select(band_values)%>%
+           pull()
+
+t.test(t1, t2)
+```
+
+How [do we interpret this](https://www.guru99.com/r-t-test-one-sample.html)?
 
 ### Review questions 
 
@@ -538,13 +560,4 @@ Write around 2-3 paragraphs on the following and support your responses with plo
 
 * Briefly explain the process of sourcing, loading and manipulating remotely sensed datasets 
 * Consider the assumption made in comparing the spectral reflectance from Sentinel and Landsat
-* Reflect on why differences in the reflectance might occur. 
-
-
-
-https://github.com/robmarkcole/satellite-image-deep-learning#techniques 
-
-
-https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification 
-
-https://opengislab.com/blog/2018/5/14/flood-mapping-with-sentinel-1-data-using-snap-and-qgis 
+* Reflect on why differences in the reflectance might occur between sensors. 

@@ -42,6 +42,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
+    - resources.qmd
     - summary.qmd
     - references.qmd
   favicon: "assets/favicon.ico"	
