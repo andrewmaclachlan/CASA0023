@@ -199,13 +199,23 @@ In remote sensing this can be called "spectral feature space", more on this late
 The output should look somewhat like a "Tasseled Cap" (a wizards hat at an angle), although this is different to the tasseled cap *transformation* which was proposed by Kauth and Thomas (1976). The tasseled cap transformation was originally applied to Landsat data being composed of brightness, greeness, yellow stuff (yes!) and none-such. It was then modified in 1968 to brightness, greeness and wetness. This can can useful for identifying urban areas, they are **usually** bright (although Andy will have more to say on this), high biomass will show in the greeness and moisture in the wetness. The tasseled cap comes from the plot between brightness on the x axis and greenness on the y axis. 
 
 Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it...
-
-$$Brightness = 0.3037(B2)+0.2793(B3)+\\0.4743(B4)+0.5585(B8)+\\
-0.5082(B11)+0.1863(B12)$$
-$$Greeness = −0.2848(B2)−0.2435(B3)\\−0.5436(B4)+0.7243(B8)+\\
-0.0840(B11)−0.1800(B12)$$
-$$Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
-0.7112(B11)−0.4572(B12)$$
+$$
+\begin{split}
+Brightness = 0.3037(B2)+0.2793(B3)+\\0.4743(B4)+0.5585(B8)+\\
+0.5082(B11)+0.1863(B12)
+\end{split}
+$$
+$$
+\begin{split}
+Greeness = −0.2848(B2)−0.2435(B3)\\−0.5436(B4)+0.7243(B8)+\\
+0.0840(B11)−0.1800(B12)\end{split}
+$$
+$$
+\begin{split}
+Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
+0.7112(B11)−0.4572(B12)
+\end{split}
+$$
 
 Now, this is fairly straight forward to do in SNAP (or R) using Band Maths (Raster > Band Maths) and then clicking edit expression, before we can apply this we have two problems:
 
@@ -501,7 +511,6 @@ p1 <- means %>%
   geom_point()+
   geom_line(aes(group = land)) +
   geom_errorbar(aes(ymin = (Mean-Std), ymax = (Mean+Std), width = 0.2))
-
 p1
 ```
 We can also look at a density plot....ideally each land cover has a clear and separate historgram... 
@@ -553,6 +562,9 @@ t.test(t1, t2)
 ```
 
 How [do we interpret this](https://www.guru99.com/r-t-test-one-sample.html)?
+
+If you make plots of reflectance be careful to use the same scale, you can do this by adding a new line under `ggplot` like:` lims(y = c(0, 80000))`
+
 
 ### Review questions 
 

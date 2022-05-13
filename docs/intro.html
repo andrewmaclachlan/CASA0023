@@ -407,11 +407,21 @@
 </section><section id="tasseled-caps" class="level6" data-number="1.1.1.2.6.2"><h6 data-number="1.1.1.2.6.2" class="anchored" data-anchor-id="tasseled-caps">
 <span class="header-section-number">1.1.1.2.6.2</span> Tasseled Caps</h6>
 <p>The output should look somewhat like a “Tasseled Cap” (a wizards hat at an angle), although this is different to the tasseled cap <em>transformation</em> which was proposed by Kauth and Thomas (1976). The tasseled cap transformation was originally applied to Landsat data being composed of brightness, greeness, yellow stuff (yes!) and none-such. It was then modified in 1968 to brightness, greeness and wetness. This can can useful for identifying urban areas, they are <strong>usually</strong> bright (although Andy will have more to say on this), high biomass will show in the greeness and moisture in the wetness. The tasseled cap comes from the plot between brightness on the x axis and greenness on the y axis.</p>
-<p>Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it…</p>
-<p><span class="math display">\[Brightness = 0.3037(B2)+0.2793(B3)+\\0.4743(B4)+0.5585(B8)+\\
-0.5082(B11)+0.1863(B12)\]</span> <span class="math display">\[Greeness = −0.2848(B2)−0.2435(B3)\\−0.5436(B4)+0.7243(B8)+\\
-0.0840(B11)−0.1800(B12)\]</span> <span class="math display">\[Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
-0.7112(B11)−0.4572(B12)\]</span></p>
+<p>Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it… <span class="math display">\[
+\begin{split}
+Brightness = 0.3037(B2)+0.2793(B3)+\\0.4743(B4)+0.5585(B8)+\\
+0.5082(B11)+0.1863(B12)
+\end{split}
+\]</span> <span class="math display">\[
+\begin{split}
+Greeness = −0.2848(B2)−0.2435(B3)\\−0.5436(B4)+0.7243(B8)+\\
+0.0840(B11)−0.1800(B12)\end{split}
+\]</span> <span class="math display">\[
+\begin{split}
+Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
+0.7112(B11)−0.4572(B12)
+\end{split}
+\]</span></p>
 <p>Now, this is fairly straight forward to do in SNAP (or R) using Band Maths (Raster &gt; Band Maths) and then clicking edit expression, before we can apply this we have two problems:</p>
 <ul>
 <li><p>B11 and B12 are at a 20 meter resolution where as all the others at a 10 meter resolution, to fix this we must re-sample to 20m</p></li>
@@ -680,7 +690,6 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">land</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="op">(</span><span class="va">Mean</span><span class="op">-</span><span class="va">Std</span><span class="op">)</span>, ymax <span class="op">=</span> <span class="op">(</span><span class="va">Mean</span><span class="op">+</span><span class="va">Std</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>
-
 <span class="va">p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="intro_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
@@ -750,6 +759,7 @@ mean of x mean of y
 </div>
 </div>
 <p>How <a href="https://www.guru99.com/r-t-test-one-sample.html">do we interpret this</a>?</p>
+<p>If you make plots of reflectance be careful to use the same scale, you can do this by adding a new line under <code>ggplot</code> like:<code>lims(y = c(0, 80000))</code></p>
 </section></section><section id="review-questions" class="level3" data-number="1.1.5"><h3 data-number="1.1.5" class="anchored" data-anchor-id="review-questions">
 <span class="header-section-number">1.1.5</span> Review questions</h3>
 <p>Write around 2-3 paragraphs on the following and support your responses with plots and literature:</p>
