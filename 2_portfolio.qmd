@@ -1,20 +1,20 @@
-# Portfolio
+# Portfolio {#sec-port}
 
 ## Learning outcomes
 
 By the end of this week / the practicals you should be able to:
 
-* Demonstrate appropriate syntax and file structure for Xaringan and Bookdown / Quarto
-* Create presentations and books appropriate to the module assignment requirements
-* Share your resources online through Git and GitHub
+-   Demonstrate appropriate syntax and file structure for Xaringan and Bookdown / Quarto
+-   Create presentations and books appropriate to the module assignment requirements
+-   Share your resources online through Git and GitHub
 
-A lot of the concepts have been covered in the lecture (more like a tutorial this week), here some key notes are provided to support and demonstrate the code for creating the slides and book. From using RMarkdown in CASA0005, this should be a little familiar. 
+A lot of the concepts have been covered in the lecture (more like a tutorial this week), here some key notes are provided to support and demonstrate the code for creating the slides and book. From using RMarkdown in CASA0005, this should be a little familiar.
 
 ## Xaringan
 
-`r emo::ji("speak")` shar-in-gen 
+`r emo::ji("speak")` shar-in-gen
 
-* Install / load the packages
+-   Install / load the packages
 
 ```{r, eval=FALSE}
 remotes::install_github("yihui/xaringan")
@@ -23,7 +23,7 @@ library(xaringanExtra)
 
 ### Template:
 
-`File -> New File -> R Markdown -> From Template -> Ninja Presentation` 
+`File -> New File -> R Markdown -> From Template -> Ninja Presentation`
 
 The loaded template and lecture had a lot of info, but to get started you need to know the following tools:
 
@@ -44,23 +44,20 @@ library(xaringanthemer)
 style_solarized_light()
 ```
 
-Change the preamble to 
-* `css: ["xaringan-themer.css"]`
-* `highlightStyle: solarized-dark` or which ever style you selected.
+Change the preamble to \* `css: ["xaringan-themer.css"]` \* `highlightStyle: solarized-dark` or which ever style you selected.
 
 See the [Xaringan CSS Theme Generator site](https://cran.r-project.org/web/packages/xaringanthemer/vignettes/xaringanthemer.html) for more details.
 
-
 ### Slide controls:
 
-* Add a new slide = `---`
-* Add a click to open the next part of a slide = `--`
-* Add a flipped slide (colours reversed and message in centre) = class: inverse, center, middle (after the `---`)
+-   Add a new slide = `---`
+-   Add a click to open the next part of a slide = `--`
+-   Add a flipped slide (colours reversed and message in centre) = class: inverse, center, middle (after the `---`)
 
 ### Headings / lists:
 
-* `#`, `##` and so on for sub headings
-* Lists use `*` or `1.First item` and `1.Second item`, it will know to list them 1 and then 2.
+-   `#`, `##` and so on for sub headings
+-   Lists use `*` or `1.First item` and `1.Second item`, it will know to list them 1 and then 2.
 
 ### Slide sides (e.g. like power point)
 
@@ -74,7 +71,7 @@ See the [Xaringan CSS Theme Generator site](https://cran.r-project.org/web/packa
 knitr::include_graphics('img/Lena-river.jpg')`
 ```
 
-to control the figure you can specify options within the chunk e.g. 
+to control the figure you can specify options within the chunk e.g.
 
 `{r  echo=FALSE, out.width='60%', fig.align='center'}`
 
@@ -86,19 +83,19 @@ To use an equation it's just placing the values / text in an opening `$$` and cl
 
 You may also want to split equations if they are rather long...with `\begin{split}` and `\\` where you want the splits and then `\end{split}`
 
+```{=tex}
 \begin{split}
 Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 0.7112(B11)−0.4572(B12)
 \end{split}
-
-
+```
 ### Preview
 
-Load the add In "Infinite Moon Reader" from Yihui Xie generates the slides every time you save the .Rmd. Tools > Addins.
+Load the add In "Infinite Moon Reader" from Yihui Xie generates the slides every time you save the .Rmd. Tools \> Addins.
 
 ### xaringanExtra
 
-xaringanExtra, developed by [Garrick Aden-Buie](https://github.com/gadenbuie) is "a playground of enhancements and extensions"..that are easy to add..for example, to add a search function in your slides just add..see [xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/search) 
+xaringanExtra, developed by [Garrick Aden-Buie](https://github.com/gadenbuie) is "a playground of enhancements and extensions"..that are easy to add..for example, to add a search function in your slides just add..see [xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/search)
 
 ```{r xaringanExtra-search, echo=FALSE}
 xaringanExtra::use_search(show_icon = TRUE)
@@ -108,7 +105,7 @@ xaringanExtra::use_search(show_icon = TRUE)
 
 Quarto allows you to publish Python, R, Julia or Observable in a online book or presentation. To an extent it is an updated `Bookdown` package that the CASA0005 resources were made with, although Bookdown still exists Quarto makes it easier to incorporate different languages and from what i can tel publish to pdf.
 
-Download Quarto: https://quarto.org/ 
+Download Quarto: https://quarto.org/
 
 **make sure you have updated RStudio** to at least v2022.02
 
@@ -116,8 +113,8 @@ Next `open a blank RStudio session > New Project > New Directory > Quarto Book`
 
 Two files will open:
 
-* `index.qmd` = the main landing page of the book
-* `_quarto.yml` = configuration file
+-   `index.qmd` = the main landing page of the book
+-   `_quarto.yml` = configuration file
 
 In the `_quarto.yml` file change the details to reflect your workbook, you will notice that the chapters are listed - these reference the other `.qmds` and need to be listed here in order to be rendered in the final book - each `.qmd` is a chapter.
 
@@ -128,7 +125,6 @@ Click Render (in the tool bar at the top of the `.qmd`) to see what happens..
 The syntax of Quarto, Xaringan and RMarkdown are the same, except you some features are specific to each package...for example..
 
 To have figures side by side in Quarto you'd do:
-
 
 ```{r eval=FALSE, echo=TRUE}
 ::: {#CHUNKNAME layout-ncol=2}
@@ -150,37 +146,35 @@ We have seen the use of Git and GitHub in several other modules, so i won't go i
 
 Once you have got your project set up with Git and GitHub:
 
-* Render the presentation / book (if using Infinite Moon Reader this will be done for you / if using Quarto you can select render on save)
-* Add > Commit > Push to GitHub
-* On GitHub > Settings > Pages the under source
-  * For Xaringan select `/root`
-  * For Quarto select `/docs`
+-   Render the presentation / book (if using Infinite Moon Reader this will be done for you / if using Quarto you can select render on save)
+-   Add \> Commit \> Push to GitHub
+-   On GitHub \> Settings \> Pages the under source
+    -   For Xaringan select `/root`
+    -   For Quarto select `/docs`
 
 The page you are on will then provide a URL
 
-### Review tasks 
+### Review tasks
 
 #### Xaringan
 
-Create a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio 
+Create a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio
 
-* Select a sensor of your choice (any)
-* Create a short (maximum 5 slides) presentation on the sensor in xaringan
+-   Select a sensor of your choice (any)
+-   Create a short (maximum 5 slides) presentation on the sensor in xaringan
 
 Things to consider:
 
-* Who runs the sensor
-* What is the cost of the data
-* Where do you source the data
-* Resolutions (e.g. in a table)
-* Applications of the data...with an example
-* Images of the data (not required to download it)
-* An example of the data being used within academic (or policy) literature
+-   Who runs the sensor
+-   What is the cost of the data
+-   Where do you source the data
+-   Resolutions (e.g. in a table)
+-   Applications of the data...with an example
+-   Images of the data (not required to download it)
+-   An example of the data being used within academic (or policy) literature
 
 #### Quarto
 
-For the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. In the practical sessions this week you should have created your online portfolio and added your response from week 1 to it. For week 2 you must add the URL of your small 5 slide presentation and also write 1 paragraph on the following:  
+For the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. In the practical sessions this week you should have created your online portfolio and added your response from week 1 to it. For week 2 you must add the URL of your small 5 slide presentation and also write 1 paragraph on the following:
 
-* Reflect on your experience using these reproducible presentation tools through considering the benefits and drawbacks.
-
-
+-   Reflect on your experience using these reproducible presentation tools through considering the benefits and drawbacks.
