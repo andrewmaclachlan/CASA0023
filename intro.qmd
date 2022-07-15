@@ -47,6 +47,8 @@ You can also use the [Sentinel 2 toolbox to replicate the conversation from TOA 
 
 - Cloud cover e.g. [0 TO 5]
 
+_ Mu image was from the 15/5/2022
+
 #### Open
 
 Once downloaded and unzipped you'll be presented with a load of folders! Here we are interested in the 10m bands...which are:
@@ -70,6 +72,8 @@ So we can make our own raster stack using the BOA bands, if you recall we did th
 
 But in QGIS it's easier to visualise the output
 
+First load the four 10M bands from the same folder e.g...`T34HBH_20220515T081611_B02_10m`
+
 Find the `merge` tool from the Raster miscellaneous tool box and select the following:
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
@@ -89,6 +93,10 @@ Once merged we can created a true colour composite using the BOA data...to do so
 
 In remote sensing the Red, Green, Blue display options are often called colour guns that are used to display images on the screen. For a true colour composite B1=Blue, B2=Green, B3=Red.
 
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/b1b2b3.PNG') 
+```
+
 Try changing the contrast enhancement and see what happens, then [consult GIS stack exchange to understand what is happening](https://gis.stackexchange.com/questions/328356/difference-between-contrast-enhancement-options-qgis-3-rasterlayer-symbology-mul)..
 
 Of course we have only used the 10m bands so far...there are two options that we can take to use the full range of spectral data:
@@ -105,6 +113,8 @@ This can also be termed resampling, and nearest neighbour simply means taking th
 #### SNAP
 
 SNAP stands for Sentinels Application Platform it is a collection of toolboxes specifically for pre-processing and analysing remotely sensed data. 
+
+Download the all toolboxes version
 
 SNAP allows us to easily do undertake many GIS raster type analysis that we've seen / discussed in other modules (like CASA0005) and that we will come across within this module including:
 
@@ -176,13 +186,13 @@ This is similar to the contrast enhancement we saw in QGIS and we can manually c
 
 Changing the distribution displayed will impact the colour of the image - try using the sliders or selecting 95% and 100% of all pixels to display. To reset click the back arrow button.
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/colour.png') 
 ```
 
 ###### Scatterplots
 
-Under the analysis button there are a variety of tools we can use to explore some image statistics....for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared  (NIR, that vegetation strongly reflects)...so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil:
+Under the analysis button there are a variety of tools we can use to explore some image statistics....for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared  (NIR, that vegetation strongly reflects)...so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil. you need to click the refresh button to generate the plot.
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/red_NIR.png') 
@@ -227,11 +237,17 @@ Note, that there are many spatial indexes that can be applied to remotely sensed
 
 ##### Masking and resampling
 
-This is sometimes also called clipping in CASA0005 we saw cropping (to the extent of a polygon) and then masking. Here I am only interested in a study area of the City of Cape Town District Municipality, which is in the gadm40_ZAF_2 [GADM data](https://gadm.org/), it also appears in the gadm40_ZAF_3 data too!  
+This is sometimes also called clipping in CASA0005 we saw cropping (to the extent of a polygon) and then masking. Here I am only interested in a study area of the City of Cape Town District Municipality, which is in the gadm40_ZAF_2 from the [GADM data](https://gadm.org/), it also appears in the gadm40_ZAF_3 data too!  
 
 Explore the GADM data in QGIS to work out what spatial aggregation you can use to mask your study area. For the sake of this example you might want to use the smallest spatial unit, GADM level 4, which for South Africa is wards. 
 
 SNAP only permits ESRI shapefile to be loaded! To do so you must select the product on interest in the product explorer > Vector > Import > ESRI Shapefile 
+
+When you load the vector file it will appear under the image product that you had selected. To show it on the map, move to the right of the screen > select layer manager > check the layer you want to show.
+
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/layer_manager.png') 
+```
 
 When you open a Shapefile in SNAP each polygon within your current extent will be made into an individual feature, opening the feature (from the Vector Data folder) will open the attribute table for the row of that polygon. You also might notice that the shapefile may have a larger extent than the image, this means we'd need to find another image and "mosaic" (merge or join together) them but we will see this later in the module, for now just accept that some area might be missing. 
 
@@ -247,11 +263,7 @@ Note that there will be both upsampling and downsampling here as i've selected a
 
 This will create a new product in the product explorer so make sure you use that from now we, next we can mask out the all the bands we need:
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
-knitr::include_graphics('prac_1/mask.png') 
-```
-
-To mask out our study area use the Land/Sea mask (Raster > Masks > Land/Sea mask) and select the vector to use as the mask. Here, i only take forward the bands i need:
+To mask out our study area use the Land/Sea mask (Raster > Masks > Land/Sea mask) and select the vector to use as the mask. Here, i only take forward the bands i need (scroll up to check):
 
 ```{r echo=FALSE, out.width = "400pxpx", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/mask.png') 
@@ -259,13 +271,17 @@ knitr::include_graphics('prac_1/mask.png')
 
 At this stage you may want to remove the shapefile that will still be within the new product created. Under the vector folder remove the relevant polygons.
 
-Then compute the tasseled cap transformation (Raster > Band Maths) with the equations above. Note that when using a subtraction (-) you might get invalid expression so use the inbuilt subtraction within the edit expression button.
+Then compute the tasseled cap transformation (Raster > Band Maths) with the equations above. Note that when using a subtraction (-) you might get invalid expression so use the inbuilt subtraction within the edit expression button. My brightness equation was:
 
-We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier. 
+```{r eval=FALSE}
+(0.3037* $3.B2) + (0.2793 * $3.B3) + (0.4743 * $3.B4) + (0.5585 * $3.B8) + (0.5082 * 0.5082) + (0.1863 * 0.1863)
+```
 
-At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/2.7/help/analysis/raster-functions/tasseled-cap-function.htm#:~:text=The%20Tasseled%20Cap%20(Kauth%2DThomas,the%20graphical%20distribution%20of%20data) from ArcPro will help explain this further. 
+The new layers we've created will be added to the bands folder of the product you had selected (remember that we can **only do this with bands that have the same resolution**, hence our up and down sampling). We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier. 
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap="in the caption"}
+At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/tasseled-cap-function.htm) from ArcPro will help explain this further. 
+
+```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE, fig.cap="in the caption"}
 #| label: tbl-tables
 #| tbl-cap: "Tables"
 knitr::include_graphics('prac_1/tass_cap.png') 
@@ -277,7 +293,7 @@ We have seen in [CASA0005 how to access Landsat imagery](https://andrewmaclachla
 
 In SNAP go File > Open Product, navigate to the `.MTL` and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can e explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
 
-To see the bands (or RGB images) side by side use the window dividers in the top right ...
+To see the bands (or RGB images) side by side use the window dividers in the top right and also ensure the views are linked in the bottom left window.
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/views.png') 
@@ -293,13 +309,19 @@ For the next part of the practical we will compare the spectral signatures from 
 
 * Clip the Landsat image to the same vector outline as the Sentinel image, during the mask you can select the bands to mask and output
 
+Once you have completed these steps you output should look something like this, however, note that my Landsat tile is a different extent to my Sentinel tile, we cover this later in the module.
+
+```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/Sentinel_Lsat_compare.png') 
+```
+
 #### Select POIs
 
 * To create points of interest we want select pixels representative of certain land cover types (e.g. Bare earth, water, grass, forest, urban) so we can compare them from both Landsat and Sentinel. Of course the pixels need to be present in both datasets. 
 
 * We can select pixels through QGIS, R or SNAP. I'll focus on the latter here.
 
-* Make a new vector data container for a land cover type (icon on the right in the image below). Note that it will be created within the data product that is selected. 
+* Make a new vector data container for a land cover type (Vector > New Vector Data Container). Note that it will be created within the data product that is selected. Next click the square icon with a plus to add vectors. Once finished repeat the process of adding a new vector data container for the next land cover type.
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/vector_container.png') 
@@ -350,30 +372,29 @@ Stars is faster than terra, terra is faster than raster.
 
 ```{r, message=FALSE}
 library(sf)
-library(stars)
 library(terra)
 library(raster)
 ```
 
 ```{r, message=FALSE, eval=FALSE, results='hide'}
-bare_earth <- st_read("prac_1/Bare earth_Polygon.shp")
-grass <- st_read("prac_1/Grass_Polygon.shp")
-forest <- st_read("prac_1/Forest_Polygon.shp")
-urban <- st_read("prac_1/Urban_Polygon.shp")
-high_urban <- st_read("prac_1/high_albedo_urban_Polygon.shp")
+bare_earth <- st_read("prac_1/Data/Bare_earth_Polygon.shp")
+grass <- st_read("prac_1/Data/Grass_Polygon.shp")
+forest <- st_read("prac_1/Data/Forest_Polygon.shp")
+urban <- st_read("prac_1/Data/Low_urban_Polygon.shp")
+high_urban <- st_read("prac_1/Data/High_urban_Polygon.shp")
 
 ```
 
 ```{r, message=FALSE}
 
 #Landsat equivalent
-bands <- c("2", "3", "4", "5", "6", "7")
+bands <- c("1","2", "3", "4", "5", "6", "7")
 
-sentinel <- rast("prac_1/S2A_MSIL2A_20220214T082031_N0400_R121_T34HBH_20220214T112437_spectral_compare.tif")
+sentinel <- rast("prac_1/Data/S2A_LSAT_msk.tif")
 
 names(sentinel) <- bands
   
-landsat<-rast("prac_1/subset_LC09_L2SP_175083_20220306_20220308_02_T1_msk2.tif")
+landsat<-rast("prac_1/Data/LSAT_msk.tif")
 
 names(landsat) <- bands
 ```
@@ -394,15 +415,15 @@ landsat <- as(landsat, "Raster")
 Of course, we can just do this straight from loading the data with the pipe...
 
 ```{r, message=FALSE, results='hide'}
-bare_earth <- st_read("prac_1/Bare earth_Polygon.shp") %>%
+bare_earth <- st_read("prac_1/Data/Bare_earth_Polygon.shp") %>%
   vect()
-grass <- st_read("prac_1/Grass_Polygon.shp")%>%
+grass <- st_read("prac_1/Data/Grass_Polygon.shp")%>%
     vect()
-forest <- st_read("prac_1/Forest_Polygon.shp")%>%
+forest <- st_read("prac_1/Data/Forest_Polygon.shp")%>%
     vect()
-urban <- st_read("prac_1/Urban_Polygon.shp")%>%
+urban <- st_read("prac_1/Data/Low_urban_Polygon.shp")%>%
     vect()
-high_urban <- st_read("prac_1/high_albedo_urban_Polygon.shp")%>%
+high_urban <- st_read("prac_1/Data/High_urban_Polygon.shp")%>%
     vect()
 
 ```

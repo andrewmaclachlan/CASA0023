@@ -1,8 +1,10 @@
 {
-  "hash": "6b21a250588dde6f79d83bc9a62d55df",
+  "hash": "67f200d02137ec69e3a94ed08d7f59fa",
   "result": {
     "markdown": "# Summary\n\nIn summary, this book has no content whatsoever.\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::",
-    "supporting": [],
+    "supporting": [
+      "summary_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
