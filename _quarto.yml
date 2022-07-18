@@ -23,7 +23,7 @@ book:
     title: "CASA0023"
     style: floating
     reader-mode: true
-  repo-url: https://github.com/quarto-dev/quarto-demo
+  repo-url: https://github.com/andrewmaclachlan/CASA0023
   repo-actions: [edit, issue]
 
     #tools:
@@ -43,6 +43,8 @@ book:
     - index.qmd
     - intro.qmd
     - 2_portfolio.qmd
+    - 3_corrections.qmd
+    - 4_policy.qmd
     - resources.qmd
     - summary.qmd
     - references.qmd

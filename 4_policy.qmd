@@ -1,0 +1,68 @@
+# Policy
+
+## Before the practical session
+
+**For the practical session** this week **come prepared to talk** about the following:
+
+- Search for one metropolitan policy challenge (any city in the World) that could be solved by incorporating remotely sensed data
+
+- Identify and evaluate a remotely sensed data set that could used to assist with contributing to the policy goal
+
+-  Demonstrate how this links to global agendas / goals
+
+- Explain how it advances current local, national or global approaches.
+
+Cities will have a diverse range of documentation available...
+
+## After the practical session
+
+**Following the practical and subsequent discussion** write up your case study city in three paragraphs, you should:
+
+* Detail the relevant policy that can be assisted with remotely sensed data
+* Evaluate how remotely sensed data set(s) could used to assist with contributing to the policy goal
+* Place it within local / global agendas and current approaches
+* Cite the relevant policy and where appropriate literature.
+
+Should you struggle to find current approaches within your city explore other cities discussed within the practical. 
+
+## Policies
+
+A few examples to get you started ...you are **not** limited to this list. We explore some of these in more detail within future lectures. 
+
+
+### Metropolitan 
+
+* [Cape Town Municipal Spatial Development Framework](https://www.capetown.gov.za/work%20and%20business/planning-portal/regulations-and-legislations/cape-town-spatial-development-framework#section-docs)
+
+* [Ahmedabad 2016 Heat Action Plan](https://www.nrdc.org/sites/default/files/ahmedabad-heat-action-plan-2016.pdf)
+
+* [South Asia’s First Heat-Health Action Plan in Ahmedabad (Gujarat, India)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4024996/)
+
+* [OneNYC 2050](https://onenyc.cityofnewyork.us/)
+
+* [London Plan](https://www.london.gov.uk/what-we-do/planning/london-plan)
+
+* [Perth and Peel @ 3.5 million](https://www.wa.gov.au/government/publications/perth-and-peel-35-million-frameworks)
+
+### National
+
+* [Singapore Master Plan](https://www.ura.gov.sg/Corporate/Planning/Master-Plan#:~:text=The%20Master%20Plan%20(MP)%20is,development%20of%20land%20and%20property.)
+
+### International 
+
+* [C40 Cities](https://www.c40.org/)
+
+* [United Nations New Urban Agenda](https://habitat3.org/the-new-urban-agenda/)
+
+* [ARUP City Resilience Framework](https://www.arup.com/projects/city-resilience-index)
+
+* [United Nations International Strategy for Disaster Reduction Sendai Framework](https://www.undrr.org/publication/sendai-framework-disaster-risk-reduction-2015-2030#:~:text=The%20Sendai%20Framework%20for%20Disaster,Investing%20in%20disaster%20reduction%20for)
+
+* [Universal Sustainable Development Goals](https://www.undp.org/sustainable-development-goals#:~:text=The%20Sustainable%20Development%20Goals%20(SDGs)%2C%20also%20known%20as%20the,people%20enjoy%20peace%20and%20prosperity.) 
+  * [The SDG targets](https://unstats.un.org/sdgs/metadata/?Text=&Goal=11&Target=)
+  
+* [Beat the Heat Handbook](https://www.unep.org/resources/report/beating-heat-sustainable-cooling-handbook-cities)  
+
+## Example
+
+For a written example read up to the study area section [in my paper on temperature mitigation (first 2 pages)](https://www.frontiersin.org/articles/10.3389/fbuil.2020.519599/full). Take note of table 1.

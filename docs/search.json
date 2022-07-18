@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "Welcome",
+    "text": "Welcome\nHello  and welcome to the Term 2 module Remotely Sensing Cities and Environments.\nSimilarly, to my Term 1 MSc module, CASA0005, this website holds all the practical instructions for the module. CASA0005 Geographic Information Systems and Science is a pre-requisite of the module so concepts taught there will mainly be assumed here."
+  },
+  {
+    "objectID": "index.html#acknowledgement",
+    "href": "index.html#acknowledgement",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThanks to the following academics who inspired the creating of the module and various concepts within it:\n\nDr Ellie Biggs\nDr Gareth Roberts\nDr Bryan Boruff\nProfessor Ted Milton\nDr Laurie Chisholm\n\nThanks again to the following people who have either contributed directly or provided code in repositories that have helped me style this book:\n\n\n\nR Studio\n\nSTAT 545\nrstudio4edu\nHadley Wickham\nAlison Presmanes Hill\nDesirée De Leon\nYihui Xie\nJulia Silge\nJenny Bryan\n\n\n\nOthers\n\nRobin Lovelace\nTwitter for R programmers\nMatt Ng\nStatQuest with Josh Starmer\nGarrick Aden‑Buie\n\n\n\n\nThe R package and analysis artwork used within this book has been produced by allison_horst, whilst artwork used in information boxes has been produced by Desirée De Leon. You can find Allison’s images on the stats illustration GitHub repository and Desirée’s on the rstudio4edu GitHub repository.\nI’ve certainly learnt a lot from their open code repositories!"
+  },
+  {
     "objectID": "intro.html#learning-outcomes",
     "href": "intro.html#learning-outcomes",
     "title": "1  Getting started with remote sensing",
@@ -35,17 +49,52 @@
     "text": "2.4 Git and GitHub\nWe have seen the use of Git and GitHub in several other modules, so i won’t go into it here. For a refresher read over Git, GitHub and RMarkdown\nRemember don’t upload large files use .gitignore\nOnce you have got your project set up with Git and GitHub:\n\nRender the presentation / book (if using Infinite Moon Reader this will be done for you / if using Quarto you can select render on save)\nAdd > Commit > Push to GitHub\nOn GitHub > Settings > Pages the under source\n\nFor Xaringan select /root\nFor Quarto select /docs\n\n\nThe page you are on will then provide a URL\n\n2.4.1 Review tasks\n\n2.4.1.1 Xaringan\nCreate a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio\n\nSelect a sensor of your choice (any)\nCreate a short (maximum 5 slides) presentation on the sensor in xaringan\n\nThings to consider:\n\nWho runs the sensor\nWhat is the cost of the data\nWhere do you source the data\nResolutions (e.g. in a table)\nApplications of the data…with an example\nImages of the data (not required to download it)\nAn example of the data being used within academic (or policy) literature\n\n\n\n2.4.1.2 Quarto\nFor the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. In the practical sessions this week you should have created your online portfolio and added your response from week 1 to it. For week 2 you must add the URL of your small 5 slide presentation and also write 1 paragraph on the following:\n\nReflect on your experience using these reproducible presentation tools through considering the benefits and drawbacks."
   },
   {
+    "objectID": "3_corrections.html",
+    "href": "3_corrections.html",
+    "title": "3  Corrections",
+    "section": "",
+    "text": "3.0.1 Review questions"
+  },
+  {
+    "objectID": "4_policy.html#before-the-practical-session",
+    "href": "4_policy.html#before-the-practical-session",
+    "title": "4  Policy",
+    "section": "4.1 Before the practical session",
+    "text": "4.1 Before the practical session\nFor the practical session this week come prepared to talk about the following:\n\nSearch for one metropolitan policy challenge (any city in the World) that could be solved by incorporating remotely sensed data\nIdentify and evaluate a remotely sensed data set that could used to assist with contributing to the policy goal\nDemonstrate how this links to global agendas / goals\nExplain how it advances current local, national or global approaches.\n\nCities will have a diverse range of documentation available…"
+  },
+  {
+    "objectID": "4_policy.html#after-the-practical-session",
+    "href": "4_policy.html#after-the-practical-session",
+    "title": "4  Policy",
+    "section": "4.2 After the practical session",
+    "text": "4.2 After the practical session\nFollowing the practical and subsequent discussion write up your case study city in three paragraphs, you should:\n\nDetail the relevant policy that can be assisted with remotely sensed data\nEvaluate how remotely sensed data set(s) could used to assist with contributing to the policy goal\nPlace it within local / global agendas and current approaches\nCite the relevant policy and where appropriate literature.\n\nShould you struggle to find current approaches within your city explore other cities discussed within the practical."
+  },
+  {
+    "objectID": "4_policy.html#policies",
+    "href": "4_policy.html#policies",
+    "title": "4  Policy",
+    "section": "4.3 Policies",
+    "text": "4.3 Policies\nA few examples to get you started …you are not limited to this list. We explore some of these in more detail within future lectures.\n\n4.3.1 Metropolitan\n\nCape Town Municipal Spatial Development Framework\nAhmedabad 2016 Heat Action Plan\nSouth Asia’s First Heat-Health Action Plan in Ahmedabad (Gujarat, India)\nOneNYC 2050\nLondon Plan\nPerth and Peel @ 3.5 million\n\n\n\n4.3.2 National\n\nSingapore Master Plan\n\n\n\n4.3.3 International\n\nC40 Cities\nUnited Nations New Urban Agenda\nARUP City Resilience Framework\nUnited Nations International Strategy for Disaster Reduction Sendai Framework\nUniversal Sustainable Development Goals\n\nThe SDG targets\n\nBeat the Heat Handbook"
+  },
+  {
     "objectID": "resources.html",
     "href": "resources.html",
-    "title": "3  Resources",
+    "title": "5  Resources",
     "section": "",
     "text": "https://github.com/robmarkcole/satellite-image-deep-learning#techniques\nhttps://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification\nhttps://opengislab.com/blog/2018/5/14/flood-mapping-with-sentinel-1-data-using-snap-and-qgis"
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "4  Summary",
+    "title": "6  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "4_policy.html#example",
+    "href": "4_policy.html#example",
+    "title": "4  Policy",
+    "section": "4.4 Example",
+    "text": "4.4 Example\nFor a written example read up to the study area section in my paper on temperature mitigation (first 2 pages). Take note of table 1."
   }
 ]
