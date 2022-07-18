@@ -4,7 +4,6 @@ To start with we are going to send some time exploring remotely sensed data read
 
 You need to select **a city of you choice** and then using the image and explanation below...i will use Cape Town, South Africa for the rest of the practical.
 
-
 ## Learning outcomes
 
 By the end of this practical you should be able to:
@@ -13,6 +12,21 @@ By the end of this practical you should be able to:
 * Undertake basic raster image statistics and processing
 * Evaluate the (dis)advantages of each type of software you have used
 * Pull out and statistically compare spectral signatures 
+
+## .gitignore
+
+If you are using Git with your project and have large data it's best to set up a `.gitignore` file. This file tells git to ignore certain files so they aren't in your local repository that is then pushed to GitHub. If you try and push large files to GitHub you will get an error and could run into lots of problems, trust me, i've been there. Look at [my .gitignore for this repository](https://github.com/andrewmaclachlan/CASA0023/blob/main/.gitignore) and you will notice:
+
+`/prac_1/*`
+
+This means ignore all files within these folders, all is denoted by the `*`. The `.gitignore` has to be in your main project folder, if you have made a a `git` repo for your project then you should have a `.gitignore` so all you have to do is open it and add the folder or file paths you wish to ignore. 
+
+GitHub has a maximum file upload size of 50mb....
+
+```{r echo=FALSE, out.width = "500pt", fig.align='center', cache=TRUE, fig.cap="GitHub maximum file upload of 50mb. Source: [reddit r/ProgrammerHumor](https://www.reddit.com/r/ProgrammerHumor/comments/gm69za/my_girlfriend_crocheted_my_favourite_meme_as_a/)"}
+knitr::include_graphics('prac_1/gitignore.jpg')
+```
+
 
 ### Sentinel download
 
@@ -289,9 +303,20 @@ knitr::include_graphics('prac_1/tass_cap.png')
 
 ### Landsat
 
-We have seen in [CASA0005 how to access Landsat imagery](https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html#raster-data-landsat). Now go and source some cloud free Landsat 8 Collection 2 level 2 imagery (surface reflectance data) for your city...and unzip it.
+Landsat imagery is the longest free temporal image repository of consistent medium resolution data. It collects data at each point on Earth each every 16 days (temporal resolution) in a raster grid composed of 30 by 30 m cells (spatial resolution). Geographical analysis and concepts are becoming ever more entwined with remote sensing and Earth observation. 
 
-In SNAP go File > Open Product, navigate to the `.MTL` and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can e explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
+To access the Landsat data we will use in this practical you can need to sign up for a free account at: https://earthexplorer.usgs.gov/. 
+
+To download the data:
+
+1. Enter your city in the address/place box > select the country  > click Show and then click on the word of your city in the box that appears.
+```{r echo=FALSE, out.width = "350pt", fig.align='center'}
+knitr::include_graphics('prac_1/earthexplorer.png')
+```
+
+Once downloaded unzip the file.
+
+In SNAP go File > Open Product, navigate to the `.MTL` and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can be explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
 
 To see the bands (or RGB images) side by side use the window dividers in the top right and also ensure the views are linked in the bottom left window.
 
