@@ -19,28 +19,7 @@ Remember this is just a starting point, explore the [reading list](https://rl.ta
 
 ## Introduction
 
-Within this practical we are going to be using data from the Landsat satellite series provided for free by the United States Geological Survey (USGS) to replicate published methods. Landsat imagery is the longest free temporal image repository of consistent medium resolution data. It collects data at each point on Earth each every 16 days (temporal resolution) in a raster grid composed of 30 by 30 m cells (spatial resolution). Geographical analysis and concepts are becoming ever more entwined with remote sensing and Earth observation. Back when I was an undergraduate there was specific software for undertaking certain analysis, now you can basically use any GIS. I see remote sensing as the science behind collecting the data with spatial data analysis then taking that data and providing meaning. So whilst i'll give a background to Landsat data and remote sensing, this practical will focus on more advanced methods for analysing and extracting meaning from raster data.
-
-## .gitignore
-
-If you are using Git with your project and have large data it's best to set up a `.gitignore` file. This file tells git to ignore certain files so they aren't in your local repository that is then pushed to GitHub. If you try and push large files to GitHub you will get an error and could run into lots of problems, trust me, i've been there. Look at [my .gitignore for this repository](https://github.com/andrewmaclachlan/CASA0005repo/blob/master/.gitignore) and you will notice:
-
-`prac8_data/Lsatdata/*`
-
-`prac8_data/exampleGoogleDrivedata/*`
-
-`prac8_data/Manchester_boundary/*`
-
-This means igore all files within these folders, all is denoted by the `*`. The `.gitignore` has to be in your main project folder, if you have made a a `git` repo for your project then you should have a `.gitignore` so all you have to do is open it and add the folder or file paths you wish to ignore. 
-
-GitHub has a maximum file upload size of 50mb....
-
-```{r echo=FALSE, out.width = "500pt", fig.align='center', cache=TRUE, fig.cap="GitHub maximum file upload of 50mb. Source: [reddit r/ProgrammerHumor](https://www.reddit.com/r/ProgrammerHumor/comments/gm69za/my_girlfriend_crocheted_my_favourite_meme_as_a/)"}
-knitr::include_graphics('prac8_images/gitignore.jpg')
-```
-
-
-Later on we will compute temperature from the Landsat data, whilst i refer to and explain each variable created don't get overwhelmed by it, take away the process of loading and manipulating raster data in R to extract meaningful information. 
+Within this practical we are going to be using data from the Landsat satellite series provided for free by the United States Geological Survey (USGS) to replicate published methods. Landsat imagery is the longest free temporal image repository of consistent medium resolution data. It collects data at each point on Earth each every 16 days (temporal resolution) in a raster grid composed of 30 by 30 m cells (spatial resolution). Geographical analysis and concepts are becoming ever more entwined with remote sensing and Earth observation.
 
 ## Data
 
@@ -54,7 +33,7 @@ To download the data it's the same process we saw in week 1 on the USGS Earth Ex
 
 1. Enter Manchester in the address/place box > select the country as United Kingdom > click Show and then click on the word Manchester in the box that appears.
 ```{r echo=FALSE, out.width = "350pt", fig.align='center', cache=TRUE}
-knitr::include_graphics('prac8_images/earthexplorer.png')
+knitr::include_graphics('prac_7/earthexplorer.png')
 ```
 
 1. Select the date range between the 12/5/2019 and 14/5/2019 --- it's a US website so check the dates are correct.
@@ -77,7 +56,7 @@ Be sure to change the path to your practical 7 folder but make sure you include 
 library("googledrive")
 
 o<-drive_download("https://drive.google.com/open?id=1MV7ym_LW3Pz3MxHrk-qErN1c_nR0NWXy",
-                  path="prac8_data/exampleGoogleDrivedata/LC08_L1TP_203023_20190513_20190521_01_T1.tar.gz", 
+                  path="prac_7/exampleGoogleDrivedata/LC08_L1TP_203023_20190513_20190521_01_T1.tar.gz", 
                   overwrite=T)
 ```
 
@@ -89,14 +68,14 @@ library(fs)
 library(stringr)
 library(utils)
 
-listfiles<-dir_info(here::here("prac8_data", "exampleGoogleDrivedata")) %>%
+listfiles<-dir_info(here::here("prac_7", "exampleGoogleDrivedata")) %>%
   dplyr::filter(str_detect(path, ".gz")) %>%
   dplyr::select(path)%>%
   dplyr::pull()%>%
   #print out the .gz file
   print()%>%
   as.character()%>%
-  utils::untar(exdir=here::here("prac8_data", "exampleGoogleDrivedata"))
+  utils::untar(exdir=here::here("prac_7", "exampleGoogleDrivedata"))
 ```
 
 ## Processing raster data
@@ -110,7 +89,7 @@ Today, we are going to be using a Landsat 8 raster of Manchester. The vector sha
 ```{r message=FALSE, warning=FALSE, cache=TRUE}
 ## listing all possible libraries that all presenters may need following each practical
 library(sp)
-library(raster)
+#library(raster)
 library(rgeos)
 library(rgdal)
 library(rasterVis)
@@ -950,7 +929,7 @@ dev.off()
 
 
 ```{r echo=FALSE, out.width = "600", fig.align='center', cache=TRUE}
-knitr::include_graphics(here::here("prac8_images", "bivaraite.png"))
+knitr::include_graphics(here::here("prac_7", "bivaraite.png"))
 ```
 
 

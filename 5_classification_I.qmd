@@ -1,3 +1,419 @@
 # Classification I
 
 ### Review questions 
+
+
+Prepare the data and make a polygon from the extent 
+
+```{r}
+# install spatial data package
+devtools::install_github("16EAGLE/getSpatialData")
+
+# load packages
+library(sf)
+library(sp)
+library(raster)
+
+studyarea<-st_read("stud_sites_new.shp", type = 3)
+#st_write(studyarea, "stud_sites_new_polys.shp")
+
+library(sp)
+library(hddtools)
+
+around<-extent(studyarea)
+#around2<-extent(new_study_area)
+
+topoly<-bboxSpatialPolygon(around, 
+                           proj4stringFrom = NULL, 
+                           proj4stringTo = NULL)
+
+```
+
+Query the USGS Landsat record to get a table of images
+
+```{r, eval=FALSE}
+library(getSpatialData)
+set_aoi(topoly)
+time_range <-  c("2016-01-01", "2016-12-31")
+
+## Login to USGS ERS
+# }
+# NOT RUN {
+login_USGS("amaclachlan@ucl")
+
+## set archive directory
+set_archive("C:\\Users\\Andy\\OneDrive - University College London\\Research\\Audrey")
+
+## get available products and select one
+product_names <- getLandsat_names()
+
+## query for records for your AOI, time range and product
+query <- getLandsat_query(time_range = time_range, name = product_names[4])
+
+library(tidyverse)
+query2<- as_tibble(query)
+
+library(magrittr)
+query2 %<>%
+  mutate(acquisitionDate= as.Date(acquisitionDate))
+         
+query3 <- filter(query2, SceneCloudCover <= 0.03 & LandCloudCover <= 0.03 & acquisitionDate > as.Date("2016-12-05"))
+
+#tpath <-unique(query3$WRSPath)
+#trow <-unique(query3$WRSRow)
+
+```
+
+Get the files using the query we just made
+
+```{r, eval=FALSE}
+## preview a record
+#getLandsat_preview(query[5,])
+
+#print available levels for a record
+query3[1,]$levels_available
+
+## download record 5 with level "l1" (will direct to AWS automaticaly)
+files <- getLandsat_data(records = query3, level = "l1", source = "auto", dir_out = "Lsatdata")
+
+## download record 5 with level "sr" (will be processed on demand by ESPA)
+files <- getLandsat_data(records = query3, level = "sr", source = "auto", dir_out = "Lsatdata")
+# this can take very long, since the function will wait,
+# until the processing by ESPA is done
+
+## you can abort the function while it is waiting for ESPA and resume later:
+files <- getLandsat_data(espa_order = "espa-a.maclachlan@ucl.ac.uk-11052019-065717-123")
+# the order IDs are displayed and send by mail, use them to resume the task
+# }
+# NOT RUN {
+
+# }
+```
+
+
+
+
+```{r}
+library(raster)
+
+o<-list.dirs(path = "get_data/LANDSAT/SR/",recursive = FALSE)
+
+length(o)
+
+# set up a variable  raster(listlandsat[[i]])
+listlandsat<-list()
+landsatraster<-list()
+bandsprocessed<-list()
+
+
+bands=c(1,2,3,4,5,6,7)
+bands=as.character(bands)
+for (t in bands){
+i<-1
+for (val in o)
+{
+  strings=paste(".*",t,"\\.tif$", sep="")
+listlandsat[[i]] <- list.files(val,pattern=strings,
+                          ignore.case=TRUE, full.names=TRUE)
+
+# Load our raster layers into a stack
+landsatraster[[i]] <- raster(listlandsat[[i]])
+landsatraster[[i]][landsatraster[[i]] == 0] <- NA
+
+i<-i+1
+}
+bandsprocessed[[t]] <-landsatraster
+}
+
+
+mosaicraster<-list()
+
+
+for (t in bands){
+#value<-as.numeric(t)
+mosaicraster[[t]]<-mosaic(bandsprocessed[[t]][[1]], 
+                          bandsprocessed[[t]][[2]],
+                          bandsprocessed[[t]][[3]],
+                          bandsprocessed[[t]][[4]],
+                          fun=mean)
+  }
+
+```
+
+```{r}
+NDVIfun <- function(NIR, Red) {
+  NDVI <- (NIR - Red) / (NIR + Red)
+  return(NDVI)
+}
+
+
+
+ndvi <- NDVIfun(mosaicraster$`5`, mosaicraster$`4`)
+
+#ndbi <- NDVIfun(mosaicraster$`6`, mosaicraster$`5`)
+
+#plot(ndvi)
+#plot(ndbi)
+
+
+rgb<-stack(mosaicraster$`2`, mosaicraster$`3`, mosaicraster$`4`)
+
+full<-stack(mosaicraster$`1`, mosaicraster$`2`, mosaicraster$`3`, mosaicraster$`4`,
+            mosaicraster$`5`, mosaicraster$`6`, mosaicraster$`7`)
+
+
+#plotRGB(rgb, axes=TRUE, stretch="lin")
+```
+
+
+
+```{r}
+# now crop our temp data to the extent
+library(sf)
+new_study_area<-st_transform(studyarea, 32645)
+
+extent <- crop(ndvi, new_study_area)
+exactoutline<-raster::mask(extent, new_study_area)
+
+#extentndbi <- crop(ndbi, new_study_area)
+#exactoutlinendbi<-raster::mask(extentndbi, new_study_area)
+
+
+
+```
+
+```{r}
+# library for pop up boxes
+library(mapview)
+library(plainview)
+
+
+pal = mapviewPalette("mapviewTopoColors")
+
+NDVI <- exactoutline
+#NDBI <- exactoutlinendbi
+Clusters <- new_study_area
+
+#mapview(NDVI,col.regions = pal(100), at = seq(-0.2, 1, 0.2), legend = TRUE) + 
+#  Clusters+
+#  viewRGB(rgb, r = 3, g = 2, b = 1)+
+#  r
+
+
+```
+
+```{r}
+
+barren<-(NDVI<0.2)
+barren[barren==0] <- NA
+barrennumber<-cellStats(barren, sum)
+barrenNDVI<-barren*NDVI
+
+low<-(NDVI >= 0.2 & NDVI < 0.5)
+low[low==0] <- NA
+lownumber<-cellStats(low, sum)
+lowNDVI<-low*NDVI
+
+dense<-(NDVI>0.5)
+dense[dense==0] <- NA
+densenumber<-cellStats(dense, sum)
+denseNDVI<-dense*NDVI
+
+set.seed(8675309)
+barrensam<-as.data.frame(sampleRandom(barrenNDVI, size=200, na.rm=TRUE, cells=TRUE))
+barrensam$class<-1
+
+lows<-as.data.frame(sampleRandom(lowNDVI, size=200, na.rm=TRUE, cells=TRUE))
+lows$class<-2
+
+denses<-as.data.frame(sampleRandom(denseNDVI, size=200, na.rm=TRUE, cells=TRUE))
+denses$class<-3
+
+all<-rbind(barrensam,lows,denses)
+
+fullraster <- brick(mosaicraster)
+mosaicextent<-crop(fullraster, new_study_area)
+mosaicoutline<-raster::mask(mosaicextent, new_study_area)
+
+values(mosaicoutline)[values(mosaicoutline) < 0] = 0
+mosaicoutline[is.na(mosaicoutline)] <- 0
+
+
+all2<-cbind(mosaicoutline[all$cell], all$class)
+
+colnames(all2) <- c("B1", "B2", "B3", "B4", "B5", "B6", "B7", "Class")
+
+df<-as.data.frame(all2)
+
+colnames(df) <- c("B1", "B2", "B3", "B4", "B5", "B6", "B7", "Class")
+colnames(df)
+
+df$Class<-as.factor(df$Class)
+library(dplyr)
+df<- select(df,-c(B1))
+
+```
+
+
+
+```{r}
+library(caret)
+model<- train(as.factor(Class) ~ B2 + B3 + B4 + B5 + B6 + B7, method="rf", data=all2)
+#summary(model)
+
+mosaicoutline<-dropLayer(mosaicoutline, 1) 
+
+names(mosaicoutline)<-c("B2", "B3", "B4", "B5", "B6", "B7")
+
+r <- predict(mosaicoutline, model, progress='text', type='raw', na.rm=TRUE)
+
+
+#fill.na <- function(x, i=5) {
+#  if( is.na(x)[i] ) {
+#    return( round(mean(x, na.rm=TRUE),0) )
+#  } else {
+#    return( round(x[i],0) )
+#  }
+#}  
+
+#r2 <- focal(full$layer.1, w = matrix(1,3,3), fun = fill.na, 
+#            pad = TRUE, na.rm = FALSE )
+
+
+#y<-is.na(full)
+
+```
+
+values per cluster
+
+```{r}
+new_study_area
+library(sf)
+
+r.vals <- raster::extract(r, new_study_area, df=TRUE, na.rm=TRUE)
+r.vals$ID<-as.factor(r.vals$ID)
+
+#new_study_area$count <- data.frame(new_study_area, m2012=r.mean)
+
+library(plyr)
+
+m<-plyr::count(r.vals, c("ID","layer"))
+m2<-plyr::count(r.vals, "ID")
+
+new_study_area_test<-new_study_area
+
+new_study_area_test$count1<-m2
+
+library(tidyr)
+
+widefly <- m %>% tidyr::pivot_wider(
+  names_from = layer, 
+  values_from = freq)
+
+
+colnames(widefly)<-c("ID", "othercount", "gasslandcount", "forestcount")
+
+#widefly$NAcount[is.na(widefly$NAcount)] <- 0
+
+widefly$totalcount<-(m2$freq)
+
+widefly$percentother<-(widefly$othercount/widefly$totalcount)*100
+widefly$percentgrassland<-(widefly$gasslandcount/widefly$totalcount)*100
+widefly$percentforest<-(widefly$forestcount/widefly$totalcount)*100
+
+widefly$areaother<-(widefly$othercount*900)/1000000
+widefly$areagrassland<-(widefly$gasslandcount*900)/1000000
+widefly$areaforest<-(widefly$forestcount*900)/1000000
+widefly$name<-(new_study_area$Name)
+
+colnames(widefly)<-c("ID", "othercount", "gasslandcount", "forestcount",
+                     "totalcount", "percentother", "percentgrassland", "percentforest",
+                     "areaother", "areagrassland", "areaforest", "Name")
+
+library(readr)
+write_csv(widefly , path = "forestperid.csv")
+
+merged = merge(new_study_area, widefly, by = "Name")
+
+
+```
+
+
+
+
+
+
+cross validation 
+
+```{r}
+
+library(dismo)
+#set.seed(99)
+flds <- createFolds(df, k = 10, list = TRUE, returnTrain = FALSE)
+j <- kfold(df, k = 5, by=df$Class)
+table(j)
+
+###########
+x <- list()
+for (k in 1:5) {
+    train <- df[j!= k, ]
+    test <- df[j == k, ]
+
+    model<- train(as.factor(Class)~ B2 + B3 + B4 + B5 + B6 + B7, method="rf",
+                  data=train)
+    
+    r <- predict(model,test)
+
+    # create a data.frame using the reference and prediction
+    x[[k]] <- cbind(test$Class, as.integer(r))
+    
+}
+
+```
+
+
+```{r}
+y <- do.call(rbind, x)
+y <- data.frame(y)
+colnames(y) <- c('observed', 'predicted')
+conmat <- table(y)
+# change the name of the classes
+colnames(conmat) <- c("other", "glassland", "forest")
+rownames(conmat) <- c("other", "glassland", "forest")
+conmat
+```
+
+
+```{r}
+n <- sum(conmat)
+n
+## [1] 1600
+# number of correctly classified cases per class
+diag <- diag(conmat)
+# Overall Accuracy
+OA <- sum(diag) / n
+OA
+```
+
+
+```{r}
+rowsums <- apply(conmat, 1, sum)
+p <- rowsums / n
+# predicted cases per class
+colsums <- apply(conmat, 2, sum)
+q <- colsums / n
+expAccuracy <- sum(p*q)
+kappa <- (OA - expAccuracy) / (1 - expAccuracy)
+kappa
+```
+
+
+```{r}
+PA <- diag / colsums
+# User accuracy
+UA <- diag / rowsums
+outAcc <- data.frame(producerAccuracy = PA, userAccuracy = UA)
+outAcc
+```
+
+
