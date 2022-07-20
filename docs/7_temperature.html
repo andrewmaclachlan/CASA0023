@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.80">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>CASA0023 Remotely Sensing Cities and Environments - 5&nbsp; Temperature</title>
+  <title>CASA0023 Remotely Sensing Cities and Environments - 6&nbsp; Temperature</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -160,7 +160,7 @@
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Temperature</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Temperature</span></h1>
       <button type="button" class="quarto-btn-toggle btn">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -195,27 +195,32 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_policy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Policy</span></a>
+  <a href="./3_corrections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_classification_II.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification II</span></a>
+  <a href="./4_policy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Policy</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_temperature.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Temperature</span></a>
+  <a href="./6_classification_II.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification II</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Resources</span></a>
+  <a href="./7_temperature.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Temperature</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -231,56 +236,56 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"> <span class="header-section-number">5.1</span> Learning objectives</a></li>
-<li><a href="#introduction" class="nav-link" data-scroll-target="#introduction"> <span class="header-section-number">5.2</span> Introduction</a></li>
-<li><a href="#data" class="nav-link" data-scroll-target="#data"> <span class="header-section-number">5.3</span> Data</a>
+<li><a href="#learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"> <span class="header-section-number">6.1</span> Learning objectives</a></li>
+<li><a href="#introduction" class="nav-link" data-scroll-target="#introduction"> <span class="header-section-number">6.2</span> Introduction</a></li>
+<li><a href="#data" class="nav-link" data-scroll-target="#data"> <span class="header-section-number">6.3</span> Data</a>
 <ul class="collapse">
-<li><a href="#shapefile" class="nav-link" data-scroll-target="#shapefile"> <span class="header-section-number">5.3.1</span> Shapefile</a></li>
-<li><a href="#raster-data-landsat" class="nav-link" data-scroll-target="#raster-data-landsat"> <span class="header-section-number">5.3.2</span> Raster data (Landsat)</a></li>
+<li><a href="#shapefile" class="nav-link" data-scroll-target="#shapefile"> <span class="header-section-number">6.3.1</span> Shapefile</a></li>
+<li><a href="#raster-data-landsat" class="nav-link" data-scroll-target="#raster-data-landsat"> <span class="header-section-number">6.3.2</span> Raster data (Landsat)</a></li>
 </ul></li>
-<li><a href="#processing-raster-data" class="nav-link" data-scroll-target="#processing-raster-data"> <span class="header-section-number">5.4</span> Processing raster data</a>
+<li><a href="#processing-raster-data" class="nav-link" data-scroll-target="#processing-raster-data"> <span class="header-section-number">6.4</span> Processing raster data</a>
 <ul class="collapse">
-<li><a href="#loading" class="nav-link" data-scroll-target="#loading"> <span class="header-section-number">5.4.1</span> Loading</a></li>
-<li><a href="#clipping" class="nav-link" data-scroll-target="#clipping"> <span class="header-section-number">5.4.2</span> Clipping</a></li>
+<li><a href="#loading" class="nav-link" data-scroll-target="#loading"> <span class="header-section-number">6.4.1</span> Loading</a></li>
+<li><a href="#clipping" class="nav-link" data-scroll-target="#clipping"> <span class="header-section-number">6.4.2</span> Clipping</a></li>
 </ul></li>
-<li><a href="#data-exploration" class="nav-link" data-scroll-target="#data-exploration"> <span class="header-section-number">5.5</span> Data exploration</a>
+<li><a href="#data-exploration" class="nav-link" data-scroll-target="#data-exploration"> <span class="header-section-number">6.5</span> Data exploration</a>
 <ul class="collapse">
-<li><a href="#more-loading-and-manipulating" class="nav-link" data-scroll-target="#more-loading-and-manipulating"> <span class="header-section-number">5.5.1</span> More loading and manipulating</a></li>
-<li><a href="#plotting-data" class="nav-link" data-scroll-target="#plotting-data"> <span class="header-section-number">5.5.2</span> Plotting data</a></li>
-<li><a href="#data-similarity" class="nav-link" data-scroll-target="#data-similarity"> <span class="header-section-number">5.5.3</span> Data similarity</a></li>
+<li><a href="#more-loading-and-manipulating" class="nav-link" data-scroll-target="#more-loading-and-manipulating"> <span class="header-section-number">6.5.1</span> More loading and manipulating</a></li>
+<li><a href="#plotting-data" class="nav-link" data-scroll-target="#plotting-data"> <span class="header-section-number">6.5.2</span> Plotting data</a></li>
+<li><a href="#data-similarity" class="nav-link" data-scroll-target="#data-similarity"> <span class="header-section-number">6.5.3</span> Data similarity</a></li>
 </ul></li>
-<li><a href="#raster-calculations" class="nav-link" data-scroll-target="#raster-calculations"> <span class="header-section-number">5.6</span> Raster calculations</a>
+<li><a href="#raster-calculations" class="nav-link" data-scroll-target="#raster-calculations"> <span class="header-section-number">6.6</span> Raster calculations</a>
 <ul class="collapse">
-<li><a href="#ndvi" class="nav-link" data-scroll-target="#ndvi"> <span class="header-section-number">5.6.1</span> NDVI</a></li>
-<li><a href="#ndvi-function" class="nav-link" data-scroll-target="#ndvi-function"> <span class="header-section-number">5.6.2</span> NDVI function</a></li>
+<li><a href="#ndvi" class="nav-link" data-scroll-target="#ndvi"> <span class="header-section-number">6.6.1</span> NDVI</a></li>
+<li><a href="#ndvi-function" class="nav-link" data-scroll-target="#ndvi-function"> <span class="header-section-number">6.6.2</span> NDVI function</a></li>
 </ul></li>
-<li><a href="#advanced-raster-calculations" class="nav-link" data-scroll-target="#advanced-raster-calculations"> <span class="header-section-number">5.7</span> Advanced raster calculations</a>
+<li><a href="#advanced-raster-calculations" class="nav-link" data-scroll-target="#advanced-raster-calculations"> <span class="header-section-number">6.7</span> Advanced raster calculations</a>
 <ul class="collapse">
-<li><a href="#calculating-tempearture-from-landsat-data" class="nav-link" data-scroll-target="#calculating-tempearture-from-landsat-data"> <span class="header-section-number">5.7.1</span> Calculating tempearture from Landsat data</a></li>
+<li><a href="#calculating-tempearture-from-landsat-data" class="nav-link" data-scroll-target="#calculating-tempearture-from-landsat-data"> <span class="header-section-number">6.7.1</span> Calculating tempearture from Landsat data</a></li>
 </ul></li>
-<li><a href="#calucating-urban-area-from-landsat-data" class="nav-link" data-scroll-target="#calucating-urban-area-from-landsat-data"> <span class="header-section-number">5.8</span> Calucating urban area from Landsat data</a></li>
-<li><a href="#urban-area-and-temperature-relationship" class="nav-link" data-scroll-target="#urban-area-and-temperature-relationship"> <span class="header-section-number">5.9</span> Urban area and temperature relationship</a></li>
-<li><a href="#statistical-summary" class="nav-link" data-scroll-target="#statistical-summary"> <span class="header-section-number">5.10</span> Statistical summary</a></li>
-<li><a href="#lsoamsoa-stats" class="nav-link" data-scroll-target="#lsoamsoa-stats"> <span class="header-section-number">5.11</span> LSOA/MSOA stats</a></li>
-<li><a href="#mapping" class="nav-link" data-scroll-target="#mapping"> <span class="header-section-number">5.12</span> Mapping</a></li>
-<li><a href="#bivariate-mapping-optional" class="nav-link" data-scroll-target="#bivariate-mapping-optional"> <span class="header-section-number">5.13</span> Bivariate mapping (optional)</a>
+<li><a href="#calucating-urban-area-from-landsat-data" class="nav-link" data-scroll-target="#calucating-urban-area-from-landsat-data"> <span class="header-section-number">6.8</span> Calucating urban area from Landsat data</a></li>
+<li><a href="#urban-area-and-temperature-relationship" class="nav-link" data-scroll-target="#urban-area-and-temperature-relationship"> <span class="header-section-number">6.9</span> Urban area and temperature relationship</a></li>
+<li><a href="#statistical-summary" class="nav-link" data-scroll-target="#statistical-summary"> <span class="header-section-number">6.10</span> Statistical summary</a></li>
+<li><a href="#lsoamsoa-stats" class="nav-link" data-scroll-target="#lsoamsoa-stats"> <span class="header-section-number">6.11</span> LSOA/MSOA stats</a></li>
+<li><a href="#mapping" class="nav-link" data-scroll-target="#mapping"> <span class="header-section-number">6.12</span> Mapping</a></li>
+<li><a href="#bivariate-mapping-optional" class="nav-link" data-scroll-target="#bivariate-mapping-optional"> <span class="header-section-number">6.13</span> Bivariate mapping (optional)</a>
 <ul class="collapse">
-<li><a href="#map-notes" class="nav-link" data-scroll-target="#map-notes"> <span class="header-section-number">5.13.1</span> Map notes</a></li>
+<li><a href="#map-notes" class="nav-link" data-scroll-target="#map-notes"> <span class="header-section-number">6.13.1</span> Map notes</a></li>
 </ul></li>
-<li><a href="#considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">5.14</span> Considerations</a></li>
-<li><a href="#references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">5.15</span> References</a></li>
-<li><a href="#remote-sensing-refresher" class="nav-link" data-scroll-target="#remote-sensing-refresher"> <span class="header-section-number">5.16</span> Remote sensing refresher</a></li>
+<li><a href="#considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">6.14</span> Considerations</a></li>
+<li><a href="#references" class="nav-link" data-scroll-target="#references"> <span class="header-section-number">6.15</span> References</a></li>
+<li><a href="#remote-sensing-refresher" class="nav-link" data-scroll-target="#remote-sensing-refresher"> <span class="header-section-number">6.16</span> Remote sensing refresher</a></li>
 </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/7_temperature.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Temperature</span></h1>
+<h1 class="title d-none d-lg-block display-7"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Temperature</span></h1>
 </header>
 
-<section id="learning-objectives" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">5.1</span> Learning objectives</h2>
+<section id="learning-objectives" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</h2>
 <p>By the end of this practical you should be able to:</p>
 <ol type="1">
 <li>Explain and execute appropriate pre-processing steps of raster data</li>
@@ -294,18 +299,18 @@
 </ul>
 <p>Remember this is just a starting point, explore the <a href="https://rl.talis.com/3/ucl/lists/139FBAF8-DACD-60FB-8BDC-E9C9E09BA885.html?lang=en-GB&amp;login=1">reading list</a>, practical and lecture for more ideas.</p>
 </section>
-<section id="introduction" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.2</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.2</span> Introduction</h2>
 <p>Within this practical we are going to be using data from the Landsat satellite series provided for free by the United States Geological Survey (USGS) to replicate published methods. Landsat imagery is the longest free temporal image repository of consistent medium resolution data. It collects data at each point on Earth each every 16 days (temporal resolution) in a raster grid composed of 30 by 30 m cells (spatial resolution). Geographical analysis and concepts are becoming ever more entwined with remote sensing and Earth observation.</p>
 </section>
-<section id="data" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="data"><span class="header-section-number">5.3</span> Data</h2>
-<section id="shapefile" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="shapefile"><span class="header-section-number">5.3.1</span> Shapefile</h3>
+<section id="data" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="data"><span class="header-section-number">6.3</span> Data</h2>
+<section id="shapefile" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="shapefile"><span class="header-section-number">6.3.1</span> Shapefile</h3>
 <p>The shapefile of Manchester is available from the data folder for this week on <a href="https://github.com/andrewmaclachlan/CASA0005repo/tree/master/prac8_data">GitHub</a>. To download this consult [How to download data and files from GitHub], i’d used Option 1.</p>
 </section>
-<section id="raster-data-landsat" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="raster-data-landsat"><span class="header-section-number">5.3.2</span> Raster data (Landsat)</h3>
+<section id="raster-data-landsat" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="raster-data-landsat"><span class="header-section-number">6.3.2</span> Raster data (Landsat)</h3>
 <p>To download the data it’s the same process we saw in week 1 on the USGS Earth Explorer website:</p>
 <ol type="1">
 <li><p>Enter Manchester in the address/place box &gt; select the country as United Kingdom &gt; click Show and then click on the word Manchester in the box that appears. ::: {.cell layout-align=“center” hash=‘7_temperature_cache/html/unnamed-chunk-1_cb5a647eaa64b52fe7b26e86019bf6b4’} ::: {.cell-output-display} <img src="prac_7/earthexplorer.png" class="img-fluid" data-fig-align="center" style="width:4.86111in"> ::: :::</p></li>
@@ -314,8 +319,8 @@
 <li><p>Click results, there should be one image (GEOTiff), download it..it might take a while</p></li>
 <li><p>Landsat data comes zipped twice as a <code>.tar.gz</code>. Use <a href="https://www.7-zip.org/">7Zip</a> or another file extractor, extract it once to get to a <code>.tar</code> then extract again and files should appear. Or the code below will also let you extract Landsat data…</p></li>
 </ol>
-<section id="alternative-raster-data" class="level4" data-number="5.3.2.1">
-<h4 data-number="5.3.2.1" class="anchored" data-anchor-id="alternative-raster-data"><span class="header-section-number">5.3.2.1</span> Alternative raster data</h4>
+<section id="alternative-raster-data" class="level4" data-number="6.3.2.1">
+<h4 data-number="6.3.2.1" class="anchored" data-anchor-id="alternative-raster-data"><span class="header-section-number">6.3.2.1</span> Alternative raster data</h4>
 <p>Occasionally the earth explorer website can go down for maintenance or during government shutdowns. If possible I strongly advise you to learn how to use its interface as multiple other data providers have similar interfaces. GitHub also place a strict size limit on files of 100MB. However, in order to account for situations like this I’ve placed the zipped file on GoogleDrive and will demonstrate how to access this from R using the new <code>googledrive</code> package.</p>
 <p>This could be a great option for you to gain reproducibility points if you have large files that you can’t upload to GitHub.</p>
 <p>In GoogleDrive you need to ensure your file is shareable with others — right click on it &gt; Share &gt; then copy the link. I have done this for my file in the example below, but if you try and replicate this, make sure you’ve done it otherwise it might not work when other people try and run your code, as they won’t have access to the file on your GoogleDrive.</p>
@@ -346,10 +351,10 @@
 </section>
 </section>
 </section>
-<section id="processing-raster-data" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="processing-raster-data"><span class="header-section-number">5.4</span> Processing raster data</h2>
-<section id="loading" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="loading"><span class="header-section-number">5.4.1</span> Loading</h3>
+<section id="processing-raster-data" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="processing-raster-data"><span class="header-section-number">6.4</span> Processing raster data</h2>
+<section id="loading" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="loading"><span class="header-section-number">6.4.1</span> Loading</h3>
 <p>Today, we are going to be using a Landsat 8 raster of Manchester. The vector shape file for Manchester has been taken from an ESRI repository.</p>
 <ol type="1">
 <li>Let’s load the majority of packages we will need here.</li>
@@ -487,8 +492,8 @@ PROJCRS["WGS 84 / UTM zone 30N",
 </div>
 </div>
 </section>
-<section id="clipping" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="clipping"><span class="header-section-number">5.4.2</span> Clipping</h3>
+<section id="clipping" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="clipping"><span class="header-section-number">6.4.2</span> Clipping</h3>
 <ol type="1">
 <li>Our raster is currently the size of the scene which satellite data is distributed in, to clip it to our study area it’s best to first crop it to the extent of the shapefile and then mask it as we have done in previous practicals…</li>
 </ol>
@@ -538,10 +543,10 @@ PROJCRS["WGS 84 / UTM zone 30N",
 <p>Here i write out each raster layer individually though specifying <code>bylayer=TRUE</code>.You can either use the <code>format=GTiff</code>or the native raster format from the <code>raster</code> package - <code>format='raster'</code> it doesn’t really matter as all GIS software can read all types.</p>
 </section>
 </section>
-<section id="data-exploration" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">5.5</span> Data exploration</h2>
-<section id="more-loading-and-manipulating" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="more-loading-and-manipulating"><span class="header-section-number">5.5.1</span> More loading and manipulating</h3>
+<section id="data-exploration" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">6.5</span> Data exploration</h2>
+<section id="more-loading-and-manipulating" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="more-loading-and-manipulating"><span class="header-section-number">6.5.1</span> More loading and manipulating</h3>
 <ol type="1">
 <li>For the next stage of analysis we are only interested in bands 1-7, we can either load them back in from the files we just saved or take them directly from the original raster stack.</li>
 </ol>
@@ -579,8 +584,8 @@ PROJCRS["WGS 84 / UTM zone 30N",
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">res</span>(manc) <span class="co"># xres, yres</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="plotting-data" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="plotting-data"><span class="header-section-number">5.5.2</span> Plotting data</h3>
+<section id="plotting-data" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="plotting-data"><span class="header-section-number">6.5.2</span> Plotting data</h3>
 <ol type="1">
 <li>Let’s actually have a look at our raster data, first in true colour (how humans see the world) and then false colour composites (using any other bands but not the combination of red, green and blue).</li>
 </ol>
@@ -602,8 +607,8 @@ PROJCRS["WGS 84 / UTM zone 30N",
 </div>
 </div>
 </section>
-<section id="data-similarity" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="data-similarity"><span class="header-section-number">5.5.3</span> Data similarity</h3>
+<section id="data-similarity" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="data-similarity"><span class="header-section-number">6.5.3</span> Data similarity</h3>
 <ol type="1">
 <li>What if you wanted to look at signle bands and also check the similarity between bands? ::: {.cell hash=‘7_temperature_cache/html/unnamed-chunk-13_d1d711231fce66b6d795c2621f8e76da’}</li>
 </ol>
@@ -702,16 +707,16 @@ Warning in graphics::par(usr): argument 1 does not name a graphical parameter</c
 <p>You can do much more using <code>GGally</code> have a look at the great <a href="https://ggobi.github.io/ggally/#ggallyggpairs">documentation</a></p>
 </section>
 </section>
-<section id="raster-calculations" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="raster-calculations"><span class="header-section-number">5.6</span> Raster calculations</h2>
+<section id="raster-calculations" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="raster-calculations"><span class="header-section-number">6.6</span> Raster calculations</h2>
 <p>Now we will move on to raster analysis in order to compute temperature from this raster data. To do so we need to generate additional raster layers, the first of which is NDVI</p>
-<section id="ndvi" class="level3" data-number="5.6.1">
-<h3 data-number="5.6.1" class="anchored" data-anchor-id="ndvi"><span class="header-section-number">5.6.1</span> NDVI</h3>
+<section id="ndvi" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="ndvi"><span class="header-section-number">6.6.1</span> NDVI</h3>
 <p>Live green vegetation can be represented with the NIR and Red Bands through the normalised difference vegetation index (NDVI) as chlorophyll reflects in the NIR wavelength, but absorbs in the Red wavelength.</p>
 <p><span class="math display">\[NDVI= \frac{NIR-Red}{NIR+Red}\]</span></p>
 </section>
-<section id="ndvi-function" class="level3" data-number="5.6.2">
-<h3 data-number="5.6.2" class="anchored" data-anchor-id="ndvi-function"><span class="header-section-number">5.6.2</span> NDVI function</h3>
+<section id="ndvi-function" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="ndvi-function"><span class="header-section-number">6.6.2</span> NDVI function</h3>
 <p>One of the great strengths of R is that is lets users define their own functions. Here we will practice writing a couple of basic functions to process some of the data we have been working with.</p>
 <p>One of the benefits of a function is that it generalises some set of operations that can then be repeated over and again on different data… the structure of a function in R is given below:</p>
 <div class="cell">
@@ -788,11 +793,11 @@ Warning in graphics::par(usr): argument 1 does not name a graphical parameter</c
 </div>
 </section>
 </section>
-<section id="advanced-raster-calculations" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="advanced-raster-calculations"><span class="header-section-number">5.7</span> Advanced raster calculations</h2>
+<section id="advanced-raster-calculations" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="advanced-raster-calculations"><span class="header-section-number">6.7</span> Advanced raster calculations</h2>
 <p>The goal of this final section is to set up a mini investigation to see if there is a relationship between urban area and temperature. If our hypothesis is that there is a relationship then our null is that there is not a relationship…</p>
-<section id="calculating-tempearture-from-landsat-data" class="level3" data-number="5.7.1">
-<h3 data-number="5.7.1" class="anchored" data-anchor-id="calculating-tempearture-from-landsat-data"><span class="header-section-number">5.7.1</span> Calculating tempearture from Landsat data</h3>
+<section id="calculating-tempearture-from-landsat-data" class="level3" data-number="6.7.1">
+<h3 data-number="6.7.1" class="anchored" data-anchor-id="calculating-tempearture-from-landsat-data"><span class="header-section-number">6.7.1</span> Calculating tempearture from Landsat data</h3>
 <p>Here we are going to compute temperature from Landsat data — there are many methods that can be found within literature to do so but we will use the one originally developed by Artis &amp; Carnahan (1982), recently summarised by Guha et al.&nbsp;2018 and and Avdan and Jovanovska (2016).</p>
 <p>Some of the terms used our outlined in the terms section at the end of the document.</p>
 <ol type="1">
@@ -942,8 +947,8 @@ values     : 281.4855, 305.9571  (min, max)</code></pre>
 <p>Nice that’s our temperature data sorted.</p>
 </section>
 </section>
-<section id="calucating-urban-area-from-landsat-data" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="calucating-urban-area-from-landsat-data"><span class="header-section-number">5.8</span> Calucating urban area from Landsat data</h2>
+<section id="calucating-urban-area-from-landsat-data" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="calucating-urban-area-from-landsat-data"><span class="header-section-number">6.8</span> Calucating urban area from Landsat data</h2>
 <p>How about we extract some urban area using another index and then see how our temperature data is related?</p>
 <p>We will use the Normalized Difference Built-up Index (NDBI) algorithm for identification of built up regions using the reflective bands: Red, Near-Infrared (NIR) and Mid-Infrared (MIR) originally proposed by Zha et al.&nbsp;(2003).</p>
 <p>It is very similar to our earlier NDVI calculation but using different bands…</p>
@@ -964,8 +969,8 @@ values     : 281.4855, 305.9571  (min, max)</code></pre>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                          lsatmask<span class="sc">$</span>LC08_L1TP_203023_20190513_20190521_01_T1_B5_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="urban-area-and-temperature-relationship" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="urban-area-and-temperature-relationship"><span class="header-section-number">5.9</span> Urban area and temperature relationship</h2>
+<section id="urban-area-and-temperature-relationship" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="urban-area-and-temperature-relationship"><span class="header-section-number">6.9</span> Urban area and temperature relationship</h2>
 <ol type="1">
 <li>We could plot the varaibles agaisnt each other but there are a lot of data points</li>
 </ol>
@@ -1062,8 +1067,8 @@ values     : 281.4855, 305.9571  (min, max)</code></pre>
 </div>
 </div>
 </section>
-<section id="statistical-summary" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="statistical-summary"><span class="header-section-number">5.10</span> Statistical summary</h2>
+<section id="statistical-summary" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="statistical-summary"><span class="header-section-number">6.10</span> Statistical summary</h2>
 <ol type="1">
 <li>To see if our variables are related let’s run some basic correlation</li>
 </ol>
@@ -1116,8 +1121,8 @@ values     : 281.4855, 305.9571  (min, max)</code></pre>
 <p>As p&lt;0.05 is shows that are variables are have a statistically significant correlation… so as urban area (assuming the index in representative) per pixel increases so does temperature…therefore we can reject our null hypothesis… but remember that this does not imply causation!!</p>
 <p>If you want more information on statistics in R go and read <a href="https://bookdown.org/ndphillips/YaRrr/">YaRrr! A Pirate’s Guide to R</a>, chapter 13 on hypothesis tests.</p>
 </section>
-<section id="lsoamsoa-stats" class="level2" data-number="5.11">
-<h2 data-number="5.11" class="anchored" data-anchor-id="lsoamsoa-stats"><span class="header-section-number">5.11</span> LSOA/MSOA stats</h2>
+<section id="lsoamsoa-stats" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="lsoamsoa-stats"><span class="header-section-number">6.11</span> LSOA/MSOA stats</h2>
 <p>This is all useful, but what if we wanted to present this analysis to local leaders in Manchester to show which areas experience the highest temperature (remember, with the limitation of this being one day!)</p>
 <p>Next, we will aggregate our raster data to LSOAs, taking a mean of the pixels in each LSOA.</p>
 <p>LSOA data: https://data-communities.opendata.arcgis.com/datasets/5e1c399d787e48c0902e5fe4fc1ccfe3</p>
@@ -1222,8 +1227,8 @@ Projected CRS: OSGB 1936 / British National Grid</code></pre>
 <span id="cb65-40"><a href="#cb65-40" aria-hidden="true" tabindex="-1"></a>             <span class="at">by=</span><span class="st">"FID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="mapping" class="level2" data-number="5.12">
-<h2 data-number="5.12" class="anchored" data-anchor-id="mapping"><span class="header-section-number">5.12</span> Mapping</h2>
+<section id="mapping" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="mapping"><span class="header-section-number">6.12</span> Mapping</h2>
 <p>Now, we could map both temperature (and the % of urban area) within a LSOA individually….In our map we want to include some place names from Open Street Map, so let’s get those from <a href="https://download.geofabrik.de/europe/great-britain/england/greater-manchester.html">OSM that is stored on Geofabrik</a></p>
 <div class="cell">
 <div class="sourceCode" id="cb66"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>Places <span class="ot">&lt;-</span> <span class="fu">st_read</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"prac_7"</span>, </span>
@@ -1287,8 +1292,8 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 <p>This could also be repeated for urban area and plotted in one figure, perhaps with an inset map like we previously did. But, we can also now plot two choropleth maps over each other, this is made much easier with the <code>biscale()</code> package, however, now we must use <code>ggplot</code> as opposed to <code>tmap</code>, you can force <code>tmap</code> to do it, but the feature is still in development.</p>
 </section>
-<section id="bivariate-mapping-optional" class="level2" data-number="5.13">
-<h2 data-number="5.13" class="anchored" data-anchor-id="bivariate-mapping-optional"><span class="header-section-number">5.13</span> Bivariate mapping (optional)</h2>
+<section id="bivariate-mapping-optional" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="bivariate-mapping-optional"><span class="header-section-number">6.13</span> Bivariate mapping (optional)</h2>
 <p>Whilst bivaraite maps look cool, they don’t tell us anything about the actual data values, simply dividing the data into classes based on the style parameter which we have seen before - jenks, equal and so on. So here I want to produce:</p>
 <ul>
 <li>A central bivariate map of LSOAs within Manchester</li>
@@ -1394,8 +1399,8 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div>
 </div>
-<section id="map-notes" class="level3" data-number="5.13.1">
-<h3 data-number="5.13.1" class="anchored" data-anchor-id="map-notes"><span class="header-section-number">5.13.1</span> Map notes</h3>
+<section id="map-notes" class="level3" data-number="6.13.1">
+<h3 data-number="6.13.1" class="anchored" data-anchor-id="map-notes"><span class="header-section-number">6.13.1</span> Map notes</h3>
 <ul>
 <li>The Manchester outline shapefile doesn’t match up with either the MSOA or LSOA boundaries, this could be solved by making sure the boundary data (e.g.&nbsp;city outline) matches any other spatial units.</li>
 <li>When selecting the data (within the Manchester boundary) any MSOA shape that was within the boundary selected</li>
@@ -1405,8 +1410,8 @@ Geodetic CRS:  WGS 84</code></pre>
 </ul>
 </section>
 </section>
-<section id="considerations" class="level2" data-number="5.14">
-<h2 data-number="5.14" class="anchored" data-anchor-id="considerations"><span class="header-section-number">5.14</span> Considerations</h2>
+<section id="considerations" class="level2" data-number="6.14">
+<h2 data-number="6.14" class="anchored" data-anchor-id="considerations"><span class="header-section-number">6.14</span> Considerations</h2>
 <p>If you wanted to explore this type of analysis further then you would need to consider the following:</p>
 <ul>
 <li>Other methods for extracting temperature from Landsat data</li>
@@ -1415,8 +1420,8 @@ Geodetic CRS:  WGS 84</code></pre>
 <li>The use of raw satellite data as opposed to remove the effects of the atmosphere. Within this practical we have only used relative spatial indexes (e.g.&nbsp;NDVI). However, if you were to use alternative methods it might be more appropriate to use surface reflectance data (also provided by USGS).</li>
 </ul>
 </section>
-<section id="references" class="level2" data-number="5.15">
-<h2 data-number="5.15" class="anchored" data-anchor-id="references"><span class="header-section-number">5.15</span> References</h2>
+<section id="references" class="level2" data-number="6.15">
+<h2 data-number="6.15" class="anchored" data-anchor-id="references"><span class="header-section-number">6.15</span> References</h2>
 <p>Thanks to former CASA graduate student Dr Matt Ng for providing the outline to the start of this practical</p>
 <p>Avdan, U. and Jovanovska, G., 2016. Algorithm for automated mapping of land surface temperature using LANDSAT 8 satellite data. Journal of Sensors, 2016.</p>
 <p>Guha, S., Govil, H., Dey, A. and Gill, N., 2018. Analytical study of land surface temperature with NDVI and NDBI using Landsat 8 OLI and TIRS data in Florence and Naples city, Italy. European Journal of Remote Sensing, 51(1), pp.667-678.</p>
@@ -1424,8 +1429,8 @@ Geodetic CRS:  WGS 84</code></pre>
 <p>Young, N.E., Anderson, R.S., Chignell, S.M., Vorster, A.G., Lawrence, R. and Evangelista, P.H., 2017. A survival guide to Landsat preprocessing. Ecology, 98(4), pp.920-932.</p>
 <p>Zha, Y., Gao, J. and Ni, S., 2003. Use of normalized difference built-up index in automatically mapping urban areas from TM imagery. International journal of remote sensing, 24(3), pp.583-594.</p>
 </section>
-<section id="remote-sensing-refresher" class="level2" data-number="5.16">
-<h2 data-number="5.16" class="anchored" data-anchor-id="remote-sensing-refresher"><span class="header-section-number">5.16</span> Remote sensing refresher</h2>
+<section id="remote-sensing-refresher" class="level2" data-number="6.16">
+<h2 data-number="6.16" class="anchored" data-anchor-id="remote-sensing-refresher"><span class="header-section-number">6.16</span> Remote sensing refresher</h2>
 <p>Landsat sensors capture reflected solar energy, convert these data to radiance, then rescale this data into a Digital Number (DN), the latter representing the intensity of the electromagnetic radiation per pixel. The range of possible DN values depends on the sensor radiometric resolution. For example Landsat Thematic Mapper 5 (TM) measures between 0 and 255 (termed 8 bit), whilst Landsat 8 OLI measures between 0 and 65536 (termed 12 bit). These DN values can then be converted into Top of Atmosphere (TOA) radiance and TOA reflectance <a href="https://landsat.usgs.gov/landsat-8-l8-data-users-handbook-section-5¬">through available equations and known constants</a> that are preloaded into certain software. The former is how much light the instrument sees in meaningful units whilst the latter removes the effects of the light source. However, TOA reflectance is still influenced by atmospheric effects. These atmospheric effects can be removed through atmospheric correction achievable in software such as ENVI and QGIS to give surface reflectance representing a ratio of the amount of light leaving a target to the amount of light striking it.</p>
 <p>We must also consider the spectral resolution of satellite imagery, Landsat 8 OLI has 11 spectral bands and as a result is a multi-spectral sensor. As humans we see in the visible part of the electromagnetic spectrum (red-green-blue) — this would be three bands of satellite imagery — however satellites can take advantage of the rest of the spectrum. Each band of Landsat measures in a certain part of the spectrum to produce a DN value. We can then combine these values to produce ‘colour composites’. So a ‘true’ colour composite is where red, green and blue Landsat bands are displayed (the visible spectrum). Based on the differing DN values obtained, we can pick out the unique signatures (values of all spectral bands) of each land cover type, termed spectral signature.</p>
 <p>For more information read <a href="https://esajournals.onlinelibrary.wiley.com/doi/pdf/10.1002/ecy.1730">Young et al.&nbsp;(2017) A survival guide to Landsat preprocessing</a></p>
@@ -1512,12 +1517,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./6_classification_II.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification II</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification II</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./resources.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Resources</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Resources</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

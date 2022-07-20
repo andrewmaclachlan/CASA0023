@@ -1,5 +1,37 @@
 # Classification I
 
+## Google Earth Engine
+
+For this week we are going to move away form R and focus on Google Earth Engine, which is still quite new for me too.
+
+Google Earth Engine (GEE) is a platform that let's us analyse data that is stored remotely, each time we write some code it is sent to a server to be evaluated and the results are returned to us. As we don't compute locally it speeds all of our processes up!
+
+GEE uses Javascript...and according to the GEE team this is all of the Javascript you need to know:
+
+```{r, eval=FALSE}
+// All the javascript you need to know (almost)
+
+var number = 1
+
+var string = 'Hello, World!'
+
+var list = [1.23, 8, -3]
+print(list[2])
+
+var dictionary = {
+  a: 'Hello',
+  b: 10,
+  c: 0.1343,
+  d: list
+}
+
+print(dictionary.b)
+print(number, string, list, dictionary)
+```
+
+
+
+
 ### Review questions 
 
 

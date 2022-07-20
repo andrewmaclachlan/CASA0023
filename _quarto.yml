@@ -43,7 +43,7 @@ book:
     - index.qmd
     - intro.qmd
     - 2_portfolio.qmd
-#    - 3_corrections.qmd
+    - 3_corrections.qmd
     - 4_policy.qmd
 #    - 5_classification_I.qmd
     - 6_classification_II.qmd

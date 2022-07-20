@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.80">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CASA0023 Remotely Sensing Cities and Environments - 3&nbsp; Corrections</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="site_libs/quarto-nav/headroom.min.js"></script>
+  <script src="site_libs/clipboard/clipboard.min.js"></script>
+  <meta name="quarto:offset" content="./">
+  <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+  <script src="site_libs/quarto-search/fuse.min.js"></script>
+  <script src="site_libs/quarto-search/quarto-search.js"></script>
+  <link href="./4_policy.html" rel="next">
+  <link href="./2_portfolio.html" rel="prev">
+  <link href="./assets/favicon.ico" rel="icon">
+  <script src="site_libs/quarto-html/quarto.js"></script>
+  <script src="site_libs/quarto-html/popper.min.js"></script>
+  <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="site_libs/quarto-html/anchor.min.js"></script>
+  <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script id="quarto-search-options" type="application/json">{
+    "location": "navbar",
+    "copy-button": false,
+    "collapse-after": 2,
+    "panel-placement": "end",
+    "type": "overlay",
+    "limit": 20,
+    "language": {
+      "search-no-results-text": "No results",
+      "search-matching-documents-text": "matching documents",
+      "search-copy-link-title": "Copy link to search",
+      "search-hide-matches-text": "Hide additional matches",
+      "search-more-match-text": "more match in this document",
+      "search-more-matches-text": "more matches in this document",
+      "search-clear-button-title": "Clear",
+      "search-detached-cancel-button-title": "Cancel",
+      "search-submit-button-title": "Submit"
+    }
+  }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="floating">
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <img src="./general_images/casa_logo.jpg" alt="">
+    <span class="navbar-title">CASA0023 Remotely Sensing Cities and Environments</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></h1>
+      <button type="button" class="quarto-btn-toggle btn">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_portfolio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Portfolio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_corrections.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_policy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Policy</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_classification_II.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification II</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7_temperature.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Temperature</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#atmosphereic-correction" class="nav-link active" data-scroll-target="#atmosphereic-correction"> <span class="header-section-number">3.1</span> Atmosphereic correction</a>
+<ul class="collapse">
+<li><a href="#dos" class="nav-link" data-scroll-target="#dos"> <span class="header-section-number">3.1.1</span> DOS</a></li>
+<li><a href="#radiance-or-dn-to-reflectance" class="nav-link" data-scroll-target="#radiance-or-dn-to-reflectance"> <span class="header-section-number">3.1.2</span> Radiance (or DN) to Reflectance</a></li>
+</ul></li>
+<li><a href="#accessing-data" class="nav-link" data-scroll-target="#accessing-data"> <span class="header-section-number">3.2</span> Accessing data</a></li>
+<li><a href="#merging-imagery" class="nav-link" data-scroll-target="#merging-imagery"> <span class="header-section-number">3.3</span> Merging imagery</a></li>
+<li><a href="#enhancements" class="nav-link" data-scroll-target="#enhancements"> <span class="header-section-number">3.4</span> Enhancements</a>
+<ul class="collapse">
+<li><a href="#ratio" class="nav-link" data-scroll-target="#ratio"> <span class="header-section-number">3.4.1</span> Ratio</a></li>
+<li><a href="#filtering" class="nav-link" data-scroll-target="#filtering"> <span class="header-section-number">3.4.2</span> Filtering</a></li>
+<li><a href="#texture" class="nav-link" data-scroll-target="#texture"> <span class="header-section-number">3.4.3</span> Texture</a></li>
+<li><a href="#data-fusion" class="nav-link" data-scroll-target="#data-fusion"> <span class="header-section-number">3.4.4</span> Data fusion</a></li>
+<li><a href="#pca" class="nav-link" data-scroll-target="#pca"> <span class="header-section-number">3.4.5</span> PCA</a></li>
+<li><a href="#review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">3.4.6</span> Review questions</a></li>
+<li><a href="#useful-blogs" class="nav-link" data-scroll-target="#useful-blogs"> <span class="header-section-number">3.4.7</span> Useful blogs</a></li>
+</ul></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/3_corrections.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header id="title-block-header">
+<h1 class="title d-none d-lg-block display-7"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></h1>
+</header>
+
+<section id="atmosphereic-correction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="atmosphereic-correction"><span class="header-section-number">3.1</span> Atmosphereic correction</h2>
+<section id="dos" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="dos"><span class="header-section-number">3.1.1</span> DOS</h3>
+<p>As described in the lecture, a rather simple method to correct raw satellite (or any other) imagery is called Dark Object Subtraction (DOS). This uses the logic that the darkest pixel within the image should be 0 and therefore any value that it has can be attributed to the atmosphere.</p>
+<p>So in order to remove the effect of the atmosphere we can the subtract the value from the rest of the pixels within the image.</p>
+<p>Here, we will need to download some raw satellite imagery, that is in Digital Number (DN).</p>
+<p>Then we will apply the formula to calculate the reluctance of the pixels by removing atmosphere effects.The formula for the cosine of the solar zenith angle correction (COST) is, this is the same as DOS but DOS omits <code>TAUz</code>. The following has made use of the <a href="https://www.gisagmaps.com/landsat-8-atco-guide/">documentation from GIS Ag Maps.com</a></p>
+<p><span class="math display">\[\rho_{\lambda}= \frac{(Lsat_{rad} - Lhaze1percent_{rad})\pi * d^2}{EO_{\lambda} * cos\theta S * TUAv + TAUz}\]</span></p>
+<p>Where…</p>
+<ul>
+<li><span class="math inline">\(\rho_{\lambda}\)</span> is the corrected value (DOS applied)</li>
+</ul>
+<p>Top line of equation…</p>
+<ul>
+<li><p><span class="math inline">\(Lsat_{rad}\)</span> = at sensor radiance (recall DN goes to radiance through the regression equation we saw!)</p></li>
+<li><p><span class="math inline">\(Lhaze1percent_{rad}\)</span> = amount of radiance that is due to the atmosphere (atmospheric haze) from path or scatter radiance. Very few surfaces are completely black so it is assume that the darkest surface has a 1% reflectance. Various methods to caclcualte this…</p>
+<ul>
+<li>Look up tables</li>
+<li>Selecting the darkest pixels (shadow, water)</li>
+</ul></li>
+</ul>
+<p>When we have the haze amount then deduct 1% from that value per band as few targets are absolutely black.</p>
+<p>For COST this this:</p>
+<p><span class="math display">\[ 0.01 reflectance = 0.01 *\frac{Eoλ * cosθs^2} {d² * pi}\]</span></p>
+<p>For DOS it’s</p>
+<p><span class="math display">\[ 0.01 reflectance = 0.01 *\frac{Eoλ * cosθs} {d² * pi}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(EO_{\lambda}\)</span> or <span class="math inline">\(ESUN_{\lambda}\)</span> = mean exoatmospheric irradiance</p>
+<ul>
+<li>irradiance = power per unit area received from the Sun</li>
+<li>exoatmospheric = just outside the Earth’s atmosphere</li>
+<li>These values are available from the Landsat user manual such as <a href="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/LSDS-1927_L7_Data_Users_Handbook-v2.pdf">table 5.3 in the Landsat 7 user guide</a></li>
+</ul></li>
+<li><p><span class="math inline">\(cosθs\)</span> = cosine of the solar azimuth, remember from the lecture that this is 90 - solar elevation.</p></li>
+<li><p><span class="math inline">\(d\)</span> = the Earth-sun distance and is in the <code>.MTL</code> file</p></li>
+<li><p><span class="math inline">\(pi\)</span> = 3.14159265</p></li>
+</ul>
+<p>Once we have all these values then we can do the following:</p>
+<ul>
+<li>Compute the haze value for each band (although not beyond NIR) - this is the amount of radiance that is due to the atmosphere (atmospheric haze), see above methods.</li>
+<li>Convert DN to radiance</li>
+<li>Compute the 1% reflectance value using the equations above</li>
+<li>Subtract the 1% reflectance value from the radiance. Here we are saying that we have a pixel (e.g.&nbsp;darkest pixel), we know what 1% of the total radiance is and we are subtracting that from the darkest pixel (which still has atmospheric effects) to account for most targets not being completely black.</li>
+</ul>
+<p>We can now plug the values in:</p>
+<p><span class="math display">\[\rho_{\lambda}= \frac{(Lsat_{rad} - Lhaze1percent_{rad})\pi * d^2}{EO_{\lambda} * cos\theta S * TUAv + TAUz}\]</span></p>
+<p>Where the <span class="math inline">\(Lhaze1percent_{rad}\)</span> is the haze value (e.g.&nbsp;darkest pixel) <strong>minus</strong> 1% of the total radiance. This 1% was computed from the equations above.</p>
+<p>Within this equation:</p>
+<p><span class="math inline">\(TAUv\)</span> = 1.0 for Landsat and <span class="math inline">\(TAUz\)</span> = cosθs for COST method. DOS is the same, but without <span class="math inline">\(TAUz\)</span></p>
+<p>Of course we can do this in R (or any other software) with just one function! First we need to download some raw satellite data that comes in the Digital Number (DN) format. This is the exact same process as we saw in week 1, expect this time select the Collection 1, Level-1 bundle. At the moment this process won’t work with Landsat 9. However, as this involves a large amount of data and it’s unlikely you will need to do this in the module of data read through the following code and then move to the next section</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RStoolbox)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Import meta-data and bands based on MTL file</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>mtlFile  <span class="ot">&lt;-</span> (<span class="st">"prac_3/Lsatdata8/LC08_L1TP_175083_20211005_20211013_01_T1_MTL.txt"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>metaData <span class="ot">&lt;-</span> <span class="fu">readMeta</span>(mtlFile)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>lsatMeta  <span class="ot">&lt;-</span> <span class="fu">stackMeta</span>(metaData)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># surface reflectance with DOS</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>l8_boa_ref <span class="ot">&lt;-</span> <span class="fu">radCor</span>(lsatMeta, metaData, <span class="at">method =</span> <span class="st">"dos"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#terra::writeRaster(l8_boa_ref, datatype="FLT4S", filename = "prac_3/Lsatdata8/l8_boa_ref.tif", format = "GTiff", overwrite=TRUE)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Radiance </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>lsat_rad <span class="ot">&lt;-</span> <span class="fu">radCor</span>(lsatMeta, <span class="at">metaData =</span> metaData, <span class="at">method =</span> <span class="st">"rad"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#terra::writeRaster(lsat_rad, datatype="FLT4S", filename = "prac_3/Lsatdata8/lsat_rad.tif", format = "GTiff", overwrite=TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hazeDN    <span class="ot">&lt;-</span> RStoolbox<span class="sc">::</span><span class="fu">estimateHaze</span>(lsat, <span class="at">hazeBands =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">darkProp =</span> <span class="fl">0.01</span>, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lsat_sref <span class="ot">&lt;-</span> <span class="fu">radCor</span>(lsatMeta, <span class="at">metaData =</span> metaData, <span class="at">method =</span> <span class="st">"dos"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">hazeValues =</span> hazeDN, <span class="at">hazeBands =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>https://rpubs.com/delViento/atm_corr</p>
+</section>
+<section id="radiance-or-dn-to-reflectance" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="radiance-or-dn-to-reflectance"><span class="header-section-number">3.1.2</span> Radiance (or DN) to Reflectance</h3>
+<p>As noted in the lecture there are a wide range of more sophisticated methods (beyond Dark Object Subtraction) to convert raw Digital Numbers or radiance to surface reflectance.</p>
+<p>Whilst this is a bit beyond the scope of this module, if you look again at the <a href="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/LSDS-1927_L7_Data_Users_Handbook-v2.pdf">Landsat 7 Data Users Handbook</a> you will see a radiance to <strong>reflectance</strong> calculation that can be used…<strong>“For relatively clear Landsat scenes”</strong>:</p>
+<p><span class="math display">\[\rho_{\rho}= \frac{\pi* L_{\lambda} * d ^2}{ESUN_{\lambda} * cos\theta_S}\]</span> and…we’ve seen all these values in the DOS formula, except <span class="math inline">\(\rho_{\rho}\)</span> which is Unitless planetary reflectance</p>
+<p>…this method is still used in current research too, for example it’s listed in this paper of Land Surface Temperature retrieval by <a href="https://www.mdpi.com/2072-4292/12/2/294">Sekertekin and Bonafonu, 2020</a>. See Appendix C for Landsat 5, 7 (that use the above equation) and Landsat 8, that uses this slight variation…</p>
+<p><span class="math display">\[\rho_{\rho}= \frac{M_{p}* Q_{CAL} + A_p}{sin\theta_{SE}}\]</span> Where…</p>
+<ul>
+<li><p><span class="math inline">\(M_p\)</span> is the band-specific multiplicative rescaling factor from the metadata</p></li>
+<li><p><span class="math inline">\(A_p\)</span> is the band-specific additive rescaling factor from the metadata</p></li>
+<li><p><span class="math inline">\(QCAL\)</span> is the digital number</p></li>
+<li><p><span class="math inline">\(\theta_{SE}\)</span> is the sun elevation angle from the metadata file.</p></li>
+</ul>
+<p><strong>Although</strong> it’s worth noting that this is Top of Atmosphere reflectance (TOA).</p>
+<p>Radiance is how much light the sensor sees.</p>
+<p>Reflectance is the ratio of light leaving the target to amount striking the target. Here will still have atmopsheric effects in the way of our true <strong>apparent</strong> reflectance. Confusingly all of these can be termed reflectance and indeed sometimes radiance is referred to as reflectance.</p>
+<p>TOA reflectance changes the data from what the sensor sees to the ratio of light leaving compared to striking it. BUT, the atmosphere is still present. If we remove the atmopshere we have apparent reflectance (sometimes called Bottom of Atmosphere reflectance). DOS gives us a <strong>version</strong> of apparent reflectance.</p>
+</section>
+</section>
+<section id="accessing-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="accessing-data"><span class="header-section-number">3.2</span> Accessing data</h2>
+<p>Ok, so we can deal with a single image, but what happens when an image doesn’t cover your entire study area. We must select two images are mosaic (or merge) them together. Landsat data (and most satellite data) is collected using some form of Worldwide Reference System. This splits the data based on PATH (columns) and ROWS.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/path_row.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="https://www.researchgate.net/publication/340870377_LANDSAT_PATH_AND_ROW_-_NIGERIA">Samuel Akande</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Before we start with merging we need to download two satellite tiles to merge together. The problem is that Landsat tiles won’t align with administration boundraies (or they might if you are lucky). For my example city of Cape Town i need at least two, possible three Landsat tiles to be merged together. In USGS Earth Explorer you can upload a shapefile or KML so you can search for tiles to cover the area. However, this is rather slow and the shapefile must only contain <strong>one</strong> polygon (cape town includes an island too). You can, however, draw a boundary to search within:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/landsat_search.png" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In my example i am going to select two tiles, i know which two to select from looking at the <a href="https://gadm.org/">GADM</a> boundary for Cape Town.</p>
+<p>When doing this:</p>
+<ul>
+<li>Select two images as temporally close to each other as possible</li>
+<li>Try and make sure there is no (or very little cloud cover)</li>
+<li>In this case select Landsat Collection 2 level 2 to get surface reflectance.</li>
+</ul>
+<p>Notes on Landsat Collections. The different collections denote a major difference in processing of the data. Where as the levels denote a specific product. There is no clear guide online that explains this, so be careful when reading papers!</p>
+<p>For example…</p>
+<blockquote class="blockquote">
+<p>A primary characteristic of Collection 2 is the substantial improvement in the absolute geolocation accuracy of the global ground reference dataset used in the Landsat Level-1 processing flow</p>
+</blockquote>
+<p>Collection 2 was released in 2020 and has some updates, see <a href="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf">this summary of differences for collection 1 vs collection 2</a>. The collection 2 auxiliary data can also be downloaded from Earth Explorer.</p>
+<p>Whereas levels will provide:</p>
+<ul>
+<li><p>Level 1 is delivered as a <a href="https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data">Digital Number</a></p></li>
+<li><p>Level 2 includes surface reflectance and surface temperature</p></li>
+<li><p>Level 3 science products are specific products generated from the data such as Burned Area, surface water extent</p></li>
+<li><p>Most of the level datasets are tiered, this is denoted through the file name that might end with T1. Tiers are based on data quality and level of processing. Tier 1 datasets are the best quality, tier 2 are good but might have some cloud that affects radiometric calibration covering ground control points.<br>
+There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data (Top of Atmosphere (TOA) reflectance, TOA Brightness Temperature, Surface Reflectance , Surface Temperature and Quality Assessment) in a specific US grid strucutre. This removes the need to process data between the difference stages for applications in the US.</p></li>
+</ul>
+<p>To conclude, we have collections, followed by levels, followed by tiers.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/Landsat-Science-Products-Infotable.jfif" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products">USGS</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case I want to download two tiles from Collection 2, Level 2. You can view the tiles and preview the data in Earth Explorer:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/landsat_tiles.png" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at the options below each tile icon in the search results you can either download the tiles individually or add them to a basked (it’s the box icon). After clicking the box on the products you want to download &gt; click the basket (top right) &gt; you will then be presented with this screen where you click start order and then follow the prompts to download multiple tiles at once.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/start_order.png" class="img-fluid figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-imagery" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="merging-imagery"><span class="header-section-number">3.3</span> Merging imagery</h2>
+<p>Open our two tiles, in my case i have move my tiles into two separate folders. So i will do this twice, note that we could automate this if we had a large number of tiles. I have also downloaded one Landsat 8 tile and one Landsat 9 tile.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>✔ ggplot2 3.3.6     ✔ purrr   0.3.4
+✔ tibble  3.1.7     ✔ dplyr   1.0.9
+✔ tidyr   1.2.0     ✔ stringr 1.4.0
+✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stderr">
+<pre><code>terra 1.5.34</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>
+Attaching package: 'terra'</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>The following object is masked from 'package:tidyr':
+
+    extract</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>listlandsat_8<span class="ot">&lt;-</span><span class="fu">dir_info</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"prac_3"</span>, <span class="st">"Landsat"</span>, <span class="st">"Lsat8"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">str_detect</span>(path, <span class="st">"[B123456790].TIF"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(path)<span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load our raster layers into a stack</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">rast</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For Landsat 9</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>listlandsat_9<span class="ot">&lt;-</span><span class="fu">dir_info</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"prac_3"</span>, <span class="st">"Landsat"</span>, <span class="st">"Lsat9"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">str_detect</span>(path, <span class="st">"[1B23456790].TIF"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(path)<span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load our raster layers into a stack</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">rast</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This might take about 2 minutes… ::: {.cell}</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">mosaic</span>(listlandsat_8, listlandsat_9, <span class="at">fun=</span><span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+</section>
+<section id="enhancements" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="enhancements"><span class="header-section-number">3.4</span> Enhancements</h2>
+<p>Using our merged Landsat data we can now undertake some basic enhancements to try and emphasize / exaggerate certain features or spectral traits.</p>
+<section id="ratio" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="ratio"><span class="header-section-number">3.4.1</span> Ratio</h3>
+<p>Ratioing is the difference between two spectral bands that have a certain spectral response meaning it is easier to identify a certain landscape feature…for example…</p>
+<ul>
+<li>The Normalised Difference Vegetation Index is based on the fact that healthy and green vegetation reflects more in the NIR but absorbs in the Red wavelength</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/leaf.jpg" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here, we can visually see the spectral trait:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/NDVI.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can leverage the fact that healthy vegetation has this spectral trait and use the NDVI index should we wish to highlight areas with healthy vegetation.</p>
+<p><span class="math display">\[NDVI= \frac{NIR-Red}{NIR+Red}\]</span> In R this would be:</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m1_NDVI <span class="ot">&lt;-</span> (m1<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5 <span class="sc">-</span> m1<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4 ) <span class="sc">/</span> (m1<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5 <span class="sc">+</span> m1<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>m1_NDVI <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can reclassify this to pull out certain areas, for example, only where NDVI is equal to or greater than 0.2</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> m1_NDVI <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">classify</span>(., <span class="fu">cbind</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">0.2</span>, <span class="cn">NA</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>veg <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_corrections_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>There are many other ratios, all of which are detailed on the <a href="https://www.indexdatabase.de/">Index Database</a> and most follow the same formula. For example, the Normalized Difference Moisture Index (NDMI):</p>
+<p>For Landsat sensors 4-7:</p>
+<p><span class="math display">\[NDMI= \frac{Band 4-Band 5}{Band 4 + Band 5}\]</span> For Landsat 8, bands are increased by 1.</p>
+</section>
+<section id="filtering" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="filtering"><span class="header-section-number">3.4.2</span> Filtering</h3>
+<p>Filtering refers to any kind of moving window operation to our data which can be saved as a separate raster file. As we saw in the lecture this can include low or high pass filters.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/focalmean.gif" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html">Introduction to Geographic Information Systems in Forest Resources</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for a 3 by 3 filter on 1 band</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>m1_filter <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">focal</span>(m1<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, <span class="at">w=</span><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>,<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="texture" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="texture"><span class="header-section-number">3.4.3</span> Texture</h3>
+<p>The basics of texture were covered in the lecture. To apply texture analysis to data in R, we can use the <code>glcm</code> package which has a selection of eight texture measures, and we can apply these per band…for example…Note, to use this you must have <a href="https://cran.r-project.org/bin/windows/Rtools/"><code>RTools</code> installed</a> as it makes use of the C++ language.</p>
+<p>Below we can specify:</p>
+<ul>
+<li>the size of the moving window</li>
+<li>the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel</li>
+<li>the measures we want, for full equations see <a href="https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&amp;text=ENVI%20computes%20a%20histogram%20that,array">Texture Metrics Background</a>%20of%20the%20occurrence%20values.&amp;text=It%20normalizes%20the%20occurrence%20values,(9%20in%20this%20example).)</li>
+</ul>
+<p>Note, that we commonly don’t use the pancrhomatic band in landcover classification, however as it is 15m it can produce some useful outputs.</p>
+<p>Currently the <code>glcm</code> package only accepts raster layers from the <code>raster</code> package so we first need to convert this to a raster layer…this will take 7-10 minutes…increasing the window size and selecting less statistics should speed this up.</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glcm)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>band4_raster<span class="ot">&lt;-</span>raster<span class="sc">::</span><span class="fu">raster</span>(m1<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>glcm <span class="ot">&lt;-</span> <span class="fu">glcm</span>(band4_raster,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">window =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">7</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                   <span class="co">#shift=list(c(0,1), c(1,1), c(1,0), c(1,-1)), </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">statistics =</span> <span class="fu">c</span>(<span class="st">"homogeneity"</span>))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>glcm<span class="sc">$</span>glcm_homogeneity <span class="sc">%&gt;%</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Depending on your study area the texture measures might not show much, but in this example from <a href="https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&amp;lang=en">Lu et al.&nbsp;2012</a> what does it highlight or make more prominent.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prac_3/texture_example.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&amp;lang=en">Land use/cover classification in the Brazilian Amazon using satellite images</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="data-fusion" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="data-fusion"><span class="header-section-number">3.4.4</span> Data fusion</h3>
+<p>In the simplest form data fusion is appending new raster data to the existing data or making a new raster dataset with different bands…here we can do this with the texture measure we have created (and the original spectral data if you wish). We are getting to the stage now where remote sensing is a merge of science and art. Specifically the science is how we correct and apply methods, the art is about how we select the right data / transform it / alter it to produce an output. There is never a <strong>completely right</strong> answer as we will see in future practicals.</p>
+<p>To create decision level fusion we append our new datasets to our existing data…</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for the next step of PCA we need to keep this in a raster (and not terra) format...</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m1_raster <span class="ot">&lt;-</span> <span class="fu">stack</span>(m1)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>Fuse <span class="ot">&lt;-</span> <span class="fu">stack</span>(m1_raster, glcm.red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Recall from the lecture there is also object fusion and image fusion.</p>
+</section>
+<section id="pca" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="pca"><span class="header-section-number">3.4.5</span> PCA</h3>
+<p>Principal Component Analysis is designed to reduce the dimensionality of our data. In this case we might want to scale our data, meaning that we can compare data that isn’t measured in the same way (as we have spectral and texture data). To do so we can use the function scale, that by default standarize the data by subtracting the mean and dividing by the standard deviation. If we just wanted to subtract the mean we could set <code>scale=FALSE</code> as an argument.</p>
+<p>When we use <code>rasterPCA()</code> we can set the number of samples <code>nsamples</code> to be used for PCA which are then applied to the rest of the data to try and make this more efficient…</p>
+<p>Also note that <code>spca=TRUE</code> which corresponds to centered and scaled input data</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RStoolbox)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Fuse_3_bands <span class="ot">&lt;-</span> <span class="fu">stack</span>(Fuse<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, Fuse<span class="sc">$</span>LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5, Fuse<span class="sc">$</span>glcm_homogeneity)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>scale_fuse<span class="ot">&lt;-</span><span class="fu">scale</span>(Fuse_3_bands)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">rasterPCA</span>(Fuse, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nSamples =</span><span class="dv">100</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">spca =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once the <code>rasterPCA()</code> has completed run the following code to get the proportion of variance explained by each PCA component and the cumulative proportion of the variance explained. Remember that PCA is trying to:</p>
+<ul>
+<li>Transform multi-spectral data into uncorrelated and smaller dataset</li>
+<li>Keep most of the original information</li>
+<li>The first component will (should) capture most of the variance within the dataset</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca<span class="sc">$</span>model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In my case component 1 (of 10) explains 77.62% of the variance from the entire dataset…how might this be useful in future analysis?</p>
+<p>Finally, to plot one of the PCA bands….</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca<span class="sc">$</span>map<span class="sc">$</span>PC1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="review-questions" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="review-questions"><span class="header-section-number">3.4.6</span> Review questions</h3>
+<p>For the task this week select one concept from the lecture to explore in greater detail (e.g.&nbsp;texture analysis to remotely sensed images).</p>
+<p>Write 2-3 paragraphs supporting your responses with plots and literature:</p>
+<ul>
+<li>Explain the concept (e.g.&nbsp;what texture analysis is)</li>
+<li>Detail how it has been applied in 2 studies</li>
+<li>Reflect on the applicability / usefulness</li>
+</ul>
+</section>
+<section id="useful-blogs" class="level3" data-number="3.4.7">
+<h3 data-number="3.4.7" class="anchored" data-anchor-id="useful-blogs"><span class="header-section-number">3.4.7</span> Useful blogs</h3>
+<ul>
+<li><a href="https://zia207.github.io/geospatial-r-github.io/texture-analysis.html">Texture and PCA in R</a></li>
+</ul>
+
+
+</section>
+</section>
+</main> <!-- /main -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./2_portfolio.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Portfolio</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./4_policy.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Policy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+</body></html>
