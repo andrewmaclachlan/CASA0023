@@ -187,5 +187,54 @@
     "title": "8  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "",
+    "text": "Andy MacLachlan1\nLast updated: 2022-07-20"
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "Welcome",
+    "text": "Welcome\nHello  and welcome to the Term 2 module Remotely Sensing Cities and Environments.\nSimilarly, to my Term 1 MSc module, CASA0005, this website holds all the practical instructions for the module. CASA0005 Geographic Information Systems and Science (or a similar module) is a pre-requisite of this module so concepts taught there will mainly be assumed here."
+  },
+  {
+    "objectID": "index.html#acknowledgement",
+    "href": "index.html#acknowledgement",
+    "title": "CASA0023 Remotely Sensing Cities and Environments",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThanks to the following academics who inspired the creating of the module and various concepts within it:\n\nDr Ellie Biggs\nDr Gareth Roberts\nDr Bryan Boruff\nProfessor Ted Milton\nDr Laurie Chisholm\n\nThanks again to the following people who have either contributed directly or provided code in repositories that have helped me style this book:\n\n\nR Studio\n\nSTAT 545\nrstudio4edu\nHadley Wickham\nAlison Presmanes Hill\nDesirée De Leon\nYihui Xie\nJulia Silge\nJenny Bryan\nOthers\n\nRobin Lovelace\nTwitter for R programmers\nMatt Ng\nStatQuest with Josh Starmer\nGarrick Aden‑Buie\n\n\n\nThe R package and analysis artwork used within this book has been produced by allison_horst, whilst artwork used in information boxes has been produced by Desirée De Leon. You can find Allison’s images on the stats illustration GitHub repository and Desirée’s on the rstudio4edu GitHub repository.\nI’ve certainly learnt a lot from their open code repositories!"
+  },
+  {
+    "objectID": "5_classification_I.html",
+    "href": "5_classification_I.html",
+    "title": "\n5  Classification I\n",
+    "section": "",
+    "text": "For this week we are going to move away form R and focus on Google Earth Engine, which is still quite new for me too.\nGoogle Earth Engine (GEE) is a platform that let’s us analyse data that is stored remotely, each time we write some code it is sent to a server to be evaluated and the results are returned to us. As we don’t compute locally it speeds all of our processes up!\nGEE uses Javascript…and according to the GEE team this is all of the Javascript you need to know:\n\n// All the javascript you need to know (almost)\n\nvar number = 1\n\nvar string = 'Hello, World!'\n\nvar list = [1.23, 8, -3]\nprint(list[2])\n\nvar dictionary = {\n  a: 'Hello',\n  b: 10,\n  c: 0.1343,\n  d: list\n}\n\nprint(dictionary.b)\nprint(number, string, list, dictionary)\n\nTo start with GEE i want to pull up the same image from a specific date for a city, i will use\nWe can make a new point in the code editor with:\n\n// Construct a point from coordinates.\nvar point = ee.Geometry.Point([77.216721, 28.644800]);"
+  },
+  {
+    "objectID": "5_classification_I.html#points",
+    "href": "5_classification_I.html#points",
+    "title": "\n5  Classification I\n",
+    "section": "\n5.2 Points",
+    "text": "5.2 Points\nIn this case my city is Dheli, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports…\nAlternatively we can click the point icon on the map and add a new point…> new layer > give an suitable name\n\n\n\n\n\n\n\n\nTo center the map on this point…where the second argument is the zoom level\n\nMap.centerObject(Dheli, 10)"
+  },
+  {
+    "objectID": "5_classification_I.html#landsat-data",
+    "href": "5_classification_I.html#landsat-data",
+    "title": "\n5  Classification I\n",
+    "section": "\n5.3 Landsat data",
+    "text": "5.3 Landsat data\nNow we need to load some surface reflectance data > browse data catalogue > click through to a Landsat surface reflectance dataset, Collection 2 and tier 1. You will see the code to import the data to your script and if you click the open window icon you can see an example…\n\n\n\n\n\n\n\n\nHere through let’s just load some data…\n\nvar dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')\n    .filterDate('2022-01-01', '2022-02-01');\n\nThis doesn’t do anything until we actually add it to our map….\n\nMap.addLayer(dataset, {bands: [\"SR_B4\", \"SR_B3\", \"SR_B2\"]})\n\nWhat has this actually done? Try zooming out and inspecting the image. On the right hand side click inspector and click around the image…\nAt the moment we aren’t sure exactly what images we are using or how much cloud cover is in them…to sort this…\nNote, that in GEE // comments out a line of code…\n\n// Load Landsat 8 data, filter by date, month, and bounds.\nvar dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')\n  .filterDate('2020-01-01', '2022-10-10')\n // .filter(ee.Filter.calendarRange(1, 2, 'month'))  // Jan and Feb images\n  .filterBounds(Dheli);  // Intersecting ROI\n\nvar filtered = dataset.filter(ee.Filter.eq('CLOUD_COVER', 0));\n\nprint(filtered)"
+  },
+  {
+    "objectID": "5_classification_I.html#problems",
+    "href": "5_classification_I.html#problems",
+    "title": "\n5  Classification I\n",
+    "section": "\n5.4 Problems",
+    "text": "5.4 Problems\nIn my case this provides three images…and if we wanted to export the metadata of these images we could using…\n\nExport.table.toDrive(filtered, 'exportAsCSV', 'GEE', 'CSVexport', 'CSV');\n\nNow I have two problems:\n\nThe collection has three images within it and when i display it Map.addLayer(filtered, {bands: [\"SR_B4\", \"SR_B3\", \"SR_B2\"]}) we get the top most image.\nThe image only covers my single point and not the whole of Dehli / the administration area.\n\n\n5.4.1 Polygons\nLet’s deal with problem two first…\n\nI could either just change my point to a shape that i can draw. Next to the point icon (in the map/layer window) there is a polygon icon.\nI can upload a file, such as one from GADM\n\n5.4.2 Single images\nNow problem one…\n\nI could just select a single image from the collection by filtering using the specific date, which you can get from the console window when printing the images within the collection. Landsat (and most other EO datasets) have the date within the file path name, this is….LC09_147040_20220403\n\n\n\nvar oneimage = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')\n  .filterDate('2022-04-03', '2022-04-04')\n  .filterBounds(Dheli);  // Intersecting ROI\n\n\nI can reduce the collection to a single image through taking the mean, median using the imageCollection.reduce() function…\n\n\nvar median = filtered.reduce(ee.Reducer.median());\n// print the image info\nprint(median)\n\nvar img = ee.Image(‘COPERNICUS/S2_SR/20210109T185751_20210109T185931_T10SEG’);\nvar dataset = ee.Image(‘LANDFIRE/Fire/MFRI/v1_2_0/CONUS’);\nvar combined_img = ee.ImageCollection([img_1, img_2]).mosaic();\n\n5.4.3 Review questions"
   }
 ]
