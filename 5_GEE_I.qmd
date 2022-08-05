@@ -1,0 +1,318 @@
+# Google Earth Engine I
+
+For this week we are going to move away form R and focus on Google Earth Engine, which is still quite new for me too.
+
+Google Earth Engine (GEE) is a platform that let's us analyse data that is stored remotely, each time we write some code it is sent to a server to be evaluated and the results are returned to us. As we don't compute locally it speeds all of our processes up!
+
+GEE uses Javascript...and according to the GEE team this is all of the Javascript you need to know:
+
+```{r, eval=FALSE}
+// All the javascript you need to know (almost)
+
+var number = 1
+
+var string = 'Hello, World!'
+
+var list = [1.23, 8, -3]
+print(list[2])
+
+var dictionary = {
+  a: 'Hello',
+  b: 10,
+  c: 0.1343,
+  d: list
+}
+
+print(dictionary.b)
+print(number, string, list, dictionary)
+```
+
+To start with GEE i want to pull up the same image from a specific date for a city, i will use 
+
+We can make a new point in the code editor with:
+```{r, eval=FALSE}
+// Construct a point from coordinates.
+var point = ee.Geometry.Point([77.216721, 28.644800]);
+
+```
+
+## Points
+
+In this case my city is Dheli, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports...
+
+Alternatively we can click the point icon on the map and add a new point...> new layer > give an suitable name
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_5/GEE_points.png') 
+```
+To center the map on this point...where the second argument is the zoom level
+
+```{r, eval=FALSE}
+Map.centerObject(Dheli, 10)
+```
+
+## Landsat data
+
+Now we need to load some surface reflectance data > browse data catalogue > click through to a Landsat surface reflectance dataset, Collection 2 and tier 1. You will see the code to import the data to your script and if you click the open window icon you can see an example...
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_5/GEE_data_catalogue.png') 
+```
+
+Here through let's just load some data...
+
+```{r, eval=FALSE}
+var dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
+    .filterDate('2022-01-01', '2022-02-01');
+```
+
+This doesn't do anything until we actually add it to our map....
+
+```{r, eval=FALSE}
+Map.addLayer(dataset, {bands: ["SR_B4", "SR_B3", "SR_B2"]})
+
+```
+
+What has this actually done? Try zooming out and inspecting the image. On the right hand side click inspector and click around the image...
+
+At the moment we aren't sure exactly what images we are using or how much cloud cover is in them...to sort this...
+
+**Note**, that in GEE `//` comments out a line of code...
+
+```{r, eval=FALSE}
+// Load Landsat 9 data, filter by date, month, and bounds.
+var dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
+  .filterDate('2020-01-01', '2022-10-10')
+ // .filter(ee.Filter.calendarRange(1, 2, 'month'))  // Jan and Feb images
+  .filterBounds(Dheli)  // Intersecting ROI
+  .filter(ee.Filter.lt("CLOUD_COVER", 0.1));
+  
+  print(dataset)
+
+
+```
+
+## Problems
+
+In my case this provides three images...and if we wanted to export the metadata of these images we could using...
+
+```{r, eval=FALSE}
+Export.table.toDrive(dataset, 'exportAsCSV', 'GEE', 'CSVexport', 'CSV');
+```
+
+Now I have two problems:
+
+* The collection has three images within it and when i display it `Map.addLayer(filtered, {bands: ["SR_B4", "SR_B3", "SR_B2"]})` we get the top most image.
+
+* The image only covers my single point and not the whole of Dehli / the administration area.
+
+### Polygons
+
+Let's deal with problem two first...
+
+* I could change my point to a shape that i can draw. Next to the point icon (in the map/layer window) there is a polygon icon.
+
+* I could also add another point to my current single point where i want the next tile to be
+
+* I could filter based on tiles from the image collection
+
+* I can upload a file, such as one from [GADM](https://gadm.org/index.html). To do so, download the appropraite GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile `gadm41_IND_2` and I need to filter (in GEE or other software) the `GID_1` column for the row `IND.25_1`.
+
+On GEE there is an assets button where you can upload data, upload your shapefile. Next we load it and filter what you need...
+
+```{r, eval=FALSE}
+var india = ee.FeatureCollection('users/andrewmaclachlan/india')
+    .filter('GID_1 == "IND.25_1"');
+```
+
+
+To now filter based on this we include it as our filter bounds. At the time of writing there weren't enough cloud free Landsat 9 scenes over Dheli to create a complete image, so I have changed to Landsat 8...
+
+```{r, eval=FALSE}
+var oneimage_study_area = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
+  .filterDate('2021-06-01', '2022-10-10')
+  .filterBounds(india);  // Intersecting ROI
+
+var oneimage_study_area_cloud = oneimage_study_area.filter(ee.Filter.eq('CLOUD_COVER', 0));
+
+```
+
+Within the Landsat 8 filename we can see which path and rows our tiles are on...`LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127`
+
+Using these dates I have 1 image from path 146, row 40, 1 image from path 146, row 41 and 4 images from path 147, row 40. See the [Landsat Acquisition Tool](https://landsat.usgs.gov/landsat_acq#convertPathRow) to check your path and row
+
+
+### Single images 
+
+Now problem one...
+
+* I could just select a single image from the collection by filtering using the specific date, which you can get from the console window when printing the images within the collection. Landsat (and most other EO datasets) have the date within the file path name, this is....`LC09_147040_20220403`
+
+```{r, eval=FALSE}
+var oneimage = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
+  .filterDate('2022-04-03', '2022-04-04')
+  .filterBounds(india);  // Intersecting ROI
+```
+
+* I can load the specific image(s) i want...
+
+```{r, eval=FALSE}
+var image_146_40 = ee.Image('LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127')
+```
+
+* I can **reduce** the collection to a single image through taking the mean, median, max or min using the `imageCollection.reduce()` function...
+
+```{r eval=FALSE}
+var median = oneimage_study_area_cloud.reduce(ee.Reducer.median());
+// print the image info
+print(median)
+```
+
+## Better images
+
+Until now we haven't really dealt with the [scaling factors from the Landsat surface reflectance product](https://www.usgs.gov/faqs/how-do-i-use-scale-factor-landsat-level-2-science-products)...
+
+> Landsat Collection 2 surface reflectance has a scale factor of 0.0000275 and an additional offset of -0.2 per pixel.
+
+We do this through making a function and then calling our collection to the function
+
+```{r eval=FALSE}
+// Applies scaling factors in a function
+function applyScaleFactors(image) {
+  var opticalBands = image.select('SR_B.').multiply(0.0000275).add(-0.2);
+  var thermalBands = image.select('ST_B.*').multiply(0.00341802).add(149.0);
+  return image.addBands(opticalBands, null, true)
+              .addBands(thermalBands, null, true);
+}
+
+// call our collection to the function and assign it to a new variable 
+oneimage_study_area_cloud_scale = oneimage_study_area_cloud.map(applyScaleFactors);
+
+// apply the median reducer
+var oneimage_study_area_cloud_scale_median = oneimage_study_area_cloud_scale.reduce(ee.Reducer.median());
+
+
+```
+
+We can then map this...
+
+```{r eval=FALSE}
+
+// set up some of the visualisation paramters 
+var vis_params = {
+  bands: ['SR_B4_median', 'SR_B3_median', 'SR_B2_median'],
+  min: 0.0,
+  max: 0.3,
+};
+
+// add a layer to the map
+Map.addLayer(oneimage_study_area_cloud_scale_median, visualization, 'True Color (432)');
+```
+
+You should have produced something like this...
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_5/GEE_median_SR.png') 
+```
+Note here that we give this layer a name `'True Color (432)'` this means on the map under the layer button it will have that same name. Here, you can also set the transparency of each layer and even change the bands that display (although this doesn't change the code)
+
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_5/GEE_layers.png') 
+```
+
+## Mosaic images
+
+When we look at these images there might be very apparent differences between the tiles - this is probably due to the date of collection and the atmospheric correction applied (remember that it's a model of the atmosphere).
+
+```{r, eval=FALSE}
+var mosaic = oneimage_study_area_cloud_scale.mosaic();
+
+var vis_params2 = {
+  bands: ['SR_B4', 'SR_B3', 'SR_B2'],
+  min: 0.0,
+  max: 0.3,
+};
+
+Map.addLayer(mosaic, vis_params2, 'spatial mosaic');
+```
+
+In this example i've mosaiced the image collection (before taking the median values). This has taken images according to their order in the collection (last on top).You'll notice there isn't much difference...but you will see the effect of the last on top rule with clear demarcations across where images overlap...making the problem we wanted to resolve worse!
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_5/GEE_mosaic.png') 
+```
+
+The best **easy** solution we have here is to take a mean of all overlapping pixels...
+
+```{r eval=FALSE}
+var meanImage = oneimage_study_area_cloud_scale.mean();
+
+Map.addLayer(meanImage, vis_params2, 'mean');
+```
+
+## Texture measures
+
+As we saw earlier in the module we can compute texture...in GEE this is...
+
+```{r, eval=FALSE}
+var glcm = meanImage.toUint16()
+  .select(['B1','B2', 'B3', 'B4', 'B5', 'B6', 'B7'])
+  .glcmTexture({size: 4});
+```
+
+Here note:
+
+* the function `.toUint16()` as`.glcmTexture` won't work with 32 bit data
+* size 4, represents the size of the kernel to consider for the texture measure of the central pixel.
+
+```{r, eval=FALSE}
+var glcm = nir.glcmTexture({size: 4});
+var contrast = glcm.select('N_contrast');
+Map.addLayer(contrast,
+             {min: 0, max: 1500, palette: ['0000CC', 'CC0000']},
+             'contrast');
+```
+
+
+
+## Clip images
+
+```{r, eval=FALSE}
+// do the clip
+var clip = meanImage.clip(india);
+
+// map the layer
+Map.addLayer(clip, vis_params2, 'clip');
+```
+
+## PCA
+
+## Exporting
+
+```{r, eval=FALSE}
+// Export a cloud-optimized GeoTIFF.
+Export.image.toDrive({
+  image: landsat,
+  description: 'imageToCOGeoTiffExample',
+  fileFormat: 'GeoTIFF',
+  formatOptions: {
+    cloudOptimized: true
+  }
+});
+```
+
+
+* I can 
+var img = ee.Image('COPERNICUS/S2_SR/20210109T185751_20210109T185931_T10SEG');
+
+
+
+var dataset = ee.Image('LANDFIRE/Fire/MFRI/v1_2_0/CONUS');
+
+
+
+var combined_img = ee.ImageCollection([img_1, img_2]).mosaic();
+
+
+### Review questions 
+

@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
 </i> 
  </a>
   </li>  
@@ -187,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_classification_I.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Google Earth Engine I</span></a>
+  <a href="./5_GEE_I.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Google Earth Engine I</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -227,10 +227,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="#problems" id="toc-problems" class="nav-link" data-scroll-target="#problems"> <span class="header-section-number">5.3</span> Problems</a>
   <ul class="collapse">
 <li><a href="#polygons" id="toc-polygons" class="nav-link" data-scroll-target="#polygons"> <span class="header-section-number">5.3.1</span> Polygons</a></li>
-  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">5.3.2</span> Review questions</a></li>
+  <li><a href="#single-images" id="toc-single-images" class="nav-link" data-scroll-target="#single-images"> <span class="header-section-number">5.3.2</span> Single images</a></li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/5_classification_I.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  <li><a href="#better-images" id="toc-better-images" class="nav-link" data-scroll-target="#better-images"> <span class="header-section-number">5.4</span> Better images</a></li>
+  <li><a href="#mosaic-images" id="toc-mosaic-images" class="nav-link" data-scroll-target="#mosaic-images"> <span class="header-section-number">5.5</span> Mosaic images</a></li>
+  <li><a href="#texture-measures" id="toc-texture-measures" class="nav-link" data-scroll-target="#texture-measures"> <span class="header-section-number">5.6</span> Texture measures</a></li>
+  <li><a href="#clip-images" id="toc-clip-images" class="nav-link" data-scroll-target="#clip-images"> <span class="header-section-number">5.7</span> Clip images</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"> <span class="header-section-number">5.8</span> PCA</a></li>
+  <li>
+<a href="#exporting" id="toc-exporting" class="nav-link" data-scroll-target="#exporting"> <span class="header-section-number">5.9</span> Exporting</a>
+  <ul class="collapse">
+<li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">5.9.1</span> Review questions</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/5_GEE_I.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -317,21 +328,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>At the moment we aren’t sure exactly what images we are using or how much cloud cover is in them…to sort this…</p>
 <p><strong>Note</strong>, that in GEE <code>//</code> comments out a line of code…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Load Landsat <span class="dv">8</span> data, filter by date, month, and bounds.</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Load Landsat <span class="dv">9</span> data, filter by date, month, and bounds.</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2020-01-01'</span>, <span class="st">'2022-10-10'</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">/</span><span class="er">/</span> <span class="fu">.filter</span>(<span class="fu">ee.Filter.calendarRange</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'month'</span>))  <span class="sc">/</span><span class="er">/</span> Jan and Feb images</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Dheli);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>var filtered <span class="ot">=</span> <span class="fu">dataset.filter</span>(<span class="fu">ee.Filter.eq</span>(<span class="st">'CLOUD_COVER'</span>, <span class="dv">0</span>));</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Dheli)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="problems" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="problems">
 <span class="header-section-number">5.3</span> Problems</h2>
 <p>In my case this provides three images…and if we wanted to export the metadata of these images we could using…</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Export.table.toDrive</span><span class="op">(</span><span class="va">filtered</span>, <span class="st">'exportAsCSV'</span>, <span class="st">'GEE'</span>, <span class="st">'CSVexport'</span>, <span class="st">'CSV'</span><span class="op">)</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Export.table.toDrive</span><span class="op">(</span><span class="va">dataset</span>, <span class="st">'exportAsCSV'</span>, <span class="st">'GEE'</span>, <span class="st">'CSVexport'</span>, <span class="st">'CSV'</span><span class="op">)</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now I have two problems:</p>
 <ul>
@@ -353,41 +363,173 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.filter</span>(<span class="st">'GID_1 == "IND.25_1"'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To now filter based on this we include it as our filter bounds. At the time of writing there weren’t enough cloud free Landsat 9 scenes over Dheli to create a complete image, so I have changed to Landsat 8…</p>
-<p>```{r. eval=FALSE} var oneimage_study_area = ee.ImageCollection(‘LANDSAT/LC08/C02/T1_L2’) .filterDate(‘2021-01-03’, ‘2022-10-10’) .filterBounds(india); // Intersecting ROI</p>
-<p>var oneimage_study_area_cloud = oneimage_study_area.filter(ee.Filter.eq(‘CLOUD_COVER’, 0));</p>
-<pre><code>
-Within the Landsat 8 filename we can see which path and rows our tiles are on...
-
-`LANDSAT/LC08/C02/T1_L2/LC08_147040_20210526`
-
-
-### Single images 
-
-Now problem one...
-
-* I could just select a single image from the collection by filtering using the specific date, which you can get from the console window when printing the images within the collection. Landsat (and most other EO datasets) have the date within the file path name, this is....`LC09_147040_20220403`
-
-
-::: {.cell}
-
-```{.r .cell-code}
-var oneimage = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
-  .filterDate('2022-04-03', '2022-04-04')
-  .filterBounds(Dheli);  // Intersecting ROI</code></pre>
-<p>:::</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2021-06-01'</span>, <span class="st">'2022-10-10'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(india);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud <span class="ot">=</span> <span class="fu">oneimage_study_area.filter</span>(<span class="fu">ee.Filter.eq</span>(<span class="st">'CLOUD_COVER'</span>, <span class="dv">0</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Within the Landsat 8 filename we can see which path and rows our tiles are on…<code>LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127</code></p>
+<p>Using these dates I have 1 image from path 146, row 40, 1 image from path 146, row 41 and 4 images from path 147, row 40. See the <a href="https://landsat.usgs.gov/landsat_acq#convertPathRow">Landsat Acquisition Tool</a> to check your path and row</p>
+</section><section id="single-images" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="single-images">
+<span class="header-section-number">5.3.2</span> Single images</h3>
+<p>Now problem one…</p>
 <ul>
-<li>I can <strong>reduce</strong> the collection to a single image through taking the mean, median using the <code>imageCollection.reduce()</code> function…</li>
+<li>I could just select a single image from the collection by filtering using the specific date, which you can get from the console window when printing the images within the collection. Landsat (and most other EO datasets) have the date within the file path name, this is….<code>LC09_147040_20220403</code>
+</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var median <span class="ot">=</span> <span class="fu">filtered.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> print the image info</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var oneimage <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2022-04-03'</span>, <span class="st">'2022-04-04'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(india);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>var img = ee.Image(‘COPERNICUS/S2_SR/20210109T185751_20210109T185931_T10SEG’);</p>
+<ul>
+<li>I can load the specific image(s) i want…</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>var image_146_40 <span class="ot">=</span> <span class="fu">ee.Image</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>I can <strong>reduce</strong> the collection to a single image through taking the mean, median, max or min using the <code>imageCollection.reduce()</code> function…</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>var median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> print the image info</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="better-images" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="better-images">
+<span class="header-section-number">5.4</span> Better images</h2>
+<p>Until now we haven’t really dealt with the <a href="https://www.usgs.gov/faqs/how-do-i-use-scale-factor-landsat-level-2-science-products">scaling factors from the Landsat surface reflectance product</a>…</p>
+<blockquote class="blockquote">
+<p>Landsat Collection 2 surface reflectance has a scale factor of 0.0000275 and an additional offset of -0.2 per pixel.</p>
+</blockquote>
+<p>We do this through making a function and then calling our collection to the function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Applies scaling factors <span class="cf">in</span> a <span class="cf">function</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">applyScaleFactors</span>(image) {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  var opticalBands <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'SR_B.'</span>)<span class="fu">.multiply</span>(<span class="fl">0.0000275</span>)<span class="fu">.add</span>(<span class="sc">-</span><span class="fl">0.2</span>);</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  var thermalBands <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'ST_B.*'</span>)<span class="fu">.multiply</span>(<span class="fl">0.00341802</span>)<span class="fu">.add</span>(<span class="fl">149.0</span>);</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">image.addBands</span>(opticalBands, null, true)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">.addBands</span>(thermalBands, null, true);</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> call our collection to the <span class="cf">function</span> and assign it to a new variable </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>oneimage_study_area_cloud_scale <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.map</span>(applyScaleFactors);</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> apply the median reducer</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud_scale_median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then map this…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> set up some of the visualisation paramters </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>var vis_params <span class="ot">=</span> {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4_median'</span>, <span class="st">'SR_B3_median'</span>, <span class="st">'SR_B2_median'</span>],</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add a layer to the map</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(oneimage_study_area_cloud_scale_median, visualization, <span class="st">'True Color (432)'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You should have produced something like this…</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_5/GEE_median_SR.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note here that we give this layer a name <code>'True Color (432)'</code> this means on the map under the layer button it will have that same name. Here, you can also set the transparency of each layer and even change the bands that display (although this doesn’t change the code)</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_5/GEE_layers.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="mosaic-images" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="mosaic-images">
+<span class="header-section-number">5.5</span> Mosaic images</h2>
+<p>When we look at these images there might be very apparent differences between the tiles - this is probably due to the date of collection and the atmospheric correction applied (remember that it’s a model of the atmosphere).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>var mosaic <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mosaic</span>();</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>var vis_params2 <span class="ot">=</span> {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B2'</span>],</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mosaic, vis_params2, <span class="st">'spatial mosaic'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this example i’ve mosaiced the image collection (before taking the median values). This has taken images according to their order in the collection (last on top).You’ll notice there isn’t much difference…but you will see the effect of the last on top rule with clear demarcations across where images overlap…making the problem we wanted to resolve worse!</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_5/GEE_mosaic.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The best <strong>easy</strong> solution we have here is to take a mean of all overlapping pixels…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>var meanImage <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mean</span>();</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(meanImage, vis_params2, <span class="st">'mean'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="texture-measures" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="texture-measures">
+<span class="header-section-number">5.6</span> Texture measures</h2>
+<p>As we saw earlier in the module we can compute texture…in GEE this is…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>var glcm <span class="ot">=</span> <span class="fu">meanImage.toUint16</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>([<span class="st">'B1'</span>,<span class="st">'B2'</span>, <span class="st">'B3'</span>, <span class="st">'B4'</span>, <span class="st">'B5'</span>, <span class="st">'B6'</span>, <span class="st">'B7'</span>])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.glcmTexture</span>({size<span class="sc">:</span> <span class="dv">4</span>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here note:</p>
+<ul>
+<li>the function <code>.toUint16()</code> as<code>.glcmTexture</code> won’t work with 32 bit data</li>
+<li>size 4, represents the size of the kernel to consider for the texture measure of the central pixel.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>var glcm <span class="ot">=</span> <span class="fu">nir.glcmTexture</span>({size<span class="sc">:</span> <span class="dv">4</span>});</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>var contrast <span class="ot">=</span> <span class="fu">glcm.select</span>(<span class="st">'N_contrast'</span>);</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(contrast,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>             {min<span class="sc">:</span> <span class="dv">0</span>, max<span class="sc">:</span> <span class="dv">1500</span>, palette<span class="sc">:</span> [<span class="st">'0000CC'</span>, <span class="st">'CC0000'</span>]},</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">'contrast'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="clip-images" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="clip-images">
+<span class="header-section-number">5.7</span> Clip images</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> do the clip</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>var clip <span class="ot">=</span> <span class="fu">meanImage.clip</span>(india);</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> map the layer</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(clip, vis_params2, <span class="st">'clip'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="pca" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="pca">
+<span class="header-section-number">5.8</span> PCA</h2>
+</section><section id="exporting" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="exporting">
+<span class="header-section-number">5.9</span> Exporting</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Export a cloud<span class="sc">-</span>optimized GeoTIFF.</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Export.image.toDrive</span>({</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  image<span class="sc">:</span> landsat,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  description<span class="sc">:</span> <span class="st">'imageToCOGeoTiffExample'</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  fileFormat<span class="sc">:</span> <span class="st">'GeoTIFF'</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  formatOptions<span class="sc">:</span> {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    cloudOptimized<span class="sc">:</span> true</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>I can var img = ee.Image(‘COPERNICUS/S2_SR/20210109T185751_20210109T185931_T10SEG’);</li>
+</ul>
 <p>var dataset = ee.Image(‘LANDFIRE/Fire/MFRI/v1_2_0/CONUS’);</p>
 <p>var combined_img = ee.ImageCollection([img_1, img_2]).mosaic();</p>
-</section><section id="review-questions" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="review-questions">
-<span class="header-section-number">5.3.2</span> Review questions</h3>
+<section id="review-questions" class="level3" data-number="5.9.1"><h3 data-number="5.9.1" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">5.9.1</span> Review questions</h3>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

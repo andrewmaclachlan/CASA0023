@@ -45,7 +45,7 @@ book:
     - 2_portfolio.qmd
     - 3_corrections.qmd
     - 4_policy.qmd
-    - 5_classification_I.qmd
+    - 5_GEE_I.qmd
     - 6_classification_II.qmd
     - 7_temperature.qmd
     - resources.qmd
