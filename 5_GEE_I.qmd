@@ -2,7 +2,7 @@
 
 For this week we are going to move away form R and focus on Google Earth Engine, which is still quite new for me too.
 
-Google Earth Engine (GEE) is a platform that let's us analyse data that is stored remotely, each time we write some code it is sent to a server to be evaluated and the results are returned to us. As we don't compute locally it speeds all of our processes up!
+Google Earth Engine (GEE) is a platform that lets us analyse data that is stored remotely, each time we write some code it is sent to a server to be evaluated and the results are returned to us. As we don't compute locally it speeds all of our processes up!
 
 GEE uses Javascript...and according to the GEE team this is all of the Javascript you need to know:
 
@@ -250,69 +250,249 @@ var meanImage = oneimage_study_area_cloud_scale.mean();
 Map.addLayer(meanImage, vis_params2, 'mean');
 ```
 
-## Texture measures
+## Clip images
 
-As we saw earlier in the module we can compute texture...in GEE this is...
+Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i'm also just selcting the bands i want.
+
+We could also visualise this with, wherei have used the interative visulisation box to select my min and max values...
 
 ```{r, eval=FALSE}
-var glcm = meanImage.toUint16()
-  .select(['B1','B2', 'B3', 'B4', 'B5', 'B6', 'B7'])
-  .glcmTexture({size: 4});
+
+var clip = meanImage.clip(india)
+  .select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7']);
+
+var vis_params3 = {
+  bands: ['SR_B4', 'SR_B3', 'SR_B2'],
+  min: 53,
+  max: 151,
+};
+
+// map the layer
+Map.addLayer(clip, vis_params3, 'clip');
+```
+
+
+## Texture measures
+
+As we saw earlier in the module we can compute texture...however, the `glcmTexture()` function requires an interger value and as our values are in surface reflectance this will mean they will be converted to 1 and 0s. To explore this, add the clipped surface reflectance layer to the map (using the code above)...Then use the inspector tab and the list view to query individual pixels....
+
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+  knitr::include_graphics('prac_5/GEE_listview.png') 
+```
+
+To resolve this we need to multiple our surface reflectance so we can compute texture. If we didn't do this our texture would just be 1s and 0s. ....
+
+**Note**, that we are selecting a **lot** of data here...if GEE shows as unresponsive click wait and it should process, otherwise reduce the number of bands.
+
+```{r, eval=FALSE}
+var glcm = clip.select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7'])
+  .multiply(1000)
+  .toUint16()
+  .glcmTexture({size: 4})
+  .select('SR_.._contrast|SR_.._diss')
+  .addBands(clip);
+  
+// add to the map, but change the range values  
+Map.addLayer(glcm, {}, 'glcm');
+  
 ```
 
 Here note:
 
 * the function `.toUint16()` as`.glcmTexture` won't work with 32 bit data
-* size 4, represents the size of the kernel to consider for the texture measure of the central pixel.
+* size 4, is the size of the neighborhood to include in each GLCM.
+* The selection function uses a regular expression to pull out just contrast and dissmilarity
+* As the texture function just outputs the texture measures, i've added back in the original bands to the image collection.
 
-```{r, eval=FALSE}
-var glcm = nir.glcmTexture({size: 4});
-var contrast = glcm.select('N_contrast');
-Map.addLayer(contrast,
-             {min: 0, max: 1500, palette: ['0000CC', 'CC0000']},
-             'contrast');
-```
-
-
-
-## Clip images
-
-```{r, eval=FALSE}
-// do the clip
-var clip = meanImage.clip(india);
-
-// map the layer
-Map.addLayer(clip, vis_params2, 'clip');
-```
 
 ## PCA
 
-## Exporting
+PCA in GEE is somewhat more complex that it was in R, by just using the one function. Most of this code is take from the [GEE Eigen Analysis guide](https://developers.google.com/earth-engine/guides/arrays_eigen_analysis) ....to start with set the:
+
+Scale: 30 meters
+Band names: from the texture and original bands collection
+Region: the geometry points (x,y coordinates) of the study area
+
+We then center the data to the mean (in the code below) and divide by the standard deviation that happens in the next section
 
 ```{r, eval=FALSE}
-// Export a cloud-optimized GeoTIFF.
+// scale and band names
+var scale = 30;
+var bandNames = clip.bandNames();
+var region = clip.geometry();
+
+
+// mean center the data and SD strech the princapal components 
+// and an SD stretch of the principal components.
+var meanDict = clip.reduceRegion({
+    reducer: ee.Reducer.mean(),
+    geometry: region,
+    scale: scale,
+    maxPixels: 1e9
+});
+var means = ee.Image.constant(meanDict.values(bandNames));
+var centered = clip.subtract(means);
+
+```
+
+We can use this function to sort out our bandnames
+
+```{r, eval=FALSE}
+// This helper function returns a list of new band names.
+var getNewBandNames = function(prefix) {
+  var seq = ee.List.sequence(1, bandNames.length());
+  return seq.map(function(b) {
+    return ee.String(prefix).cat(ee.Number(b).int());
+  });
+};
+
+```
+
+Then we can pass our centered data to the PCA function, here i have added some code from [Guo Qiqu](https://chowdera.com/2021/11/20211126170055724x.html) that will display the % variance explained by each component. **Note** i have just used this function to get what i need here, and that is the PCA output. 
+
+```{r, eval=FALSE}
+// This function accepts mean centered imagery, a scale and
+// a region in which to perform the analysis.  It returns the
+// Principal Components (PC) in the region as a new image.
+var getPrincipalComponents = function(centered, scale, region) {
+  // Collapse the bands of the image into a 1D array per pixel.
+  var arrays = centered.toArray();
+
+  // Compute the covariance of the bands within the region.
+  var covar = arrays.reduceRegion({
+    reducer: ee.Reducer.centeredCovariance(),
+    geometry: region,
+    scale: scale,
+    maxPixels: 1e9
+  });
+
+  // Get the 'array' covariance result and cast to an array.
+  // This represents the band-to-band covariance within the region.
+  var covarArray = ee.Array(covar.get('array'));
+
+  // Perform an eigen analysis and slice apart the values and vectors.
+  var eigens = covarArray.eigen();
+
+  // This is a P-length vector of Eigenvalues.
+  var eigenValues = eigens.slice(1, 0, 1);
+  // This is a PxP matrix with eigenvectors in rows.
+  
+  var eigenValuesList = eigenValues.toList().flatten()
+  var total = eigenValuesList.reduce(ee.Reducer.sum())
+  var percentageVariance = eigenValuesList.map(function(item) {
+  return (ee.Number(item).divide(total)).multiply(100).format('%.2f')
+    })
+  
+  print("percentageVariance", percentageVariance)  
+
+  var eigenVectors = eigens.slice(1, 1);
+
+  // Convert the array image to 2D arrays for matrix computations.
+  var arrayImage = arrays.toArray(1);
+
+  // Left multiply the image array by the matrix of eigenvectors.
+  var principalComponents = ee.Image(eigenVectors).matrixMultiply(arrayImage);
+
+  // Turn the square roots of the Eigenvalues into a P-band image.
+  var sdImage = ee.Image(eigenValues.sqrt())
+    .arrayProject([0]).arrayFlatten([getNewBandNames('sd')]);
+
+  // Turn the PCs into a P-band image, normalized by SD.
+  return principalComponents
+    // Throw out an an unneeded dimension, [[]] -> [].
+    .arrayProject([0])
+    // Make the one band array image a multi-band image, [] -> image.
+    .arrayFlatten([getNewBandNames('pc')])
+    // Normalize the PCs by their SDs.
+    .divide(sdImage);
+};
+
+// Get the PCs at the specified scale and in the specified region
+var pcImage = getPrincipalComponents(centered, scale, region);
+
+// Plot each PC as a new layer
+for (var i = 0; i < bandNames.length().getInfo(); i++) {
+  var band = pcImage.bandNames().get(i).getInfo();
+  Map.addLayer(pcImage.select([band]), {min: -2, max: 2}, band);
+}
+
+```
+
+We can then plot each component with a for loop
+
+```{r, eval=FALSE}
+// Plot each PC as a new layer
+for (var i = 0; i < bandNames.length().getInfo(); i++) {
+  var band = pcImage.bandNames().get(i).getInfo();
+  Map.addLayer(pcImage.select([band]), {min: -2, max: 2}, band);
+}
+
+```
+
+In my case i can see that the first component explains 81% of the variance within the collection and the second component 12%....we can just add these bands instead of the entire image.
+
+```{r, eval=FALSE}
+Map.addLayer(pcImage, {bands: ['pc2', 'pc1'], min: -2, max: 2}, 'PCA bands 1 and 2');
+```
+
+## Exporting
+
+There are a number of ways you can export data from GEE, to your Google Drive, Cloud storage or as an Asset for future use.
+
+To export it to your drive...
+
+```{r, eval=FALSE}
+
+// select the bands you want
+var PCA_out = pcImage.select(['pc1', 'pc2'])
+
+// get the projection info for the export, note it will run without this 
+var projection = pcImage.select('pc1').projection().getInfo();
+
 Export.image.toDrive({
-  image: landsat,
-  description: 'imageToCOGeoTiffExample',
+  image: PCA_out,
+  description: 'PCA_india',
+  crs: projection.crs,
+  crsTransform: projection.transform,
   fileFormat: 'GeoTIFF',
+  maxPixels: 1E10,
   formatOptions: {
     cloudOptimized: true
   }
 });
+
+```
+Now when you run the script a task will appear in the task menu, to export your file click Run and then it will save into your Google Drive so you can download it locally.
+
+## Band math
+
+It is also possible to quickly calculate indices in GEE...
+
+```{r, eval=FALSE}
+
+//NDVI
+var NDVI_1 = clip.select('SR_B5').subtract(clip.select('SR_B4'))
+  .divide(clip.select('SR_5').add(clip.select('SR_B4')));
+
+Map.addLayer(NDVI, { min: -1, max: 1}, 'NDVI');
+
 ```
 
+NDVI/ the formula to compute it even has it's own function...
 
-* I can 
-var img = ee.Image('COPERNICUS/S2_SR/20210109T185751_20210109T185931_T10SEG');
-
-
-
-var dataset = ee.Image('LANDFIRE/Fire/MFRI/v1_2_0/CONUS');
-
-
-
-var combined_img = ee.ImageCollection([img_1, img_2]).mosaic();
-
+```{r, eval=FALSE}
+var NDVI_2 = clip.normalizedDifference([SR_B5, SR_B4]);
+```
 
 ### Review questions 
+
+For the task this week select a metropolitan area of your choice (e.g. using [GADM](https://gadm.org/) or another admin boundary dataset) and apply a formula / function that we have seen in the module to a collection of data.
+
+For example, calculate the Tasseled Cap transformation for the Berlin Metropolitan area using Sentinel 2 data.
+
+You must:
+
+* Output your final data product to a file
+* Share your code your portfolio
+* Explain (within 1 -2 paragraphs) what you did.
 

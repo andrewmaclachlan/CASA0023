@@ -1,12 +1,12 @@
 {
   "hash": "67f200d02137ec69e3a94ed08d7f59fa",
   "result": {
-    "markdown": "# Summary\n\nIn summary, this book has no content whatsoever.\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::",
+    "markdown": "# Summary\n\nIn summary, this book has no content whatsoever.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
-    "includes": [],
+    "includes": {},
     "engineDependencies": {},
     "preserve": {},
     "postProcess": true

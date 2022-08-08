@@ -1,145 +1,139 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.80">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>CASA0023 Remotely Sensing Cities and Environments - 1&nbsp; Getting started with remote sensing</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>CASA0023 Remotely Sensing Cities and Environments - 1&nbsp; Getting started with remote sensing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
-  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="site_libs/quarto-nav/headroom.min.js"></script>
-  <script src="site_libs/clipboard/clipboard.min.js"></script>
-  <meta name="quarto:offset" content="./">
-  <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-  <script src="site_libs/quarto-search/fuse.min.js"></script>
-  <script src="site_libs/quarto-search/quarto-search.js"></script>
-  <link href="./2_portfolio.html" rel="next">
-  <link href="./index.html" rel="prev">
-  <link href="./assets/favicon.ico" rel="icon">
-  <script src="site_libs/quarto-html/quarto.js"></script>
-  <script src="site_libs/quarto-html/popper.min.js"></script>
-  <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-  <script src="site_libs/quarto-html/anchor.min.js"></script>
-  <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
-  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-  <script id="quarto-search-options" type="application/json">{
-    "location": "navbar",
-    "copy-button": false,
-    "collapse-after": 2,
-    "panel-placement": "end",
-    "type": "overlay",
-    "limit": 20,
-    "language": {
-      "search-no-results-text": "No results",
-      "search-matching-documents-text": "matching documents",
-      "search-copy-link-title": "Copy link to search",
-      "search-hide-matches-text": "Hide additional matches",
-      "search-more-match-text": "more match in this document",
-      "search-more-matches-text": "more matches in this document",
-      "search-clear-button-title": "Clear",
-      "search-detached-cancel-button-title": "Cancel",
-      "search-submit-button-title": "Submit"
-    }
-  }</script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./2_portfolio.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./assets/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-<body class="floating">
+<body class="nav-sidebar floating nav-fixed">
+
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <a class="navbar-brand" href="./index.html">
-    <img src="./general_images/casa_logo.jpg" alt="">
-    <span class="navbar-title">CASA0023 Remotely Sensing Cities and Environments</span>
+    <img src="./general_images/casa_logo.jpg" alt=""><span class="navbar-title">CASA0023 Remotely Sensing Cities and Environments</span>
   </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
 </i> 
  </a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
+<div class="quarto-toggle-container">
                   <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -149,28 +143,24 @@
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span></h1>
-      <button type="button" class="quarto-btn-toggle btn">
+    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-      <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
   </div>
@@ -197,22 +187,27 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_classification_II.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification II</span></a>
+  <a href="./5_GEE_I.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Google Earth Engine I</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_temperature.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Temperature</span></a>
+  <a href="./6_classification_II.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification II</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Resources</span></a>
+  <a href="./7_temperature.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Temperature</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Summary</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -221,76 +216,83 @@
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-<h2 id="toc-title">Table of contents</h2>
-<ul>
-<li><a href="#learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes"> <span class="header-section-number">1.1</span> Learning outcomes</a></li>
-<li><a href="#gitignore" class="nav-link" data-scroll-target="#gitignore"> <span class="header-section-number">1.2</span> .gitignore</a>
-<ul class="collapse">
-<li><a href="#sentinel-download" class="nav-link" data-scroll-target="#sentinel-download"> <span class="header-section-number">1.2.1</span> Sentinel download</a></li>
-<li><a href="#landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.2.2</span> Landsat</a></li>
-<li><a href="#spectral-signatures" class="nav-link" data-scroll-target="#spectral-signatures"> <span class="header-section-number">1.2.3</span> Spectral signatures</a></li>
-<li><a href="#using-r" class="nav-link" data-scroll-target="#using-r"> <span class="header-section-number">1.2.4</span> Using R</a></li>
-<li><a href="#review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">1.2.5</span> Review questions</a></li>
-</ul></li>
-</ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes"> <span class="header-section-number">1.1</span> Learning outcomes</a></li>
+  <li>
+<a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore"> <span class="header-section-number">1.2</span> .gitignore</a>
+  <ul class="collapse">
+<li><a href="#sentinel-download" id="toc-sentinel-download" class="nav-link" data-scroll-target="#sentinel-download"> <span class="header-section-number">1.2.1</span> Sentinel download</a></li>
+  <li><a href="#landsat" id="toc-landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.2.2</span> Landsat</a></li>
+  <li><a href="#spectral-signatures" id="toc-spectral-signatures" class="nav-link" data-scroll-target="#spectral-signatures"> <span class="header-section-number">1.2.3</span> Spectral signatures</a></li>
+  <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"> <span class="header-section-number">1.2.4</span> Using R</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">1.2.5</span> Review questions</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-<header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span></h1>
-</header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span>
+</h1>
+</div>
 
-<p>To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Sentinel and then move to Landsat data, which we have seen before in CASA0005.</p>
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><p>To start with we are going to send some time exploring remotely sensed data ready for future analysis. We will first look at Sentinel and then move to Landsat data, which we have seen before in CASA0005.</p>
 <p>You need to select <strong>a city of you choice</strong> and then using the image and explanation below…i will use Cape Town, South Africa for the rest of the practical.</p>
-<section id="learning-outcomes" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">1.1</span> Learning outcomes</h2>
+<section id="learning-outcomes" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="learning-outcomes">
+<span class="header-section-number">1.1</span> Learning outcomes</h2>
 <p>By the end of this practical you should be able to:</p>
 <ul>
 <li>Source, load and articulate the differences between Landsat and Sentinel data</li>
 <li>Undertake basic raster image statistics and processing</li>
 <li>Evaluate the (dis)advantages of each type of software you have used</li>
 <li>Pull out and statistically compare spectral signatures</li>
-</ul>
-</section>
-<section id="gitignore" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="gitignore"><span class="header-section-number">1.2</span> .gitignore</h2>
+</ul></section><section id="gitignore" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="gitignore">
+<span class="header-section-number">1.2</span> .gitignore</h2>
 <p>If you are using Git with your project and have large data it’s best to set up a <code>.gitignore</code> file. This file tells git to ignore certain files so they aren’t in your local repository that is then pushed to GitHub. If you try and push large files to GitHub you will get an error and could run into lots of problems, trust me, i’ve been there. Look at <a href="https://github.com/andrewmaclachlan/CASA0023/blob/main/.gitignore">my .gitignore for this repository</a> and you will notice:</p>
 <p><code>/prac_1/*</code></p>
 <p>This means ignore all files within these folders, all is denoted by the <code>*</code>. The <code>.gitignore</code> has to be in your main project folder, if you have made a a <code>git</code> repo for your project then you should have a <code>.gitignore</code> so all you have to do is open it and add the folder or file paths you wish to ignore.</p>
 <p>GitHub has a maximum file upload size of 50mb….</p>
-<div class="cell" data-layout-align="center" data-hash="intro_cache/html/unnamed-chunk-1_639a671bae94a3b8fa6651affd51115c">
+<div class="cell" data-layout-align="center" data-hash="intro_cache/html/unnamed-chunk-1_d68fbf084b00e4e94b558539b51d8d0a">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/gitignore.jpg" class="img-fluid figure-img" style="width:6.94444in"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">GitHub maximum file upload of 50mb. Source: <a href="https://www.reddit.com/r/ProgrammerHumor/comments/gm69za/my_girlfriend_crocheted_my_favourite_meme_as_a/">reddit r/ProgrammerHumor</a></figcaption><p></p>
+<figure class="figure"><p><img src="prac_1/gitignore.jpg" class="img-fluid figure-img" style="width:6.94444in"></p>
+<p></p><figcaption class="figure-caption">GitHub maximum file upload of 50mb. Source: <a href="https://www.reddit.com/r/ProgrammerHumor/comments/gm69za/my_girlfriend_crocheted_my_favourite_meme_as_a/">reddit r/ProgrammerHumor</a></figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="sentinel-download" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="sentinel-download"><span class="header-section-number">1.2.1</span> Sentinel download</h3>
+<section id="sentinel-download" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="sentinel-download">
+<span class="header-section-number">1.2.1</span> Sentinel download</h3>
 <ul>
 <li><p>Go to the <a href="https://scihub.copernicus.eu/dhus/#/home">Copernicus Open Access Hub</a></p></li>
-<li><p>You will need to make a free account</p>
+<li>
+<p>You will need to make a free account</p>
 <ul>
 <li>Draw around the study area</li>
 <li>Select image filter criteria</li>
 <li>Select search icon</li>
 <li>Download the S2MSI2A data</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/sentinel_data_1.png" class="img-fluid figure-img" width="500"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_data_1.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
@@ -311,14 +313,13 @@
 <li><p>Cloud cover e.g.&nbsp;[0 TO 5]</p></li>
 </ul>
 <p>_ Mu image was from the 15/5/2022</p>
-<section id="open" class="level4" data-number="1.2.1.1">
-<h4 data-number="1.2.1.1" class="anchored" data-anchor-id="open"><span class="header-section-number">1.2.1.1</span> Open</h4>
+<section id="open" class="level4" data-number="1.2.1.1"><h4 data-number="1.2.1.1" class="anchored" data-anchor-id="open">
+<span class="header-section-number">1.2.1.1</span> Open</h4>
 <p>Once downloaded and unzipped you’ll be presented with a load of folders! Here we are interested in the 10m bands…which are:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/sentinel_bands.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_bands.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -328,8 +329,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/sentinel_data_cape_town_TCI.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_data_cape_town_TCI.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -343,8 +343,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/sentinel_merge.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/sentinel_merge.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -364,8 +363,7 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/b1b2b3.PNG" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/b1b2b3.PNG" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -379,9 +377,8 @@
 <p>Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using <a href="https://step.esa.int/main/snap-supported-plugins/sen2res/">Sen2Res</a> that is another plug in for the <a href="https://step.esa.int/main/download/snap-download/">SNAP toolbox</a>. Arguably SNAP is just a difference type of GIS software specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.</p>
 <p>Upscaling aggregates the images to a more coarse resolution (e.g.&nbsp;10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g.&nbsp;within the 20m folder there are 10 bands). However, it’s not clear what method has been used, the documentation suggests nearest neighbour - https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/.</p>
 <p>This can also be termed resampling, and nearest neighbour simply means taking the new raster resolution and then assiging the value from the closest value in the original data. Others approaches include bilinear or cubic convolution resampling.</p>
-</section>
-<section id="snap" class="level4" data-number="1.2.1.2">
-<h4 data-number="1.2.1.2" class="anchored" data-anchor-id="snap"><span class="header-section-number">1.2.1.2</span> SNAP</h4>
+</section><section id="snap" class="level4" data-number="1.2.1.2"><h4 data-number="1.2.1.2" class="anchored" data-anchor-id="snap">
+<span class="header-section-number">1.2.1.2</span> SNAP</h4>
 <p>SNAP stands for Sentinels Application Platform it is a collection of toolboxes specifically for pre-processing and analysing remotely sensed data.</p>
 <p>Download the all toolboxes version</p>
 <p>SNAP allows us to easily do undertake many GIS raster type analysis that we’ve seen / discussed in other modules (like CASA0005) and that we will come across within this module including:</p>
@@ -395,16 +392,14 @@
 <li>many more methods!</li>
 </ul>
 <p>Aside from these methods in a GUI the real benefit is that it’s made to use remotely sensed data. Let’s explore some features of SNAP.</p>
-<section id="load-data" class="level5" data-number="1.2.1.2.1">
-<h5 data-number="1.2.1.2.1" class="anchored" data-anchor-id="load-data"><span class="header-section-number">1.2.1.2.1</span> Load data</h5>
+<section id="load-data" class="level5" data-number="1.2.1.2.1"><h5 data-number="1.2.1.2.1" class="anchored" data-anchor-id="load-data">
+<span class="header-section-number">1.2.1.2.1</span> Load data</h5>
 <ul>
 <li><p>File &gt; Open Product &gt; select the .zip that was downloaded. Do not rename it or unzip it before hand!</p></li>
 <li><p>In the side bar under Product Explorer there will be a lot on data that you can load. The remotely sensed data in under Bands and then each band is listed (e.g.&nbsp;B1 443nm). What does 443nm mean?</p></li>
 <li><p>Double right click on a layer and it will appear in the viewer area</p></li>
-</ul>
-</section>
-<section id="snap-layout" class="level5" data-number="1.2.1.2.2">
-<h5 data-number="1.2.1.2.2" class="anchored" data-anchor-id="snap-layout"><span class="header-section-number">1.2.1.2.2</span> SNAP layout</h5>
+</ul></section><section id="snap-layout" class="level5" data-number="1.2.1.2.2"><h5 data-number="1.2.1.2.2" class="anchored" data-anchor-id="snap-layout">
+<span class="header-section-number">1.2.1.2.2</span> SNAP layout</h5>
 <p>The layout of SNAP isn’t too different to QGIS, we have:</p>
 <ul>
 <li>Products on the left side bar</li>
@@ -412,29 +407,27 @@
 <ul>
 <li>additional panes of info can be added through view &gt;toolbar windows</li>
 <li>note i have added pixel info (updates when moving the cursor) and world map</li>
-</ul></li>
+</ul>
+</li>
 <li>Layer / mask managers in the right sidebar</li>
 <li>Processing tools in the top tool bars</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/SNAP.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/SNAP.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here, i have also the two link buttons selected (bottom left window) these mean that if i move to another band i will still be in the same position on the image.</p>
-</section>
-<section id="colour-composites" class="level5" data-number="1.2.1.2.3">
-<h5 data-number="1.2.1.2.3" class="anchored" data-anchor-id="colour-composites"><span class="header-section-number">1.2.1.2.3</span> Colour composites</h5>
+</section><section id="colour-composites" class="level5" data-number="1.2.1.2.3"><h5 data-number="1.2.1.2.3" class="anchored" data-anchor-id="colour-composites">
+<span class="header-section-number">1.2.1.2.3</span> Colour composites</h5>
 <p>To re-created a true colour composite, right click on the data product and open RGB image</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/SNAP_colour_comp.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/SNAP_colour_comp.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -446,36 +439,31 @@
 <li><p>The short-wave infrared composite: B12, B8A and B4 shows vegetation in green, the darker the greener the denser it is and brown shows built up or bare soil</p></li>
 </ul>
 <p>For other band colour combinations <a href="https://gisgeography.com/sentinel-2-bands-combinations/">consult gisgeogrpahy</a></p>
-</section>
-<section id="creating-a-project" class="level5" data-number="1.2.1.2.4">
-<h5 data-number="1.2.1.2.4" class="anchored" data-anchor-id="creating-a-project"><span class="header-section-number">1.2.1.2.4</span> Creating a project</h5>
+</section><section id="creating-a-project" class="level5" data-number="1.2.1.2.4"><h5 data-number="1.2.1.2.4" class="anchored" data-anchor-id="creating-a-project">
+<span class="header-section-number">1.2.1.2.4</span> Creating a project</h5>
 <p>Before we go any further we should create a project, that way all our processed outputs will be stored within the projected and loaded again when we open it in future - like projects in any other software such as QGIS or R. Go File &gt; Project &gt; Save project. A project tab next to the product explorer tab will appear, but not you can’t access the bands from within the project that must be done through the product explorer.</p>
-</section>
-<section id="image-statistics" class="level5" data-number="1.2.1.2.5">
-<h5 data-number="1.2.1.2.5" class="anchored" data-anchor-id="image-statistics"><span class="header-section-number">1.2.1.2.5</span> Image statistics</h5>
-</section>
-<section id="image-histogram" class="level5" data-number="1.2.1.2.6">
-<h5 data-number="1.2.1.2.6" class="anchored" data-anchor-id="image-histogram"><span class="header-section-number">1.2.1.2.6</span> Image histogram</h5>
+</section><section id="image-statistics" class="level5" data-number="1.2.1.2.5"><h5 data-number="1.2.1.2.5" class="anchored" data-anchor-id="image-statistics">
+<span class="header-section-number">1.2.1.2.5</span> Image statistics</h5>
+</section><section id="image-histogram" class="level5" data-number="1.2.1.2.6"><h5 data-number="1.2.1.2.6" class="anchored" data-anchor-id="image-histogram">
+<span class="header-section-number">1.2.1.2.6</span> Image histogram</h5>
 <p>When we open an RGB image in SNAP the histogram is clipped by <a href="https://forum.step.esa.int/t/rgb-generation-in-snap/9066">1% at the lower end and 4% at the upper end</a> and then mapped in bins between 0 and 255 for display. A computer screen in full RGB displays colours between 0 and 255, hence why this is done.</p>
 <p>This is similar to the contrast enhancement we saw in QGIS and we can manually change it here again through View &gt; Tool Windows &gt; Colour Manipulation.</p>
 <p>Changing the distribution displayed will impact the colour of the image - try using the sliders or selecting 95% and 100% of all pixels to display. To reset click the back arrow button.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/colour.png" class="img-fluid figure-img" width="500"></p>
+<figure class="figure"><p><img src="prac_1/colour.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="scatterplots" class="level6" data-number="1.2.1.2.6.1">
-<h6 data-number="1.2.1.2.6.1" class="anchored" data-anchor-id="scatterplots"><span class="header-section-number">1.2.1.2.6.1</span> Scatterplots</h6>
+<section id="scatterplots" class="level6" data-number="1.2.1.2.6.1"><h6 data-number="1.2.1.2.6.1" class="anchored" data-anchor-id="scatterplots">
+<span class="header-section-number">1.2.1.2.6.1</span> Scatterplots</h6>
 <p>Under the analysis button there are a variety of tools we can use to explore some image statistics….for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared (NIR, that vegetation strongly reflects)…so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil. you need to click the refresh button to generate the plot.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/red_NIR.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/red_NIR.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -483,28 +471,29 @@
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/red_NIR_lab11.png" class="img-fluid figure-img" width="450"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Source: <a href="http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf">Remote Sensing 4113</a></figcaption><p></p>
+<figure class="figure"><p><img src="prac_1/red_NIR_lab11.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="http://geofaculty.uwyo.edu/rhowell/classes/remote_sensing/labs/lab_11_2018_alternate_vegetation.pdf">Remote Sensing 4113</a></figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>In remote sensing this can be called “spectral feature space”, more on this later in the term. You might see the software ENVI in the source above - ENVI is propriety software that is similar to SNAP.</p>
-</section>
-<section id="tasseled-caps" class="level6" data-number="1.2.1.2.6.2">
-<h6 data-number="1.2.1.2.6.2" class="anchored" data-anchor-id="tasseled-caps"><span class="header-section-number">1.2.1.2.6.2</span> Tasseled Caps</h6>
+</section><section id="tasseled-caps" class="level6" data-number="1.2.1.2.6.2"><h6 data-number="1.2.1.2.6.2" class="anchored" data-anchor-id="tasseled-caps">
+<span class="header-section-number">1.2.1.2.6.2</span> Tasseled Caps</h6>
 <p>The output should look somewhat like a “Tasseled Cap” (a wizards hat at an angle), although this is different to the tasseled cap <em>transformation</em> which was proposed by Kauth and Thomas (1976). The tasseled cap transformation was originally applied to Landsat data being composed of brightness, greeness, yellow stuff (yes!) and none-such. It was then modified in 1968 to brightness, greeness and wetness. This can can useful for identifying urban areas, they are <strong>usually</strong> bright (although Andy will have more to say on this), high biomass will show in the greeness and moisture in the wetness. The tasseled cap comes from the plot between brightness on the x axis and greenness on the y axis.</p>
-<p>Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it… <span class="math display">\[
+<p>Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it…</p>
+<p><span class="math display">\[
 \begin{split}
 Brightness = 0.3037(B2)+0.2793(B3)+\\0.4743(B4)+0.5585(B8)+\\
 0.5082(B11)+0.1863(B12)
 \end{split}
-\]</span> <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \begin{split}
 Greeness = −0.2848(B2)−0.2435(B3)\\−0.5436(B4)+0.7243(B8)+\\
 0.0840(B11)−0.1800(B12)\end{split}
-\]</span> <span class="math display">\[
+\]</span></p>
+<p><span class="math display">\[
 \begin{split}
 Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 0.7112(B11)−0.4572(B12)
@@ -516,10 +505,8 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <li><p>Using the image provided will mean that the entire tile is computed when we really only care about our study area</p></li>
 </ul>
 <p>Note, that there are many spatial indexes that can be applied to remotely sensed data, the <a href="https://www.indexdatabase.de/">Index DataBase</a> holds them all or Chapter 8, pages 325 from Jensen is a good place to start.</p>
-</section>
-</section>
-<section id="masking-and-resampling" class="level5" data-number="1.2.1.2.7">
-<h5 data-number="1.2.1.2.7" class="anchored" data-anchor-id="masking-and-resampling"><span class="header-section-number">1.2.1.2.7</span> Masking and resampling</h5>
+</section></section><section id="masking-and-resampling" class="level5" data-number="1.2.1.2.7"><h5 data-number="1.2.1.2.7" class="anchored" data-anchor-id="masking-and-resampling">
+<span class="header-section-number">1.2.1.2.7</span> Masking and resampling</h5>
 <p>This is sometimes also called clipping in CASA0005 we saw cropping (to the extent of a polygon) and then masking. Here I am only interested in a study area of the City of Cape Town District Municipality, which is in the gadm40_ZAF_2 from the <a href="https://gadm.org/">GADM data</a>, it also appears in the gadm40_ZAF_3 data too!</p>
 <p>Explore the GADM data in QGIS to work out what spatial aggregation you can use to mask your study area. For the sake of this example you might want to use the smallest spatial unit, GADM level 4, which for South Africa is wards.</p>
 <p>SNAP only permits ESRI shapefile to be loaded! To do so you must select the product on interest in the product explorer &gt; Vector &gt; Import &gt; ESRI Shapefile</p>
@@ -527,8 +514,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/layer_manager.png" class="img-fluid figure-img" width="500"></p>
+<figure class="figure"><p><img src="prac_1/layer_manager.png" class="img-fluid figure-img" width="500"></p>
 </figure>
 </div>
 </div>
@@ -539,8 +525,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/resample.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/resample.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -551,8 +536,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/mask.png" class="img-fluid figure-img"></p>
+<figure class="figure"><p><img src="prac_1/mask.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -560,44 +544,47 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <p>At this stage you may want to remove the shapefile that will still be within the new product created. Under the vector folder remove the relevant polygons.</p>
 <p>Then compute the tasseled cap transformation (Raster &gt; Band Maths) with the equations above. Note that when using a subtraction (-) you might get invalid expression so use the inbuilt subtraction within the edit expression button. My brightness equation was:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.3037</span><span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B2) <span class="sc">+</span> (<span class="fl">0.2793</span> <span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B3) <span class="sc">+</span> (<span class="fl">0.4743</span> <span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B4) <span class="sc">+</span> (<span class="fl">0.5585</span> <span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B8) <span class="sc">+</span> (<span class="fl">0.5082</span> <span class="sc">*</span> <span class="fl">0.5082</span>) <span class="sc">+</span> (<span class="fl">0.1863</span> <span class="sc">*</span> <span class="fl">0.1863</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.3037</span><span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B2) <span class="sc">+</span> (<span class="fl">0.2793</span> <span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B3) <span class="sc">+</span> (<span class="fl">0.4743</span> <span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B4) <span class="sc">+</span> (<span class="fl">0.5585</span> <span class="sc">*</span> <span class="er">$</span><span class="fl">3.</span>B8) <span class="sc">+</span> (<span class="fl">0.5082</span> <span class="sc">*</span> <span class="fl">0.5082</span>) <span class="sc">+</span> (<span class="fl">0.1863</span> <span class="sc">*</span> <span class="fl">0.1863</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The new layers we’ve created will be added to the bands folder of the product you had selected (remember that we can <strong>only do this with bands that have the same resolution</strong>, hence our up and down sampling). We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier.</p>
 <p>At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image…what do the values and colours show? The <a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/tasseled-cap-function.htm">Tasseled Cap function</a> from ArcPro will help explain this further.</p>
-<div class="cell tbl-parent quarto-layout-panel">
+<div id="tbl-tables" class="cell tbl-parent quarto-layout-panel anchored" data-tbl-cap="Tables">
 <div class="panel-caption table-caption">
 <p><strong>?(caption)</strong></p>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/tass_cap.png" class="img-fluid figure-img" width="500"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">in the caption</figcaption><p></p>
+<figure class="figure"><p><img src="prac_1/tass_cap.png" class="img-fluid figure-img" width="500"></p>
+<p></p><figcaption class="figure-caption">in the caption</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</section>
-</section>
-</section>
-<section id="landsat" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="landsat"><span class="header-section-number">1.2.2</span> Landsat</h3>
+</section></section></section><section id="landsat" class="level3" data-number="1.2.2"><h3 data-number="1.2.2" class="anchored" data-anchor-id="landsat">
+<span class="header-section-number">1.2.2</span> Landsat</h3>
 <p>Landsat imagery is the longest free temporal image repository of consistent medium resolution data. It collects data at each point on Earth each every 16 days (temporal resolution) in a raster grid composed of 30 by 30 m cells (spatial resolution). Geographical analysis and concepts are becoming ever more entwined with remote sensing and Earth observation.</p>
 <p>To access the Landsat data we will use in this practical you can need to sign up for a free account at: https://earthexplorer.usgs.gov/.</p>
 <p>To download the data:</p>
 <ol type="1">
-<li>Enter your city in the address/place box &gt; select the country &gt; click Show and then click on the word of your city in the box that appears. ::: {.cell layout-align=“center”} ::: {.cell-output-display} <img src="prac_1/earthexplorer.png" class="img-fluid" data-fig-align="center" style="width:4.86111in"> ::: :::</li>
+<li>Enter your city in the address/place box &gt; select the country &gt; click Show and then click on the word of your city in the box that appears.</li>
 </ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_1/earthexplorer.png" class="img-fluid figure-img" style="width:4.86111in"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Once downloaded unzip the file.</p>
 <p>In SNAP go File &gt; Open Product, navigate to the <code>.MTL</code> and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can be explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.</p>
 <p>To see the bands (or RGB images) side by side use the window dividers in the top right and also ensure the views are linked in the bottom left window.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/views.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/views.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -612,22 +599,23 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <li>What bands over Sentinel and Landsat actually overlap, do you need all of them<br>
 </li>
 <li>what resolution is useful</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Clip the Landsat image to the same vector outline as the Sentinel image, during the mask you can select the bands to mask and output</li>
 </ul>
 <p>Once you have completed these steps you output should look something like this, however, note that my Landsat tile is a different extent to my Sentinel tile, we cover this later in the module.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/Sentinel_Lsat_compare.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/Sentinel_Lsat_compare.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="select-pois" class="level4" data-number="1.2.2.1">
-<h4 data-number="1.2.2.1" class="anchored" data-anchor-id="select-pois"><span class="header-section-number">1.2.2.1</span> Select POIs</h4>
+<section id="select-pois" class="level4" data-number="1.2.2.1"><h4 data-number="1.2.2.1" class="anchored" data-anchor-id="select-pois">
+<span class="header-section-number">1.2.2.1</span> Select POIs</h4>
 <ul>
 <li><p>To create points of interest we want select pixels representative of certain land cover types (e.g.&nbsp;Bare earth, water, grass, forest, urban) so we can compare them from both Landsat and Sentinel. Of course the pixels need to be present in both datasets.</p></li>
 <li><p>We can select pixels through QGIS, R or SNAP. I’ll focus on the latter here.</p></li>
@@ -636,8 +624,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/vector_container.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/vector_container.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -648,8 +635,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="prac_1/spectrum.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_1/spectrum.png" class="img-fluid figure-img" width="450"></p>
 </figure>
 </div>
 </div>
@@ -657,11 +643,8 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <ul>
 <li><p>Once done create another vector data container and repeat for the next land cover type.</p></li>
 <li><p>Consider have a separate class for highly reflective urban (e.g.&nbsp;industrial areas)</p></li>
-</ul>
-</section>
-</section>
-<section id="spectral-signatures" class="level3" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="spectral-signatures"><span class="header-section-number">1.2.3</span> Spectral signatures</h3>
+</ul></section></section><section id="spectral-signatures" class="level3" data-number="1.2.3"><h3 data-number="1.2.3" class="anchored" data-anchor-id="spectral-signatures">
+<span class="header-section-number">1.2.3</span> Spectral signatures</h3>
 <p>To compare out spectral signatures we have a few options</p>
 <ul>
 <li>right click on the image in SNAP and then export mask pixels as a <code>.txt</code>, but you will need to do this for each land cover class and for each image (Sentinel and Landsat).</li>
@@ -675,170 +658,167 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <li><p>Right clicking on the vector containers will allow export to shapefile - do this for all the land covers you have</p></li>
 <li><p>To export the “product” which is what your image will be un SNAP. Select it (just click it) then go File &gt; Export &gt; GeoTIFF. When exporting the Landsat data click the subset button in the save box &gt; band subset (select only spectral bands) and then metadata subset and remove all the selection.</p></li>
 <li><p>Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS &gt; Symbology &gt; expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B3 is red, B2 is green and B1 is blue. This <strong>does not change the values of the pixels</strong>, just <em>how they are displayed on a colour screen</em>.</p></li>
-</ul>
-</section>
-<section id="using-r" class="level3" data-number="1.2.4">
-<h3 data-number="1.2.4" class="anchored" data-anchor-id="using-r"><span class="header-section-number">1.2.4</span> Using R</h3>
+</ul></section><section id="using-r" class="level3" data-number="1.2.4"><h3 data-number="1.2.4" class="anchored" data-anchor-id="using-r">
+<span class="header-section-number">1.2.4</span> Using R</h3>
 <p>Remember that before we deal with large data sets in R, we <strong>must</strong> sort out the .gitignore file, if we intend to use Git and GitHub at any stage (hint: you will for the assessment). Go <a href="https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html">back to CASA0005 to remember how if you need to</a></p>
 <p>Raster packages in R have and are still evolving rapidly, we have probably seen and used the <code>raster</code> package and may have seen the <code>terra</code> or <code>stars</code> packages. All can handle raster data and do the same analysis (pretty much).</p>
 <p>In 2023 some key packages will retire like <code>maptools</code>, <code>rgdal</code> and <code>rgeos</code> as their maintainer, Roger Bivand will retire. <code>raster</code> uses <code>sp</code> objects for vector data and also the <code>rgdal</code> package - the Geospatial Data Abstraction Library (GDAL) for reading, writing and converting between spatial formats. <code>sp</code> (that we saw in CASA0005) also uses <code>rgdal</code> and suggests <code>rgeos</code>.</p>
 <p>The <code>terra</code> package (2020) is somewhat mixed with <code>raster</code>, however the retiring packages are only needed by <code>raster</code>, with the <code>terra</code> package replacing <code>raster</code>. Terra is much faster than <code>raster</code> as datasets that can’t be loaded into RAM are stored on disc and when loaded doesn’t read the values. Then when computations occur the do so in chunks. Terra is very well documented and the functions are very similar to raster - https://rspatial.org/terra/pkg/index.html</p>
-<p>The <code>stars</code> package (2018) works with <code>sf</code>!!, this means many of the functions we’ve seen and are familiar with it will work - e.g.&nbsp;<code>st_transform()</code> which is much easier than doing it in raster. The real benefit of <code>stars</code> is its ability to handle large data (like satellite data) that can’t fit into memory. It does this through not loading the pixel values but keeping a reference to them through a proxy and only loading / running computations when specifically needed (e.g.&nbsp;plotting, will only plot the pixels that can be seen)! The <a href="https://keen-swartz-3146c4.netlify.app/large.html#raster-data-stars">stars section from Spatial Data Science</a> in Pebesma and Bivnad 2022 gives a good overview with examples</p>
+<p>The <code>stars</code> package (2018) works with <code>sf</code>!!, this means many of the functions we’ve seen and are familiar with it will work - e.g.&nbsp;<code><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform()</a></code> which is much easier than doing it in raster. The real benefit of <code>stars</code> is its ability to handle large data (like satellite data) that can’t fit into memory. It does this through not loading the pixel values but keeping a reference to them through a proxy and only loading / running computations when specifically needed (e.g.&nbsp;plotting, will only plot the pixels that can be seen)! The <a href="https://keen-swartz-3146c4.netlify.app/large.html#raster-data-stars">stars section from Spatial Data Science</a> in Pebesma and Bivnad 2022 gives a good overview with examples</p>
 <p>Stars is faster than terra, terra is faster than raster.</p>
-<section id="data-loading" class="level4" data-number="1.2.4.1">
-<h4 data-number="1.2.4.1" class="anchored" data-anchor-id="data-loading"><span class="header-section-number">1.2.4.1</span> Data loading</h4>
+<section id="data-loading" class="level4" data-number="1.2.4.1"><h4 data-number="1.2.4.1" class="anchored" data-anchor-id="data-loading">
+<span class="header-section-number">1.2.4.1</span> Data loading</h4>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bare_earth <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Bare_earth_Polygon.shp"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>grass <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Grass_Polygon.shp"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>forest <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Forest_Polygon.shp"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>urban <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Low_urban_Polygon.shp"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>high_urban <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/High_urban_Polygon.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bare_earth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Bare_earth_Polygon.shp"</span><span class="op">)</span></span>
+<span><span class="va">grass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Grass_Polygon.shp"</span><span class="op">)</span></span>
+<span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Forest_Polygon.shp"</span><span class="op">)</span></span>
+<span><span class="va">urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Low_urban_Polygon.shp"</span><span class="op">)</span></span>
+<span><span class="va">high_urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/High_urban_Polygon.shp"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Landsat equivalent</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bands <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"6"</span>, <span class="st">"7"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>sentinel <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"prac_1/Data/S2A_LSAT_msk.tif"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sentinel) <span class="ot">&lt;-</span> bands</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>landsat<span class="ot">&lt;-</span><span class="fu">rast</span>(<span class="st">"prac_1/Data/LSAT_msk.tif"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(landsat) <span class="ot">&lt;-</span> bands</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Landsat equivalent</span></span>
+<span><span class="va">bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>,<span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>, <span class="st">"6"</span>, <span class="st">"7"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sentinel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="st">"prac_1/Data/S2A_LSAT_msk.tif"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sentinel</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">bands</span></span>
+<span>  </span>
+<span><span class="va">landsat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="st">"prac_1/Data/LSAT_msk.tif"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">landsat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">bands</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here i have chosen to use <code>terra</code>, this is because i want to extract the pixel values from within the polygons and at the moment <code>stars</code> will only permit aggregation - e.g.&nbsp;the mean of the pixels in the polygons. This is fine unless you want to explore the variation in signatures! then you will need the values.</p>
-<p>To use a vector layer in <code>terra</code> it needs to be in a SpatVector (in <code>terra</code> the raster is a SpatRaster). Now there are two ways we can do this…the first is with the <code>vect()</code> function from <code>terra</code>:</p>
+<p>To use a vector layer in <code>terra</code> it needs to be in a SpatVector (in <code>terra</code> the raster is a SpatRaster). Now there are two ways we can do this…the first is with the <code><a href="https://rdrr.io/pkg/terra/man/vect.html">vect()</a></code> function from <code>terra</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>urban <span class="ot">&lt;-</span> <span class="fu">vect</span>(urban)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">urban</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the second we can actually convert the SpatRaster to a raster and then just use the <code>sf</code> object! I know, i know, how many formats do we need here! <strong>But</strong> this will mean we have a raster brick as we have all of our bands and a raster brick won’t work here.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>landsat <span class="ot">&lt;-</span> <span class="fu">as</span>(landsat, <span class="st">"Raster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">landsat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="va">landsat</span>, <span class="st">"Raster"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Of course, we can just do this straight from loading the data with the pipe…</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bare_earth <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Bare_earth_Polygon.shp"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vect</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>grass <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Grass_Polygon.shp"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vect</span>()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>forest <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Forest_Polygon.shp"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vect</span>()</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>urban <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/Low_urban_Polygon.shp"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vect</span>()</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>high_urban <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"prac_1/Data/High_urban_Polygon.shp"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bare_earth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Bare_earth_Polygon.shp"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">grass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Grass_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Forest_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/Low_urban_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">high_urban</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"prac_1/Data/High_urban_Polygon.shp"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Before we can start the extraction you might have seen that my Landsat data is not in the same CRS as the rest of the data, it’s close, but different. We can also just use the raster to get the CRS info, like</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(landsat)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(sentinel)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># reproject landsat</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>landsat <span class="ot">&lt;-</span> <span class="fu">project</span>(landsat, sentinel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/crs.html">crs</a></span><span class="op">(</span><span class="va">landsat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/crs.html">crs</a></span><span class="op">(</span><span class="va">sentinel</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># reproject landsat</span></span>
+<span><span class="va">landsat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/project.html">project</a></span><span class="op">(</span><span class="va">landsat</span>, <span class="va">sentinel</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s pull out those values, and get the mean and standard deviation, starting with urban from sentinel data…</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sen_urban<span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(sentinel, urban, <span class="at">progress =</span> F)<span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to=</span><span class="st">"bands"</span>, </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">"band_values"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">sensor=</span><span class="st">"sentinel"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">land=</span><span class="st">"urban"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">urban</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
+<span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>sensor<span class="op">=</span><span class="st">"sentinel"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>land<span class="op">=</span><span class="st">"urban"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, because this process will be the same for the other landcover types we can make a function…this is the <strong>exact</strong> same code as above but i’ve replaced two arguments with sensor and lancover that i can now change for each version (e.g.&nbsp;bare earth in Landsat or forest in Sentinel)</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>band_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(sensor, landcover) {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  col_sensor <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(sensor))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  col_land <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(landcover))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  sen_urban<span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(sensor, landcover, <span class="at">progress =</span> F)<span class="sc">%&gt;%</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to=</span><span class="st">"bands"</span>, </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">"band_values"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_column</span>(<span class="at">sensor=</span>col_sensor)<span class="sc">%&gt;%</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_column</span>(<span class="at">land=</span>col_land)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                 </span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">band_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">col_sensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">sensor</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">col_land</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">landcover</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
+<span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>sensor<span class="op">=</span><span class="va">col_sensor</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>land<span class="op">=</span><span class="va">col_land</span><span class="op">)</span></span>
+<span>                 </span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Later on we will also create a density plot, so let’s write a function for all the values…it’s very similar…we will call this one when we need it later…</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>band_fun_all_values <span class="ot">&lt;-</span> <span class="cf">function</span>(sensor, landcover) {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  col_sensor <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(sensor))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  col_land <span class="ot">&lt;-</span> <span class="fu">deparse</span>(<span class="fu">substitute</span>(landcover))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  sen_urban<span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(sensor, landcover, <span class="at">progress =</span> F)<span class="sc">%&gt;%</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to=</span><span class="st">"bands"</span>, </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">"band_values"</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                 </span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">band_fun_all_values</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">col_sensor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">sensor</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">col_land</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="va">landcover</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
+<span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span></span>
+<span>                 </span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then it’s simply…</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sen_bare <span class="ot">&lt;-</span> <span class="fu">band_fun</span>(sentinel, bare_earth)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sen_grass<span class="ot">&lt;-</span> <span class="fu">band_fun</span>(sentinel, grass) </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sen_forest<span class="ot">&lt;-</span> <span class="fu">band_fun</span>(sentinel, forest) </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>sen_high_urban <span class="ot">&lt;-</span> <span class="fu">band_fun</span>(sentinel, high_urban) </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>lsat_urban<span class="ot">&lt;-</span> <span class="fu">band_fun</span>(landsat, urban)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>lsat_bare<span class="ot">&lt;-</span> <span class="fu">band_fun</span>(landsat, bare_earth)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>lsat_grass<span class="ot">&lt;-</span> <span class="fu">band_fun</span>(landsat, grass)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>lsat_forest<span class="ot">&lt;-</span> <span class="fu">band_fun</span>(landsat, forest)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>lsat_high_urban <span class="ot">&lt;-</span> <span class="fu">band_fun</span>(sentinel, high_urban) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sen_bare</span> <span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">bare_earth</span><span class="op">)</span></span>
+<span><span class="va">sen_grass</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">grass</span><span class="op">)</span> </span>
+<span><span class="va">sen_forest</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">forest</span><span class="op">)</span> </span>
+<span><span class="va">sen_high_urban</span> <span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">high_urban</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">lsat_urban</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">landsat</span>, <span class="va">urban</span><span class="op">)</span></span>
+<span><span class="va">lsat_bare</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">landsat</span>, <span class="va">bare_earth</span><span class="op">)</span></span>
+<span><span class="va">lsat_grass</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">landsat</span>, <span class="va">grass</span><span class="op">)</span></span>
+<span><span class="va">lsat_forest</span><span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">landsat</span>, <span class="va">forest</span><span class="op">)</span></span>
+<span><span class="va">lsat_high_urban</span> <span class="op">&lt;-</span> <span class="fu">band_fun</span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">high_urban</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Think about what this has given us?</p>
 <p>The next stage is to put then into a tibble…</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sen_lsat <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sen_urban, sen_bare, sen_grass,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                      sen_forest, sen_high_urban,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                      lsat_urban, lsat_bare, lsat_grass,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                      lsat_forest, lsat_high_urban)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sen_lsat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">sen_urban</span>, <span class="va">sen_bare</span>, <span class="va">sen_grass</span>,</span>
+<span>                      <span class="va">sen_forest</span>, <span class="va">sen_high_urban</span>,</span>
+<span>                      <span class="va">lsat_urban</span>, <span class="va">lsat_bare</span>, <span class="va">lsat_grass</span>,</span>
+<span>                      <span class="va">lsat_forest</span>, <span class="va">lsat_high_urban</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The next stage is to get the mean (and standard deviation) values for each band per sensor and land cover type:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>means<span class="ot">&lt;-</span> sen_lsat<span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bands, sensor, land)<span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean=</span><span class="fu">mean</span>(band_values), <span class="at">Std=</span><span class="fu">sd</span>(band_values))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">means</span><span class="op">&lt;-</span> <span class="va">sen_lsat</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bands</span>, <span class="va">sensor</span>, <span class="va">land</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span>, Std<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Plot some spectral profiles, first for Sentinel…</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> means <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sensor<span class="sc">==</span><span class="st">"sentinel"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> bands, <span class="at">y =</span> Mean,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">col=</span>land))<span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> land)) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> (Mean<span class="sc">-</span>Std), <span class="at">ymax =</span> (Mean<span class="sc">+</span>Std), <span class="at">width =</span> <span class="fl">0.2</span>))</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">means</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sensor</span><span class="op">==</span><span class="st">"sentinel"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bands</span>, y <span class="op">=</span> <span class="va">Mean</span>,</span>
+<span>                col<span class="op">=</span><span class="va">land</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">land</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="op">(</span><span class="va">Mean</span><span class="op">-</span><span class="va">Std</span><span class="op">)</span>, ymax <span class="op">=</span> <span class="op">(</span><span class="va">Mean</span><span class="op">+</span><span class="va">Std</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">p1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="intro_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We can also look at a density plot….ideally each land cover has a clear and separate historgram…</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> sen_lsat <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sensor<span class="sc">==</span><span class="st">"sentinel"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>band_values, <span class="at">group=</span>land, <span class="at">fill=</span>land)) <span class="sc">+</span> </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>)<span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Add a mean vertical line</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(land) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">group_mean =</span> <span class="fu">mean</span>(band_values)),</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">xintercept=</span>group_mean, <span class="at">color =</span> land), <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">sen_lsat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sensor</span><span class="op">==</span><span class="st">"sentinel"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">band_values</span>, group<span class="op">=</span><span class="va">land</span>, fill<span class="op">=</span><span class="va">land</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="co">#Add a mean vertical line</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">.</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">land</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>group_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="va">group_mean</span>, color <span class="op">=</span> <span class="va">land</span><span class="op">)</span>, linetype<span class="op">=</span><span class="st">"dashed"</span>, size<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="intro_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption aria-hidden="true" class="figure-caption">Thanks to Sydney Goldstein for <a href="https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification">some of this code</a></figcaption><p></p>
+<figure class="figure"><p><img src="intro_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Thanks to Sydney Goldstein for <a href="https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification">some of this code</a></figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -847,33 +827,33 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <p>Andy will talk about these outputs.</p>
 <p>We can arrange our grids nicely with the <code>cowplot</code> package…</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>output<span class="ot">&lt;-</span><span class="fu">plot_grid</span>(p1, p2, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'A'</span>, <span class="st">'B'</span>), <span class="at">label_size =</span> <span class="dv">12</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/">cowplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">output</span><span class="op">&lt;-</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'A'</span>, <span class="st">'B'</span><span class="op">)</span>, label_size <span class="op">=</span> <span class="fl">12</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="intro_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We can also export this if we wanted with <code>ggsave()</code> to,<a href="https://ggplot2.tidyverse.org/reference/ggsave.html"><code>ggsave</code> has a lot of options</a> and can output to most formats, it also gives examples of not using <code>ggsave</code></p>
+<p>We can also export this if we wanted with <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code> to,<a href="https://ggplot2.tidyverse.org/reference/ggsave.html"><code>ggsave</code> has a lot of options</a> and can output to most formats, it also gives examples of not using <code>ggsave</code></p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"spectral_reflectance.pdf"</span>, <span class="at">width =</span> <span class="dv">20</span>, <span class="at">height =</span> <span class="dv">20</span>, <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span><span class="st">"spectral_reflectance.pdf"</span>, width <span class="op">=</span> <span class="fl">20</span>, height <span class="op">=</span> <span class="fl">20</span>, units <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here, i have just shown the process for Sentinel data. Your task is to respond to the review questions which will include doing a bit similar analysis of the Landsat data / some comparisons…perhaps even a statistical test (e.g.&nbsp;a t-test) to compare the difference between the reflectance of Landsat and Sentinel data e.g..</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">&lt;-</span> sen_lsat <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(sensor<span class="sc">==</span><span class="st">"sentinel"</span> <span class="sc">&amp;</span> land <span class="sc">==</span><span class="st">"urban"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">select</span>(band_values)<span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">pull</span>()</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">&lt;-</span> sen_lsat <span class="sc">%&gt;%</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(sensor<span class="sc">==</span><span class="st">"landsat"</span> <span class="sc">&amp;</span> land <span class="sc">==</span><span class="st">"urban"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">select</span>(band_values)<span class="sc">%&gt;%</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">pull</span>()</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(t1, t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t1</span><span class="op">&lt;-</span> <span class="va">sen_lsat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sensor</span><span class="op">==</span><span class="st">"sentinel"</span> <span class="op">&amp;</span> <span class="va">land</span> <span class="op">==</span><span class="st">"urban"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t2</span><span class="op">&lt;-</span> <span class="va">sen_lsat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sensor</span><span class="op">==</span><span class="st">"landsat"</span> <span class="op">&amp;</span> <span class="va">land</span> <span class="op">==</span><span class="st">"urban"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">band_values</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">t1</span>, <span class="va">t2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
@@ -889,10 +869,8 @@ mean of x mean of y
 </div>
 <p>How <a href="https://www.guru99.com/r-t-test-one-sample.html">do we interpret this</a>?</p>
 <p>If you make plots of reflectance be careful to use the same scale, you can do this by adding a new line under <code>ggplot</code> like:<code>lims(y = c(0, 80000))</code></p>
-</section>
-</section>
-<section id="review-questions" class="level3" data-number="1.2.5">
-<h3 data-number="1.2.5" class="anchored" data-anchor-id="review-questions"><span class="header-section-number">1.2.5</span> Review questions</h3>
+</section></section><section id="review-questions" class="level3" data-number="1.2.5"><h3 data-number="1.2.5" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">1.2.5</span> Review questions</h3>
 <p>Write around 2-3 paragraphs on the following and support your responses with plots and literature:</p>
 <ul>
 <li>Briefly explain the process of sourcing, loading and manipulating remotely sensed datasets</li>
@@ -901,11 +879,26 @@ mean of x mean of y
 </ul>
 
 
-</section>
-</section>
-</main> <!-- /main -->
-<script type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -925,7 +918,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.blur();
     // flash "checked"
     button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
     setTimeout(function() {
+      button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
@@ -979,9 +975,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
       </a>          
@@ -993,6 +987,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 </body></html>
