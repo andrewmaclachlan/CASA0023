@@ -264,6 +264,7 @@ Low statistical significance means that the bands are sufficiently different eno
 ```{r cache=FALSE, message=FALSE}
 library(ggplot2)
 library(GGally)
+library(raster)
 
 manc %>%
   terra::as.data.frame(., na.rm=TRUE)%>%

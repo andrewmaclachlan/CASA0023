@@ -66,10 +66,10 @@ var dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
     .filterDate('2022-01-01', '2022-02-01');
 ```
 
-This doesn't do anything until we actually add it to our map....
+This doesn't do anything until we actually add it to our map....the final Landsat 9 here is what the layer will be called on the map.
 
 ```{r, eval=FALSE}
-Map.addLayer(dataset, {bands: ["SR_B4", "SR_B3", "SR_B2"]})
+Map.addLayer(dataset, {bands: ["SR_B4", "SR_B3", "SR_B2"]}, "Landsat 9")
 
 ```
 
@@ -87,8 +87,7 @@ var dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
   .filterBounds(Dheli)  // Intersecting ROI
   .filter(ee.Filter.lt("CLOUD_COVER", 0.1));
   
-  print(dataset)
-
+  print(dataset, "datasetprint")
 
 ```
 
@@ -126,14 +125,13 @@ var india = ee.FeatureCollection('users/andrewmaclachlan/india')
 ```
 
 
-To now filter based on this we include it as our filter bounds. At the time of writing there weren't enough cloud free Landsat 9 scenes over Dheli to create a complete image, so I have changed to Landsat 8...
+To now filter based on this we include it as our filter bounds. At the time of writing there weren't enough cloud free Landsat 9 scenes over Delhi to create a complete image, so I have changed to Landsat 8...
 
 ```{r, eval=FALSE}
-var oneimage_study_area = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
+var oneimage_study_area_cloud = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
   .filterDate('2021-06-01', '2022-10-10')
-  .filterBounds(india);  // Intersecting ROI
-
-var oneimage_study_area_cloud = oneimage_study_area.filter(ee.Filter.eq('CLOUD_COVER', 0));
+  .filterBounds(india)  // Intersecting ROI
+  .filter(ee.Filter.lt("CLOUD_COVER", 0.1));
 
 ```
 
@@ -165,7 +163,7 @@ var image_146_40 = ee.Image('LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127')
 ```{r eval=FALSE}
 var median = oneimage_study_area_cloud.reduce(ee.Reducer.median());
 // print the image info
-print(median)
+print(median, "median")
 ```
 
 ## Better images
@@ -254,7 +252,7 @@ Map.addLayer(meanImage, vis_params2, 'mean');
 
 Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i'm also just selcting the bands i want.
 
-We could also visualise this with, wherei have used the interative visulisation box to select my min and max values...
+We could also visualise this with, where have used the interative visulisation box to select my min and max values...
 
 ```{r, eval=FALSE}
 
@@ -263,8 +261,8 @@ var clip = meanImage.clip(india)
 
 var vis_params3 = {
   bands: ['SR_B4', 'SR_B3', 'SR_B2'],
-  min: 53,
-  max: 151,
+  min: 0,
+  max: 0.3,
 };
 
 // map the layer
@@ -288,19 +286,19 @@ To resolve this we need to multiple our surface reflectance so we can compute te
 var glcm = clip.select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7'])
   .multiply(1000)
   .toUint16()
-  .glcmTexture({size: 4})
+  .glcmTexture({size: 1})
   .select('SR_.._contrast|SR_.._diss')
   .addBands(clip);
   
 // add to the map, but change the range values  
-Map.addLayer(glcm, {}, 'glcm');
+Map.addLayer(glcm, {min:14, max: 650}, 'glcm');
   
 ```
 
 Here note:
 
 * the function `.toUint16()` as`.glcmTexture` won't work with 32 bit data
-* size 4, is the size of the neighborhood to include in each GLCM.
+* size 1, is the size of the neighborhood to include in each GLCM.The value refers to the number of pixels to move from the central pixel, so a value of 1 creates a surrounding 3 by 3 grid. 
 * The selection function uses a regular expression to pull out just contrast and dissmilarity
 * As the texture function just outputs the texture measures, i've added back in the original bands to the image collection.
 
@@ -318,8 +316,13 @@ We then center the data to the mean (in the code below) and divide by the standa
 ```{r, eval=FALSE}
 // scale and band names
 var scale = 30;
-var bandNames = clip.bandNames();
-var region = clip.geometry();
+var bandNames = glcm.bandNames();
+
+var region = india.geometry();
+Map.centerObject(region, 10);
+Map.addLayer(ee.Image().paint(region, 0, 2), {}, 'Region');
+
+print(region, "india_geometry")
 
 
 // mean center the data and SD strech the princapal components 
@@ -418,7 +421,7 @@ for (var i = 0; i < bandNames.length().getInfo(); i++) {
 
 ```
 
-We can then plot each component with a for loop
+We can then plot each component with a for loop:
 
 ```{r, eval=FALSE}
 // Plot each PC as a new layer
@@ -446,23 +449,26 @@ To export it to your drive...
 // select the bands you want
 var PCA_out = pcImage.select(['pc1', 'pc2'])
 
-// get the projection info for the export, note it will run without this 
-var projection = pcImage.select('pc1').projection().getInfo();
+var projection = PCA_out.select('pc1').projection().getInfo();
+print(projection, "output_projection")
 
+var bounds = india.geometry();
+
+// Export the image, specifying the CRS, transform, and region.
 Export.image.toDrive({
   image: PCA_out,
   description: 'PCA_india',
+  scale:30,
   crs: projection.crs,
-  crsTransform: projection.transform,
-  fileFormat: 'GeoTIFF',
-  maxPixels: 1E10,
-  formatOptions: {
-    cloudOptimized: true
-  }
+  maxPixels: 100E10,
+  region: bounds
+
 });
 
 ```
 Now when you run the script a task will appear in the task menu, to export your file click Run and then it will save into your Google Drive so you can download it locally.
+
+**Note** that setting the region here will mean that if you haven't performed a clip it will just export the region you have set.
 
 ## Band math
 
@@ -474,7 +480,7 @@ It is also possible to quickly calculate indices in GEE...
 var NDVI_1 = clip.select('SR_B5').subtract(clip.select('SR_B4'))
   .divide(clip.select('SR_5').add(clip.select('SR_B4')));
 
-Map.addLayer(NDVI, { min: -1, max: 1}, 'NDVI');
+Map.addLayer(NDVI_1, { min: -1, max: 1, palette: ['blue', 'white', 'green']}, 'NDVI');
 
 ```
 
@@ -486,13 +492,13 @@ var NDVI_2 = clip.normalizedDifference([SR_B5, SR_B4]);
 
 ### Review questions 
 
-For the task this week select a metropolitan area of your choice (e.g. using [GADM](https://gadm.org/) or another admin boundary dataset) and apply a formula / function that we have seen in the module to a collection of data.
+For the task this week select a metropolitan area of your choice (e.g. using [GADM](https://gadm.org/) or another admin boundary dataset) and apply a formula / function that we have seen in the module (or from online / literature) to a collection of data.
 
 For example, calculate the Tasseled Cap transformation for the Berlin Metropolitan area using Sentinel 2 data.
 
 You must:
 
 * Output your final data product to a file
-* Share your code your portfolio
+* Share your code in your portfolio
 * Explain (within 1 -2 paragraphs) what you did.
 
