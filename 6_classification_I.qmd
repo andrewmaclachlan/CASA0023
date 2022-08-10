@@ -1,0 +1,160 @@
+# Classification I
+
+## Data catlog
+
+In the last practical we uploaded our own admin boundary dataset from GADM. However, GEE has a massive catalog of data that we can search and just load directly into our script...
+
+For example, [search the GEE data catalogue](https://developers.google.com/earth-engine/datasets/catalog) for `admin`. You should see the FAO GAUL global admin layers and level 2 is equivalent to our unit of study from last week. 
+
+## Vector data
+
+To load in the level 2 Global Administrative Unit Layers (GAUL) data we can use the example code....
+
+```{r, eval=FALSE}
+var dataset = ee.FeatureCollection("FAO/GAUL/2015/level2");
+
+Map.setCenter(12.876, 42.682, 5);
+
+var styleParams = {
+  fillColor: 'b5ffb4',
+  color: '00909F',
+  width: 1.0,
+};
+
+// comment this out otherwise it will just display as RBG data
+//dataset = dataset.style(styleParams);
+
+Map.addLayer(dataset, {}, 'Second Level Administrative Units');
+
+```
+
+Make a new script and copy this code in, then use the inspector to select a study area and filter the vector data to just that area. Note, that level 2 is different between different countries.
+
+I am going to focus on Shenzhen, but select any city. My inspector shows....
+
+
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_inspector.png') 
+```
+
+
+To filter out my study area....
+
+```{r, eval=FALSE}
+var shenzhen = dataset.filter('ADM2_CODE == 13030');
+```
+
+Be careful here as the column is numeric not string, so the value `13030` is not in "" (like it was last week with the GADM data)
+
+## EO data
+
+Here i'm going to use Sentinel data. If you search the data catalog for sentinel there will be a wide variety to select from, here i have gone for surface reflectance and the harmonized product that shifts newer images to be the same as that in older images, creating a consistent collection!
+
+There is code provided for us to load us on the [Harmonized Sentinel-2 MSI: MultiSpectral Instrument Level-2A catalog page](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED)
+
+Looking at this code you will see there is a cloud mask. There are two options we have when dealing with clouds.
+
+* To filter the entire collection based on a low cloud coverage percentage per tile, like we did last week
+
+* To set a higher percentage per tile (e.g. 20) but then to use the quality assurance (QA) bands to filter the clouds per pixel. Scrolling down the bands list [on the catalog page](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR#bands) there is a description of the bitmask for the relevant QA band (QA60). Here we can see the value for each pixel. This is the same layer that we get when downloading Sentinel data, in practical one we could see this in the masks folder....
+
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/SNAP_masks.png') 
+```
+
+Let's now try both approaches...
+
+The first thing to note is that the Sentinel data is scaled by 10000 so in order to display this between 0 and 1 we need to divide collection using a function...
+
+```{r, eval=FALSE}
+//create the function
+var divide10000 = function(image) {
+  return image.divide(10000);
+};
+
+```
+
+1. Let's load the imagery with minimal cloud cover, now depending on your study area and the propesnity for it to be cloudy (like the UK) you will need to change the dates and compromise on the less than % of cloud cover per tile...i wanted just to get 2022 data for this composite, with less than .1% cloud cover...the latter limited the images i could select from so i changed it to 1%
+
+```{r, eval=FALSE}
+var wayone = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+                  .filterDate('2022-01-01', '2022-10-31')
+                  .filterBounds(shenzhen)  // Intersecting ROI
+                  // Pre-filter to get less cloudy granules.
+                  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE',1));
+
+var wayone_divide = wayone.map(divide10000);
+
+var visualization = {
+  min: 0.0,
+  max: 0.3,
+  bands: ['B4', 'B3', 'B2'],
+};
+
+Map.centerObject(shenzhen, 10);
+
+Map.addLayer(wayone_divide, visualization, 'wayoneRGB');
+```
+
+Remember that if we wanted to see all the files we have here, we can export it to a `.csv`
+
+```{r, eval=FALSE}
+Export.table.toDrive(wayone_divide, 'exportAsCSV_wayone', 'GEE', 'CSVexport', 'CSV');
+```
+
+For example...i have a tile with an index `20220404T025539_20220404T030757_T49QGE`
+
+Here....
+
+* The first part is the sensing data and time (the T) - `20220404T025539`
+* The second part is the product generation date and time - `20220404T030757`
+* The third part is the UTM grid reference in the [Military Grid Reference System (MGRS)](https://en.wikipedia.org/wiki/Military_Grid_Reference_System). Where `T49` is the grid zone designator
+
+In my case this gives me 13 images...now what about increasing the cloud coverage and masking the cloud pixels
+
+2. First we need another function to mask the cloudy pixels and do the division...
+
+```{r, eval=FALSE}
+function maskS2clouds(image) {
+  var qa = image.select('QA60');
+
+  // Bits 10 and 11 are clouds and cirrus, respectively.
+  var cloudBitMask = 1 << 10;
+  var cirrusBitMask = 1 << 11;
+
+  // Both flags should be set to zero, indicating clear conditions.
+  var mask = qa.bitwiseAnd(cloudBitMask).eq(0)
+      .and(qa.bitwiseAnd(cirrusBitMask).eq(0));
+
+  return image.updateMask(mask).divide(10000);
+}
+```
+
+Then load and filter the collection with a cloud mask.**Note** a very similar method can be used for Landsat data
+
+Or https://developers.google.com/earth-engine/apidocs/ee-algorithms-landsat-simplecomposite
+
+```{r, eval=FALSE}
+var waytwo = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+                  .filterDate('2022-01-01', '2022-10-31')
+                  .filterBounds(shenzhen)  // Intersecting ROI
+                  // Pre-filter to get less cloudy granules.
+                  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE',20))
+                  .map(maskS2clouds);
+                  
+Map.addLayer(waytwo, visualization, 'waytwoRGB');
+
+```
+
+In my case this produces a mixed result. I now have 62 images, but evidently the cloud mask hasn't worked perfectly...
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_waytwo.png') 
+```
+So at this point i might consider reducing the threshold for clouds in my image. There is an alternative to this that uses 
+
+## Classification 
+
+
+
+### Review questions 
