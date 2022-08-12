@@ -283,6 +283,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dictionary.b)</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(number, string, list, dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>When you open GEE code editor you will see the following screen composed of these parts:</p>
+<div class="cell" data-layout-align="center" data-hash="5_GEE_I_cache/html/unnamed-chunk-2_db3bf160c49d87024453922bb1352117">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_5/ee-editor.png" class="img-fluid figure-img" style="width:12.5in"></p>
+<p></p><figcaption class="figure-caption">GEE screen: <a href="https://developers.google.com/earth-engine/tutorials/community/beginners-cookbook">GEE community Beginner’s Cookbook, TC25</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
 <p>To start with GEE i want to pull up the same image from a specific date for a city, i will use</p>
 <p>We can make a new point in the code editor with:</p>
 <div class="cell">
@@ -479,10 +489,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(meanImage, vis_params2, <span class="st">'mean'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="clip-images" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="clip-images">
+<p>However, as noted in the lectures we could also match the histograms of the images, this is beyond the scope of the practical but more details are:</p>
+<ul>
+<li>In Nocel Gorelick’s <a href="https://medium.com/google-earth/histogram-matching-c7153c85066d">Histogram Matching Earth Engine by Example article</a> <a href="https://code.earthengine.google.com/0dd13bac8afbae60d424b65e11f69232">and code</a>
+</li>
+</ul></section><section id="clip-images" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="clip-images">
 <span class="header-section-number">5.6</span> Clip images</h2>
-<p>Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i’m also just selcting the bands i want.</p>
-<p>We could also visualise this with, where have used the interative visulisation box to select my min and max values…</p>
+<p>Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i’m also just selecting the bands i want.</p>
+<p>We could also visualise this with, where have used the interactive visulisation box to select my min and max values…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>var clip <span class="ot">=</span> <span class="fu">meanImage.clip</span>(india)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>([<span class="st">'SR_B1'</span>, <span class="st">'SR_B2'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B4'</span>, <span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>]);</span>

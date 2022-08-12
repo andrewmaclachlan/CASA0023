@@ -27,6 +27,14 @@ print(dictionary.b)
 print(number, string, list, dictionary)
 ```
 
+When you open GEE code editor you will see the following screen composed of these parts:
+
+```{r echo=FALSE, out.width = "900pt", fig.align='center', cache=TRUE, fig.cap="GEE screen: [GEE community Beginner's Cookbook, TC25](https://developers.google.com/earth-engine/tutorials/community/beginners-cookbook)"}
+knitr::include_graphics('prac_5/ee-editor.png')
+```
+
+
+
 To start with GEE i want to pull up the same image from a specific date for a city, i will use 
 
 We can make a new point in the code editor with:
@@ -248,11 +256,15 @@ var meanImage = oneimage_study_area_cloud_scale.mean();
 Map.addLayer(meanImage, vis_params2, 'mean');
 ```
 
+However, as noted in the lectures we could also match the histograms of the images, this is beyond the scope of the practical but more details are:
+
+* In Nocel Gorelick's [Histogram Matching Earth Engine by Example article](https://medium.com/google-earth/histogram-matching-c7153c85066d) [and code](https://code.earthengine.google.com/0dd13bac8afbae60d424b65e11f69232)
+
 ## Clip images
 
-Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i'm also just selcting the bands i want.
+Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i'm also just selecting the bands i want.
 
-We could also visualise this with, where have used the interative visulisation box to select my min and max values...
+We could also visualise this with, where have used the interactive visulisation box to select my min and max values...
 
 ```{r, eval=FALSE}
 

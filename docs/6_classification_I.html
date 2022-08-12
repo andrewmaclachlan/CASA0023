@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
@@ -227,7 +227,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li>
 <a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"> <span class="header-section-number">6.4</span> Classification</a>
   <ul class="collapse">
-<li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">6.4.1</span> Review questions</a></li>
+<li><a href="#clip" id="toc-clip" class="nav-link" data-scroll-target="#clip"> <span class="header-section-number">6.4.1</span> Clip</a></li>
+  <li><a href="#training-data" id="toc-training-data" class="nav-link" data-scroll-target="#training-data"> <span class="header-section-number">6.4.2</span> Training data</a></li>
+  </ul>
+</li>
+  <li><a href="#classify" id="toc-classify" class="nav-link" data-scroll-target="#classify"> <span class="header-section-number">6.5</span> Classify</a></li>
+  <li><a href="#train-test-split" id="toc-train-test-split" class="nav-link" data-scroll-target="#train-test-split"> <span class="header-section-number">6.6</span> Train test split</a></li>
+  <li>
+<a href="#train-test-split-pixel" id="toc-train-test-split-pixel" class="nav-link" data-scroll-target="#train-test-split-pixel"> <span class="header-section-number">6.7</span> Train test split pixel</a>
+  <ul class="collapse">
+<li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">6.7.1</span> Review questions</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/6_classification_I.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -386,11 +395,286 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>So at this point i might consider reducing the threshold for clouds in my image. There is an alternative to this that uses</p>
+<p>Now, there are two ways we can deal with this…</p>
+<ul>
+<li><p>Take the median image from all images in our collection - meaning the middle value of each pixel that will result in the clouds being removed (as they are very reflective and will have high values)…adding</p></li>
+<li><p>Use something more advanced for cloud detection such as <a href="https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless">s2cloudless</a></p></li>
+</ul>
+<p>Taking the median returns….</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_6/GEE_median.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
+</div>
 </section><section id="classification" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="classification">
 <span class="header-section-number">6.4</span> Classification</h2>
-<section id="review-questions" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored" data-anchor-id="review-questions">
-<span class="header-section-number">6.4.1</span> Review questions</h3>
+<p>The main focus here is classification, this is where we take some samples, train a model and then apply the model to the rest of the image.</p>
+<p>In classification we are using feature vectors, which are tables. For example pixel x has band values of 200, 300, 400 and a landcover class of grass. The row of the table is a feature, the pixel values are the properties and combined they are feature vectors.</p>
+<p>In GEE the supervised classifiers include: CART, RandomForest, NaiveBayes and SVM. GEE only allows 1 million points for sampling (to train the classifier). If you have more than this you would need to take a sample.</p>
+<p>To start we need some training data within our study area. I’m going to clip my median imagery to my admin boundary and then take some samples. To take samples either use QGIS (and upload the <code>.shp</code>), Google Earth (the desktop version that has high resolution imagery) or GEE itself to generate some samples….I will use GEE.</p>
+<section id="clip" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored" data-anchor-id="clip">
+<span class="header-section-number">6.4.1</span> Clip</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var waytwo_clip <span class="ot">=</span> <span class="fu">waytwo.clip</span>(shenzhen)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(waytwo_clip, visualization, <span class="st">'waytwoRGB_clip'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="training-data" class="level3" data-number="6.4.2"><h3 data-number="6.4.2" class="anchored" data-anchor-id="training-data">
+<span class="header-section-number">6.4.2</span> Training data</h3>
+<p>To select training data in GEE, click the polygon symbol and add polygons for the landcovers you want to classify. Add a new layer for each different landcover.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_6/GEE_polygons.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you add these multi-polygons they will appear as variables at the top of your script. Next we need to merge the polygons into a feature collection…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Make a FeatureCollection from the polygons</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>var polygons <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>([</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ee.Feature</span>(urban_low, {<span class="st">'class'</span><span class="sc">:</span> <span class="dv">1</span>}),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ee.Feature</span>(water, {<span class="st">'class'</span><span class="sc">:</span> <span class="dv">2</span>}),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ee.Feature</span>(urban_high, {<span class="st">'class'</span><span class="sc">:</span> <span class="dv">3</span>}),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ee.Feature</span>(grass, {<span class="st">'class'</span><span class="sc">:</span> <span class="dv">4</span>}),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ee.Feature</span>(bare_earth, {<span class="st">'class'</span><span class="sc">:</span> <span class="dv">5</span>}),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ee.Feature</span>(forest, {<span class="st">'class'</span><span class="sc">:</span> <span class="dv">6</span>}),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we need to set some context for the classifier - which bands are we going to use and what is the classification property - we just set it as class….</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Use these bands <span class="cf">for</span> classification.</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>var bands <span class="ot">=</span> [<span class="st">'B2'</span>, <span class="st">'B3'</span>, <span class="st">'B4'</span>, <span class="st">'B5'</span>, <span class="st">'B6'</span>, <span class="st">'B7'</span>];</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> The name of the property on the points storing the class label.</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>var classProperty <span class="ot">=</span> <span class="st">'class'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we need to pull out the data from our training areas…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Sample the composite to generate training data.  Note that the</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> class label is stored <span class="cf">in</span> the <span class="st">'landcover'</span> property.</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> polygons,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [classProperty],</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When i print this variable you can see the values that have been pullout out of the data</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">training</span>, <span class="st">"training"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_6/GEE_pixel_values.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="classify" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="classify">
+<span class="header-section-number">6.5</span> Classify</h2>
+<p>To train our classifier…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Train a CART classifier.</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>var classifier <span class="ot">=</span> <span class="fu">ee.Classifier.smileCart</span>()<span class="fu">.train</span>({</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  features<span class="sc">:</span> training,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  classProperty<span class="sc">:</span> classProperty,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Print some info about the <span class="fu">classifier</span> (specific to CART).</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'CART, explained'</span>, <span class="fu">classifier.explain</span>());</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When you print out the classifier you will see:</p>
+<ul>
+<li>max depth = max number of splits</li>
+<li>variable importance</li>
+<li>number of nodes = leaf nodes, use to make a prediction.</li>
+</ul>
+<div class="cell" data-layout-align="center" data-hash="6_classification_I_cache/html/unnamed-chunk-20_b53d36a10345915a61f4042863b73a21">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_5/DT.png" class="img-fluid figure-img" style="width:5.55556in"></p>
+<p></p><figcaption class="figure-caption">Decision Trees Explained With a Practical Example. Source: <a href="https://towardsai.net/p/programming/decision-trees-explained-with-a-practical-example-fe47872d3b53">Towards AI</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Then we can classify the image…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Classify the image.</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>var classified <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(classifier);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And plot the output…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add output</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(shenzhen);</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(classified, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]}, <span class="st">"classified"</span>);</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> colours from<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>gis.stackexchange.com<span class="sc">/</span>questions<span class="sc">/</span><span class="dv">336043</span><span class="sc">/</span>why<span class="sc">-</span>do<span class="sc">-</span>original<span class="sc">-</span>colors<span class="sc">-</span><span class="cf">in</span><span class="sc">-</span>gee<span class="sc">-</span>images<span class="sc">-</span>appear<span class="sc">-</span><span class="cf">in</span><span class="sc">-</span>different<span class="sc">-</span>colors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_6/GEE_classified_map.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can then query the classified layer using the inspector, the classification value will correspond to the one you assigned….</p>
+<p>In my case: * 1: Low urban albedo * 2: High urban albedo * 3: Grass * 4: Bare earth * 5: Forest</p>
+</section><section id="train-test-split" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="train-test-split">
+<span class="header-section-number">6.6</span> Train test split</h2>
+<p>Not the problem with this is that we didn’t retain a % of the data to test the model…we can fix this…this time i am going to use a Random Forest classifier, which is just many (or in this case 100) decison trees….read the code and comment after before you run this…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Optionally, do some accuracy assessment.  Fist, add a column of</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> random uniforms to the training dataset.</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>var withRandom <span class="ot">=</span> <span class="fu">polygons.randomColumn</span>(<span class="st">'random'</span>);</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> We want to reserve some of the data <span class="cf">for</span> testing, to avoid overfitting the model.</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>var split <span class="ot">=</span> <span class="fl">0.5</span>;  <span class="sc">/</span><span class="er">/</span> Roughly <span class="dv">70</span><span class="sc">% training, 30%</span> testing.</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>var trainingPartition <span class="ot">=</span> <span class="fu">withRandom.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>var testingPartition <span class="ot">=</span> <span class="fu">withRandom.filter</span>(<span class="fu">ee.Filter.gte</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(trainingPartition, <span class="st">"train"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(testingPartition, <span class="st">"test"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> take samples from image <span class="cf">for</span> training and validation  </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> trainingPartition,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>var validation <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> testingPartition,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Random Forest Classification</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>var rf1 <span class="ot">=</span> <span class="fu">ee.Classifier.smileRandomForest</span>(<span class="dv">100</span>)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.train</span>(training, <span class="st">'class'</span>);</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">///</span>classify<span class="sc">/</span><span class="er">/////</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>var rf2 <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(rf1);</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Classify the test FeatureCollection.</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>var test <span class="ot">=</span> <span class="fu">validation.classify</span>(rf1);</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>var testAccuracy <span class="ot">=</span> <span class="fu">test.errorMatrix</span>(<span class="st">'class'</span>, <span class="st">'classification'</span>);</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>var consumers<span class="ot">=</span><span class="fu">testAccuracy.consumersAccuracy</span>()</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span>, testAccuracy);</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span>, <span class="fu">testAccuracy.accuracy</span>())</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation consumer accuracy: '</span>, consumers);</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(rf2, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]}, <span class="st">"RF"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, when i plot this map it gives a worse looking result and the accuracy doesn’t make sense. Can you think why this is in this case? If not keep reading to find out…</p>
+</section><section id="train-test-split-pixel" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="train-test-split-pixel">
+<span class="header-section-number">6.7</span> Train test split pixel</h2>
+<p>The problem above was that the train test split was done on the polygons and i didn’t draw that many in my original training data….So the process went…. draw polygons &gt; make a feature collection (where i assigned the land cover classes values) &gt; select a test train split of the polygons using random numbers &gt; extract the values &gt; train the model….</p>
+<p>Now i can get around this by using a pixel approach….draw polygons &gt; select a number of points from each class (e.g.&nbsp;500) &gt; assign the pixels random numbers &gt; generate a test train split &gt; extract the values &gt; train the model….</p>
+<p>Thanks to <a href="https://twitter.com/oballinger">Ollie Ballinger</a> for some of this code…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">///</span>Pixel approach<span class="sc">/</span><span class="er">////////////</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>var pixel_number<span class="ot">=</span> <span class="dv">1000</span>;</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>var urban_low_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(urban_low, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">1</span>})})</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>var water_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(water, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">2</span>})})</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>var urban_high_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(urban_high, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">3</span>})})</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>var grass_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(grass, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">4</span>})})</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>var bare_earth_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(bare_earth, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">5</span>})})</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>var forest_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(forest, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">6</span>})})</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>var point_sample<span class="ot">=</span><span class="fu">ee.FeatureCollection</span>([urban_low_points,</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>                                  water_points,</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>                                  urban_high_points,</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>                                  grass_points,</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>                                  bare_earth_points,</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                                  forest_points])</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">.flatten</span>()</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">.randomColumn</span>();</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> assign <span class="dv">70</span>% of training points to validation </span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>var split<span class="ot">=</span><span class="fl">0.7</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>var training_sample <span class="ot">=</span> <span class="fu">point_sample.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>var validation_sample <span class="ot">=</span> <span class="fu">point_sample.filter</span>(<span class="fu">ee.Filter.gte</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> take samples from image <span class="cf">for</span> training and validation  </span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> training_sample,</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span>,</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>var validation <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> validation_sample,</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Random Forest Classification</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>var rf1_pixel <span class="ot">=</span> <span class="fu">ee.Classifier.smileRandomForest</span>(<span class="dv">100</span>)</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.train</span>(training, <span class="st">'class'</span>);</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Get information about the trained classifier.</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Results of RF trained classifier'</span>, <span class="fu">rf1_pixel.explain</span>());</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> Step <span class="dv">3</span><span class="sc">:</span> Conduct classification <span class="sc">--------------------------------</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>var rf2_pixel <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(rf1_pixel);</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(rf2_pixel, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, </span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]},</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RF_pixel"</span>);</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> Step <span class="dv">4</span><span class="sc">:</span> Assess Accuracy <span class="sc">--------------------------------</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>var trainAccuracy <span class="ot">=</span> <span class="fu">rf1_pixel.confusionMatrix</span>();</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Resubstitution error matrix: '</span>, trainAccuracy);</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Training overall accuracy: '</span>, <span class="fu">trainAccuracy.accuracy</span>());</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>var validated <span class="ot">=</span> <span class="fu">validation.classify</span>(rf1_pixel);</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>var testAccuracy <span class="ot">=</span> <span class="fu">validated.errorMatrix</span>(<span class="st">'class'</span>, <span class="st">'classification'</span>);</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>var consumers<span class="ot">=</span><span class="fu">testAccuracy.consumersAccuracy</span>()</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span>, testAccuracy);</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span>, <span class="fu">testAccuracy.accuracy</span>())</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation consumer accuracy: '</span>, consumers);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here:</p>
+<ul>
+<li><p>Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly precited rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%.</p></li>
+<li><p>Resubstituion accuracy is where we take the original training data and compare it to the modeled output. Mine is 99%.</p></li>
+<li><p>The confusion matrix is where we held back our % of the original data calling it our validation or test data. We then trained with the model with our training data, took the model and applied it to our testing data. This matrix compares the output of the model and our validation data (which wasn’t used to train it). Mine is 98%.</p></li>
+</ul>
+<p>Final output:</p>
+<section id="review-questions" class="level3" data-number="6.7.1"><h3 data-number="6.7.1" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">6.7.1</span> Review questions</h3>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

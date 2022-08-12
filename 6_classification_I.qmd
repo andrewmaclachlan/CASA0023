@@ -151,9 +151,311 @@ In my case this produces a mixed result. I now have 62 images, but evidently the
 ```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_6/GEE_waytwo.png') 
 ```
-So at this point i might consider reducing the threshold for clouds in my image. There is an alternative to this that uses 
+
+Now, there are two ways we can deal with this...
+
+* Take the median image from all images in our collection - meaning the middle value of each pixel that will result in the clouds being removed (as they are very reflective and will have high values)...adding 
+
+* Use something more advanced for cloud detection such as [s2cloudless](https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless)
+
+Taking the median returns....
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_median.png') 
+```
 
 ## Classification 
+
+The main focus here is classification, this is where we take some samples, train a model and then apply the model to the rest of the image.
+
+In classification we are using feature vectors, which are tables. For example pixel x has band values of 200, 300, 400 and a landcover class of grass. The row of the table is a feature, the pixel values are the properties and combined they are feature vectors.
+
+In GEE the supervised classifiers include: CART, RandomForest, NaiveBayes and SVM. GEE only allows 1 million points for sampling (to train the classifier). If you have more than this you would need to take a sample.
+
+To start we need some training data within our study area. I'm going to clip my median imagery to my admin boundary and then take some samples. To take samples either use QGIS (and upload the `.shp`), Google Earth (the desktop version that has high resolution imagery) or GEE itself to generate some samples....I will use GEE.
+
+### Clip
+
+```{r, eval=FALSE}
+
+var waytwo_clip = waytwo.clip(shenzhen)
+
+Map.addLayer(waytwo_clip, visualization, 'waytwoRGB_clip');
+```
+
+### Training data
+
+To select training data in GEE, click the polygon symbol and add polygons for the landcovers you want to classify. Add a new layer for each different landcover.
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_polygons.png') 
+```
+
+As you add these multi-polygons they will appear as variables at the top of your script. Next we need to merge the polygons into a feature collection...
+
+```{r, eval=FALSE}
+// Make a FeatureCollection from the polygons
+var polygons = ee.FeatureCollection([
+  ee.Feature(urban_low, {'class': 1}),
+  ee.Feature(water, {'class': 2}),
+  ee.Feature(urban_high, {'class': 3}),
+  ee.Feature(grass, {'class': 4}),
+  ee.Feature(bare_earth, {'class': 5}),
+  ee.Feature(forest, {'class': 6}),
+
+]);
+
+```
+
+Next, we need to set some context for the classifier - which bands are we going to use and what is the classification property - we just set it as class....
+
+```{r, eval=FALSE}
+// Use these bands for classification.
+var bands = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7'];
+// The name of the property on the points storing the class label.
+var classProperty = 'class';
+```
+
+Now, we need to pull out the data from our training areas...
+
+```{r, eval=FALSE}
+// Sample the composite to generate training data.  Note that the
+// class label is stored in the 'landcover' property.
+var training = waytwo_clip.select(bands).sampleRegions({
+  collection: polygons,
+  properties: [classProperty],
+  scale: 10
+});
+
+```
+
+When i print this variable you can see the values that have been pullout out of the data
+
+```{r, eval=FALSE}
+print(training, "training")
+```
+
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_pixel_values.png') 
+```
+
+## Classify
+
+To train our classifier...
+
+```{r, eval=FALSE}
+// Train a CART classifier.
+var classifier = ee.Classifier.smileCart().train({
+  features: training,
+  classProperty: classProperty,
+});
+// Print some info about the classifier (specific to CART).
+print('CART, explained', classifier.explain());
+```
+
+When you print out the classifier you will see:
+
+* max depth = max number of splits 
+* variable importance
+* number of nodes = leaf nodes, use to make a prediction. 
+
+
+```{r echo=FALSE, out.width = "400pt", fig.align='center', cache=TRUE, fig.cap="Decision Trees Explained With a Practical Example. Source: [Towards AI](https://towardsai.net/p/programming/decision-trees-explained-with-a-practical-example-fe47872d3b53)"}
+knitr::include_graphics('prac_5/DT.png')
+```
+
+Then we can classify the image...
+
+```{r, eval=FALSE}
+// Classify the image.
+var classified = waytwo_clip.classify(classifier);
+
+```
+
+And plot the output...
+
+```{r, eval=FALSE}
+// add output
+Map.centerObject(shenzhen);
+Map.addLayer(classified, {min: 1, max: 5, palette: ['d99282', '466b9f', 'ab0000', 'dfdfc2', 'b3ac9f', '1c5f2c']}, "classified");
+
+// colours from: https://gis.stackexchange.com/questions/336043/why-do-original-colors-in-gee-images-appear-in-different-colors
+```
+
+```{r echo=FALSE, out.width = "900", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_classified_map.png') 
+```
+
+We can then query the classified layer using the inspector, the classification value will correspond to the one you assigned....
+
+In my case:
+* 1: Low urban albedo
+* 2: High urban albedo 
+* 3: Grass
+* 4: Bare earth
+* 5: Forest
+
+## Train test split
+
+Not the problem with this is that we didn't retain a % of the data to test the model...we can fix this...this time i am going to use a Random Forest classifier, which is just many (or in this case 100) decison trees....read the code and comment after before you run this...
+
+```{r, eval=FALSE}
+
+// Optionally, do some accuracy assessment.  Fist, add a column of
+// random uniforms to the training dataset.
+var withRandom = polygons.randomColumn('random');
+
+
+// We want to reserve some of the data for testing, to avoid overfitting the model.
+var split = 0.5;  // Roughly 70% training, 30% testing.
+var trainingPartition = withRandom.filter(ee.Filter.lt('random', split));
+var testingPartition = withRandom.filter(ee.Filter.gte('random', split));
+
+print(trainingPartition, "train")
+print(testingPartition, "test")
+
+
+// take samples from image for training and validation  
+var training = waytwo_clip.select(bands).sampleRegions({
+  collection: trainingPartition,
+  properties: ['class'],
+  scale: 10,
+});
+
+
+var validation = waytwo_clip.select(bands).sampleRegions({
+  collection: testingPartition,
+  properties: ['class'],
+  scale: 10
+});
+
+// Random Forest Classification
+
+var rf1 = ee.Classifier.smileRandomForest(100)
+    .train(training, 'class');
+    
+
+////classify//////
+    
+var rf2 = waytwo_clip.classify(rf1);
+
+// Classify the test FeatureCollection.
+var test = validation.classify(rf1);
+
+var testAccuracy = test.errorMatrix('class', 'classification');
+var consumers=testAccuracy.consumersAccuracy()
+
+print('Validation error matrix: ', testAccuracy);
+print('Validation overall accuracy: ', testAccuracy.accuracy())
+print('Validation consumer accuracy: ', consumers);
+
+Map.addLayer(rf2, {min: 1, max: 5, palette: ['d99282', '466b9f', 'ab0000', 'dfdfc2', 'b3ac9f', '1c5f2c']}, "RF");
+
+
+```
+
+However, when i plot this map it gives a worse looking result and the accuracy doesn't make sense. Can you think why this is in this case? If not keep reading to find out...
+
+## Train test split pixel
+
+The problem above was that the train test split was done on the polygons and i didn't draw that many in my original training data....So the process went.... draw polygons > make a feature collection (where i assigned the land cover classes values) > select a test train split of the polygons using random numbers > extract the values > train the model....
+
+Now i can get around this by using a pixel approach....draw polygons > select a number of points from each class (e.g. 500) > assign the pixels random numbers > generate a test train split > extract the values > train the model....
+
+Thanks to [Ollie Ballinger](https://twitter.com/oballinger) for some of this code...
+
+```{r, eval=FALSE}
+////Pixel approach/////////////
+
+var pixel_number= 1000;
+
+var urban_low_points=ee.FeatureCollection.randomPoints(urban_low, pixel_number).map(function(i){
+  return i.set({'class': 1})})
+  
+var water_points=ee.FeatureCollection.randomPoints(water, pixel_number).map(function(i){
+  return i.set({'class': 2})})
+  
+var urban_high_points=ee.FeatureCollection.randomPoints(urban_high, pixel_number).map(function(i){
+  return i.set({'class': 3})})
+
+var grass_points=ee.FeatureCollection.randomPoints(grass, pixel_number).map(function(i){
+  return i.set({'class': 4})})
+
+var bare_earth_points=ee.FeatureCollection.randomPoints(bare_earth, pixel_number).map(function(i){
+  return i.set({'class': 5})})
+
+var forest_points=ee.FeatureCollection.randomPoints(forest, pixel_number).map(function(i){
+  return i.set({'class': 6})})
+
+var point_sample=ee.FeatureCollection([urban_low_points,
+                                  water_points,
+                                  urban_high_points,
+                                  grass_points,
+                                  bare_earth_points,
+                                  forest_points])
+                                  .flatten()
+                                  .randomColumn();
+
+// assign 70% of training points to validation 
+var split=0.7
+var training_sample = point_sample.filter(ee.Filter.lt('random', split));
+var validation_sample = point_sample.filter(ee.Filter.gte('random', split));
+
+// take samples from image for training and validation  
+var training = waytwo_clip.select(bands).sampleRegions({
+  collection: training_sample,
+  properties: ['class'],
+  scale: 10,
+});
+
+var validation = waytwo_clip.select(bands).sampleRegions({
+  collection: validation_sample,
+  properties: ['class'],
+  scale: 10
+});
+
+// Random Forest Classification
+
+var rf1_pixel = ee.Classifier.smileRandomForest(100)
+    .train(training, 'class');
+
+// Get information about the trained classifier.
+print('Results of RF trained classifier', rf1_pixel.explain());
+
+
+// // --------------------- Step 3: Conduct classification --------------------------------
+    
+var rf2_pixel = waytwo_clip.classify(rf1_pixel);
+
+Map.addLayer(rf2_pixel, {min: 1, max: 5, 
+  palette: ['d99282', '466b9f', 'ab0000', 'dfdfc2', 'b3ac9f', '1c5f2c']},
+  "RF_pixel");
+// // --------------------- Step 4: Assess Accuracy --------------------------------
+
+var trainAccuracy = rf1_pixel.confusionMatrix();
+print('Resubstitution error matrix: ', trainAccuracy);
+print('Training overall accuracy: ', trainAccuracy.accuracy());
+
+var validated = validation.classify(rf1_pixel);
+
+var testAccuracy = validated.errorMatrix('class', 'classification');
+var consumers=testAccuracy.consumersAccuracy()
+
+print('Validation error matrix: ', testAccuracy);
+print('Validation overall accuracy: ', testAccuracy.accuracy())
+print('Validation consumer accuracy: ', consumers);
+
+```
+
+Here:
+
+* Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly precited rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%. 
+
+* Resubstituion accuracy is where we take the original training data and compare it to the modeled output. Mine is 99%.
+
+* The confusion matrix is where we held back our % of the original data calling it our validation or test data. We then trained with the model with our training data, took the model and applied it to our testing data. This matrix compares the output of the model and our validation data (which wasn't used to train it). Mine is 98%.
+
+Final output:
 
 
 
