@@ -1,10 +1,10 @@
 # Classification I
 
-## Data catlog
+## Data
 
-In the last practical we uploaded our own admin boundary dataset from GADM. However, GEE has a massive catalog of data that we can search and just load directly into our script...
+In the last practical we uploaded our own admin boundary dataset from GADM. GEE has a massive catalog of data that we can search and just load directly into our script...
 
-For example, [search the GEE data catalogue](https://developers.google.com/earth-engine/datasets/catalog) for `admin`. You should see the FAO GAUL global admin layers and level 2 is equivalent to our unit of study from last week. 
+[Search the GEE data catalogue](https://developers.google.com/earth-engine/datasets/catalog) for `admin`. You should see the FAO GAUL global admin layers and level 2 is equivalent to our unit of study from last week (although this varies based on the country). 
 
 ## Vector data
 

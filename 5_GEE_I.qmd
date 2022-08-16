@@ -502,6 +502,41 @@ NDVI/ the formula to compute it even has it's own function...
 var NDVI_2 = clip.normalizedDifference([SR_B5, SR_B4]);
 ```
 
+## GEE apps
+
+A real feature of GEE is the ability to turn code into responsive applications. Whilst this is beyond the scope of this module, exploring some of these apps might give you some ideas for your project proposals:
+
+* [List of awesome GEE apps](https://github.com/philippgaertner/awesome-earth-engine-apps)
+* [Air quality example](https://gaertnerp.users.earthengine.app/view/europe-air-quality-winner#cloud=10;scale=15000;ranking=absolute%20difference%20(%CE%BCmol%2Fm%C2%B2);startdate=2020-03-01;enddate=2020-04-01;
+)
+* [NDVI slider example](https://khaledalshamaa.users.earthengine.app/view/modis-ndvi-slider)
+
+## GEE Data
+
+### GEE catlog
+
+GEE has a massive [catalog of data](https://developers.google.com/earth-engine/datasets) that we can search and just load directly into our script...over reading week explore the data catalog and see what might be useful for your project proposals..datasets of note:
+
+* Open Buildings V1 Polygons
+* Sentinel-5P pollution products from the Tropomi instrument 
+* World Settlement Footprint 2015
+* Night time light data
+* Global flood database
+* Temperature (daily) from MODIS or on image basis from Landsat
+* MODIS thermal anomalies and fire
+* Famine early warning system
+* US census data and roads
+* Some examples of high resolution data e.g. Planet SkySat Public Ortho Imagery 
+
+### Community catlog
+
+In addition to the GEE catalog there is also now a [community GEE catalog](https://samapriya.github.io/awesome-gee-community-datasets/) as it can be difficult to use GEE if the data you want isn't available...datasets of note:
+
+* Global urban extents from 1870 to 2100
+* Global utilities 
+* Global fire / burned area
+* Air pollutants (Long-term Gap-free High-resolution Air Pollutants (LGHAP))
+
 ### Review questions 
 
 For the task this week select a metropolitan area of your choice (e.g. using [GADM](https://gadm.org/) or another admin boundary dataset) and apply a formula / function that we have seen in the module (or from online / literature) to a collection of data.

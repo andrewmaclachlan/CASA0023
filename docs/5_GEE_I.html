@@ -236,10 +236,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#texture-measures" id="toc-texture-measures" class="nav-link" data-scroll-target="#texture-measures"> <span class="header-section-number">5.7</span> Texture measures</a></li>
   <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"> <span class="header-section-number">5.8</span> PCA</a></li>
   <li><a href="#exporting" id="toc-exporting" class="nav-link" data-scroll-target="#exporting"> <span class="header-section-number">5.9</span> Exporting</a></li>
+  <li><a href="#band-math" id="toc-band-math" class="nav-link" data-scroll-target="#band-math"> <span class="header-section-number">5.10</span> Band math</a></li>
+  <li><a href="#gee-apps" id="toc-gee-apps" class="nav-link" data-scroll-target="#gee-apps"> <span class="header-section-number">5.11</span> GEE apps</a></li>
   <li>
-<a href="#band-math" id="toc-band-math" class="nav-link" data-scroll-target="#band-math"> <span class="header-section-number">5.10</span> Band math</a>
+<a href="#gee-data" id="toc-gee-data" class="nav-link" data-scroll-target="#gee-data"> <span class="header-section-number">5.12</span> GEE Data</a>
   <ul class="collapse">
-<li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">5.10.1</span> Review questions</a></li>
+<li><a href="#gee-catlog" id="toc-gee-catlog" class="nav-link" data-scroll-target="#gee-catlog"> <span class="header-section-number">5.12.1</span> GEE catlog</a></li>
+  <li><a href="#community-catlog" id="toc-community-catlog" class="nav-link" data-scroll-target="#community-catlog"> <span class="header-section-number">5.12.2</span> Community catlog</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">5.12.3</span> Review questions</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/5_GEE_I.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -697,8 +701,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>var NDVI_2 <span class="ot">=</span> <span class="fu">clip.normalizedDifference</span>([SR_B5, SR_B4]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="review-questions" class="level3" data-number="5.10.1"><h3 data-number="5.10.1" class="anchored" data-anchor-id="review-questions">
-<span class="header-section-number">5.10.1</span> Review questions</h3>
+</section><section id="gee-apps" class="level2" data-number="5.11"><h2 data-number="5.11" class="anchored" data-anchor-id="gee-apps">
+<span class="header-section-number">5.11</span> GEE apps</h2>
+<p>A real feature of GEE is the ability to turn code into responsive applications. Whilst this is beyond the scope of this module, exploring some of these apps might give you some ideas for your project proposals:</p>
+<ul>
+<li><a href="https://github.com/philippgaertner/awesome-earth-engine-apps">List of awesome GEE apps</a></li>
+<li><a href="https://gaertnerp.users.earthengine.app/view/europe-air-quality-winner#cloud=10;scale=15000;ranking=absolute%20difference%20(%CE%BCmol%2Fm%C2%B2);startdate=2020-03-01;enddate=2020-04-01;">Air quality example</a></li>
+<li><a href="https://khaledalshamaa.users.earthengine.app/view/modis-ndvi-slider">NDVI slider example</a></li>
+</ul></section><section id="gee-data" class="level2" data-number="5.12"><h2 data-number="5.12" class="anchored" data-anchor-id="gee-data">
+<span class="header-section-number">5.12</span> GEE Data</h2>
+<section id="gee-catlog" class="level3" data-number="5.12.1"><h3 data-number="5.12.1" class="anchored" data-anchor-id="gee-catlog">
+<span class="header-section-number">5.12.1</span> GEE catlog</h3>
+<p>GEE has a massive <a href="https://developers.google.com/earth-engine/datasets">catalog of data</a> that we can search and just load directly into our script…over reading week explore the data catalog and see what might be useful for your project proposals..datasets of note:</p>
+<ul>
+<li>Open Buildings V1 Polygons</li>
+<li>Sentinel-5P pollution products from the Tropomi instrument</li>
+<li>World Settlement Footprint 2015</li>
+<li>Night time light data</li>
+<li>Global flood database</li>
+<li>Temperature (daily) from MODIS or on image basis from Landsat</li>
+<li>MODIS thermal anomalies and fire</li>
+<li>Famine early warning system</li>
+<li>US census data and roads</li>
+<li>Some examples of high resolution data e.g.&nbsp;Planet SkySat Public Ortho Imagery</li>
+</ul></section><section id="community-catlog" class="level3" data-number="5.12.2"><h3 data-number="5.12.2" class="anchored" data-anchor-id="community-catlog">
+<span class="header-section-number">5.12.2</span> Community catlog</h3>
+<p>In addition to the GEE catalog there is also now a <a href="https://samapriya.github.io/awesome-gee-community-datasets/">community GEE catalog</a> as it can be difficult to use GEE if the data you want isn’t available…datasets of note:</p>
+<ul>
+<li>Global urban extents from 1870 to 2100</li>
+<li>Global utilities</li>
+<li>Global fire / burned area</li>
+<li>Air pollutants (Long-term Gap-free High-resolution Air Pollutants (LGHAP))</li>
+</ul></section><section id="review-questions" class="level3" data-number="5.12.3"><h3 data-number="5.12.3" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">5.12.3</span> Review questions</h3>
 <p>For the task this week select a metropolitan area of your choice (e.g.&nbsp;using <a href="https://gadm.org/">GADM</a> or another admin boundary dataset) and apply a formula / function that we have seen in the module (or from online / literature) to a collection of data.</p>
 <p>For example, calculate the Tasseled Cap transformation for the Berlin Metropolitan area using Sentinel 2 data.</p>
 <p>You must:</p>
