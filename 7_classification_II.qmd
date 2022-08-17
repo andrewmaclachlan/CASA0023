@@ -139,11 +139,99 @@ var oneimage_study_area_cloud = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
   .clip(Daressalaam);
 ```
 
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_7/GEE_median_image.png') 
+```
+
 Now let's classify...
 
 ## Classify
 
 ### Sub-pixel 
+
+Spectral unfixing is where we provide an end member and compute the fractions of each pixel from the often "spectrally pure" spectral signature. However, no pixel is ever (or rarely) on landcover type.  There are two main ways to do this in GEE.
+
+1. Define a variable that is the end member (this could be a point)
+2. Select some training data of landcover and then take a average that becomes the endmember
+
+Once we have the data we then pass this to the `unmix()` function that will generate and image.
+
+In the first example, this could involve querying the image to generate a list of values...such as that [from the manual](https://developers.google.com/earth-engine/guides/image_transforms)
+
+```{r, eval=FALSE}
+var urban = [88, 42, 48, 38, 86, 115, 59]
+var veg = [50, 21, 20, 35, 50, 110, 23];
+var water = [51, 20, 14, 9, 7, 116, 4];
+```
+
+However, we can also use the image itself to generate these lists in way 2.
+
+In this case i have created a point (or it could be a polygon) and extracted the (mean) value....
+
+```{r, eval=FALSE}
+//------------------urban-------------------
+
+var urban_val = oneimage_study_area_cloud.reduceRegion({reducer: 
+  ee.Reducer.mean(),
+  geometry:urban, 
+  scale: 30, 
+  maxPixels: 1e8});
+
+var urban_val2 = urban_val.values()
+```
+
+Once we have got this working for one example, we can make it into a function...
+
+```{r, eval=FALSE}
+
+//------------------function-------------------
+
+function data_extract (image, vector) {
+
+var data =  image.reduceRegion({reducer: 
+  ee.Reducer.mean(),
+  geometry:vector, 
+  scale: 30, 
+  maxPixels: 1e8});
+  return data.values(); // here we use return
+}
+```
+
+Then we can call it with the different landcover types we have...
+```{r, eval=FALSE}
+var urban_data = data_extract(oneimage_study_area_cloud, urban);
+var grass_data = data_extract(oneimage_study_area_cloud, grass);
+var bare_earth_data = data_extract(oneimage_study_area_cloud, bare_earth);
+var forest_data = data_extract(oneimage_study_area_cloud, forest);
+
+```
+
+Unmix the image and add it to the map...
+
+```{r, eval=FALSE}
+//------------------fractions-------------------
+var fractions = oneimage_study_area_cloud.unmix([urban_data, grass_data, bare_earth_data, forest_data]);
+Map.addLayer(fractions, {}, 'unmixed');
+```
+
+Now at the moment these are unconstrained, meaning they don't sum to one and we have negative values...to change this add the following [from the documentation](https://developers.google.com/earth-engine/apidocs/ee-image-unmix).
+
+```{r, eval=FALSE}
+var fractions_constrained = oneimage_study_area_cloud.unmix([urban_data, grass_data, bare_earth_data, forest_data], true, true);
+Map.addLayer(fractions_constrained, {}, 'constrained fractions');
+```
+
+Now we have the fraction (or percent) of each endmember per pixel.
+
+https://docs.google.com/document/d/1keJGLN-j5H5B-kQXdwy0ryx6E8j2D9KZVEUD-v9evys/edit#
+
+#### Accuracy
+
+A problem with using sub pixel analysis is that it is harder to calculate an error matrix. There are two main ways to deal with this.
+
+1. Harden the sub-pixel image and classify each pixel that has the largest proportion of land cover
+1. Take a very high resolution image
+
 
 ### Object based
 
