@@ -32,8 +32,11 @@ When you open GEE code editor you will see the following screen composed of thes
 ```{r echo=FALSE, out.width = "900pt", fig.align='center', cache=TRUE, fig.cap="GEE screen: [GEE community Beginner's Cookbook, TC25](https://developers.google.com/earth-engine/tutorials/community/beginners-cookbook)"}
 knitr::include_graphics('prac_5/ee-editor.png')
 ```
+## Examples
 
+Before we begin explore some of the examples in the script editor, start with the user interface ones..
 
+## Points
 
 To start with GEE i want to pull up the same image from a specific date for a city, i will use 
 
@@ -43,8 +46,6 @@ We can make a new point in the code editor with:
 var point = ee.Geometry.Point([77.216721, 28.644800]);
 
 ```
-
-## Points
 
 In this case my city is Dheli, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports...
 

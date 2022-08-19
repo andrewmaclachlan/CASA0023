@@ -294,5 +294,152 @@ To make either of these into objects we'd need to vectorise the raster data - wh
 
 ### Super pixels
 
+The basic idea here is the same as the lecture, take a grid of points and get the pixels around them. We want to reduce the pixels to fewer objects...all pixels must go somewhere and then we can classify the objects....
 
+To start with, let's try k-means clustering of pixels....
+
+```{r, eval=FALSE}
+var kmeans = ee.Algorithms.Image.Segmentation.KMeans({
+  image: oneimage_study_area_cloud,
+  numClusters: 1000,
+  numIterations: 100,
+ // neighborhoodSize: 2,
+  //gridSize: 2,
+  forceConvergence: false,
+  uniqueLabels: true
+})
+
+Map.addLayer(kmeans, {}, 'kmeans')
+```
+
+This will produce a large grid of pixels (squares basically) of similar kinds of pixels, we could then take the average spectral reflectance and classify them. **Note** that the output is just a 1 band image with a cluster ID...
+
+Another approach we can try is Simple non-iterative clustering (SNIC), this makes clusters without k-means. It uses a regular grid of points (like k-means) but then assigns pixels to points through distance color and co-ordinates - it represents normalised spatial and color distances.
+
+Let's make a seed gird....the number denotes the spacing in pixels (i assume this is GEE pixels not our Landsat pixels), we can also set a square or hex grid
+
+```{r, eval=FALSE}
+var seeds = ee.Algorithms.Image.Segmentation.seedGrid(40, "hex");
+
+Map.addLayer(seeds, {}, 'seeds')
+```
+
+To create the objects it's then...
+
+```{r, eval=FALSE}
+// Run SNIC on the regular square grid.
+var snic = ee.Algorithms.Image.Segmentation.SNIC({
+  image: oneimage_study_area_cloud, 
+  //size: 50,  // don't need it seeds given
+  compactness: 1,
+  connectivity: 8,
+  neighborhoodSize:50,
+  seeds: seeds
+});
+
+Map.addLayer(snic, {}, 'means', true ,0.6)
+
+```
+
+Here we have:
+
+* image = our image
+* size = seed locations, not needed as we have a seed layer
+* compactness =  represents how compact the super pixels are. A higher value means compact superpixels which results in regular hexes or squares as opposed to different shapes and sizes....
+* connectivity = distances (as above) to either 4 or 8 connected pixels to current cluster.**generally** the higher the value the smoother the objects will appear 
+* neighborhoodSize = I **believe** this sets a limit for the clusters and defaults to 2 * the seed size, if you comment it out (or set it to 1) you will see large squares around some of the clusters. Probably not overly useful here, so i will set this quite high. 
+* seeds = our seed layer
+
+Printing the snic variable we can see the mean values across each object and the cluster (or pixel) ID
+
+```{r, eval=FALSE}
+print(snic, "snic")
+```
+
+
+Once we have the clusters we can extract some more info that might be useful to us...such as...would the area / perimeter / standard deviation of the objects be similar across the image and can we use that as a band in classification? Or perhaps NDVI per object that we could use to threshold out green objects such as parks and forests...
+
+Here is the standard deviation for each band within the object. We must append the cluster ID back to the original image data then reduce the image based on the clusters and finally calculate the standard deviation. The final value here is the `maxSize` that is the size of the neigbhourhood for aggregating the values - any object larger than this will be masked - we should set it to the same as our neighborhoodSize
+
+```{r, eval=FALSE}
+//------------------OBIA stats-------------------
+
+var clusters = snic.select('clusters')
+var stdDev = oneimage_study_area_cloud.addBands(clusters).reduceConnectedComponents(ee.Reducer.stdDev(), 'clusters', 100)
+
+Map.addLayer(stdDev, {min:0, max:0.1}, 'StdDev', true)
+
+```
+
+For NDVI of each object we can just use the mean SR per object...
+```{r, eval=FALSE}
+var NDVI = snic.normalizedDifference(['SR_B5_median_mean', 'SR_B4_median_mean']);
+Map.addLayer(NDVI, {min:-1, max:1}, 'NDVI', false)
+```
+
+Or we could add NDVI as a band to the original image and then compute the standard deviation. This is useful as it shows the dispersion of values across each object....e.g. a park might have a low standard deviation in the object, but an urban area might have a higher standard deviation....
+
+Once we have what we want, create an image....
+
+```{r, eval=FALSE}
+
+//------------------OBIA merge-------------------
+
+var bands = ['SR_B1_median_mean', 'SR_B2_median_mean', 'SR_B3_median_mean', 'SR_B4_median_mean',
+'SR_B5_median_mean', 'SR_B6_median_mean', 'SR_B7_median_mean']
+
+var objectPropertiesImage = ee.Image.cat([
+  snic.select(bands),
+  stdDev,
+  NDVI
+]).float();
+
+```
+
+Train and classify....we need to get some training data....so select some points or reuse / add to your points from the mixture classification. Note, that if you only have 1 point per landcover class the classifcation will be very poor!
+
+**Note** this code is adapted from the first classification we did last week, you might consider adding in the [Train test split](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html#train-test-split) code as well to assess the accuracy of the image....
+
+```{r, eval=FALSE}
+//------------------ Classification -------------------
+
+// Make a FeatureCollection from the polygons
+var points = ee.FeatureCollection([
+  ee.Feature(urban, {'class': 1}),
+  ee.Feature(grass, {'class': 2}),
+  ee.Feature(bare_earth, {'class': 5}),
+  ee.Feature(forest, {'class': 6}),
+]);
+
+// The name of the property on the points storing the class label.
+var classProperty = 'class';
+
+// Sample the composite to generate training data.  Note that the
+// class label is stored in the 'landcover' property.
+var training = objectPropertiesImage.sampleRegions({
+  collection: points,
+  properties: [classProperty],
+  scale: 30
+});
+
+// Train a CART classifier.
+var classifier = ee.Classifier.smileCart().train({
+  features: training,
+  classProperty: classProperty,
+});
+
+var classified = objectPropertiesImage.classify(classifier);
+
+Map.addLayer(classified, {min: 1, max: 5, palette: ['d99282', 'dfdfc2', 'b3ac9f', '1c5f2c']}, "classified");
+
+```
+
+### Resources
+
+Image Segmentation and OBIA by Noel Gorelick:
+
+* [presentation](https://docs.google.com/presentation/d/1p_W06MwdhRFZjkb7imYkuTchatY5nxb5aTRgh6qm2uU/edit#slide=id.g3bdeabc530_4_365)
+* [video](https://www.youtube.com/watch?v=2R0aTaMtYTY)
+* [The paper: Superpixels and Polygons using Simple Non-Iterative Clustering](https://openaccess.thecvf.com/content_cvpr_2017/papers/Achanta_Superpixels_and_Polygons_CVPR_2017_paper.pdf)
+* The [original GEE SNIC example](https://code.earthengine.google.com/c069f07d0e15eb104302fc6360f89301)
 
