@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
 </i> 
  </a>
   </li>  
@@ -268,18 +268,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">7.1.1</span> Vector data</h3>
 <p>Here i will load the level 2 Global Administrative Unit Layers (GAUL), but style it on the map</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>);</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">--------------------------</span>Vector data<span class="sc">---------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>var dataset_style <span class="ot">=</span> <span class="fu">dataset.style</span>({</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> <span class="st">'1e90ff'</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  width<span class="sc">:</span> <span class="dv">2</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  fillColor<span class="sc">:</span> <span class="st">'00000000'</span>,  <span class="sc">/</span><span class="er">/</span> with alpha set <span class="cf">for</span> partial transparency</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  lineType<span class="sc">:</span> <span class="st">'dotted'</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  pointSize<span class="sc">:</span> <span class="dv">10</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  pointShape<span class="sc">:</span> <span class="st">'circle'</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset_style, null, <span class="st">'Second Level Administrative Units'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>);</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>var dataset_style <span class="ot">=</span> <span class="fu">dataset.style</span>({</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> <span class="st">'1e90ff'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  width<span class="sc">:</span> <span class="dv">2</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  fillColor<span class="sc">:</span> <span class="st">'00000000'</span>,  <span class="sc">/</span><span class="er">/</span> with alpha set <span class="cf">for</span> partial transparency</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  lineType<span class="sc">:</span> <span class="st">'dotted'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  pointSize<span class="sc">:</span> <span class="dv">10</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  pointShape<span class="sc">:</span> <span class="st">'circle'</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset_style, null, <span class="st">'Second Level Administrative Units'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that the fill colour is set to 0, making it transparent. If i wanted to set this to a colour i could use any <a href="https://www.color-hex.com/color-names.html">hex colour code</a> and then adding a value (alpha) for transparency…e.g.&nbsp;<code>e32636</code> and then <code>e3263675</code> for 75% transparency. <strong>However</strong> this means that the attributes of the data are lost…so this might be more appropriate:</p>
 <div class="cell">
@@ -589,7 +591,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  NDVI</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>])<span class="fu">.float</span>();</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Train and classify….we need to get some training data….so select some points or reuse / add to your points from the mixture classification. Note, that if you only have 1 point per landcover class the classifcation will be very poor!</p>
+<p>Train and classify….we need to get some training data….so select some points or reuse / add to your points from the mixture classification. Note, that if you only have 1 point per landcover class the classification will be very poor! Note, that some publications / workflows actually use classified data products (e.g.&nbsp;<a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1">Dynamic World</a>) to produce the training and test data.</p>
 <p><strong>Note</strong> this code is adapted from the first classification we did last week, you might consider adding in the <a href="https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html#train-test-split">Train test split</a> code as well to assess the accuracy of the image….</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">------------------</span> Classification <span class="sc">-------------------</span></span>

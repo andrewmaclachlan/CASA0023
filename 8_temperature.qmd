@@ -1,4 +1,169 @@
 # Temperature
 
+Within this practical we are going to explore temperature across urban areas using two different data products: Landsat and MODIS. We'll then look at which admin areas are hottest over time.
+
+The first stage of this practical is to load up a level 2 admin area to extract temperature for....
+
+## Vector data
+
+```{r, eval=FALSE}
+//--------------------------Vector data---------------------------
+
+var dataset = ee.FeatureCollection("FAO/GAUL/2015/level2");
+
+var dataset_style = dataset.style({
+  color: '1e90ff',
+  width: 2,
+  fillColor: '00000000',  // with alpha set for partial transparency
+//  lineType: 'dotted',
+//  pointSize: 10,
+//  pointShape: 'circle'
+});
+
+Map.addLayer(dataset, {}, 'Second Level Administrative Units_2');
+
+var Beijing = dataset.filter('ADM2_CODE == 13000');
+
+Map.addLayer(Beijing, {}, 'Beijing');
+
+```
+
+## Landsat 
+
+Next, the Landsat data...**note** below that i have set a month range as i want to consider the summer and not the whole year...
+
+```{r, eval=FALSE}
+//--------------------------Landsat data---------------------------
+
+function applyScaleFactors(image) {
+  var opticalBands = image.select('SR_B.').multiply(0.0000275).add(-0.2);
+  var thermalBands = image.select('ST_B.*').multiply(0.00341802).add(149.0);
+  return image.addBands(opticalBands, null, true)
+              .addBands(thermalBands, null, true);
+}
+
+var landsat = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
+  .filterDate('2022-01-01', '2022-10-10')
+  .filter(ee.Filter.calendarRange(5, 9,'month'))
+  .filterBounds(Beijing)  // Intersecting ROI
+  .filter(ee.Filter.lt("CLOUD_COVER", 1))
+  .map(applyScaleFactors);
+
+print(landsat)
+```
+
+The temperature band in Landsat is B10, however it comes in Kelvin and not Celcius, to cover we just subtract 273.1. **But** i want to do this per image...at the moment `.subtract` won't work over an image collection so we can subtract the value from each individual image in a collection...we also want to mask any pixels that have a below 0 value (e.g. probably no data ones). I've done this within this function as well..
+
+```{r, eval=FALSE}
+
+var subtracted = landsat.select('ST_B10').map(function (image) {
+  var subtract = image.subtract(273.1); // subtract
+  var mask = subtract.gt(0); //set mask up
+  var mask_0 = subtract.updateMask(mask); //Apply this in a mask
+return mask_0
+})  
+
+```
+
+If we were to plot this now, we would still show all of the images we have in the collection, but, we can take the mean ("reduce") and clip to our study area...
+
+```{r, eval=FALSE}
+var subtracted_mean = subtracted.reduce(ee.Reducer.mean())
+  .clip(Beijing)
+```
+
+Then finally plot the data...
+
+```{r, eval=FALSE}
+// set up some of the visualisation paramters 
+// the palette is taken from the MODIS example (which we will see later on)
+var vis_params = {
+  min: 20,
+  max: 55,
+    palette: [
+    '040274', '040281', '0502a3', '0502b8', '0502ce', '0502e6',
+    '0602ff', '235cb1', '307ef3', '269db1', '30c8e2', '32d3ef',
+    '3be285', '3ff38f', '86e26f', '3ae237', 'b5e22e', 'd6e21f',
+    'fff705', 'ffd611', 'ffb613', 'ff8b13', 'ff6e08', 'ff500d',
+    'ff0000', 'de0101', 'c21301', 'a71001', '911003'
+  ]
+};
+
+Map.addLayer(subtracted_mean, vis_params, 'Landsat Temp');
+```
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_8/GEE_temp_out.png') 
+```
+
+## MODIS
+
+Now, we can also do the same process with the Moderate Resolution Imaging Spectroradiometer (MODIS), MODIS is an instrument aboard both the Terra and Aqua satellites. Terra crosses the equator from N to S in the morning and Aqua S to N in the afternoon meaning the entire earth is sampled every 1-2 days, with most places getting 2 images a day.    
+
+### Aqua
+
+```{r, eval=FALSE}
+var MODIS_Aqua_day = ee.ImageCollection('MODIS/061/MYD11A1')
+  .filterDate('2022-01-01', '2022-10-10')
+  .filter(ee.Filter.calendarRange(5, 9,'month'))
+  .filterBounds(Beijing)  // Intersecting ROI;
+  .select('LST_Day_1km')
+
+print(MODIS_Aqua_day, "MODIS_AQUA")  
+
+```
+
+### Terra
+
+```{r, eval=FALSE}
+var MODIS_Terra_day = ee.ImageCollection('MODIS/061/MOD11A1')
+  .filterDate('2022-01-01', '2022-10-10')
+  .filter(ee.Filter.calendarRange(5, 9,'month'))
+  .filterBounds(Beijing)  // Intersecting ROI;
+  .select('LST_Day_1km')
+
+print(MODIS_Terra_day, "MODIS_Terra")  
+
+```
+
+For the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution...
+
+Merge the collections and plot a mean summer temperature image...
+
+```{r, eval=FALSE}
+var mean_aqua_terra = MODIS_Aqua_day.merge(MODIS_Terra_day)
+  .reduce(ee.Reducer.mean())
+  .clip(Beijing)
+
+Map.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,
+    'MODIS Land Surface Temperature');
+```
+
+What do you see ?
+
+## Timeseries 
+
+So the real benefit of MODIS data is that we can plot the time series...**however** in doing so we lose the spatial element, 
+
+```{r, eval=FALSE}
+var timeseries = ui.Chart.image.series({
+  imageCollection: aqua_terra,
+  region: Beijing,
+  reducer: ee.Reducer.mean(),
+  scale: 1000,
+  xProperty: 'system:time_start'})
+  .setOptions({
+     title: 'Temperature time series',
+     vAxis: {title: 'LST Celsius'}});
+print(timeseries);
+```
+
+
+Times series modelling....https://developers.google.com/earth-engine/tutorials/community/time-series-modeling
+
+## Statistics 
+
+
+
 
 Make this - https://www.bbc.co.uk/news/uk-62243280

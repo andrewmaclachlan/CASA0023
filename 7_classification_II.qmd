@@ -11,6 +11,8 @@ Here i will load the level 2 Global Administrative Unit Layers (GAUL), but style
 
 ```{r, eval=FALSE}
 
+//--------------------------Vector data---------------------------
+
 var dataset = ee.FeatureCollection("FAO/GAUL/2015/level2");
 
 var dataset_style = dataset.style({
@@ -396,7 +398,7 @@ var objectPropertiesImage = ee.Image.cat([
 
 ```
 
-Train and classify....we need to get some training data....so select some points or reuse / add to your points from the mixture classification. Note, that if you only have 1 point per landcover class the classifcation will be very poor!
+Train and classify....we need to get some training data....so select some points or reuse / add to your points from the mixture classification. Note, that if you only have 1 point per landcover class the classification will be very poor! Note, that some publications / workflows actually use classified data products (e.g. [Dynamic World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1)) to produce the training and test data. 
 
 **Note** this code is adapted from the first classification we did last week, you might consider adding in the [Train test split](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html#train-test-split) code as well to assess the accuracy of the image....
 
