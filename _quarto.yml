@@ -4,7 +4,6 @@ project:
 
 
 book:
-  google-analytics: "G-5LZK055F2X"
   title: "CASA0023 Remotely Sensing Cities and Environments"
   #author: Andy MacLachlan
   image: general_images/casa_logo.jpg
@@ -26,7 +25,9 @@ book:
     reader-mode: true
   repo-url: https://github.com/andrewmaclachlan/CASA0023
   repo-actions: [edit, issue]
-
+  google-analytics:
+    tracking-id: "G-5LZK055F2X"
+    anonymize-ip: true
     #tools:
     #- icon: twitter
     #  href: https://twitter.com
@@ -60,7 +61,9 @@ book:
 bibliography: references.bib
 
 website:
-  google-analytics: "G-5LZK055F2X"
+  google-analytics:
+    tracking-id: "G-5LZK055F2X"
+    anonymize-ip: true
 
 format:
   html:
