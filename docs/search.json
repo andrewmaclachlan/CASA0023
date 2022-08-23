@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "CASA0023 Remotely Sensing Cities and Environments",
     "section": "",
-    "text": "Andy MacLachlan1\nLast updated: 2022-08-22"
+    "text": "Andy MacLachlan1\nLast updated: 2022-08-23"
   },
   {
     "objectID": "index.html#welcome",
@@ -305,7 +305,7 @@
     "href": "8_temperature.html#vector-data",
     "title": "\n8  Temperature\n",
     "section": "\n8.1 Vector data",
-    "text": "8.1 Vector data\n\n//--------------------------Vector data---------------------------\n\nvar dataset = ee.FeatureCollection(\"FAO/GAUL/2015/level2\");\n\nvar dataset_style = dataset.style({\n  color: '1e90ff',\n  width: 2,\n  fillColor: '00000000',  // with alpha set for partial transparency\n//  lineType: 'dotted',\n//  pointSize: 10,\n//  pointShape: 'circle'\n});\n\nMap.addLayer(dataset, {}, 'Second Level Administrative Units_2');\n\nvar Beijing = dataset.filter('ADM2_CODE == 13000');\n\nMap.addLayer(Beijing, {}, 'Beijing');"
+    "text": "8.1 Vector data\n\n//--------------------------Vector data---------------------------\n\nvar dataset = ee.FeatureCollection(\"FAO/GAUL/2015/level1\");\n\nvar dataset_style = dataset.style({\n  color: '1e90ff',\n  width: 2,\n  fillColor: '00000000',  // with alpha set for partial transparency\n//  lineType: 'dotted',\n//  pointSize: 10,\n//  pointShape: 'circle'\n});\n\nMap.addLayer(dataset, {}, 'Second Level Administrative Units_1');\n\nvar Beijing = dataset.filter('ADM1_CODE == 899');\n\n\nMap.addLayer(Beijing, {}, 'Beijing');"
   },
   {
     "objectID": "8_temperature.html#landsat",
@@ -319,21 +319,35 @@
     "href": "8_temperature.html#modis",
     "title": "\n8  Temperature\n",
     "section": "\n8.3 MODIS",
-    "text": "8.3 MODIS\nNow, we can also do the same process with the Moderate Resolution Imaging Spectroradiometer (MODIS), MODIS is an instrument aboard both the Terra and Aqua satellites. Terra crosses the equator from N to S in the morning and Aqua S to N in the afternoon meaning the entire earth is sampled every 1-2 days, with most places getting 2 images a day.\n\n8.3.1 Aqua\n\nvar MODIS_Aqua_day = ee.ImageCollection('MODIS/061/MYD11A1')\n  .filterDate('2022-01-01', '2022-10-10')\n  .filter(ee.Filter.calendarRange(5, 9,'month'))\n  .filterBounds(Beijing)  // Intersecting ROI;\n  .select('LST_Day_1km')\n\nprint(MODIS_Aqua_day, \"MODIS_AQUA\")  \n\n\n8.3.2 Terra\n\nvar MODIS_Terra_day = ee.ImageCollection('MODIS/061/MOD11A1')\n  .filterDate('2022-01-01', '2022-10-10')\n  .filter(ee.Filter.calendarRange(5, 9,'month'))\n  .filterBounds(Beijing)  // Intersecting ROI;\n  .select('LST_Day_1km')\n\nprint(MODIS_Terra_day, \"MODIS_Terra\")  \n\nFor the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution…\nMerge the collections and plot a mean summer temperature image…\n\nvar mean_aqua_terra = MODIS_Aqua_day.merge(MODIS_Terra_day)\n  .reduce(ee.Reducer.mean())\n  .clip(Beijing)\n\nMap.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,\n    'MODIS Land Surface Temperature');\n\nWhat do you see ?"
+    "text": "8.3 MODIS\nNow, we can also do the same process with the Moderate Resolution Imaging Spectroradiometer (MODIS), MODIS is an instrument aboard both the Terra and Aqua satellites. Terra crosses the equator from N to S in the morning and Aqua S to N in the afternoon meaning the entire earth is sampled every 1-2 days, with most places getting 2 images a day.\n\n8.3.1 Aqua\n\nvar MODIS_Aqua_day = ee.ImageCollection('MODIS/061/MYD11A1')\n  .filterDate('2022-01-01', '2022-10-10')\n  .filter(ee.Filter.calendarRange(5, 9,'month'))\n  .filterBounds(Beijing)  // Intersecting ROI;\n  .select('LST_Day_1km')\n\nprint(MODIS_Aqua_day, \"MODIS_AQUA\")  \n\n\n8.3.2 Terra\n\nvar MODIS_Terra_day = ee.ImageCollection('MODIS/061/MOD11A1')\n  .filterDate('2022-01-01', '2022-10-10')\n  .filter(ee.Filter.calendarRange(5, 9,'month'))\n  .filterBounds(Beijing)  // Intersecting ROI;\n  .select('LST_Day_1km')\n\nprint(MODIS_Terra_day, \"MODIS_Terra\")  \n\n\n8.3.3 Scaling\nFor the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution…and if you look at the values (through adding one of the collections to the map) we haven’t addressed the scaling….\nLike Landsat data MODIS data needs to have the scale factor applied, looking at the GEE documentation or the MODIS documentation we can see that the value is 0.02 and the values are in Kelvin, when we want Celcius….\n\nfunction MODISscale(image) {\n  var temp = image.select('LST_.*').multiply(0.02).subtract(273.1);\n  return image.addBands(temp, null, true)\n}\n\n\nvar MODIS_Aqua_day = ee.ImageCollection('MODIS/061/MYD11A1')\n  .filterDate('2022-01-01', '2022-10-10')\n  .filter(ee.Filter.calendarRange(5, 9,'month'))\n  .select('LST_Day_1km')\n  .map(MODISscale)\n  .filterBounds(Beijing);  // Intersecting ROI;\n\nprint(MODIS_Aqua_day, \"MODIS_AQUA\")  \n\nvar MODIS_Terra_day = ee.ImageCollection('MODIS/061/MOD11A1')\n  .filterDate('2022-01-01', '2022-10-10')\n  .filter(ee.Filter.calendarRange(5, 9,'month'))\n  .filterBounds(Beijing)  // Intersecting ROI;\n  .select('LST_Day_1km')\n  .map(MODISscale);\n\n\n8.3.4 Collection merge\nMerge the collections and plot a mean summer temperature image…\n\nvar mean_aqua_terra = MODIS_Aqua_day.merge(MODIS_Terra_day)\n  .reduce(ee.Reducer.mean())\n  .clip(Beijing)\n\nMap.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,\n    'MODIS Land Surface Temperature');\n\n\n8.3.5 Display the results\n\nvar landSurfaceTemperatureVis = {\n  min: 15,\n  max: 45,\n  palette: [\n    '040274', '040281', '0502a3', '0502b8', '0502ce', '0502e6',\n    '0602ff', '235cb1', '307ef3', '269db1', '30c8e2', '32d3ef',\n    '3be285', '3ff38f', '86e26f', '3ae237', 'b5e22e', 'd6e21f',\n    'fff705', 'ffd611', 'ffb613', 'ff8b13', 'ff6e08', 'ff500d',\n    'ff0000', 'de0101', 'c21301', 'a71001', '911003'\n  ],\n};\n\nMap.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,\n    'MODIS Land Surface Temperature');\n\nWhat do you see ?"
   },
   {
     "objectID": "8_temperature.html#timeseries",
     "href": "8_temperature.html#timeseries",
     "title": "\n8  Temperature\n",
     "section": "\n8.4 Timeseries",
-    "text": "8.4 Timeseries\nSo the real benefit of MODIS data is that we can plot the time series…however in doing so we lose the spatial element,\n\nvar timeseries = ui.Chart.image.series({\n  imageCollection: aqua_terra,\n  region: Beijing,\n  reducer: ee.Reducer.mean(),\n  scale: 1000,\n  xProperty: 'system:time_start'})\n  .setOptions({\n     title: 'Temperature time series',\n     vAxis: {title: 'LST Celsius'}});\nprint(timeseries);\n\nTimes series modelling….https://developers.google.com/earth-engine/tutorials/community/time-series-modeling"
+    "text": "8.4 Timeseries\nSo the real benefit of MODIS data is that we can plot the time series…however in doing so we lose the spatial element…\n\nvar timeseries = ui.Chart.image.series({\n  imageCollection: aqua_terra,\n  region: Beijing,\n  reducer: ee.Reducer.mean(),\n  scale: 1000,\n  xProperty: 'system:time_start'})\n  .setOptions({\n     title: 'Temperature time series',\n     vAxis: {title: 'LST Celsius'}});\nprint(timeseries);\n\n\n\n\n\n\n\n\n\nTimes series modelling….https://developers.google.com/earth-engine/tutorials/community/time-series-modeling"
   },
   {
-    "objectID": "8_temperature.html#statistics",
-    "href": "8_temperature.html#statistics",
+    "objectID": "8_temperature.html#statistics-per-spatial-unit",
+    "href": "8_temperature.html#statistics-per-spatial-unit",
     "title": "\n8  Temperature\n",
-    "section": "\n8.5 Statistics",
-    "text": "8.5 Statistics\nMake this - https://www.bbc.co.uk/news/uk-62243280"
+    "section": "\n8.5 Statistics per spatial unit",
+    "text": "8.5 Statistics per spatial unit\n\n8.5.1 Landsat\nTo start with let’s just explore the average temperature per GAUL level 2 area within the Beijing level 1 area….we can do this using the reduceRegions function….\n\n//--------------------------Statistics per level 2---------------------------.\n\nvar GAUL_2 = ee.FeatureCollection(\"FAO/GAUL/2015/level2\");\n\nvar Beijing_level2 = GAUL_2.filter('ADM1_CODE == 899');\n\nMap.addLayer(Beijing_level2, {}, 'Second Level Administrative Units_2');\n\nprint(subtracted_mean)\n\nvar mean_Landsat_level2 = subtracted_mean.reduceRegions({\n  collection: Beijing_level2,\n  reducer: ee.Reducer.mean(),\n  scale: 30,\n});\n\nMap.addLayer(mean_Landsat_level2, {}, 'mean_Landsat_level2');\n\nWhen we inspect the new vector file we can see that a mean column has been added to the attribute table….\n\n\n\n\n\n\n\n\nCan we style this better?\n\n8.5.2 MODIS\nTo get the time series data per spatial unit in MODIS we can use the similar code as before, but this time we:\n\nuse the function ui.Chart.image.seriesByRegion\n\nset our regions argument to the lower level spatial data….\n\n\nvar chart = ui.Chart.image.seriesByRegion({\n    imageCollection: MODIS_Aqua_day,\n    regions: Beijing_level2, //this is the difference\n    reducer: ee.Reducer.mean()\n})\n\nprint(chart)\n\nWe could make the plot a bit fancier in GEE…here, i have adapted the code from the documentation…\n\nvar timeseries_per_unit = ui.Chart.image.seriesByRegion({\n  imageCollection: aqua_terra,\n  //band: 'NDVI',\n  regions: Beijing_level2,\n  reducer: ee.Reducer.mean(),\n  scale: 1000,\n  //seriesProperty: 'label',\n  xProperty: 'system:time_start'\n})\n.setOptions({\n  title: 'Average temp per spatial unit',\n  hAxis: {title: 'Date', titleTextStyle: {italic: false, bold: true}},\n  vAxis: {\n    title: 'NDVI (x1e4)',\n    titleTextStyle: {italic: false, bold: true}\n  },\n  lineWidth: 1,\n  colors: ['0f8755', '808080'],\n});\nprint(timeseries_per_unit);\n\nWe could then export the data to run some time series analysis for the spatial units, this might be interesting if we know characteristics of land cover or development change over time….."
+  },
+  {
+    "objectID": "8_temperature.html#trend-analysis",
+    "href": "8_temperature.html#trend-analysis",
+    "title": "\n8  Temperature\n",
+    "section": "\n8.6 Trend analysis",
+    "text": "8.6 Trend analysis"
+  },
+  {
+    "objectID": "8_temperature.html#considerations",
+    "href": "8_temperature.html#considerations",
+    "title": "\n8  Temperature\n",
+    "section": "\n8.7 Considerations",
+    "text": "8.7 Considerations\nhttps://developers.google.com/earth-engine/tutorials/community/nonparametric-trends\nMake this - https://www.bbc.co.uk/news/uk-62243280"
   },
   {
     "objectID": "resources.html",

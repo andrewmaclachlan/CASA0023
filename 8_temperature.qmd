@@ -9,7 +9,7 @@ The first stage of this practical is to load up a level 2 admin area to extract 
 ```{r, eval=FALSE}
 //--------------------------Vector data---------------------------
 
-var dataset = ee.FeatureCollection("FAO/GAUL/2015/level2");
+var dataset = ee.FeatureCollection("FAO/GAUL/2015/level1");
 
 var dataset_style = dataset.style({
   color: '1e90ff',
@@ -20,9 +20,10 @@ var dataset_style = dataset.style({
 //  pointShape: 'circle'
 });
 
-Map.addLayer(dataset, {}, 'Second Level Administrative Units_2');
+Map.addLayer(dataset, {}, 'Second Level Administrative Units_1');
 
-var Beijing = dataset.filter('ADM2_CODE == 13000');
+var Beijing = dataset.filter('ADM1_CODE == 899');
+
 
 Map.addLayer(Beijing, {}, 'Beijing');
 
@@ -126,7 +127,38 @@ print(MODIS_Terra_day, "MODIS_Terra")
 
 ```
 
-For the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution...
+### Scaling 
+
+For the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution...**and** if you look at the values (through adding one of the collections to the map) we haven't addressed the scaling....
+
+Like Landsat data MODIS data needs to have the scale factor applied, looking at the [GEE documentation](https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MYD11A1#bands) or the MODIS documentation we can see that the value is 0.02 and the values are in Kelvin, when we want Celcius....
+
+```{r, eval=FALSE}
+
+function MODISscale(image) {
+  var temp = image.select('LST_.*').multiply(0.02).subtract(273.1);
+  return image.addBands(temp, null, true)
+}
+
+
+var MODIS_Aqua_day = ee.ImageCollection('MODIS/061/MYD11A1')
+  .filterDate('2022-01-01', '2022-10-10')
+  .filter(ee.Filter.calendarRange(5, 9,'month'))
+  .select('LST_Day_1km')
+  .map(MODISscale)
+  .filterBounds(Beijing);  // Intersecting ROI;
+
+print(MODIS_Aqua_day, "MODIS_AQUA")  
+
+var MODIS_Terra_day = ee.ImageCollection('MODIS/061/MOD11A1')
+  .filterDate('2022-01-01', '2022-10-10')
+  .filter(ee.Filter.calendarRange(5, 9,'month'))
+  .filterBounds(Beijing)  // Intersecting ROI;
+  .select('LST_Day_1km')
+  .map(MODISscale);
+```
+
+### Collection merge
 
 Merge the collections and plot a mean summer temperature image...
 
@@ -139,11 +171,33 @@ Map.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,
     'MODIS Land Surface Temperature');
 ```
 
+### Display the results
+
+```{r, eval=FALSE}
+
+var landSurfaceTemperatureVis = {
+  min: 15,
+  max: 45,
+  palette: [
+    '040274', '040281', '0502a3', '0502b8', '0502ce', '0502e6',
+    '0602ff', '235cb1', '307ef3', '269db1', '30c8e2', '32d3ef',
+    '3be285', '3ff38f', '86e26f', '3ae237', 'b5e22e', 'd6e21f',
+    'fff705', 'ffd611', 'ffb613', 'ff8b13', 'ff6e08', 'ff500d',
+    'ff0000', 'de0101', 'c21301', 'a71001', '911003'
+  ],
+};
+
+Map.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,
+    'MODIS Land Surface Temperature');
+    
+```
+
+
 What do you see ?
 
 ## Timeseries 
 
-So the real benefit of MODIS data is that we can plot the time series...**however** in doing so we lose the spatial element, 
+So the real benefit of MODIS data is that we can plot the time series...**however** in doing so we lose the spatial element...
 
 ```{r, eval=FALSE}
 var timeseries = ui.Chart.image.series({
@@ -158,10 +212,103 @@ var timeseries = ui.Chart.image.series({
 print(timeseries);
 ```
 
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_8/ee-chart.png') 
+```
+
 
 Times series modelling....https://developers.google.com/earth-engine/tutorials/community/time-series-modeling
 
-## Statistics 
+## Statistics per spatial unit
+
+### Landsat
+
+To start with let's just explore the average temperature per GAUL level 2 area within the Beijing level 1 area....we can do this using the `reduceRegions` function....
+
+```{r, eval=FALSE}
+
+//--------------------------Statistics per level 2---------------------------.
+
+var GAUL_2 = ee.FeatureCollection("FAO/GAUL/2015/level2");
+
+var Beijing_level2 = GAUL_2.filter('ADM1_CODE == 899');
+
+Map.addLayer(Beijing_level2, {}, 'Second Level Administrative Units_2');
+
+print(subtracted_mean)
+
+var mean_Landsat_level2 = subtracted_mean.reduceRegions({
+  collection: Beijing_level2,
+  reducer: ee.Reducer.mean(),
+  scale: 30,
+});
+
+Map.addLayer(mean_Landsat_level2, {}, 'mean_Landsat_level2');
+```
+
+When we inspect the new vector file we can see that a mean column has been added to the attribute table....
+
+```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_8/GEE_mean_Lsat.png') 
+```
+
+Can we style this better?
+
+### MODIS
+
+To get the time series data per spatial unit in MODIS we can use the similar code as before, but this time we:
+
+* use the function `ui.Chart.image.seriesByRegion`
+* set our `regions` argument to the lower level spatial data....
+
+```{r, eval=FALSE}
+
+var chart = ui.Chart.image.seriesByRegion({
+    imageCollection: MODIS_Aqua_day,
+    regions: Beijing_level2, //this is the difference
+    reducer: ee.Reducer.mean()
+})
+
+print(chart)
+```
+
+We could make the plot a bit fancier in GEE...here, i have adapted the code [from the documentation](https://developers.google.com/earth-engine/apidocs/ui-chart-image-seriesbyregion)...
+
+```{r, eval=FALSE}
+var timeseries_per_unit = ui.Chart.image.seriesByRegion({
+  imageCollection: aqua_terra,
+  //band: 'NDVI',
+  regions: Beijing_level2,
+  reducer: ee.Reducer.mean(),
+  scale: 1000,
+  //seriesProperty: 'label',
+  xProperty: 'system:time_start'
+})
+.setOptions({
+  title: 'Average temp per spatial unit',
+  hAxis: {title: 'Date', titleTextStyle: {italic: false, bold: true}},
+  vAxis: {
+    title: 'NDVI (x1e4)',
+    titleTextStyle: {italic: false, bold: true}
+  },
+  lineWidth: 1,
+  colors: ['0f8755', '808080'],
+});
+print(timeseries_per_unit);
+
+
+```
+
+
+We could then export the data to run some time series analysis for the spatial units, this might be interesting if we know characteristics of land cover or development change over time.....
+
+## Trend analysis 
+
+## Considerations
+
+
+
+https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends
 
 
 

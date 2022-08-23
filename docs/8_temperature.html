@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
@@ -233,10 +233,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
 <li><a href="#aqua" id="toc-aqua" class="nav-link" data-scroll-target="#aqua"> <span class="header-section-number">8.3.1</span> Aqua</a></li>
   <li><a href="#terra" id="toc-terra" class="nav-link" data-scroll-target="#terra"> <span class="header-section-number">8.3.2</span> Terra</a></li>
+  <li><a href="#scaling" id="toc-scaling" class="nav-link" data-scroll-target="#scaling"> <span class="header-section-number">8.3.3</span> Scaling</a></li>
+  <li><a href="#collection-merge" id="toc-collection-merge" class="nav-link" data-scroll-target="#collection-merge"> <span class="header-section-number">8.3.4</span> Collection merge</a></li>
+  <li><a href="#display-the-results" id="toc-display-the-results" class="nav-link" data-scroll-target="#display-the-results"> <span class="header-section-number">8.3.5</span> Display the results</a></li>
   </ul>
 </li>
   <li><a href="#timeseries" id="toc-timeseries" class="nav-link" data-scroll-target="#timeseries"> <span class="header-section-number">8.4</span> Timeseries</a></li>
-  <li><a href="#statistics" id="toc-statistics" class="nav-link" data-scroll-target="#statistics"> <span class="header-section-number">8.5</span> Statistics</a></li>
+  <li>
+<a href="#statistics-per-spatial-unit" id="toc-statistics-per-spatial-unit" class="nav-link" data-scroll-target="#statistics-per-spatial-unit"> <span class="header-section-number">8.5</span> Statistics per spatial unit</a>
+  <ul class="collapse">
+<li><a href="#landsat-1" id="toc-landsat-1" class="nav-link" data-scroll-target="#landsat-1"> <span class="header-section-number">8.5.1</span> Landsat</a></li>
+  <li><a href="#modis-1" id="toc-modis-1" class="nav-link" data-scroll-target="#modis-1"> <span class="header-section-number">8.5.2</span> MODIS</a></li>
+  </ul>
+</li>
+  <li><a href="#trend-analysis" id="toc-trend-analysis" class="nav-link" data-scroll-target="#trend-analysis"> <span class="header-section-number">8.6</span> Trend analysis</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">8.7</span> Considerations</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/8_temperature.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -262,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">--------------------------</span>Vector data<span class="sc">---------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>);</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level1"</span>);</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>var dataset_style <span class="ot">=</span> <span class="fu">dataset.style</span>({</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> <span class="st">'1e90ff'</span>,</span>
@@ -273,11 +284,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  pointShape<span class="sc">:</span> <span class="st">'circle'</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>});</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset, {}, <span class="st">'Second Level Administrative Units_2'</span>);</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset, {}, <span class="st">'Second Level Administrative Units_1'</span>);</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>var Beijing <span class="ot">=</span> <span class="fu">dataset.filter</span>(<span class="st">'ADM2_CODE == 13000'</span>);</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>var Beijing <span class="ot">=</span> <span class="fu">dataset.filter</span>(<span class="st">'ADM1_CODE == 899'</span>);</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(Beijing, {}, <span class="st">'Beijing'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(Beijing, {}, <span class="st">'Beijing'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="landsat" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="landsat">
 <span class="header-section-number">8.2</span> Landsat</h2>
@@ -366,35 +378,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(MODIS_Terra_day, <span class="st">"MODIS_Terra"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution…</p>
+</section><section id="scaling" class="level3" data-number="8.3.3"><h3 data-number="8.3.3" class="anchored" data-anchor-id="scaling">
+<span class="header-section-number">8.3.3</span> Scaling</h3>
+<p>For the Landsat data in this period we had 5 images, compared to 108 for Aqua and 107 for Terra!But! MODIS data is at 1km resolution…<strong>and</strong> if you look at the values (through adding one of the collections to the map) we haven’t addressed the scaling….</p>
+<p>Like Landsat data MODIS data needs to have the scale factor applied, looking at the <a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MYD11A1#bands">GEE documentation</a> or the MODIS documentation we can see that the value is 0.02 and the values are in Kelvin, when we want Celcius….</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">MODISscale</span>(image) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  var temp <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'LST_.*'</span>)<span class="fu">.multiply</span>(<span class="fl">0.02</span>)<span class="fu">.subtract</span>(<span class="fl">273.1</span>);</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">image.addBands</span>(temp, null, true)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>var MODIS_Aqua_day <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'MODIS/061/MYD11A1'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-10-10'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.calendarRange</span>(<span class="dv">5</span>, <span class="dv">9</span>,<span class="st">'month'</span>))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>(<span class="st">'LST_Day_1km'</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.map</span>(MODISscale)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Beijing);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI;</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(MODIS_Aqua_day, <span class="st">"MODIS_AQUA"</span>)  </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>var MODIS_Terra_day <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'MODIS/061/MOD11A1'</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-10-10'</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.calendarRange</span>(<span class="dv">5</span>, <span class="dv">9</span>,<span class="st">'month'</span>))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Beijing)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI;</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>(<span class="st">'LST_Day_1km'</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.map</span>(MODISscale);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="collection-merge" class="level3" data-number="8.3.4"><h3 data-number="8.3.4" class="anchored" data-anchor-id="collection-merge">
+<span class="header-section-number">8.3.4</span> Collection merge</h3>
 <p>Merge the collections and plot a mean summer temperature image…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var mean_aqua_terra <span class="ot">=</span> <span class="fu">MODIS_Aqua_day.merge</span>(MODIS_Terra_day)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.reduce</span>(<span class="fu">ee.Reducer.mean</span>())</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.clip</span>(Beijing)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mean_aqua_terra, landSurfaceTemperatureVis,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MODIS Land Surface Temperature'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var mean_aqua_terra <span class="ot">=</span> <span class="fu">MODIS_Aqua_day.merge</span>(MODIS_Terra_day)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.reduce</span>(<span class="fu">ee.Reducer.mean</span>())</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.clip</span>(Beijing)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mean_aqua_terra, landSurfaceTemperatureVis,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MODIS Land Surface Temperature'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="display-the-results" class="level3" data-number="8.3.5"><h3 data-number="8.3.5" class="anchored" data-anchor-id="display-the-results">
+<span class="header-section-number">8.3.5</span> Display the results</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var landSurfaceTemperatureVis <span class="ot">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="dv">15</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="dv">45</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  palette<span class="sc">:</span> [</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'040274'</span>, <span class="st">'040281'</span>, <span class="st">'0502a3'</span>, <span class="st">'0502b8'</span>, <span class="st">'0502ce'</span>, <span class="st">'0502e6'</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'0602ff'</span>, <span class="st">'235cb1'</span>, <span class="st">'307ef3'</span>, <span class="st">'269db1'</span>, <span class="st">'30c8e2'</span>, <span class="st">'32d3ef'</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'3be285'</span>, <span class="st">'3ff38f'</span>, <span class="st">'86e26f'</span>, <span class="st">'3ae237'</span>, <span class="st">'b5e22e'</span>, <span class="st">'d6e21f'</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'fff705'</span>, <span class="st">'ffd611'</span>, <span class="st">'ffb613'</span>, <span class="st">'ff8b13'</span>, <span class="st">'ff6e08'</span>, <span class="st">'ff500d'</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ff0000'</span>, <span class="st">'de0101'</span>, <span class="st">'c21301'</span>, <span class="st">'a71001'</span>, <span class="st">'911003'</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  ],</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mean_aqua_terra, landSurfaceTemperatureVis,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MODIS Land Surface Temperature'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What do you see ?</p>
 </section></section><section id="timeseries" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="timeseries">
 <span class="header-section-number">8.4</span> Timeseries</h2>
-<p>So the real benefit of MODIS data is that we can plot the time series…<strong>however</strong> in doing so we lose the spatial element,</p>
+<p>So the real benefit of MODIS data is that we can plot the time series…<strong>however</strong> in doing so we lose the spatial element…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var timeseries <span class="ot">=</span> <span class="fu">ui.Chart.image.series</span>({</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  imageCollection<span class="sc">:</span> aqua_terra,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  region<span class="sc">:</span> Beijing,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">1000</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  xProperty<span class="sc">:</span> <span class="st">'system:time_start'</span>})</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.setOptions</span>({</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     title<span class="sc">:</span> <span class="st">'Temperature time series'</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     vAxis<span class="sc">:</span> {title<span class="sc">:</span> <span class="st">'LST Celsius'</span>}});</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(timeseries);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>var timeseries <span class="ot">=</span> <span class="fu">ui.Chart.image.series</span>({</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  imageCollection<span class="sc">:</span> aqua_terra,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  region<span class="sc">:</span> Beijing,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">1000</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  xProperty<span class="sc">:</span> <span class="st">'system:time_start'</span>})</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.setOptions</span>({</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>     title<span class="sc">:</span> <span class="st">'Temperature time series'</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>     vAxis<span class="sc">:</span> {title<span class="sc">:</span> <span class="st">'LST Celsius'</span>}});</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(timeseries);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_8/ee-chart.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Times series modelling….https://developers.google.com/earth-engine/tutorials/community/time-series-modeling</p>
-</section><section id="statistics" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="statistics">
-<span class="header-section-number">8.5</span> Statistics</h2>
+</section><section id="statistics-per-spatial-unit" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="statistics-per-spatial-unit">
+<span class="header-section-number">8.5</span> Statistics per spatial unit</h2>
+<section id="landsat-1" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="landsat-1">
+<span class="header-section-number">8.5.1</span> Landsat</h3>
+<p>To start with let’s just explore the average temperature per GAUL level 2 area within the Beijing level 1 area….we can do this using the <code>reduceRegions</code> function….</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">--------------------------</span>Statistics per level <span class="dv">2</span><span class="sc">---------------------------</span>.</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>var GAUL_2 <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>);</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>var Beijing_level2 <span class="ot">=</span> <span class="fu">GAUL_2.filter</span>(<span class="st">'ADM1_CODE == 899'</span>);</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(Beijing_level2, {}, <span class="st">'Second Level Administrative Units_2'</span>);</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(subtracted_mean)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>var mean_Landsat_level2 <span class="ot">=</span> <span class="fu">subtracted_mean.reduceRegions</span>({</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> Beijing_level2,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">30</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mean_Landsat_level2, {}, <span class="st">'mean_Landsat_level2'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When we inspect the new vector file we can see that a mean column has been added to the attribute table….</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_8/GEE_mean_Lsat.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Can we style this better?</p>
+</section><section id="modis-1" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="modis-1">
+<span class="header-section-number">8.5.2</span> MODIS</h3>
+<p>To get the time series data per spatial unit in MODIS we can use the similar code as before, but this time we:</p>
+<ul>
+<li>use the function <code>ui.Chart.image.seriesByRegion</code>
+</li>
+<li>set our <code>regions</code> argument to the lower level spatial data….</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>var chart <span class="ot">=</span> <span class="fu">ui.Chart.image.seriesByRegion</span>({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    imageCollection<span class="sc">:</span> MODIS_Aqua_day,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    regions<span class="sc">:</span> Beijing_level2, <span class="sc">/</span><span class="er">/</span>this is the difference</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We could make the plot a bit fancier in GEE…here, i have adapted the code <a href="https://developers.google.com/earth-engine/apidocs/ui-chart-image-seriesbyregion">from the documentation</a>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>var timeseries_per_unit <span class="ot">=</span> <span class="fu">ui.Chart.image.seriesByRegion</span>({</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  imageCollection<span class="sc">:</span> aqua_terra,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span>band<span class="sc">:</span> <span class="st">'NDVI'</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  regions<span class="sc">:</span> Beijing_level2,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">1000</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span>seriesProperty<span class="sc">:</span> <span class="st">'label'</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  xProperty<span class="sc">:</span> <span class="st">'system:time_start'</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">.setOptions</span>({</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  title<span class="sc">:</span> <span class="st">'Average temp per spatial unit'</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  hAxis<span class="sc">:</span> {title<span class="sc">:</span> <span class="st">'Date'</span>, titleTextStyle<span class="sc">:</span> {italic<span class="sc">:</span> false, bold<span class="sc">:</span> true}},</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  vAxis<span class="sc">:</span> {</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    title<span class="sc">:</span> <span class="st">'NDVI (x1e4)'</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    titleTextStyle<span class="sc">:</span> {italic<span class="sc">:</span> false, bold<span class="sc">:</span> true}</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  lineWidth<span class="sc">:</span> <span class="dv">1</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  colors<span class="sc">:</span> [<span class="st">'0f8755'</span>, <span class="st">'808080'</span>],</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(timeseries_per_unit);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We could then export the data to run some time series analysis for the spatial units, this might be interesting if we know characteristics of land cover or development change over time…..</p>
+</section></section><section id="trend-analysis" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="trend-analysis">
+<span class="header-section-number">8.6</span> Trend analysis</h2>
+</section><section id="considerations" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="considerations">
+<span class="header-section-number">8.7</span> Considerations</h2>
+<p>https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends</p>
 <p>Make this - https://www.bbc.co.uk/news/uk-62243280</p>
 
 
