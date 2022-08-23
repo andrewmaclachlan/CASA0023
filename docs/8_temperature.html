@@ -247,7 +247,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul>
 </li>
   <li><a href="#trend-analysis" id="toc-trend-analysis" class="nav-link" data-scroll-target="#trend-analysis"> <span class="header-section-number">8.6</span> Trend analysis</a></li>
-  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">8.7</span> Considerations</a></li>
+  <li><a href="#heat-index" id="toc-heat-index" class="nav-link" data-scroll-target="#heat-index"> <span class="header-section-number">8.7</span> Heat index</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">8.8</span> Considerations</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/8_temperature.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -313,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(landsat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The temperature band in Landsat is B10, however it comes in Kelvin and not Celcius, to cover we just subtract 273.1. <strong>But</strong> i want to do this per image…at the moment <code>.subtract</code> won’t work over an image collection so we can subtract the value from each individual image in a collection…we also want to mask any pixels that have a below 0 value (e.g.&nbsp;probably no data ones). I’ve done this within this function as well..</p>
+<p>The temperature band in Landsat is B10, however it comes in Kelvin and not Celsius, to cover we just subtract 273.1. <strong>But</strong> i want to do this per image…at the moment <code>.subtract</code> won’t work over an image collection so we can subtract the value from each individual image in a collection…we also want to mask any pixels that have a below 0 value (e.g.&nbsp;probably no data ones). I’ve done this within this function as well..</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>var subtracted <span class="ot">=</span> <span class="fu">landsat.select</span>(<span class="st">'ST_B10'</span>)<span class="fu">.map</span>(<span class="cf">function</span> (image) {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  var subtract <span class="ot">=</span> <span class="fu">image.subtract</span>(<span class="fl">273.1</span>); <span class="sc">/</span><span class="er">/</span> subtract</span>
@@ -435,6 +436,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MODIS Land Surface Temperature'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What do you see ?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_8/GEE_temp_out_MODIS.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
+</div>
 </section></section><section id="timeseries" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="timeseries">
 <span class="header-section-number">8.4</span> Timeseries</h2>
 <p>So the real benefit of MODIS data is that we can plot the time series…<strong>however</strong> in doing so we lose the spatial element…</p>
@@ -537,13 +546,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  title<span class="sc">:</span> <span class="st">'Average temp per spatial unit'</span>,</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  hAxis<span class="sc">:</span> {title<span class="sc">:</span> <span class="st">'Date'</span>, titleTextStyle<span class="sc">:</span> {italic<span class="sc">:</span> false, bold<span class="sc">:</span> true}},</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  vAxis<span class="sc">:</span> {</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    title<span class="sc">:</span> <span class="st">'NDVI (x1e4)'</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    title<span class="sc">:</span> <span class="st">'LST Celsius'</span>,</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    titleTextStyle<span class="sc">:</span> {italic<span class="sc">:</span> false, bold<span class="sc">:</span> true}</span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  },</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  lineWidth<span class="sc">:</span> <span class="dv">1</span>,</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  colors<span class="sc">:</span> [<span class="st">'0f8755'</span>, <span class="st">'808080'</span>],</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(timeseries_per_unit);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  lineWidth<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>  colors<span class="sc">:</span> [<span class="st">'0f8755'</span>, <span class="st">'808080'</span>],</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="prac_8/ee-chart-two-units.png" class="img-fluid figure-img" width="900"></p>
+</figure>
+</div>
+</div>
 </div>
 <section id="export-1" class="level4" data-number="8.5.2.1"><h4 data-number="8.5.2.1" class="anchored" data-anchor-id="export-1">
 <span class="header-section-number">8.5.2.1</span> Export</h4>
@@ -576,11 +592,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://code.earthengine.google.com/9c091e27ca86c3d1e6adbefea8769cc3">Example code for exporting time series per spatial unit</a></li>
 </ul></section></section></section><section id="trend-analysis" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="trend-analysis">
 <span class="header-section-number">8.6</span> Trend analysis</h2>
-<p>To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example…the <a href="https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends">Mann-Kendall trend test</a>. Once we have identified these pixels or areas we could then investgate them further with Landsat surface temperature data and landcover data.</p>
-</section><section id="considerations" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="considerations">
-<span class="header-section-number">8.7</span> Considerations</h2>
-<p>We have focused on temperature within this practical</p>
+<p>To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example…the <a href="https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends">Mann-Kendall trend test</a>. Once we have identified these pixels or areas we could then investigate them further with Landsat surface temperature data and landcover data.</p>
+</section><section id="heat-index" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="heat-index">
+<span class="header-section-number">8.7</span> Heat index</h2>
 <p>Make this - https://www.bbc.co.uk/news/uk-62243280</p>
+</section><section id="considerations" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="considerations">
+<span class="header-section-number">8.8</span> Considerations</h2>
+<ul>
+<li><p>Following the lecture, could the red lined areas experience higher temperatures?</p></li>
+<li><p>Could a similar analysis be done for other variables? Such as <a href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_NO2">pollution</a><br></p></li>
+<li><p>Could we make a pollution index similar to the heat index</p></li>
+<li><p>Could we make a <a href="https://developers.google.com/earth-engine/datasets/catalog/GLOBAL_FLOOD_DB_MODIS_EVENTS_V1">flood index</a> or explore flooding over time in cities / determine areas that need remediation</p></li>
+</ul>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

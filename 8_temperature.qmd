@@ -53,7 +53,7 @@ var landsat = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
 print(landsat)
 ```
 
-The temperature band in Landsat is B10, however it comes in Kelvin and not Celcius, to cover we just subtract 273.1. **But** i want to do this per image...at the moment `.subtract` won't work over an image collection so we can subtract the value from each individual image in a collection...we also want to mask any pixels that have a below 0 value (e.g. probably no data ones). I've done this within this function as well..
+The temperature band in Landsat is B10, however it comes in Kelvin and not Celsius, to cover we just subtract 273.1. **But** i want to do this per image...at the moment `.subtract` won't work over an image collection so we can subtract the value from each individual image in a collection...we also want to mask any pixels that have a below 0 value (e.g. probably no data ones). I've done this within this function as well..
 
 ```{r, eval=FALSE}
 
@@ -192,8 +192,12 @@ Map.addLayer(mean_aqua_terra, landSurfaceTemperatureVis,
     
 ```
 
-
 What do you see ?
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_8/GEE_temp_out_MODIS.png') 
+```
+
 
 ## Timeseries 
 
@@ -304,15 +308,17 @@ var timeseries_per_unit = ui.Chart.image.seriesByRegion({
   title: 'Average temp per spatial unit',
   hAxis: {title: 'Date', titleTextStyle: {italic: false, bold: true}},
   vAxis: {
-    title: 'NDVI (x1e4)',
+    title: 'LST Celsius',
     titleTextStyle: {italic: false, bold: true}
   },
-  lineWidth: 1,
-  colors: ['0f8755', '808080'],
+  lineWidth: 1
+//  colors: ['0f8755', '808080'],
 });
-print(timeseries_per_unit);
 
+```
 
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_8/ee-chart-two-units.png') 
 ```
 
 #### Export
@@ -349,14 +355,18 @@ You can also change how the data is exported, although I would now just do some 
 
 ## Trend analysis 
 
-To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example...the [Mann-Kendall trend test](https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends). Once we have identified these pixels or areas we could then investgate them further with Landsat surface temperature data and landcover data.
+To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example...the [Mann-Kendall trend test](https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends). Once we have identified these pixels or areas we could then investigate them further with Landsat surface temperature data and landcover data.
+
+## Heat index
+
+Make this - https://www.bbc.co.uk/news/uk-62243280
 
 ## Considerations
 
-We have focused on temperature within this practical 
+* Following the lecture, could the red lined areas experience higher temperatures?
 
+* Could a similar analysis be done for other variables? Such as [pollution](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_NO2)  
+* Could we make a pollution index similar to the heat index
 
+* Could we make a [flood index](https://developers.google.com/earth-engine/datasets/catalog/GLOBAL_FLOOD_DB_MODIS_EVENTS_V1) or explore flooding over time in cities / determine areas that need remediation 
 
-
-
-Make this - https://www.bbc.co.uk/news/uk-62243280

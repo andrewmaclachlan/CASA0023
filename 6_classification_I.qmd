@@ -457,6 +457,8 @@ Here:
 
 Final output:
 
-
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_6/GEE_classified_map_final.png') 
+```
 
 ### Review questions 
