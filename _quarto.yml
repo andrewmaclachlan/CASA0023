@@ -58,6 +58,9 @@ book:
 
 bibliography: references.bib
 
+website:
+  google-analytics: "UA-151934476-1"
+
 format:
   html:
     theme: cosmo
