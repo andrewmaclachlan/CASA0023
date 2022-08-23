@@ -252,7 +252,23 @@ When we inspect the new vector file we can see that a mean column has been added
 knitr::include_graphics('prac_8/GEE_mean_Lsat.png') 
 ```
 
-Can we style this better?
+Can we style this better? AM to check
+
+
+#### Export
+
+To export a feature collection like this...
+
+```{r, eval=FALSE}
+// Export the FeatureCollection to a SHP file.
+Export.table.toDrive({
+  collection: mean_Landsat_level2,
+  description:'mean_Landsat_level2',
+  fileFormat: 'SHP'
+});
+```
+
+We can then open it in QGIS to see our average tempearture per spatial untit. 
 
 ### MODIS
 
@@ -299,16 +315,46 @@ print(timeseries_per_unit);
 
 ```
 
+#### Export
 
-We could then export the data to run some time series analysis for the spatial units, this might be interesting if we know characteristics of land cover or development change over time.....
+We could then export the data to run some time series analysis for the spatial units (e.g. in R), this might be interesting if we know characteristics of land cover or development change over time.....
+
+```{r, eval=FALSE}
+// Collect block, image, value triplets.
+var triplets = aqua_terra.map(function(image) {
+  return image.select('LST_Day_1km').reduceRegions({
+    collection: Beijing_level2.select(['ADM2_CODE']), 
+    reducer: ee.Reducer.mean(), 
+    scale: 30
+  }).filter(ee.Filter.neq('mean', null))
+    .map(function(f) { 
+      return f.set('imageId', image.id());
+    });
+}).flatten();
+
+print(triplets.first(), "trip")
+
+Export.table.toDrive({
+  collection: triplets, 
+  description: triplets, 
+  fileNamePrefix: triplets,
+  fileFormat: 'CSV'
+});
+```
+
+You can also change how the data is exported, although I would now just do some wrangling in R. See the:
+
+* [GEE presentation](https://docs.google.com/presentation/d/1D7rezUHPElCfYWHMRNBChHjbEv6nXDD8xnh7_YgyK6A/edit#slide=id.g22bb639feb_1_27)
+* [Example code for exporting time series per spatial unit](https://code.earthengine.google.com/9c091e27ca86c3d1e6adbefea8769cc3)
 
 ## Trend analysis 
 
+To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example...the [Mann-Kendall trend test](https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends). Once we have identified these pixels or areas we could then investgate them further with Landsat surface temperature data and landcover data.
+
 ## Considerations
 
+We have focused on temperature within this practical 
 
-
-https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends
 
 
 
