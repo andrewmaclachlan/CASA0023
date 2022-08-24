@@ -92,10 +92,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -140,6 +142,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
   </li>  
 </ul>
 <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
                   <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -233,14 +236,15 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
    
   <ul>
 <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes"> <span class="header-section-number">1.1</span> Learning outcomes</a></li>
+  <li><a href="#eo-dashboard" id="toc-eo-dashboard" class="nav-link" data-scroll-target="#eo-dashboard"> <span class="header-section-number">1.2</span> EO dashboard</a></li>
   <li>
-<a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore"> <span class="header-section-number">1.2</span> .gitignore</a>
+<a href="#gitignore" id="toc-gitignore" class="nav-link" data-scroll-target="#gitignore"> <span class="header-section-number">1.3</span> .gitignore</a>
   <ul class="collapse">
-<li><a href="#sentinel-download" id="toc-sentinel-download" class="nav-link" data-scroll-target="#sentinel-download"> <span class="header-section-number">1.2.1</span> Sentinel download</a></li>
-  <li><a href="#landsat" id="toc-landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.2.2</span> Landsat</a></li>
-  <li><a href="#spectral-signatures" id="toc-spectral-signatures" class="nav-link" data-scroll-target="#spectral-signatures"> <span class="header-section-number">1.2.3</span> Spectral signatures</a></li>
-  <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"> <span class="header-section-number">1.2.4</span> Using R</a></li>
-  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">1.2.5</span> Review questions</a></li>
+<li><a href="#sentinel-download" id="toc-sentinel-download" class="nav-link" data-scroll-target="#sentinel-download"> <span class="header-section-number">1.3.1</span> Sentinel download</a></li>
+  <li><a href="#landsat" id="toc-landsat" class="nav-link" data-scroll-target="#landsat"> <span class="header-section-number">1.3.2</span> Landsat</a></li>
+  <li><a href="#spectral-signatures" id="toc-spectral-signatures" class="nav-link" data-scroll-target="#spectral-signatures"> <span class="header-section-number">1.3.3</span> Spectral signatures</a></li>
+  <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"> <span class="header-section-number">1.3.4</span> Using R</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">1.3.5</span> Review questions</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -271,8 +275,11 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <li>Undertake basic raster image statistics and processing</li>
 <li>Evaluate the (dis)advantages of each type of software you have used</li>
 <li>Pull out and statistically compare spectral signatures</li>
-</ul></section><section id="gitignore" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="gitignore">
-<span class="header-section-number">1.2</span> .gitignore</h2>
+</ul></section><section id="eo-dashboard" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="eo-dashboard">
+<span class="header-section-number">1.2</span> EO dashboard</h2>
+<p>Before we start the practical, spend 5 minutes exploring the <a href="https://eodashboard.org/explore?poi=World-E10e">EOdashboard website</a>. It contains a useful overview of some of the EO data that we can and will explore later in the module.</p>
+</section><section id="gitignore" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="gitignore">
+<span class="header-section-number">1.3</span> .gitignore</h2>
 <p>If you are using Git with your project and have large data it’s best to set up a <code>.gitignore</code> file. This file tells git to ignore certain files so they aren’t in your local repository that is then pushed to GitHub. If you try and push large files to GitHub you will get an error and could run into lots of problems, trust me, i’ve been there. Look at <a href="https://github.com/andrewmaclachlan/CASA0023/blob/main/.gitignore">my .gitignore for this repository</a> and you will notice:</p>
 <p><code>/prac_1/*</code></p>
 <p>This means ignore all files within these folders, all is denoted by the <code>*</code>. The <code>.gitignore</code> has to be in your main project folder, if you have made a a <code>git</code> repo for your project then you should have a <code>.gitignore</code> so all you have to do is open it and add the folder or file paths you wish to ignore.</p>
@@ -286,8 +293,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<section id="sentinel-download" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="sentinel-download">
-<span class="header-section-number">1.2.1</span> Sentinel download</h3>
+<section id="sentinel-download" class="level3" data-number="1.3.1"><h3 data-number="1.3.1" class="anchored" data-anchor-id="sentinel-download">
+<span class="header-section-number">1.3.1</span> Sentinel download</h3>
 <ul>
 <li><p>Go to the <a href="https://scihub.copernicus.eu/dhus/#/home">Copernicus Open Access Hub</a></p></li>
 <li>
@@ -324,8 +331,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <li><p>Cloud cover e.g.&nbsp;[0 TO 5]</p></li>
 </ul>
 <p>_ Mu image was from the 15/5/2022</p>
-<section id="open" class="level4" data-number="1.2.1.1"><h4 data-number="1.2.1.1" class="anchored" data-anchor-id="open">
-<span class="header-section-number">1.2.1.1</span> Open</h4>
+<section id="open" class="level4" data-number="1.3.1.1"><h4 data-number="1.3.1.1" class="anchored" data-anchor-id="open">
+<span class="header-section-number">1.3.1.1</span> Open</h4>
 <p>Once downloaded and unzipped you’ll be presented with a load of folders! Here we are interested in the 10m bands…which are:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -388,8 +395,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <p>Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using <a href="https://step.esa.int/main/snap-supported-plugins/sen2res/">Sen2Res</a> that is another plug in for the <a href="https://step.esa.int/main/download/snap-download/">SNAP toolbox</a>. Arguably SNAP is just a difference type of GIS software specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.</p>
 <p>Upscaling aggregates the images to a more coarse resolution (e.g.&nbsp;10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g.&nbsp;within the 20m folder there are 10 bands). However, it’s not clear what method has been used, the documentation suggests nearest neighbour - https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/.</p>
 <p>This can also be termed resampling, and nearest neighbour simply means taking the new raster resolution and then assiging the value from the closest value in the original data. Others approaches include bilinear or cubic convolution resampling.</p>
-</section><section id="snap" class="level4" data-number="1.2.1.2"><h4 data-number="1.2.1.2" class="anchored" data-anchor-id="snap">
-<span class="header-section-number">1.2.1.2</span> SNAP</h4>
+</section><section id="snap" class="level4" data-number="1.3.1.2"><h4 data-number="1.3.1.2" class="anchored" data-anchor-id="snap">
+<span class="header-section-number">1.3.1.2</span> SNAP</h4>
 <p>SNAP stands for Sentinels Application Platform it is a collection of toolboxes specifically for pre-processing and analysing remotely sensed data.</p>
 <p>Download the all toolboxes version</p>
 <p>SNAP allows us to easily do undertake many GIS raster type analysis that we’ve seen / discussed in other modules (like CASA0005) and that we will come across within this module including:</p>
@@ -403,14 +410,14 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <li>many more methods!</li>
 </ul>
 <p>Aside from these methods in a GUI the real benefit is that it’s made to use remotely sensed data. Let’s explore some features of SNAP.</p>
-<section id="load-data" class="level5" data-number="1.2.1.2.1"><h5 data-number="1.2.1.2.1" class="anchored" data-anchor-id="load-data">
-<span class="header-section-number">1.2.1.2.1</span> Load data</h5>
+<section id="load-data" class="level5" data-number="1.3.1.2.1"><h5 data-number="1.3.1.2.1" class="anchored" data-anchor-id="load-data">
+<span class="header-section-number">1.3.1.2.1</span> Load data</h5>
 <ul>
 <li><p>File &gt; Open Product &gt; select the .zip that was downloaded. Do not rename it or unzip it before hand!</p></li>
 <li><p>In the side bar under Product Explorer there will be a lot on data that you can load. The remotely sensed data in under Bands and then each band is listed (e.g.&nbsp;B1 443nm). What does 443nm mean?</p></li>
 <li><p>Double right click on a layer and it will appear in the viewer area</p></li>
-</ul></section><section id="snap-layout" class="level5" data-number="1.2.1.2.2"><h5 data-number="1.2.1.2.2" class="anchored" data-anchor-id="snap-layout">
-<span class="header-section-number">1.2.1.2.2</span> SNAP layout</h5>
+</ul></section><section id="snap-layout" class="level5" data-number="1.3.1.2.2"><h5 data-number="1.3.1.2.2" class="anchored" data-anchor-id="snap-layout">
+<span class="header-section-number">1.3.1.2.2</span> SNAP layout</h5>
 <p>The layout of SNAP isn’t too different to QGIS, we have:</p>
 <ul>
 <li>Products on the left side bar</li>
@@ -432,8 +439,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Here, i have also the two link buttons selected (bottom left window) these mean that if i move to another band i will still be in the same position on the image.</p>
-</section><section id="colour-composites" class="level5" data-number="1.2.1.2.3"><h5 data-number="1.2.1.2.3" class="anchored" data-anchor-id="colour-composites">
-<span class="header-section-number">1.2.1.2.3</span> Colour composites</h5>
+</section><section id="colour-composites" class="level5" data-number="1.3.1.2.3"><h5 data-number="1.3.1.2.3" class="anchored" data-anchor-id="colour-composites">
+<span class="header-section-number">1.3.1.2.3</span> Colour composites</h5>
 <p>To re-created a true colour composite, right click on the data product and open RGB image</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -450,13 +457,13 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <li><p>The short-wave infrared composite: B12, B8A and B4 shows vegetation in green, the darker the greener the denser it is and brown shows built up or bare soil</p></li>
 </ul>
 <p>For other band colour combinations <a href="https://gisgeography.com/sentinel-2-bands-combinations/">consult gisgeogrpahy</a></p>
-</section><section id="creating-a-project" class="level5" data-number="1.2.1.2.4"><h5 data-number="1.2.1.2.4" class="anchored" data-anchor-id="creating-a-project">
-<span class="header-section-number">1.2.1.2.4</span> Creating a project</h5>
+</section><section id="creating-a-project" class="level5" data-number="1.3.1.2.4"><h5 data-number="1.3.1.2.4" class="anchored" data-anchor-id="creating-a-project">
+<span class="header-section-number">1.3.1.2.4</span> Creating a project</h5>
 <p>Before we go any further we should create a project, that way all our processed outputs will be stored within the projected and loaded again when we open it in future - like projects in any other software such as QGIS or R. Go File &gt; Project &gt; Save project. A project tab next to the product explorer tab will appear, but not you can’t access the bands from within the project that must be done through the product explorer.</p>
-</section><section id="image-statistics" class="level5" data-number="1.2.1.2.5"><h5 data-number="1.2.1.2.5" class="anchored" data-anchor-id="image-statistics">
-<span class="header-section-number">1.2.1.2.5</span> Image statistics</h5>
-</section><section id="image-histogram" class="level5" data-number="1.2.1.2.6"><h5 data-number="1.2.1.2.6" class="anchored" data-anchor-id="image-histogram">
-<span class="header-section-number">1.2.1.2.6</span> Image histogram</h5>
+</section><section id="image-statistics" class="level5" data-number="1.3.1.2.5"><h5 data-number="1.3.1.2.5" class="anchored" data-anchor-id="image-statistics">
+<span class="header-section-number">1.3.1.2.5</span> Image statistics</h5>
+</section><section id="image-histogram" class="level5" data-number="1.3.1.2.6"><h5 data-number="1.3.1.2.6" class="anchored" data-anchor-id="image-histogram">
+<span class="header-section-number">1.3.1.2.6</span> Image histogram</h5>
 <p>When we open an RGB image in SNAP the histogram is clipped by <a href="https://forum.step.esa.int/t/rgb-generation-in-snap/9066">1% at the lower end and 4% at the upper end</a> and then mapped in bins between 0 and 255 for display. A computer screen in full RGB displays colours between 0 and 255, hence why this is done.</p>
 <p>This is similar to the contrast enhancement we saw in QGIS and we can manually change it here again through View &gt; Tool Windows &gt; Colour Manipulation.</p>
 <p>Changing the distribution displayed will impact the colour of the image - try using the sliders or selecting 95% and 100% of all pixels to display. To reset click the back arrow button.</p>
@@ -468,8 +475,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<section id="scatterplots" class="level6" data-number="1.2.1.2.6.1"><h6 data-number="1.2.1.2.6.1" class="anchored" data-anchor-id="scatterplots">
-<span class="header-section-number">1.2.1.2.6.1</span> Scatterplots</h6>
+<section id="scatterplots" class="level6" data-number="1.3.1.2.6.1"><h6 data-number="1.3.1.2.6.1" class="anchored" data-anchor-id="scatterplots">
+<span class="header-section-number">1.3.1.2.6.1</span> Scatterplots</h6>
 <p>Under the analysis button there are a variety of tools we can use to explore some image statistics….for example, here i have created a scatter plot of band 4 (x axis) and band 8 ( y axis). These bands are the red (vegetation absorbs) and Near-infrared (NIR, that vegetation strongly reflects)…so where we have high values of NIR and low values of red the plot represents dense vegetation whilst low values of both red and NIR are usually wet bare soil. you need to click the refresh button to generate the plot.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -489,8 +496,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 </div>
 <p>In remote sensing this can be called “spectral feature space”, more on this later in the term. You might see the software ENVI in the source above - ENVI is propriety software that is similar to SNAP.</p>
-</section><section id="tasseled-caps" class="level6" data-number="1.2.1.2.6.2"><h6 data-number="1.2.1.2.6.2" class="anchored" data-anchor-id="tasseled-caps">
-<span class="header-section-number">1.2.1.2.6.2</span> Tasseled Caps</h6>
+</section><section id="tasseled-caps" class="level6" data-number="1.3.1.2.6.2"><h6 data-number="1.3.1.2.6.2" class="anchored" data-anchor-id="tasseled-caps">
+<span class="header-section-number">1.3.1.2.6.2</span> Tasseled Caps</h6>
 <p>The output should look somewhat like a “Tasseled Cap” (a wizards hat at an angle), although this is different to the tasseled cap <em>transformation</em> which was proposed by Kauth and Thomas (1976). The tasseled cap transformation was originally applied to Landsat data being composed of brightness, greeness, yellow stuff (yes!) and none-such. It was then modified in 1968 to brightness, greeness and wetness. This can can useful for identifying urban areas, they are <strong>usually</strong> bright (although Andy will have more to say on this), high biomass will show in the greeness and moisture in the wetness. The tasseled cap comes from the plot between brightness on the x axis and greenness on the y axis.</p>
 <p>Traditionally this is usually only applied to Landsat data, however if our bands in other sensors (like Sentinel) cover the same wavelengths we can apply it…</p>
 <p><span class="math display">\[
@@ -516,8 +523,8 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <li><p>Using the image provided will mean that the entire tile is computed when we really only care about our study area</p></li>
 </ul>
 <p>Note, that there are many spatial indexes that can be applied to remotely sensed data, the <a href="https://www.indexdatabase.de/">Index DataBase</a> holds them all or Chapter 8, pages 325 from Jensen is a good place to start.</p>
-</section></section><section id="masking-and-resampling" class="level5" data-number="1.2.1.2.7"><h5 data-number="1.2.1.2.7" class="anchored" data-anchor-id="masking-and-resampling">
-<span class="header-section-number">1.2.1.2.7</span> Masking and resampling</h5>
+</section></section><section id="masking-and-resampling" class="level5" data-number="1.3.1.2.7"><h5 data-number="1.3.1.2.7" class="anchored" data-anchor-id="masking-and-resampling">
+<span class="header-section-number">1.3.1.2.7</span> Masking and resampling</h5>
 <p>This is sometimes also called clipping in CASA0005 we saw cropping (to the extent of a polygon) and then masking. Here I am only interested in a study area of the City of Cape Town District Municipality, which is in the gadm40_ZAF_2 from the <a href="https://gadm.org/">GADM data</a>, it also appears in the gadm40_ZAF_3 data too!</p>
 <p>Explore the GADM data in QGIS to work out what spatial aggregation you can use to mask your study area. For the sake of this example you might want to use the smallest spatial unit, GADM level 4, which for South Africa is wards.</p>
 <p>SNAP only permits ESRI shapefile to be loaded! To do so you must select the product on interest in the product explorer &gt; Vector &gt; Import &gt; ESRI Shapefile</p>
@@ -573,8 +580,8 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 </div>
 </div>
 </div>
-</section></section></section><section id="landsat" class="level3" data-number="1.2.2"><h3 data-number="1.2.2" class="anchored" data-anchor-id="landsat">
-<span class="header-section-number">1.2.2</span> Landsat</h3>
+</section></section></section><section id="landsat" class="level3" data-number="1.3.2"><h3 data-number="1.3.2" class="anchored" data-anchor-id="landsat">
+<span class="header-section-number">1.3.2</span> Landsat</h3>
 <p>Landsat imagery is the longest free temporal image repository of consistent medium resolution data. It collects data at each point on Earth each every 16 days (temporal resolution) in a raster grid composed of 30 by 30 m cells (spatial resolution). Geographical analysis and concepts are becoming ever more entwined with remote sensing and Earth observation.</p>
 <p>To access the Landsat data we will use in this practical you can need to sign up for a free account at: https://earthexplorer.usgs.gov/.</p>
 <p>To download the data:</p>
@@ -625,8 +632,8 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 </div>
 </div>
 </div>
-<section id="select-pois" class="level4" data-number="1.2.2.1"><h4 data-number="1.2.2.1" class="anchored" data-anchor-id="select-pois">
-<span class="header-section-number">1.2.2.1</span> Select POIs</h4>
+<section id="select-pois" class="level4" data-number="1.3.2.1"><h4 data-number="1.3.2.1" class="anchored" data-anchor-id="select-pois">
+<span class="header-section-number">1.3.2.1</span> Select POIs</h4>
 <ul>
 <li><p>To create points of interest we want select pixels representative of certain land cover types (e.g.&nbsp;Bare earth, water, grass, forest, urban) so we can compare them from both Landsat and Sentinel. Of course the pixels need to be present in both datasets.</p></li>
 <li><p>We can select pixels through QGIS, R or SNAP. I’ll focus on the latter here.</p></li>
@@ -654,8 +661,8 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <ul>
 <li><p>Once done create another vector data container and repeat for the next land cover type.</p></li>
 <li><p>Consider have a separate class for highly reflective urban (e.g.&nbsp;industrial areas)</p></li>
-</ul></section></section><section id="spectral-signatures" class="level3" data-number="1.2.3"><h3 data-number="1.2.3" class="anchored" data-anchor-id="spectral-signatures">
-<span class="header-section-number">1.2.3</span> Spectral signatures</h3>
+</ul></section></section><section id="spectral-signatures" class="level3" data-number="1.3.3"><h3 data-number="1.3.3" class="anchored" data-anchor-id="spectral-signatures">
+<span class="header-section-number">1.3.3</span> Spectral signatures</h3>
 <p>To compare out spectral signatures we have a few options</p>
 <ul>
 <li>right click on the image in SNAP and then export mask pixels as a <code>.txt</code>, but you will need to do this for each land cover class and for each image (Sentinel and Landsat).</li>
@@ -669,16 +676,16 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <li><p>Right clicking on the vector containers will allow export to shapefile - do this for all the land covers you have</p></li>
 <li><p>To export the “product” which is what your image will be un SNAP. Select it (just click it) then go File &gt; Export &gt; GeoTIFF. When exporting the Landsat data click the subset button in the save box &gt; band subset (select only spectral bands) and then metadata subset and remove all the selection.</p></li>
 <li><p>Open the GeoTIFFS and shapefiles in QGIS to check everything.This is another good opportunity to understand how contrast enhancement works - in QGIS &gt; Symbology &gt; expand min / max and then change the cumulative count cut the value for each band will change. For Landsat B3 is red, B2 is green and B1 is blue. This <strong>does not change the values of the pixels</strong>, just <em>how they are displayed on a colour screen</em>.</p></li>
-</ul></section><section id="using-r" class="level3" data-number="1.2.4"><h3 data-number="1.2.4" class="anchored" data-anchor-id="using-r">
-<span class="header-section-number">1.2.4</span> Using R</h3>
+</ul></section><section id="using-r" class="level3" data-number="1.3.4"><h3 data-number="1.3.4" class="anchored" data-anchor-id="using-r">
+<span class="header-section-number">1.3.4</span> Using R</h3>
 <p>Remember that before we deal with large data sets in R, we <strong>must</strong> sort out the .gitignore file, if we intend to use Git and GitHub at any stage (hint: you will for the assessment). Go <a href="https://andrewmaclachlan.github.io/CASA0005repo/advanced-raster-analysis.html">back to CASA0005 to remember how if you need to</a></p>
 <p>Raster packages in R have and are still evolving rapidly, we have probably seen and used the <code>raster</code> package and may have seen the <code>terra</code> or <code>stars</code> packages. All can handle raster data and do the same analysis (pretty much).</p>
 <p>In 2023 some key packages will retire like <code>maptools</code>, <code>rgdal</code> and <code>rgeos</code> as their maintainer, Roger Bivand will retire. <code>raster</code> uses <code>sp</code> objects for vector data and also the <code>rgdal</code> package - the Geospatial Data Abstraction Library (GDAL) for reading, writing and converting between spatial formats. <code>sp</code> (that we saw in CASA0005) also uses <code>rgdal</code> and suggests <code>rgeos</code>.</p>
 <p>The <code>terra</code> package (2020) is somewhat mixed with <code>raster</code>, however the retiring packages are only needed by <code>raster</code>, with the <code>terra</code> package replacing <code>raster</code>. Terra is much faster than <code>raster</code> as datasets that can’t be loaded into RAM are stored on disc and when loaded doesn’t read the values. Then when computations occur the do so in chunks. Terra is very well documented and the functions are very similar to raster - https://rspatial.org/terra/pkg/index.html</p>
 <p>The <code>stars</code> package (2018) works with <code>sf</code>!!, this means many of the functions we’ve seen and are familiar with it will work - e.g.&nbsp;<code><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform()</a></code> which is much easier than doing it in raster. The real benefit of <code>stars</code> is its ability to handle large data (like satellite data) that can’t fit into memory. It does this through not loading the pixel values but keeping a reference to them through a proxy and only loading / running computations when specifically needed (e.g.&nbsp;plotting, will only plot the pixels that can be seen)! The <a href="https://keen-swartz-3146c4.netlify.app/large.html#raster-data-stars">stars section from Spatial Data Science</a> in Pebesma and Bivnad 2022 gives a good overview with examples</p>
 <p>Stars is faster than terra, terra is faster than raster.</p>
-<section id="data-loading" class="level4" data-number="1.2.4.1"><h4 data-number="1.2.4.1" class="anchored" data-anchor-id="data-loading">
-<span class="header-section-number">1.2.4.1</span> Data loading</h4>
+<section id="data-loading" class="level4" data-number="1.3.4.1"><h4 data-number="1.3.4.1" class="anchored" data-anchor-id="data-loading">
+<span class="header-section-number">1.3.4.1</span> Data loading</h4>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
@@ -880,8 +887,8 @@ mean of x mean of y
 </div>
 <p>How <a href="https://www.guru99.com/r-t-test-one-sample.html">do we interpret this</a>?</p>
 <p>If you make plots of reflectance be careful to use the same scale, you can do this by adding a new line under <code>ggplot</code> like:<code>lims(y = c(0, 80000))</code></p>
-</section></section><section id="review-questions" class="level3" data-number="1.2.5"><h3 data-number="1.2.5" class="anchored" data-anchor-id="review-questions">
-<span class="header-section-number">1.2.5</span> Review questions</h3>
+</section></section><section id="review-questions" class="level3" data-number="1.3.5"><h3 data-number="1.3.5" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">1.3.5</span> Review questions</h3>
 <p>Write around 2-3 paragraphs on the following and support your responses with plots and literature:</p>
 <ul>
 <li>Briefly explain the process of sourcing, loading and manipulating remotely sensed datasets</li>
@@ -910,6 +917,109 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

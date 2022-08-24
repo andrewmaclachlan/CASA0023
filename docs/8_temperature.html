@@ -92,10 +92,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -140,6 +142,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
   </li>  
 </ul>
 <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
                   <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -253,8 +256,14 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
   </ul>
 </li>
   <li><a href="#trend-analysis" id="toc-trend-analysis" class="nav-link" data-scroll-target="#trend-analysis"> <span class="header-section-number">8.6</span> Trend analysis</a></li>
-  <li><a href="#heat-index" id="toc-heat-index" class="nav-link" data-scroll-target="#heat-index"> <span class="header-section-number">8.7</span> Heat index</a></li>
-  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">8.8</span> Considerations</a></li>
+  <li>
+<a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions"> <span class="header-section-number">8.7</span> Review questions</a>
+  <ul class="collapse">
+<li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context"> <span class="header-section-number">8.7.1</span> Context</a></li>
+  </ul>
+</li>
+  <li><a href="#guidance" id="toc-guidance" class="nav-link" data-scroll-target="#guidance"> <span class="header-section-number">8.8</span> Guidance</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link" data-scroll-target="#considerations"> <span class="header-section-number">8.9</span> Considerations</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/8_temperature.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -599,11 +608,37 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </ul></section></section></section><section id="trend-analysis" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="trend-analysis">
 <span class="header-section-number">8.6</span> Trend analysis</h2>
 <p>To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example…the <a href="https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends">Mann-Kendall trend test</a>. Once we have identified these pixels or areas we could then investigate them further with Landsat surface temperature data and landcover data.</p>
-</section><section id="heat-index" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="heat-index">
-<span class="header-section-number">8.7</span> Heat index</h2>
+</section><section id="review-questions" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="review-questions">
+<span class="header-section-number">8.7</span> Review questions</h2>
+<p>For the task this week the task is to make an index from remotely sensed data, for example a heat or pollution index following the example below…</p>
+<p>You will need to provide the GEE code and 1-2 paragraphs of text explaining what the code does</p>
+<section id="context" class="level3" data-number="8.7.1"><h3 data-number="8.7.1" class="anchored" data-anchor-id="context">
+<span class="header-section-number">8.7.1</span> Context</h3>
 <p>Make this - https://www.bbc.co.uk/news/uk-62243280</p>
-</section><section id="considerations" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="considerations">
-<span class="header-section-number">8.8</span> Considerations</h2>
+<p>From this BBC article it says that:</p>
+<blockquote class="blockquote">
+<p>A statistical method published by academics was used to standardise land surface temperatures for each postcode area, which involved combining satellite images for different dates over the past three years.</p>
+</blockquote>
+<p>Further…</p>
+<blockquote class="blockquote">
+<p>Using satellite data from 4 Earth Intelligence, the BBC mapped how vulnerable postcode areas were to extreme heat in England, Wales and Scotland during periods of hot weather over the past three summers - shown with a heat hazard score.</p>
+</blockquote>
+<p>The temperature was from.,..</p>
+<blockquote class="blockquote">
+<p>The potential heat hazard score for each postcode area was calculated by 4EI, who measured the average land surface temperature over a sample of days in the past three summers across Britain.</p>
+</blockquote>
+<p>The score was calculated ….</p>
+<p>Index 1 = 40th percentile and lower, if you lined up all the postcodes by heat hazard score, your postcode is in the coolest 40%.</p>
+<p>Index 2 = 40th - 70th percentile, your postcode is in the mid-range. 40% of postcodes have a lower heat hazard than yours but 30% have a higher one.</p>
+<p>Index 3 is the 70-90th, 4 is the 90-99th and 5 is the 99th.</p>
+<p>https://gis.stackexchange.com/questions/392533/google-earth-engine-calculate-percentile-rank-in-ee-imagecollection</p>
+</section></section><section id="guidance" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="guidance">
+<span class="header-section-number">8.8</span> Guidance</h2>
+<ul>
+<li>You should select an area that isn’t too cloudly or change the image date seach values</li>
+<li>You might wish to upload the GADM admin boundaries or another</li>
+</ul></section><section id="considerations" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="considerations">
+<span class="header-section-number">8.9</span> Considerations</h2>
 <ul>
 <li><p>Following the lecture, could the red lined areas experience higher temperatures?</p></li>
 <li><p>Could a similar analysis be done for other variables? Such as <a href="https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_NO2">pollution</a><br></p></li>
@@ -632,6 +667,109 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

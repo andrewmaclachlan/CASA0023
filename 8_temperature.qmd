@@ -357,9 +357,42 @@ You can also change how the data is exported, although I would now just do some 
 
 To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example...the [Mann-Kendall trend test](https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends). Once we have identified these pixels or areas we could then investigate them further with Landsat surface temperature data and landcover data.
 
-## Heat index
+## Review questions
+
+For the task this week the task is to make an index from remotely sensed data, for example a heat or pollution index following the example below...
+
+You will need to provide the GEE code and 1-2 paragraphs of text explaining what the code does
+
+### Context 
 
 Make this - https://www.bbc.co.uk/news/uk-62243280
+
+From this BBC article it says that:
+
+> A statistical method published by academics was used to standardise land surface temperatures for each postcode area, which involved combining satellite images for different dates over the past three years.
+
+Further...
+
+> Using satellite data from 4 Earth Intelligence, the BBC mapped how vulnerable postcode areas were to extreme heat in England, Wales and Scotland during periods of hot weather over the past three summers - shown with a heat hazard score.
+
+The temperature was from.,..
+
+> The potential heat hazard score for each postcode area was calculated by 4EI, who measured the average land surface temperature over a sample of days in the past three summers across Britain.
+
+The score was calculated ....
+
+Index 1 = 40th percentile and lower, if you lined up all the postcodes by heat hazard score, your postcode is in the coolest 40%.
+
+Index 2 = 40th - 70th percentile, your postcode is in the mid-range. 40% of postcodes have a lower heat hazard than yours but 30% have a higher one.
+
+Index 3 is the 70-90th, 4 is the 90-99th and 5 is the 99th.
+
+https://gis.stackexchange.com/questions/392533/google-earth-engine-calculate-percentile-rank-in-ee-imagecollection
+
+## Guidance
+
+* You should select an area that isn't too cloudly or change the image date seach values
+* You might wish to upload the GADM admin boundaries or another 
 
 ## Considerations
 

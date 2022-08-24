@@ -67,8 +67,11 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+        light: [cosmo, flatly]
+        dark: [cosmo, darkly]
     code-link: true
+
 
   pdf:
     documentclass: scrbook

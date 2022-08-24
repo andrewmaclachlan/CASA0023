@@ -13,6 +13,10 @@ By the end of this practical you should be able to:
 * Evaluate the (dis)advantages of each type of software you have used
 * Pull out and statistically compare spectral signatures 
 
+## EO dashboard
+
+Before we start the practical, spend 5 minutes exploring the [EOdashboard website](https://eodashboard.org/explore?poi=World-E10e). It contains a useful overview of some of the EO data that we can and will explore later in the module. 
+
 ## .gitignore
 
 If you are using Git with your project and have large data it's best to set up a `.gitignore` file. This file tells git to ignore certain files so they aren't in your local repository that is then pushed to GitHub. If you try and push large files to GitHub you will get an error and could run into lots of problems, trust me, i've been there. Look at [my .gitignore for this repository](https://github.com/andrewmaclachlan/CASA0023/blob/main/.gitignore) and you will notice:
