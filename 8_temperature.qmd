@@ -256,8 +256,9 @@ When we inspect the new vector file we can see that a mean column has been added
 knitr::include_graphics('prac_8/GEE_mean_Lsat.png') 
 ```
 
-Can we style this better? AM to check
+**Notes** of the reduce regions:
 
+* There is a reduce percentile function...`reducer: ee.Reducer.percentile([10, 20, 30, 40, 50, 60, 70, 80, 90])` that might also be useful. This takes all the pixels in each polygon and lists the value of the percentiles specified in the attribute table. 
 
 #### Export
 
@@ -361,11 +362,13 @@ To extended our analysis we could explore statistics that will establish if we h
 
 For the task this week the task is to make an index from remotely sensed data, for example a heat or pollution index following the example below...
 
-You will need to provide the GEE code and 1-2 paragraphs of text explaining what the code does
+You will need to provide the GEE code and 1-2 paragraphs of text explaining what the code does.
+
+I have used London as my example, and you might see that some of the wards are missing, this is because of the original dataset using a mixture of polygons and polylines After I uploaded and ran the statistics GEE didn't want to export different poly features so i just selected the polygons...
 
 ### Guidance
 
-* You should select an area that isn't too cloudy or change the image date seach values
+* You should select an area that isn't too cloudy or change the image date search values
 * You might wish to upload the GADM admin boundaries or another 
 
 
@@ -391,17 +394,21 @@ Index 2 = 40th - 70th percentile, your postcode is in the mid-range. 40% of post
 
 Index 3 is the 70-90th, 4 is the 90-99th and 5 is the 99th.
 
-To calculate the percentile of the mean tempearture per spatial unit, i downloaded my data from GEE and ran it in R....
+However, feel free to change these assumptions, for example, as noted earlier is it more appropriate to use the percentile within each spatial unit than compare then across the entire study area?
+
+To calculate the percentile rank of the mean temperature per spatial unit, i downloaded my data from GEE and ran it in R....
 
 First make a quick map of our mean temperature per spatial unit, in my case wards...
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(sf)
 library(tmap)
+
 temp <- st_read(here::here("prac_8",
                                   "mean_Landsat_ward.shp"))
 
+tmap_mode("plot")
 # plot each map
 tm1 <- tm_shape(temp) + 
   tm_polygons("mean", 
@@ -417,7 +424,7 @@ Then for percentile rank...the percentile code is [from stackexchange](https://s
 
 Note, that percentile rank is "percentage of scores within a norm group that is lower than the score you have"....if you are in the 25% then 25% of values are below that [value and it is the 25 rank...](https://www.statisticshowto.com/probability-and-statistics/percentiles-rank-range/)
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 perc.rank <- function(x) trunc(rank(x))/length(x)
 
 percentile <- temp %>% 
@@ -427,13 +434,13 @@ percentile <- temp %>%
 
 Now assign the classes...
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 perc.rank <- function(x) trunc(rank(x))/length(x)
+
 
 percentile <- temp %>% 
   mutate(percentile1 = (perc.rank(mean))*100)%>%
-
-  mutate(Level = case_when(between(percentile1, 0, 39.99)~ "1",
+    mutate(Level = case_when(between(percentile1, 0, 39.99)~ "1",
                            between(percentile1, 40, 69.99)~ "2",
                            between(percentile1, 70, 89.99)~ "3",
                            between(percentile1, 90, 98.99)~ "4",
@@ -441,9 +448,21 @@ percentile <- temp %>%
 
 ```
 
+To understand this a bit further check out the percentiles of the breaks we set...a percentile is.." 
+> a statistical measure that indicates the value below which a percentage of data falls, [Rbloggers](https://www.r-bloggers.com/2022/06/r-percentile/)
+
+Run the code below then open your `percentile` data above, you should see that the ranks correspond to the percentiles set...
+
+```{r, message=FALSE, warning=FALSE}
+test<-quantile(temp$mean, c(0.39999, 0.69999, 0.8999, 0.98999, 1.0))
+
+test
+```
+In my case a temperature of 39.87138 is set to level 2, whilst a temperature of 39.87861 is set to level 3...
+
 Map the heat index....
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # plot each map
 tm1 <- tm_shape(percentile) + 
   tm_polygons("Level", 
@@ -457,13 +476,13 @@ tm1
 
 Interactive...
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(terra)
-temp <- rast("prac_8/subtracted_mean_HI.tif")
+temp_rast <- rast("prac_8/subtracted_mean_HI.tif")
 
 tmap_mode("view")
 
-interactive <- tm_shape(temp) +
+interactive <- tm_shape(temp_rast) +
   tm_raster("subtracted_mean_HI.tif", 
             palette = "Reds") + 
 tm_shape(percentile) + 
@@ -479,7 +498,7 @@ interactive
 
 ```
 
-Now we have the tempearture per ward, we could explore factors of the built envrionemnt that might contirbute to that temperature....such as...buildings, lack of vegetation, lack of water areas and so on. 
+Now we have the temperature per ward (or the index), we could explore factors of the built environment that might contribute to that temperature....such as...buildings, lack of vegetation, lack of water areas and so on. This could include some more analysis in GEE such as NDVI, [building area](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_Research_open-buildings_v1_polygons) per spatial unit or other data from local authorities...
 
 ## Considerations
 
