@@ -363,11 +363,15 @@ For the task this week the task is to make an index from remotely sensed data, f
 
 You will need to provide the GEE code and 1-2 paragraphs of text explaining what the code does
 
+### Guidance
+
+* You should select an area that isn't too cloudy or change the image date seach values
+* You might wish to upload the GADM admin boundaries or another 
+
+
 ### Context 
 
-Make this - https://www.bbc.co.uk/news/uk-62243280
-
-From this BBC article it says that:
+From [this BBC article](https://www.bbc.co.uk/news/uk-62243280) it says that:
 
 > A statistical method published by academics was used to standardise land surface temperatures for each postcode area, which involved combining satellite images for different dates over the past three years.
 
@@ -387,12 +391,95 @@ Index 2 = 40th - 70th percentile, your postcode is in the mid-range. 40% of post
 
 Index 3 is the 70-90th, 4 is the 90-99th and 5 is the 99th.
 
-https://gis.stackexchange.com/questions/392533/google-earth-engine-calculate-percentile-rank-in-ee-imagecollection
+To calculate the percentile of the mean tempearture per spatial unit, i downloaded my data from GEE and ran it in R....
 
-## Guidance
+First make a quick map of our mean temperature per spatial unit, in my case wards...
 
-* You should select an area that isn't too cloudly or change the image date seach values
-* You might wish to upload the GADM admin boundaries or another 
+```{r}
+library(tidyverse)
+library(sf)
+library(tmap)
+temp <- st_read(here::here("prac_8",
+                                  "mean_Landsat_ward.shp"))
+
+# plot each map
+tm1 <- tm_shape(temp) + 
+  tm_polygons("mean", 
+             # breaks=breaks,
+              palette="Reds")+
+  tm_legend(show=TRUE)+
+  tm_layout(frame=FALSE)
+
+tm1
+```
+
+Then for percentile rank...the percentile code is [from stackexchange](https://stats.stackexchange.com/questions/11924/computing-percentile-rank-in-r/11928#11928)
+
+Note, that percentile rank is "percentage of scores within a norm group that is lower than the score you have"....if you are in the 25% then 25% of values are below that [value and it is the 25 rank...](https://www.statisticshowto.com/probability-and-statistics/percentiles-rank-range/)
+
+```{r}
+perc.rank <- function(x) trunc(rank(x))/length(x)
+
+percentile <- temp %>% 
+  mutate(percentile1 = perc.rank(mean))
+
+```
+
+Now assign the classes...
+
+```{r}
+perc.rank <- function(x) trunc(rank(x))/length(x)
+
+percentile <- temp %>% 
+  mutate(percentile1 = (perc.rank(mean))*100)%>%
+
+  mutate(Level = case_when(between(percentile1, 0, 39.99)~ "1",
+                           between(percentile1, 40, 69.99)~ "2",
+                           between(percentile1, 70, 89.99)~ "3",
+                           between(percentile1, 90, 98.99)~ "4",
+                           between(percentile1, 99, 100)~ "5"))
+
+```
+
+Map the heat index....
+
+```{r}
+# plot each map
+tm1 <- tm_shape(percentile) + 
+  tm_polygons("Level", 
+             # breaks=breaks,
+              palette="Reds")+
+  tm_legend(show=TRUE)+
+  tm_layout(frame=FALSE)
+
+tm1
+```
+
+Interactive...
+
+```{r}
+library(terra)
+temp <- rast("prac_8/subtracted_mean_HI.tif")
+
+tmap_mode("view")
+
+interactive <- tm_shape(temp) +
+  tm_raster("subtracted_mean_HI.tif", 
+            palette = "Reds") + 
+tm_shape(percentile) + 
+  tm_polygons("Level", 
+             # breaks=breaks,
+              palette="Reds",
+              fillOpacity = 0.7,
+)+
+  tm_legend(show=TRUE)+
+  tm_layout(frame=FALSE)
+
+interactive
+
+```
+
+Now we have the tempearture per ward, we could explore factors of the built envrionemnt that might contirbute to that temperature....such as...buildings, lack of vegetation, lack of water areas and so on. 
 
 ## Considerations
 
