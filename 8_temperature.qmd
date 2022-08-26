@@ -398,7 +398,10 @@ Index 3 is the 70-90th, 4 is the 90-99th and 5 is the 99th.
 
 However, feel free to change these assumptions, for example, as noted earlier is it more appropriate to use the percentile within each spatial unit than compare then across the entire study area?
 
-To calculate the percentile rank of the mean temperature per spatial unit, i downloaded my data from GEE and ran it in R....
+To calculate the percentile rank of the mean temperature per spatial unit, in my first attempt at this I downloaded my data from GEE and ran it in R....I then consulted Ollie Ballinger who helped me re-create the `case_when()` that you see below from R...First the R attempt...
+
+#### R 
+
 
 First make a quick map of our mean temperature per spatial unit, in my case wards...
 
@@ -497,6 +500,96 @@ tm_shape(percentile) +
   tm_layout(frame=FALSE)
 
 interactive
+
+```
+
+#### GEE
+
+This is very similar (but slightly different) in GEE....
+
+First of all we need to get the percentiles of the mean column...
+
+```{r, eval=FALSE}
+var percentiles = mean_Landsat_ward.reduceColumns({
+  reducer: ee.Reducer.percentile([10, 20, 30, 40, 50, 60, 70, 80, 90, 99, 100]),
+  selectors: ['mean']
+});
+
+print(percentiles, "percentile") ///gives the overall percentile then need to map
+```
+
+Next, pull out these values are numbers....
+
+```{r, eval=FALSE}
+var p40 = ee.Number(percentiles.get('p40'))
+var p70 = ee.Number(percentiles.get('p70'))
+var p90 = ee.Number(percentiles.get('p90'))
+var p99 = ee.Number(percentiles.get('p99'))
+var p100 = ee.Number(percentiles.get('p100'))
+
+print(p40, "p40")// check one
+
+```
+
+Now, do the `case_when()` equivalent ....it's a lot of code! 
+
+```{r, eval=FALSE}
+
+var resub= mean_Landsat_ward.map(function(feat){
+  return ee.Algorithms.If(ee.Number(feat.get('mean')).lt(p40).and(ee.Number(feat.get('mean')).gt(0)),
+  feat.set({'percentile_cat': 1}),
+  ee.Algorithms.If(ee.Number(feat.get('mean')).gt(p40).and(ee.Number(feat.get('mean')).lt(p70)),
+  feat.set({'percentile_cat': 2}),
+  ee.Algorithms.If(ee.Number(feat.get('mean')).gt(p70).and(ee.Number(feat.get('mean')).lt(p90)),
+  feat.set({'percentile_cat': 3}),
+  ee.Algorithms.If(ee.Number(feat.get('mean')).gt(p90).and(ee.Number(feat.get('mean')).lt(p99)),
+  feat.set({'percentile_cat': 4}),
+  ee.Algorithms.If(ee.Number(feat.get('mean')).gt(p99).and(ee.Number(feat.get('mean')).lte(p100)),
+  feat.set({'percentile_cat': 5}),  
+  feat.set({'percentile_cat': 0}))
+))))})
+
+```
+
+Next up is setting some visualization parameters, i got the CSS colour codes (HEX codes) from [colorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)
+
+```{r, eval=FALSE}
+
+var visParams_vec = {
+    'palette': ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
+    'min': 0.0,
+    'max': 5,
+    'opacity': 0.8,
+}
+```
+
+Now, we make an image from out our column in the vector data....
+
+```{r, eval=FALSE}
+var image = ee.Image().float().paint(resub, 'percentile_cat')
+```
+
+Finally, we map it....
+
+```{r, eval=FALSE}
+Map.addLayer(image, visParams_vec, 'Percentile_cat')
+```
+
+```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_8/GEE_temp_index.png') 
+```
+
+As as side note here, it we want to add columns in GEE like we would in R using `mutate()` or a `field calculator` in GIS software we use something like this...
+
+```{r, eval=FALSE}
+//example of field calculator or mutate in R...
+
+var collectionWithCount = mean_Landsat_ward.map(function (feature) {
+  ///make a new column
+  return feature.set('percentage',
+  // take the mean column and * 100                   
+  feature.getNumber('mean').multiply(100));
+});
 
 ```
 
