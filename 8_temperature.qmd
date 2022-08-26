@@ -204,6 +204,8 @@ knitr::include_graphics('prac_8/GEE_temp_out_MODIS.png')
 So the real benefit of MODIS data is that we can plot the time series...**however** in doing so we lose the spatial element...
 
 ```{r, eval=FALSE}
+var aqua_terra = MODIS_Aqua_day.merge(MODIS_Terra_day) //merge the two collections
+
 var timeseries = ui.Chart.image.series({
   imageCollection: aqua_terra,
   region: Beijing,
