@@ -1,0 +1,83 @@
+# Hello Remote Sensing {.unnumbered}
+
+```{r load_packages, message=FALSE, warning=FALSE, include=FALSE}
+library(fontawesome)
+```
+
+## Schedule
+
+| Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                   |
+|-------|:-------------|:---------:|----------------|:-----------:|
+| 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)        |
+| 2    | Portfolio tools: Xaringan and Quarto                                | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Portfolio                           |     [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html)     |
+| 3    | Remote sensing data                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1) | Corrections                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/3_corrections.html)    |
+| 4    | Policy applications                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-4/#1) | Policy                              |      [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/4_policy.html)       |
+| 5    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1) | Google Earth Engine                 |       [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html)       |
+|      | **Reading week**                                                    |                                                                                         |                                     |                                                                                        |
+| 6    | Classification the big questions (lecture 5 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification I                    | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |
+| 7    | Temperature and policy                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html) |
+| 8    | Need a lecture on GEE?                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Tempearture                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html)    |
+| 9    | SAR??                                                               | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | SAR? Change detection               |                                     `r fa("code")`                                     |
+| 10   | Presentations                                                       | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Remote sensing workflow?            |                                     `r fa("code")`                                     |
+
+## Intended course learning outcomes
+
+At the end of this module students will be able to:
+
+-   Create a reproducible online portfolio workbook
+
+-   Explain and evaluate common issues with urban and environmental policies at the local, national and international level that fail to consider spatial data
+
+-   Revise vague and ambiguous development targets
+
+-   Appropriately pre-process Earth observation imagery ready for analysis
+
+-   Apply published methodologies to extract meaning from Earth observation data
+
+-   Combine a variety of spatial data to demonstrate the benefits of data-informed governance and planning.
+
+-   Create and design a reproducible workflow for consistent monitoring of urban and environmental metrics
+
+-   Critique and optimise recently developed metropolitan climate mitigation strategies using appropriate spatial data, optimizing financial investment and environmental outcomes
+
+## How to use this book
+
+This website is hosted on GitHub and holds all the practical instructions and data. Data used within the practicals is available online, however occasionally websites can undergo maintenance or be inaccessible due to political factors such as government shutdowns.
+
+To get the most out of this book spend a few minutes learning how to control it, in the top right of this webpage you will see this tools bar:
+
+```{r echo=FALSE, out.width = "600pt", fig.align='center', cache=TRUE, message=FALSE}
+knitr::include_graphics('general_images/Book_controls.png')
+```
+
+From left to right these buttons will let you:
+
+-   <i class="fa fa-bars fa-lg"></i> control the side bar
+
+-   <i class="fa fa-search fa-lg"></i> search the entire book for a specific word
+
+-   <i class ="fa fa-font settings fa-lg"></i> change the text size, font, colour
+
+-   <i class ="fa fa-edit fa-lg"></i> propose an edit if you see a mistake that I can review
+
+-   <i class="fa fa-download fa-lg"></i> view the webpage in the 'raw' RMarkdown format, we cover RMarkdown in the course
+
+-   <i class="fa fa-info" fa-lg></i> information about shortcuts for this book and most others like it
+
+In addition the <i class="fa fa-github fa-lg"></i> icon in the top right of the page takes you to the GitHub repository for this book, we cover GitHub in the course, but it's basically where the online files for the book are stored.
+
+## Software installation
+
+This course uses a range of software, some of which we have encountered before:
+
+### SNAP
+
+### Google Earth Engine
+
+### R
+
+You should have both R and RStudio installed from CASA0005
+
+### QGIS
+
+You should have QGIS installed from CASA0005

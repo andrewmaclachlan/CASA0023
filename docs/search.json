@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "CASA0023 Remotely Sensing Cities and Environments",
     "section": "",
-    "text": "Andy MacLachlan1\nLast updated: 2022-08-26"
+    "text": "Andy MacLachlan1\nLast updated: 2022-10-03"
   },
   {
     "objectID": "index.html#welcome",
@@ -19,6 +19,34 @@
     "title": "CASA0023 Remotely Sensing Cities and Environments",
     "section": "Acknowledgement",
     "text": "Acknowledgement\nThanks to the following academics who inspired the creating of the module and various concepts within it:\n\nDr Ellie Biggs\nDr Gareth Roberts\nDr Bryan Boruff\nProfessor Ted Milton\nDr Laurie Chisholm\n\nThanks again to the following people who have either contributed directly or provided code in repositories that have helped me style this book:\n\n\nR Studio\n\nSTAT 545\nrstudio4edu\nHadley Wickham\nAlison Presmanes Hill\nDesirée De Leon\nYihui Xie\nJulia Silge\nJenny Bryan\nOthers\n\nRobin Lovelace\nTwitter for R programmers\nMatt Ng\nStatQuest with Josh Starmer\nGarrick Aden‑Buie\n\n\n\nThe R package and analysis artwork used within this book has been produced by allison_horst, whilst artwork used in information boxes has been produced by Desirée De Leon. You can find Allison’s images on the stats illustration GitHub repository and Desirée’s on the rstudio4edu GitHub repository.\nI’ve certainly learnt a lot from their open code repositories!"
+  },
+  {
+    "objectID": "00-course_info.html",
+    "href": "00-course_info.html",
+    "title": "Hello Remote Sensing",
+    "section": "",
+    "text": "Week\nLecture\nPresentation\nPractical\nPractical material\n\n\n\n1\nAn Introduction to Remote Sensing\n\nGetting started with remote sensing\n\n\n\n2\nPortfolio tools: Xaringan and Quarto\n\nPortfolio\n\n\n\n3\nRemote sensing data\n\nCorrections\n\n\n\n4\nPolicy applications\n\nPolicy\n\n\n\n5\nClassification\n\nGoogle Earth Engine\n\n\n\n\nReading week\n\n\n\n\n\n6\nClassification the big questions (lecture 5 continued) and accuracy\n\nClassification I\n\n\n\n7\nTemperature and policy\n\nClassification II\n\n\n\n8\nNeed a lecture on GEE?\n\nTempearture\n\n\n\n9\nSAR??\n\nSAR? Change detection\n\n\n\n10\nPresentations\n\nRemote sensing workflow?"
+  },
+  {
+    "objectID": "00-course_info.html#intended-course-learning-outcomes",
+    "href": "00-course_info.html#intended-course-learning-outcomes",
+    "title": "Hello Remote Sensing",
+    "section": "Intended course learning outcomes",
+    "text": "Intended course learning outcomes\nAt the end of this module students will be able to:\n\nCreate a reproducible online portfolio workbook\nExplain and evaluate common issues with urban and environmental policies at the local, national and international level that fail to consider spatial data\nRevise vague and ambiguous development targets\nAppropriately pre-process Earth observation imagery ready for analysis\nApply published methodologies to extract meaning from Earth observation data\nCombine a variety of spatial data to demonstrate the benefits of data-informed governance and planning.\nCreate and design a reproducible workflow for consistent monitoring of urban and environmental metrics\nCritique and optimise recently developed metropolitan climate mitigation strategies using appropriate spatial data, optimizing financial investment and environmental outcomes"
+  },
+  {
+    "objectID": "00-course_info.html#how-to-use-this-book",
+    "href": "00-course_info.html#how-to-use-this-book",
+    "title": "Hello Remote Sensing",
+    "section": "How to use this book",
+    "text": "How to use this book\nThis website is hosted on GitHub and holds all the practical instructions and data. Data used within the practicals is available online, however occasionally websites can undergo maintenance or be inaccessible due to political factors such as government shutdowns.\nTo get the most out of this book spend a few minutes learning how to control it, in the top right of this webpage you will see this tools bar:\n\n\n\n\n\n\n\n\nFrom left to right these buttons will let you:\n\n control the side bar\n search the entire book for a specific word\n change the text size, font, colour\n propose an edit if you see a mistake that I can review\n view the webpage in the ‘raw’ RMarkdown format, we cover RMarkdown in the course\n information about shortcuts for this book and most others like it\n\nIn addition the  icon in the top right of the page takes you to the GitHub repository for this book, we cover GitHub in the course, but it’s basically where the online files for the book are stored."
+  },
+  {
+    "objectID": "00-course_info.html#software-installation",
+    "href": "00-course_info.html#software-installation",
+    "title": "Hello Remote Sensing",
+    "section": "Software installation",
+    "text": "Software installation\nThis course uses a range of software, some of which we have encountered before:\nSNAP\nGoogle Earth Engine\nR\nYou should have both R and RStudio installed from CASA0005\nQGIS\nYou should have QGIS installed from CASA0005"
   },
   {
     "objectID": "intro.html",
@@ -60,7 +88,7 @@
     "href": "2_portfolio.html#xaringan",
     "title": "2  Portfolio",
     "section": "\n2.2 Xaringan",
-    "text": "2.2 Xaringan\n🙊 shar-in-gen\n\nInstall / load the packages\n\n\nremotes::install_github(\"yihui/xaringan\")\nlibrary(xaringanExtra)\n\n\n2.2.1 Template:\nFile -> New File -> R Markdown -> From Template -> Ninja Presentation\nThe loaded template and lecture had a lot of info, but to get started you need to know the following tools:\n\n2.2.2 Themes\nTo change how the RMarkdown renders you can select a different theme…just change the css argument in the preamble…currently it will be…\ncss: [default, metropolis, metropolis-fonts]\nTo see other themes:\nnames(xaringan:::list_css())\nOr, use the package xaringanthemer. Simply load the package, have a code chunk at the start of the presentation like this…\nChange the preamble to * css: [\"xaringan-themer.css\"] * highlightStyle: solarized-dark or which ever style you selected.\nSee the Xaringan CSS Theme Generator site for more details.\n\n2.2.3 Slide controls:\n\nAdd a new slide = ---\n\nAdd a click to open the next part of a slide = --\n\nAdd a flipped slide (colours reversed and message in centre) = class: inverse, center, middle (after the ---)\n\n2.2.4 Headings / lists:\n\n\n#, ## and so on for sub headings\nLists use * or 1.First item and 1.Second item, it will know to list them 1 and then 2.\n\n2.2.5 Slide sides (e.g. like power point)\n.pull-left[To have things on the left]\n.pull-right[To have things on the right]\n\n2.2.6 Images\n\nknitr::include_graphics('img/Lena-river.jpg')`\n\nto control the figure you can specify options within the chunk e.g.\n{r  echo=FALSE, out.width='60%', fig.align='center'}\n\n2.2.7 Equations\nTo use an equation it’s just placing the values / text in an opening $$ and closing $$e.g.\n$$NDVI= \\frac{NIR-Red}{NIR+Red}$$\nYou may also want to split equations if they are rather long…with \\begin{split} and \\\\ where you want the splits and then \\end{split}\n\\[\\begin{split}\nWetness = 0.1509(B2)+0.1973(B3)\\\\+0.3279(B4)+0.3406(B8)\\\\−\n0.7112(B11)−0.4572(B12)\n\\end{split}\\]\n\n2.2.8 Preview\nLoad the add In “Infinite Moon Reader” from Yihui Xie generates the slides every time you save the .Rmd. Tools > Addins.\n\n2.2.9 xaringanExtra\nxaringanExtra, developed by Garrick Aden-Buie is “a playground of enhancements and extensions”..that are easy to add..for example, to add a search function in your slides just add..see xaringanExtra"
+    "text": "2.2 Xaringan\n🗣 shar-in-gen\n\nInstall / load the packages\n\n\nremotes::install_github(\"yihui/xaringan\")\nlibrary(xaringanExtra)\n\n\n2.2.1 Template:\nFile -> New File -> R Markdown -> From Template -> Ninja Presentation\nThe loaded template and lecture had a lot of info, but to get started you need to know the following tools:\n\n2.2.2 Themes\nTo change how the RMarkdown renders you can select a different theme…just change the css argument in the preamble…currently it will be…\ncss: [default, metropolis, metropolis-fonts]\nTo see other themes:\nnames(xaringan:::list_css())\nOr, use the package xaringanthemer. Simply load the package, have a code chunk at the start of the presentation like this…\nChange the preamble to * css: [\"xaringan-themer.css\"] * highlightStyle: solarized-dark or which ever style you selected.\nSee the Xaringan CSS Theme Generator site for more details.\n\n2.2.3 Slide controls:\n\nAdd a new slide = ---\n\nAdd a click to open the next part of a slide = --\n\nAdd a flipped slide (colours reversed and message in centre) = class: inverse, center, middle (after the ---)\n\n2.2.4 Headings / lists:\n\n\n#, ## and so on for sub headings\nLists use * or 1.First item and 1.Second item, it will know to list them 1 and then 2.\n\n2.2.5 Slide sides (e.g. like power point)\n.pull-left[To have things on the left]\n.pull-right[To have things on the right]\n\n2.2.6 Images\n\nknitr::include_graphics('img/Lena-river.jpg')`\n\nto control the figure you can specify options within the chunk e.g.\n{r  echo=FALSE, out.width='60%', fig.align='center'}\n\n2.2.7 Equations\nTo use an equation it’s just placing the values / text in an opening $$ and closing $$e.g.\n$$NDVI= \\frac{NIR-Red}{NIR+Red}$$\nYou may also want to split equations if they are rather long…with \\begin{split} and \\\\ where you want the splits and then \\end{split}\n\\[\\begin{split}\nWetness = 0.1509(B2)+0.1973(B3)\\\\+0.3279(B4)+0.3406(B8)\\\\−\n0.7112(B11)−0.4572(B12)\n\\end{split}\\]\n\n2.2.8 Preview\nLoad the add In “Infinite Moon Reader” from Yihui Xie generates the slides every time you save the .Rmd. Tools > Addins.\n\n2.2.9 xaringanExtra\nxaringanExtra, developed by Garrick Aden-Buie is “a playground of enhancements and extensions”..that are easy to add..for example, to add a search function in your slides just add..see xaringanExtra"
   },
   {
     "objectID": "2_portfolio.html#quarto",
@@ -361,7 +389,7 @@
     "href": "8_temperature.html#considerations",
     "title": "\n8  Temperature\n",
     "section": "\n8.8 Considerations",
-    "text": "8.8 Considerations\n\nFollowing the lecture, could the red lined areas experience higher temperatures?\nCould a similar analysis be done for other variables? Such as pollution\nCould we make a pollution index similar to the heat index\nCould we make a flood index or explore flooding over time in cities / determine areas that need remediation"
+    "text": "8.8 Considerations\n\nhttps://docs.google.com/document/d/1WDxMR5UpxqiTB4GsJcdP9AB0hP-Z8oaX-O9akBg2PZ0/edit\nFollowing the lecture, could the red lined areas experience higher temperatures?\nCould a similar analysis be done for other variables? Such as pollution\nCould we make a pollution index similar to the heat index\nCould we make a flood index or explore flooding over time in cities / determine areas that need remediation"
   },
   {
     "objectID": "resources.html",

@@ -597,6 +597,8 @@ Now we have the temperature per ward (or the index), we could explore factors of
 
 ## Considerations
 
+* https://docs.google.com/document/d/1WDxMR5UpxqiTB4GsJcdP9AB0hP-Z8oaX-O9akBg2PZ0/edit
+
 * Following the lecture, could the red lined areas experience higher temperatures?
 
 * Could a similar analysis be done for other variables? Such as [pollution](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_NO2)  

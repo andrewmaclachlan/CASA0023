@@ -43,6 +43,7 @@ book:
   #sharing: [twitter, facebook]
   chapters:
     - index.qmd
+    - 00-course_info.qmd
     - intro.qmd
     - 2_portfolio.qmd
     - 3_corrections.qmd
