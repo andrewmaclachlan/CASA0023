@@ -72,7 +72,16 @@ This course uses a range of software, some of which we have encountered before:
 
 ### SNAP
 
-### Google Earth Engine
+Sentinels Application Platform (SNAP) is open source software and has common tools and methods used on earth observation (EO) data. It's like QGIS for EO data, developed by the European Space Agency (ESA).
+
+Download [the all toolboxes option for your operating system](https://step.esa.int/main/download/snap-download/) 
+
+### Google Earth Engine (GEE)
+
+Google Earth Engine isn't software as such, but we will be using it within the module. You need:
+
+* A free Google account
+* To [sign up for GEE](https://earthengine.google.com/)   
 
 ### R
 

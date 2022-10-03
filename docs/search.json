@@ -46,7 +46,7 @@
     "href": "00-course_info.html#software-installation",
     "title": "Hello Remote Sensing",
     "section": "Software installation",
-    "text": "Software installation\nThis course uses a range of software, some of which we have encountered before:\nSNAP\nGoogle Earth Engine\nR\nYou should have both R and RStudio installed from CASA0005\nQGIS\nYou should have QGIS installed from CASA0005"
+    "text": "Software installation\nThis course uses a range of software, some of which we have encountered before:\nSNAP\nSentinels Application Platform (SNAP) is open source software and has common tools and methods used on earth observation (EO) data. It’s like QGIS for EO data, developed by the European Space Agency (ESA).\nDownload the all toolboxes option for your operating system\nGoogle Earth Engine (GEE)\nGoogle Earth Engine isn’t software as such, but we will be using it within the module. You need:\n\nA free Google account\nTo sign up for GEE\n\nR\nYou should have both R and RStudio installed from CASA0005\nQGIS\nYou should have QGIS installed from CASA0005"
   },
   {
     "objectID": "intro.html",
