@@ -145,7 +145,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -757,7 +757,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">urban</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
 <span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
 <span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>sensor<span class="op">=</span><span class="st">"sentinel"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -771,7 +771,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <span></span>
 <span>  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
 <span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
 <span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>sensor<span class="op">=</span><span class="va">col_sensor</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -787,7 +787,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <span></span>
 <span>  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
 <span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
 <span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span></span>
 <span>                 </span>

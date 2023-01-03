@@ -4,10 +4,18 @@
 library(fontawesome)
 ```
 
+## Books
+
+There are two main books used in this module.
+
+-   Introductory Digital Image Processing: A Remote Sensing Perspective, Jensen (2015). Available as a physical copy or [online via the UCL library](https://read.kortext.com/reader/pdf/1872407/Cover)
+
+-   [Earth Engine Fundamentals and Applications (author's live version)](https://docs.google.com/document/d/1dLSaGXlAnI0jK6LAB6F-gQLBA30NTT0pz1tovHfOmvI/edit) and [associated website](https://www.eefabook.org/go-to-the-book.html)
+
 ## Schedule
 
 | Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                   | Reading | Assessment |
-|-------|:------------|:---------:|-----------|:------------:|---------|----------|
+|-----------|:----------|:---------:|-----------|:---------:|-----------|-----------|
 | 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)        |         |            |
 | 2    | Portfolio tools: Xaringan and Quarto                                | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Portfolio                           |     [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html)     |         |            |
 | 3    | Remote sensing data                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1) | Corrections                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/3_corrections.html)    |         |            |
