@@ -6,19 +6,19 @@ library(fontawesome)
 
 ## Schedule
 
-| Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                   |
-|-------|:-------------|:---------:|----------------|:-----------:|
-| 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)        |
-| 2    | Portfolio tools: Xaringan and Quarto                                | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Portfolio                           |     [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html)     |
-| 3    | Remote sensing data                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1) | Corrections                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/3_corrections.html)    |
-| 4    | Policy applications                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-4/#1) | Policy                              |      [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/4_policy.html)       |
-| 5    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1) | Google Earth Engine                 |       [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html)       |
-|      | **Reading week**                                                    |                                                                                         |                                     |                                                                                        |
-| 6    | Classification the big questions (lecture 5 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification I                    | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |
-| 7    | Temperature and policy                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html) |
-| 8    | Need a lecture on GEE?                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Tempearture                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html)    |
-| 9    | SAR??                                                               | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | SAR? Change detection               |                                     `r fa("code")`                                     |
-| 10   | Presentations                                                       | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Remote sensing workflow?            |                                     `r fa("code")`                                     |
+| Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                   | Reading | Assessment |
+|-------|:------------|:---------:|-----------|:------------:|---------|----------|
+| 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)        |         |            |
+| 2    | Portfolio tools: Xaringan and Quarto                                | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Portfolio                           |     [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html)     |         |            |
+| 3    | Remote sensing data                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1) | Corrections                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/3_corrections.html)    |         |            |
+| 4    | Policy applications                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-4/#1) | Policy                              |      [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/4_policy.html)       |         |            |
+| 5    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1) | Google Earth Engine                 |       [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html)       |         |            |
+|      | **Reading week**                                                    |                                                                                         |                                     |                                                                                        |         |            |
+| 6    | Classification the big questions (lecture 5 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification I                    | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |         |            |
+| 7    | Temperature and policy                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html) |         |            |
+| 8    | Need a lecture on GEE?                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Tempearture                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html)    |         |            |
+| 9    | SAR??                                                               | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | SAR? Change detection               |                                     `r fa("code")`                                     |         |            |
+| 10   | Presentations                                                       | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Remote sensing workflow?            |                                     `r fa("code")`                                     |         |            |
 
 ## Intended course learning outcomes
 
@@ -44,27 +44,15 @@ At the end of this module students will be able to:
 
 This website is hosted on GitHub and holds all the practical instructions and data. Data used within the practicals is available online, however occasionally websites can undergo maintenance or be inaccessible due to political factors such as government shutdowns.
 
-To get the most out of this book spend a few minutes learning how to control it, in the top right of this webpage you will see this tools bar:
+To get the most out of this book spend a few minutes learning how to control it, in the top right of this webpage you will see the following tools:
 
-```{r echo=FALSE, out.width = "600pt", fig.align='center', cache=TRUE, message=FALSE}
-knitr::include_graphics('general_images/Book_controls.png')
-```
+-   `r fa("magnifying-glass")` search the entire book for a specific word
 
-From left to right these buttons will let you:
+-   `r fa("bars")` control the side / menu bars
 
--   <i class="fa fa-bars fa-lg"></i> control the side bar
+-   `r fa("toggle-off")` changes to light or dark mode
 
--   <i class="fa fa-search fa-lg"></i> search the entire book for a specific word
-
--   <i class ="fa fa-font settings fa-lg"></i> change the text size, font, colour
-
--   <i class ="fa fa-edit fa-lg"></i> propose an edit if you see a mistake that I can review
-
--   <i class="fa fa-download fa-lg"></i> view the webpage in the 'raw' RMarkdown format, we cover RMarkdown in the course
-
--   <i class="fa fa-info" fa-lg></i> information about shortcuts for this book and most others like it
-
-In addition the <i class="fa fa-github fa-lg"></i> icon in the top right of the page takes you to the GitHub repository for this book, we cover GitHub in the course, but it's basically where the online files for the book are stored.
+-   `r fa("github")` GitHub repository for this book
 
 ## Software installation
 
@@ -74,14 +62,14 @@ This course uses a range of software, some of which we have encountered before:
 
 Sentinels Application Platform (SNAP) is open source software and has common tools and methods used on earth observation (EO) data. It's like QGIS for EO data, developed by the European Space Agency (ESA).
 
-Download [the all toolboxes option for your operating system](https://step.esa.int/main/download/snap-download/) 
+Download [the all toolboxes option for your operating system](https://step.esa.int/main/download/snap-download/)
 
 ### Google Earth Engine (GEE)
 
 Google Earth Engine isn't software as such, but we will be using it within the module. You need:
 
-* A free Google account
-* To [sign up for GEE](https://earthengine.google.com/)   
+-   A free Google account
+-   To [sign up for GEE](https://earthengine.google.com/)
 
 ### R
 

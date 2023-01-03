@@ -13,6 +13,24 @@ By the end of this practical you should be able to:
 * Evaluate the (dis)advantages of each type of software you have used
 * Pull out and statistically compare spectral signatures 
 
+::: {.infobox .note data-latex="{note}"}
+**Reading**
+
+Each week i'll provide a core chapter to support the skills taught here. However, **you are free to read whatever interests you** and Adam and I strongly encourage this, so please don't be constrained to this recommendation. Consult the [reading list](https://rl.talis.com/3/ucl/lists/139FBAF8-DACD-60FB-8BDC-E9C9E09BA885.html?lang=en-GB&login=1), practical and lecture each week for more ideas.
+
+This week:
+
+-   [GIS and Cartography](https://www.sciencedirect.com/science/article/pii/B9780080449104000341) by Goodchild (2009)
+
+-   [Chapter 2 "Geographic data in R"](https://geocompr.robinlovelace.net/spatial-class.html) from Geocomputation with R by Lovelace, Nowosad and Muenchow (2020).
+
+-   [Opening practice: supporting reproducibility and critical spatial data science](https://link.springer.com/article/10.1007/s10109-020-00334-2#Sec3) by Brunsdon and Comber (2020)
+
+**Watching**
+
+-   [What is Spatial Data Science](https://www.youtube.com/watch?v=osAbJeTho5w) from some of our friends at CARTO
+:::
+
 ## EO dashboard
 
 Before we start the practical, spend 5 minutes exploring the [EOdashboard website](https://eodashboard.org/explore?poi=World-E10e). It contains a useful overview of some of the EO data that we can and will explore later in the module. 
@@ -618,7 +636,7 @@ How [do we interpret this](https://www.guru99.com/r-t-test-one-sample.html)?
 If you make plots of reflectance be careful to use the same scale, you can do this by adding a new line under `ggplot` like:` lims(y = c(0, 80000))`
 
 
-### Review questions 
+## Review questions 
 
 Write around 2-3 paragraphs on the following and support your responses with plots and literature:
 
