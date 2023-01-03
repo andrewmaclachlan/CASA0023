@@ -6,7 +6,7 @@ project:
 book:
   title: "CASA0023 Remotely Sensing Cities and Environments"
   #author: Andy MacLachlan
-  image: general_images/casa_logo.jpg
+#  image: general_images/casa_logo.jpg
 #  downloads: [qmd]
   #cover-image: general_images/casa_logo.jpg
   #date: r Sys.Date()
