@@ -290,23 +290,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <li>Undertake basic raster image statistics and processing</li>
 <li>Evaluate the (dis)advantages of each type of software you have used</li>
 <li>Pull out and statistically compare spectral signatures</li>
-</ul>
-<div class="infobox note">
-<p><strong>Reading</strong></p>
-<p>Each week i’ll provide a core chapter to support the skills taught here. However, <strong>you are free to read whatever interests you</strong> and Adam and I strongly encourage this, so please don’t be constrained to this recommendation. Consult the <a href="https://rl.talis.com/3/ucl/lists/139FBAF8-DACD-60FB-8BDC-E9C9E09BA885.html?lang=en-GB&amp;login=1">reading list</a>, practical and lecture each week for more ideas.</p>
-<p>This week:</p>
-<ul>
-<li><p><a href="https://www.sciencedirect.com/science/article/pii/B9780080449104000341">GIS and Cartography</a> by Goodchild (2009)</p></li>
-<li><p><a href="https://geocompr.robinlovelace.net/spatial-class.html">Chapter 2 “Geographic data in R”</a> from Geocomputation with R by Lovelace, Nowosad and Muenchow (2020).</p></li>
-<li><p><a href="https://link.springer.com/article/10.1007/s10109-020-00334-2#Sec3">Opening practice: supporting reproducibility and critical spatial data science</a> by Brunsdon and Comber (2020)</p></li>
-</ul>
-<p><strong>Watching</strong></p>
-<ul>
-<li>
-<a href="https://www.youtube.com/watch?v=osAbJeTho5w">What is Spatial Data Science</a> from some of our friends at CARTO</li>
-</ul>
-</div>
-</section><section id="eo-dashboard" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="eo-dashboard">
+</ul></section><section id="eo-dashboard" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="eo-dashboard">
 <span class="header-section-number">1.2</span> EO dashboard</h2>
 <p>Before we start the practical, spend 5 minutes exploring the <a href="https://eodashboard.org/explore?poi=World-E10e">EOdashboard website</a>. It contains a useful overview of some of the EO data that we can and will explore later in the module.</p>
 </section><section id="gitignore" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="gitignore">
@@ -773,7 +757,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sentinel</span>, <span class="va">urban</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
 <span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
 <span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>sensor<span class="op">=</span><span class="st">"sentinel"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -787,7 +771,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <span></span>
 <span>  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
 <span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
 <span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>sensor<span class="op">=</span><span class="va">col_sensor</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -803,7 +787,7 @@ Wetness = 0.1509(B2)+0.1973(B3)\\+0.3279(B4)+0.3406(B8)\\−
 <span></span>
 <span>  <span class="va">sen_urban</span><span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">sensor</span>, <span class="va">landcover</span>, progress <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span>, </span>
 <span>               names_to<span class="op">=</span><span class="st">"bands"</span>, </span>
 <span>               values_to<span class="op">=</span><span class="st">"band_values"</span><span class="op">)</span></span>
 <span>                 </span>

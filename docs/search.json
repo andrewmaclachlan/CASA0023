@@ -60,7 +60,7 @@
     "href": "intro.html#learning-outcomes",
     "title": "\n1  Getting started with remote sensing\n",
     "section": "\n1.1 Learning outcomes",
-    "text": "1.1 Learning outcomes\nBy the end of this practical you should be able to:\n\nSource, load and articulate the differences between Landsat and Sentinel data\nUndertake basic raster image statistics and processing\nEvaluate the (dis)advantages of each type of software you have used\nPull out and statistically compare spectral signatures\n\n\nReading\nEach week i’ll provide a core chapter to support the skills taught here. However, you are free to read whatever interests you and Adam and I strongly encourage this, so please don’t be constrained to this recommendation. Consult the reading list, practical and lecture each week for more ideas.\nThis week:\n\nGIS and Cartography by Goodchild (2009)\nChapter 2 “Geographic data in R” from Geocomputation with R by Lovelace, Nowosad and Muenchow (2020).\nOpening practice: supporting reproducibility and critical spatial data science by Brunsdon and Comber (2020)\n\nWatching\n\n\nWhat is Spatial Data Science from some of our friends at CARTO"
+    "text": "1.1 Learning outcomes\nBy the end of this practical you should be able to:\n\nSource, load and articulate the differences between Landsat and Sentinel data\nUndertake basic raster image statistics and processing\nEvaluate the (dis)advantages of each type of software you have used\nPull out and statistically compare spectral signatures"
   },
   {
     "objectID": "intro.html#eo-dashboard",
