@@ -154,27 +154,24 @@ Once you have got your project set up with Git and GitHub:
 
 The page you are on will then provide a URL
 
-### Review tasks
+## Learning diary
 
-#### Xaringan
+This week for your learning diary you need to create a Xaringan presentation and a your Quarto learning diary.
+
+### Xaringan
 
 Create a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio
 
 -   Select a sensor of your choice (any)
--   Create a short (maximum 5 slides) presentation on the sensor in xaringan
+-   Create a short (maximum 9 slide) presentation on the sensor in xaringan
 
-Things to consider:
+The presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically: 
 
--   Who runs the sensor
--   What is the cost of the data
--   Where do you source the data
--   Resolutions (e.g. in a table)
--   Applications of the data...with an example
--   Images of the data (not required to download it)
--   An example of the data being used within academic (or policy) literature
+* The summary criterion will refer to the summary of the sensor you have selected.
+* The application criterion will refer to examples of studies that have used the data from the sensor and their purpose
+* The reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work. 
+  
+### Quarto learning diary
 
-#### Quarto
+The production of the Quarto learning diary is not marked, but it is required for component 2. Once you have made your Quarto document update it with your learning diary entry from week 1, and the Xaringan presentation from week 2.
 
-For the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. In the practical sessions this week you should have created your online portfolio and added your response from week 1 to it. For week 2 you must add the URL of your small 5 slide presentation and also write 1 paragraph on the following:
-
--   Reflect on your experience using these reproducible presentation tools through considering the benefits and drawbacks.

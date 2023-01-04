@@ -1,5 +1,27 @@
 # Corrections
 
+## Reading
+
+::: callout-tip
+## This week
+
+-   Types of Geometric correction, Chapter 7, p.242
+
+-   Atmospheric correction, Chapter 6, p.208
+
+-   Mosaicking, Chapter 7, p.267
+
+-   Image enhancements, Chapter 8, p.273
+
+Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
+
+-   Data fusion
+
+Schulte to Bühne, H., Pettorelli, N., 2018. [Better together: Integrating and fusing multispectral and radar satellite imagery to inform biodiversity monitoring, ecological research and conservation science. Methods in Ecology and Evolution 9, 849–865.]( https://doi.org/10.1111/2041-210X.12942)
+
+:::
+
+
 ## Atmosphereic correction 
 
 ### DOS
@@ -436,15 +458,9 @@ PCA1 %>%
 ```
 
 
-### Review questions 
+## Learning diary
 
-For the task this week select one concept from the lecture to explore in greater detail (e.g. texture analysis to remotely sensed images).
-
-Write 2-3 paragraphs supporting your responses with plots and literature:
-
-* Explain the concept (e.g. what texture analysis is)
-* Detail how it has been applied in 2 studies
-* Reflect on the applicability / usefulness
+Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
 
 ### Useful blogs
 

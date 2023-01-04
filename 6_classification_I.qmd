@@ -461,4 +461,6 @@ Final output:
 knitr::include_graphics('prac_6/GEE_classified_map_final.png') 
 ```
 
-### Review questions 
+## Learning diary
+
+Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.

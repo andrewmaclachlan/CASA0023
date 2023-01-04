@@ -4,9 +4,11 @@
 
 **For the practical session** this week **come prepared to talk** about the following:
 
+- Explore the policies below
+
 - Search for one metropolitan policy challenge (any city in the World) that could be solved by incorporating remotely sensed data
 
-- Identify and evaluate a remotely sensed data set that could used to assist with contributing to the policy goal
+- Identify and evaluate a remotely sensed data set that could be used to assist with contributing to the policy goal
 
 -  Demonstrate how this links to global agendas / goals
 
@@ -14,14 +16,15 @@
 
 Cities will have a diverse range of documentation available...
 
-## After the practical session
+## Learning diary
 
-**Following the practical and subsequent discussion** write up your case study city in three paragraphs, you should:
+**Following the practical and subsequent discussion** write up your case study city
 
-* Detail the relevant policy that can be assisted with remotely sensed data
-* Evaluate how remotely sensed data set(s) could used to assist with contributing to the policy goal
-* Place it within local / global agendas and current approaches
-* Cite the relevant policy and where appropriate literature.
+The case study will be marked in the same manner set out in mark scheme for the learning diary. Specifically: 
+
+* The summary criterion will refer to the summary of the policy and city you have selected.
+* The application criterion will refer to how the remotely sensed data you sourced could be used to assist with contributing to the policy goal. How could the data be applied to solve the policy challenge. 
+* The reflection criterion will refer to what you have learnt in relation to the policy, city and the application of the data. 
 
 Should you struggle to find current approaches within your city explore other cities discussed within the practical. 
 

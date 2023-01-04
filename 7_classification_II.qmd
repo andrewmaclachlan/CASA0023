@@ -436,6 +436,10 @@ Map.addLayer(classified, {min: 1, max: 5, palette: ['d99282', 'dfdfc2', 'b3ac9f'
 
 ```
 
+## Learning diary
+
+Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
+
 ### Resources
 
 Image Segmentation and OBIA by Noel Gorelick:

@@ -597,7 +597,7 @@ Now we have the temperature per ward (or the index), we could explore factors of
 
 ## Considerations
 
-* https://docs.google.com/document/d/1WDxMR5UpxqiTB4GsJcdP9AB0hP-Z8oaX-O9akBg2PZ0/edit
+* [Google Earth Engine: Analyzing Land Surface Temperature Data](https://docs.google.com/document/d/1WDxMR5UpxqiTB4GsJcdP9AB0hP-Z8oaX-O9akBg2PZ0/edit)
 
 * Following the lecture, could the red lined areas experience higher temperatures?
 
@@ -605,4 +605,8 @@ Now we have the temperature per ward (or the index), we could explore factors of
 * Could we make a pollution index similar to the heat index
 
 * Could we make a [flood index](https://developers.google.com/earth-engine/datasets/catalog/GLOBAL_FLOOD_DB_MODIS_EVENTS_V1) or explore flooding over time in cities / determine areas that need remediation 
+
+## Learning diary
+
+Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
 

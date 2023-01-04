@@ -538,15 +538,6 @@ In addition to the GEE catalog there is also now a [community GEE catalog](https
 * Global fire / burned area
 * Air pollutants (Long-term Gap-free High-resolution Air Pollutants (LGHAP))
 
-### Review questions 
+## Learning diary
 
-For the task this week select a metropolitan area of your choice (e.g. using [GADM](https://gadm.org/) or another admin boundary dataset) and apply a formula / function that we have seen in the module (or from online / literature) to a collection of data.
-
-For example, calculate the Tasseled Cap transformation for the Berlin Metropolitan area using Sentinel 2 data.
-
-You must:
-
-* Output your final data product to a file
-* Share your code in your portfolio
-* Explain (within 1 -2 paragraphs) what you did.
-
+Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
