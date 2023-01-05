@@ -145,7 +145,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -249,7 +249,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#reading" id="toc-reading" class="nav-link active" data-scroll-target="#reading"><span class="toc-section-number">3.1</span>  Reading</a></li>
+<li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources"><span class="toc-section-number">3.1</span>  Resources</a></li>
   <li>
 <a href="#atmosphereic-correction" id="toc-atmosphereic-correction" class="nav-link" data-scroll-target="#atmosphereic-correction"><span class="toc-section-number">3.2</span>  Atmosphereic correction</a>
   <ul class="collapse">
@@ -294,8 +294,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
   </div>
   
 
-</header><section id="reading" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="reading">
-<span class="header-section-number">3.1</span> Reading</h2>
+</header><section id="resources" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="resources">
+<span class="header-section-number">3.1</span> Resources</h2>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -307,16 +307,24 @@ This week
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Types of Geometric correction, Chapter 7, p.242</p></li>
+<li><p>Joyce, K., 2013. <a href="https://www.youtube.com/watch?v=qb4yFwzsnU8&amp;t">Radiative transfer and atmospheric correction video</a></p></li>
+<li>
+<p>Jensen, J.R., 2015. <a href="https://read.kortext.com/reader/pdf/1872407/Cover">Introductory digital image processing: a remote sensing perspective.</a> Prentice-Hall Inc.</p>
+<ul>
 <li><p>Atmospheric correction, Chapter 6, p.208</p></li>
+<li><p>Types of Geometric correction, Chapter 7, p.242</p></li>
 <li><p>Mosaicking, Chapter 7, p.267</p></li>
 <li><p>Image enhancements, Chapter 8, p.273</p></li>
 </ul>
-<p>Jensen, J.R., 2015. <a href="https://read.kortext.com/reader/pdf/1872407/Cover">Introductory digital image processing: a remote sensing perspective.</a> Prentice-Hall Inc.</p>
+</li>
+<li>
+<p>Schulte to Bühne, H., Pettorelli, N., 2018. <a href="https://doi.org/10.1111/2041-210X.12942">Better together: Integrating and fusing multispectral and radar satellite imagery to inform biodiversity monitoring, ecological research and conservation science. Methods in Ecology and Evolution 9, 849–865.</a></p>
 <ul>
-<li>Data fusion</li>
+<li>
+<a href="https://www.youtube.com/watch?v=a4dW5EWbNK4&amp;t=3s">Data fusion video</a> created for the paper</li>
 </ul>
-<p>Schulte to Bühne, H., Pettorelli, N., 2018. <a href="">Better together: Integrating and fusing multispectral and radar satellite imagery to inform biodiversity monitoring, ecological research and conservation science. Methods in Ecology and Evolution 9, 849–865.</a> https://doi.org/10.1111/2041-210X.12942)</p>
+</li>
+</ul>
 </div>
 </div>
 </section><section id="atmosphereic-correction" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="atmosphereic-correction">
@@ -526,7 +534,7 @@ The following object is masked from 'package:tidyr':
 <span></span>
 <span><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
 <span><span class="va">listlandsat_8</span><span class="op">&lt;-</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_info</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"prac_3"</span>, <span class="st">"Landsat"</span>, <span class="st">"Lsat8"</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"[B123456790].TIF"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stringr/man/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"[B123456790].TIF"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -537,7 +545,7 @@ The following object is masked from 'package:tidyr':
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
 <span><span class="va">listlandsat_9</span><span class="op">&lt;-</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_info</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"prac_3"</span>, <span class="st">"Landsat"</span>, <span class="st">"Lsat9"</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"[1B23456790].TIF"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stringr/man/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"[1B23456790].TIF"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>

@@ -1,5 +1,29 @@
 # Classification II
 
+## Resources
+
+::: callout-tip
+## This week
+
+-   Foody, G.M., 2004. [Sub-Pixel Methods in Remote Sensing, in: Jong, S.M.D., Meer, F.D.V. der (Eds.), Remote Sensing Image Analysis: Including The Spatial Domain, Remote Sensing and Digital Image Processing. Springer Netherlands, Dordrecht, pp. 37–49.]( https://doi.org/10.1007/978-1-4020-2560-0_3)
+
+-   Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
+
+    -   Thematic Information Extraction: Pattern Recognition, Chapter 9
+        -   object based image analysis classification
+    -   Information Extraction Using Image Spectroscopy, Chapter 11
+        -   subpixel classification, linear spectral unmixing or spectral mixture analysis
+
+-   [Cloud-Based Remote Sensing with Google Earth Engine](https://www.eefabook.org/go-to-the-book.html) (accessed 1.5.23).
+
+    -   Chapter F3.3: Object-Based Image Analysis
+
+-   Barsi, Á., Kugler, Z., László, I., Szabó, G., Abdulmutalib, H., 2018. [Accuracy dimensions in remote sensing. International Archives of the Photogrammetry, Remote Sensing & Spatial Information Sciences 42.](https://www.int-arch-photogramm-remote-sens-spatial-inf-sci.net/XLII-3/61/2018/isprs-archives-XLII-3-61-2018.pdf)
+
+-   Karasiak, N., Dejoux, J.-F., Monteil, C., Sheeren, D., 2022. [Spatial dependence between training and test sets: another pitfall of classification accuracy assessment in remote sensing. Mach Learn 111, 2715–2740.](https://doi.org/10.1007/s10994-021-05972-1)
+
+:::
+
 In this practical we will look at some more advanced classification methods and how to do change detection...
 
 ## Data

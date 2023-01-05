@@ -145,7 +145,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -249,26 +249,27 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"><span class="toc-section-number">7.1</span>  Data</a>
+<li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources"><span class="toc-section-number">7.1</span>  Resources</a></li>
+  <li>
+<a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="toc-section-number">7.2</span>  Data</a>
   <ul class="collapse">
-<li><a href="#vector-data" id="toc-vector-data" class="nav-link" data-scroll-target="#vector-data"><span class="toc-section-number">7.1.1</span>  Vector data</a></li>
-  <li><a href="#eo-data" id="toc-eo-data" class="nav-link" data-scroll-target="#eo-data"><span class="toc-section-number">7.1.2</span>  EO data</a></li>
+<li><a href="#vector-data" id="toc-vector-data" class="nav-link" data-scroll-target="#vector-data"><span class="toc-section-number">7.2.1</span>  Vector data</a></li>
+  <li><a href="#eo-data" id="toc-eo-data" class="nav-link" data-scroll-target="#eo-data"><span class="toc-section-number">7.2.2</span>  EO data</a></li>
   </ul>
 </li>
   <li>
-<a href="#classify" id="toc-classify" class="nav-link" data-scroll-target="#classify"><span class="toc-section-number">7.2</span>  Classify</a>
+<a href="#classify" id="toc-classify" class="nav-link" data-scroll-target="#classify"><span class="toc-section-number">7.3</span>  Classify</a>
   <ul class="collapse">
-<li><a href="#sub-pixel" id="toc-sub-pixel" class="nav-link" data-scroll-target="#sub-pixel"><span class="toc-section-number">7.2.1</span>  Sub-pixel</a></li>
-  <li><a href="#object-based" id="toc-object-based" class="nav-link" data-scroll-target="#object-based"><span class="toc-section-number">7.2.2</span>  Object based</a></li>
-  <li><a href="#image" id="toc-image" class="nav-link" data-scroll-target="#image"><span class="toc-section-number">7.2.3</span>  Image</a></li>
-  <li><a href="#super-pixels" id="toc-super-pixels" class="nav-link" data-scroll-target="#super-pixels"><span class="toc-section-number">7.2.4</span>  Super pixels</a></li>
+<li><a href="#sub-pixel" id="toc-sub-pixel" class="nav-link" data-scroll-target="#sub-pixel"><span class="toc-section-number">7.3.1</span>  Sub-pixel</a></li>
+  <li><a href="#object-based" id="toc-object-based" class="nav-link" data-scroll-target="#object-based"><span class="toc-section-number">7.3.2</span>  Object based</a></li>
+  <li><a href="#image" id="toc-image" class="nav-link" data-scroll-target="#image"><span class="toc-section-number">7.3.3</span>  Image</a></li>
+  <li><a href="#super-pixels" id="toc-super-pixels" class="nav-link" data-scroll-target="#super-pixels"><span class="toc-section-number">7.3.4</span>  Super pixels</a></li>
   </ul>
 </li>
   <li>
-<a href="#learning-diary" id="toc-learning-diary" class="nav-link" data-scroll-target="#learning-diary"><span class="toc-section-number">7.3</span>  Learning diary</a>
+<a href="#learning-diary" id="toc-learning-diary" class="nav-link" data-scroll-target="#learning-diary"><span class="toc-section-number">7.4</span>  Learning diary</a>
   <ul class="collapse">
-<li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="toc-section-number">7.3.1</span>  Resources</a></li>
+<li><a href="#resources-1" id="toc-resources-1" class="nav-link" data-scroll-target="#resources-1"><span class="toc-section-number">7.4.1</span>  Resources</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/7_classification_II.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -290,11 +291,51 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>In this practical we will look at some more advanced classification methods and how to do change detection…</p>
-<section id="data" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="data">
-<span class="header-section-number">7.1</span> Data</h2>
-<section id="vector-data" class="level3" data-number="7.1.1"><h3 data-number="7.1.1" class="anchored" data-anchor-id="vector-data">
-<span class="header-section-number">7.1.1</span> Vector data</h3>
+</header><section id="resources" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="resources">
+<span class="header-section-number">7.1</span> Resources</h2>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+This week
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Foody, G.M., 2004. <a href="https://doi.org/10.1007/978-1-4020-2560-0_3">Sub-Pixel Methods in Remote Sensing, in: Jong, S.M.D., Meer, F.D.V. der (Eds.), Remote Sensing Image Analysis: Including The Spatial Domain, Remote Sensing and Digital Image Processing. Springer Netherlands, Dordrecht, pp.&nbsp;37–49.</a></p></li>
+<li>
+<p>Jensen, J.R., 2015. <a href="https://read.kortext.com/reader/pdf/1872407/Cover">Introductory digital image processing: a remote sensing perspective.</a> Prentice-Hall Inc.</p>
+<ul>
+<li>Thematic Information Extraction: Pattern Recognition, Chapter 9
+<ul>
+<li>object based image analysis classification</li>
+</ul>
+</li>
+<li>Information Extraction Using Image Spectroscopy, Chapter 11
+<ul>
+<li>subpixel classification, linear spectral unmixing or spectral mixture analysis</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.eefabook.org/go-to-the-book.html">Cloud-Based Remote Sensing with Google Earth Engine</a> (accessed 1.5.23).</p>
+<ul>
+<li>Chapter F3.3: Object-Based Image Analysis</li>
+</ul>
+</li>
+<li><p>Barsi, Á., Kugler, Z., László, I., Szabó, G., Abdulmutalib, H., 2018. <a href="https://www.int-arch-photogramm-remote-sens-spatial-inf-sci.net/XLII-3/61/2018/isprs-archives-XLII-3-61-2018.pdf">Accuracy dimensions in remote sensing. International Archives of the Photogrammetry, Remote Sensing &amp; Spatial Information Sciences 42.</a></p></li>
+<li><p>Karasiak, N., Dejoux, J.-F., Monteil, C., Sheeren, D., 2022. <a href="https://doi.org/10.1007/s10994-021-05972-1">Spatial dependence between training and test sets: another pitfall of classification accuracy assessment in remote sensing. Mach Learn 111, 2715–2740.</a></p></li>
+</ul>
+</div>
+</div>
+<p>In this practical we will look at some more advanced classification methods and how to do change detection…</p>
+</section><section id="data" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="data">
+<span class="header-section-number">7.2</span> Data</h2>
+<section id="vector-data" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="vector-data">
+<span class="header-section-number">7.2.1</span> Vector data</h3>
 <p>Here i will load the level 2 Global Administrative Unit Layers (GAUL), but style it on the map</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">--------------------------</span>Vector data<span class="sc">---------------------------</span></span>
@@ -322,8 +363,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(Daressalaam, {}, <span class="st">'Dar-es-salaam'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="eo-data" class="level3" data-number="7.1.2"><h3 data-number="7.1.2" class="anchored" data-anchor-id="eo-data">
-<span class="header-section-number">7.1.2</span> EO data</h3>
+</section><section id="eo-data" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="eo-data">
+<span class="header-section-number">7.2.2</span> EO data</h3>
 <p>This week i am going to switch back to Landsat…we need to…</p>
 <ul>
 <li>set the scale function</li>
@@ -429,10 +470,10 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Now let’s classify…</p>
-</section></section><section id="classify" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="classify">
-<span class="header-section-number">7.2</span> Classify</h2>
-<section id="sub-pixel" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="sub-pixel">
-<span class="header-section-number">7.2.1</span> Sub-pixel</h3>
+</section></section><section id="classify" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="classify">
+<span class="header-section-number">7.3</span> Classify</h2>
+<section id="sub-pixel" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="sub-pixel">
+<span class="header-section-number">7.3.1</span> Sub-pixel</h3>
 <p>Spectral unfixing is where we provide an end member and compute the fractions of each pixel from the often “spectrally pure” spectral signature. However, no pixel is ever (or rarely) on landcover type. There are two main ways to do this in GEE.</p>
 <ol type="1">
 <li>Define a variable that is the end member (this could be a point)</li>
@@ -492,8 +533,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 <p>Now we have the fraction (or percent) of each endmember per pixel. But how is this helpful and What can we do with this ?</p>
 <p>Credit the <a href="https://docs.google.com/document/d/1keJGLN-j5H5B-kQXdwy0ryx6E8j2D9KZVEUD-v9evys/edit#">Earth Engine Intermediate Curriculum</a> for some code here.</p>
-<section id="accuracy" class="level4" data-number="7.2.1.1"><h4 data-number="7.2.1.1" class="anchored" data-anchor-id="accuracy">
-<span class="header-section-number">7.2.1.1</span> Accuracy</h4>
+<section id="accuracy" class="level4" data-number="7.3.1.1"><h4 data-number="7.3.1.1" class="anchored" data-anchor-id="accuracy">
+<span class="header-section-number">7.3.1.1</span> Accuracy</h4>
 <p>A problem with using sub pixel analysis is that it is harder to calculate an error matrix. There are two main ways to deal with this.</p>
 <ol type="1">
 <li>Harden the sub-pixel image and classify each pixel that has the largest proportion of land cover (e.g.&nbsp;50% of more)</li>
@@ -521,10 +562,10 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(reclassified_all, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">3</span>, palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]}, <span class="st">"reclassified_all"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How could we run some accuracy assessment from this point, note it would be easier if we collected lots of training data at the start and held a % back before making an average endmember.</p>
-</section></section><section id="object-based" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="object-based">
-<span class="header-section-number">7.2.2</span> Object based</h3>
-</section><section id="image" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="image">
-<span class="header-section-number">7.2.3</span> Image</h3>
+</section></section><section id="object-based" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="object-based">
+<span class="header-section-number">7.3.2</span> Object based</h3>
+</section><section id="image" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="image">
+<span class="header-section-number">7.3.3</span> Image</h3>
 <p>Otherwise know as object based image analysis (OBIA) as opposed to pixel analysis, pixels are grouped together based on a set of rules…</p>
 <p>The first port of call here is image gradient, this is the directional change in intensity or colour in an image. To do this…</p>
 <div class="cell">
@@ -539,8 +580,8 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 </div>
 <p>Within this function we can also set the metric for the spectral gradient (e.g.&nbsp;spectral angle mapper is ‘sam’) and the kernel size, the default is a square radius of 1.</p>
 <p>To make either of these into objects we’d need to vectorise the raster data - which might not be that useful, if you have high resolution data it will work better…</p>
-</section><section id="super-pixels" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="super-pixels">
-<span class="header-section-number">7.2.4</span> Super pixels</h3>
+</section><section id="super-pixels" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="super-pixels">
+<span class="header-section-number">7.3.4</span> Super pixels</h3>
 <p>The basic idea here is the same as the lecture, take a grid of points and get the pixels around them. We want to reduce the pixels to fewer objects…all pixels must go somewhere and then we can classify the objects….</p>
 <p>To start with, let’s try k-means clustering of pixels….</p>
 <div class="cell">
@@ -654,11 +695,11 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 <span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(classified, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]}, <span class="st">"classified"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="learning-diary" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="learning-diary">
-<span class="header-section-number">7.3</span> Learning diary</h2>
+</section></section><section id="learning-diary" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="learning-diary">
+<span class="header-section-number">7.4</span> Learning diary</h2>
 <p>Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.</p>
-<section id="resources" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="resources">
-<span class="header-section-number">7.3.1</span> Resources</h3>
+<section id="resources-1" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="resources-1">
+<span class="header-section-number">7.4.1</span> Resources</h3>
 <p>Image Segmentation and OBIA by Noel Gorelick:</p>
 <ul>
 <li><a href="https://docs.google.com/presentation/d/1p_W06MwdhRFZjkb7imYkuTchatY5nxb5aTRgh6qm2uU/edit#slide=id.g3bdeabc530_4_365">presentation</a></li>

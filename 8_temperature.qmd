@@ -1,5 +1,24 @@
 # Temperature
 
+## Resources
+
+::: callout-tip
+## This week
+
+-   Wilson, B., 2020. [Urban Heat Management and the Legacy of Redlining. Journal of the American Planning Association 86, 443–457](https://doi.org/10.1080/01944363.2020.1759127)
+
+-   Klinenberg, E., 1999. [Denaturalizing Disaster: A Social Autopsy of the 1995 Chicago Heat Wave. Theory and Society 28, 239–295.](https://www.jstor.org/stable/3108472#metadata_info_tab_contents)
+
+-   Li, D., Newman, G.D., Wilson, B., Zhang, Y., Brown, R.D., 2022. [Modeling the relationships between historical redlining, urban heat, and heat-related emergency department visits: An examination of 11 Texas cities. Environment and Planning B: Urban Analytics and City Science 49, 933–952.](https://doi.org/10.1177/23998083211039854)
+
+-   [Cloud-Based Remote Sensing with Google Earth Engine](https://www.eefabook.org/go-to-the-book.html) (accessed 1.5.23).
+
+    -   Chapter A1.5 Heat Islands
+
+-   MacLachlan, A., Biggs, E., Roberts, G., Boruff, B., 2021. [Sustainable City Planning: A Data-Driven Approach for Mitigating Urban Heat. Frontiers in Built Environment 6.](https://www.frontiersin.org/articles/10.3389/fbuil.2020.519599/full)
+
+:::
+
 Within this practical we are going to explore temperature across urban areas using two different data products: Landsat and MODIS. We'll then look at which admin areas are hottest over time.
 
 The first stage of this practical is to load up a level 2 admin area to extract temperature for....

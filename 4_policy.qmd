@@ -1,5 +1,33 @@
 # Policy
 
+## Resources
+
+::: callout-tip
+## This week
+
+The focus this week is on identifying an earth observation dataset that could be used to assist a policy. 
+
+The following papers will be useful:
+
+-   Gerasopoulos, E., Bailey, J., Athanasopoulou, E., Speyer, O., Kocman, D., Raudner, A., Tsouni, A., Kontoes, H., Johansson, C., Georgiadis, C., Matthias, V., Kussul, N., Aquilino, M., Paasonen, P., 2022. [Earth observation: An integral part of a smart and sustainable city. Environmental Science & Policy 132, 296–307.](https://doi.org/10.1016/j.envsci.2022.02.033)
+
+-   Kadhim, N., Mourshed, M., Bray, M., 2016. [Advances in remote sensing applications for urban sustainability. Euro-Mediterr J Environ Integr 1, 7.](https://doi.org/10.1007/s41207-016-0007-4)
+
+-   Wellmann, T., Lausch, A., Andersson, E., Knapp, S., Cortinovis, C., Jache, J., Scheuer, S., Kremer, P., Mascarenhas, A., Kraemer, R., Haase, A., Schug, F., Haase, D., 2020. [Remote sensing in urban planning: Contributions towards ecologically sound policies? Landscape and Urban Planning 204, 103921.](https://doi.org/10.1016/j.landurbplan.2020.103921)
+
+-   Searching for urban or city in the [International Journal of Applied Earth Observation and Geoinformation](https://www.sciencedirect.com/journal/international-journal-of-applied-earth-observation-and-geoinformation)
+
+-   Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
+
+    -   Urban-Suburban Phenological Cycles, Chapter 12, p.509
+
+A very nice example that combines EO data and analysis we saw in CASA0005! The **spatial error model!**. We will discuss the specific data in future weeks.
+
+-   Li, D., Newman, G.D., Wilson, B., Zhang, Y., Brown, R.D., 2022. [Modeling the relationships between historical redlining, urban heat, and heat-related emergency department visits: An examination of 11 Texas cities. Environment and Planning B: Urban Analytics and City Science 49, 933–952.](https://doi.org/10.1177/23998083211039854)
+
+:::
+
+
 ## Before the practical session
 
 **For the practical session** this week **come prepared to talk** about the following:

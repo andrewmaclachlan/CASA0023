@@ -1,10 +1,38 @@
 # Classification I
 
+## Resources
+
+::: callout-tip
+## This week
+
+-   Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
+
+    -   Thematic Information Extraction: Pattern Recognition, Chapter 9
+        -   supervised classification
+        -   unsupervised classification
+    -   Information Extraction Using AI, Chapter 10
+        -   expert systems
+        -   support vector machines
+        -   random forest classifier
+    -   Remote Sensing-Derived Thematic Map Accuracy Assessment, Chapter 13
+        -   the error matrix
+
+-   [Cloud-Based Remote Sensing with Google Earth Engine](https://www.eefabook.org/go-to-the-book.html) (accessed 1.5.23).
+
+    -   Chapter F2.1: Interpreting an Image: Classification
+
+-   Pal, M., Mather, P.M., 2005. [Support vector machines for classification in remote sensing. International Journal of Remote Sensing 26, 1007--1011.](https://doi.org/10.1080/01431160512331314083)
+
+-   GISGeography, 2014. [Image Classification Techniques in Remote Sensing](https://gisgeography.com/image-classification-techniques-remote-sensing/) (accessed 1.5.23).
+
+-   Barsi, Á., Kugler, Z., László, I., Szabó, G., Abdulmutalib, H., 2018. [Accuracy dimensions in remote sensing. International Archives of the Photogrammetry, Remote Sensing & Spatial Information Sciences 42.](https://www.int-arch-photogramm-remote-sens-spatial-inf-sci.net/XLII-3/61/2018/isprs-archives-XLII-3-61-2018.pdf)
+:::
+
 ## Data
 
 In the last practical we uploaded our own admin boundary dataset from GADM. GEE has a massive catalog of data that we can search and just load directly into our script...
 
-[Search the GEE data catalogue](https://developers.google.com/earth-engine/datasets/catalog) for `admin`. You should see the FAO GAUL global admin layers and level 2 is equivalent to our unit of study from last week (although this varies based on the country). 
+[Search the GEE data catalogue](https://developers.google.com/earth-engine/datasets/catalog) for `admin`. You should see the FAO GAUL global admin layers and level 2 is equivalent to our unit of study from last week (although this varies based on the country).
 
 ## Vector data
 
@@ -32,11 +60,9 @@ Make a new script and copy this code in, then use the inspector to select a stud
 
 I am going to focus on Shenzhen, but select any city. My inspector shows....
 
-
 ```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_6/GEE_inspector.png') 
 ```
-
 
 To filter out my study area....
 
@@ -54,9 +80,9 @@ There is code provided for us to load us on the [Harmonized Sentinel-2 MSI: Mult
 
 Looking at this code you will see there is a cloud mask. There are two options we have when dealing with clouds.
 
-* To filter the entire collection based on a low cloud coverage percentage per tile, like we did last week
+-   To filter the entire collection based on a low cloud coverage percentage per tile, like we did last week
 
-* To set a higher percentage per tile (e.g. 20) but then to use the quality assurance (QA) bands to filter the clouds per pixel. Scrolling down the bands list [on the catalog page](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR#bands) there is a description of the bitmask for the relevant QA band (QA60). Here we can see the value for each pixel. This is the same layer that we get when downloading Sentinel data, in practical one we could see this in the masks folder....
+-   To set a higher percentage per tile (e.g. 20) but then to use the quality assurance (QA) bands to filter the clouds per pixel. Scrolling down the bands list [on the catalog page](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR#bands) there is a description of the bitmask for the relevant QA band (QA60). Here we can see the value for each pixel. This is the same layer that we get when downloading Sentinel data, in practical one we could see this in the masks folder....
 
 ```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_6/SNAP_masks.png') 
@@ -74,7 +100,7 @@ var divide10000 = function(image) {
 
 ```
 
-1. Let's load the imagery with minimal cloud cover, now depending on your study area and the propesnity for it to be cloudy (like the UK) you will need to change the dates and compromise on the less than % of cloud cover per tile...i wanted just to get 2022 data for this composite, with less than .1% cloud cover...the latter limited the images i could select from so i changed it to 1%
+1.  Let's load the imagery with minimal cloud cover, now depending on your study area and the propesnity for it to be cloudy (like the UK) you will need to change the dates and compromise on the less than % of cloud cover per tile...i wanted just to get 2022 data for this composite, with less than .1% cloud cover...the latter limited the images i could select from so i changed it to 1%
 
 ```{r, eval=FALSE}
 var wayone = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
@@ -106,13 +132,13 @@ For example...i have a tile with an index `20220404T025539_20220404T030757_T49QG
 
 Here....
 
-* The first part is the sensing data and time (the T) - `20220404T025539`
-* The second part is the product generation date and time - `20220404T030757`
-* The third part is the UTM grid reference in the [Military Grid Reference System (MGRS)](https://en.wikipedia.org/wiki/Military_Grid_Reference_System). Where `T49` is the grid zone designator
+-   The first part is the sensing data and time (the T) - `20220404T025539`
+-   The second part is the product generation date and time - `20220404T030757`
+-   The third part is the UTM grid reference in the [Military Grid Reference System (MGRS)](https://en.wikipedia.org/wiki/Military_Grid_Reference_System). Where `T49` is the grid zone designator
 
 In my case this gives me 13 images...now what about increasing the cloud coverage and masking the cloud pixels
 
-2. First we need another function to mask the cloudy pixels and do the division...
+2.  First we need another function to mask the cloudy pixels and do the division...
 
 ```{r, eval=FALSE}
 function maskS2clouds(image) {
@@ -154,9 +180,9 @@ knitr::include_graphics('prac_6/GEE_waytwo.png')
 
 Now, there are two ways we can deal with this...
 
-* Take the median image from all images in our collection - meaning the middle value of each pixel that will result in the clouds being removed (as they are very reflective and will have high values)...adding 
+-   Take the median image from all images in our collection - meaning the middle value of each pixel that will result in the clouds being removed (as they are very reflective and will have high values)...adding
 
-* Use something more advanced for cloud detection such as [s2cloudless](https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless)
+-   Use something more advanced for cloud detection such as [s2cloudless](https://developers.google.com/earth-engine/tutorials/community/sentinel-2-s2cloudless)
 
 Taking the median returns....
 
@@ -164,7 +190,7 @@ Taking the median returns....
 knitr::include_graphics('prac_6/GEE_median.png') 
 ```
 
-## Classification 
+## Classification
 
 The main focus here is classification, this is where we take some samples, train a model and then apply the model to the rest of the image.
 
@@ -255,10 +281,9 @@ print('CART, explained', classifier.explain());
 
 When you print out the classifier you will see:
 
-* max depth = max number of splits 
-* variable importance
-* number of nodes = leaf nodes, use to make a prediction. 
-
+-   max depth = max number of splits
+-   variable importance
+-   number of nodes = leaf nodes, use to make a prediction.
 
 ```{r echo=FALSE, out.width = "400pt", fig.align='center', cache=TRUE, fig.cap="Decision Trees Explained With a Practical Example. Source: [Towards AI](https://towardsai.net/p/programming/decision-trees-explained-with-a-practical-example-fe47872d3b53)"}
 knitr::include_graphics('prac_5/DT.png')
@@ -289,11 +314,16 @@ knitr::include_graphics('prac_6/GEE_classified_map.png')
 We can then query the classified layer using the inspector, the classification value will correspond to the one you assigned....
 
 In my case:
-* 1: Low urban albedo
-* 2: High urban albedo 
-* 3: Grass
-* 4: Bare earth
-* 5: Forest
+
+1.   Low urban albedo
+
+2.   High urban albedo
+
+3.   Grass
+
+4.   Bare earth
+
+5.  Forest
 
 ## Train test split
 
@@ -358,9 +388,9 @@ However, when i plot this map it gives a worse looking result and the accuracy d
 
 ## Train test split pixel
 
-The problem above was that the train test split was done on the polygons and i didn't draw that many in my original training data....So the process went.... draw polygons > make a feature collection (where i assigned the land cover classes values) > select a test train split of the polygons using random numbers > extract the values > train the model....
+The problem above was that the train test split was done on the polygons and i didn't draw that many in my original training data....So the process went.... draw polygons \> make a feature collection (where i assigned the land cover classes values) \> select a test train split of the polygons using random numbers \> extract the values \> train the model....
 
-Now i can get around this by using a pixel approach....draw polygons > select a number of points from each class (e.g. 500) > assign the pixels random numbers > generate a test train split > extract the values > train the model....
+Now i can get around this by using a pixel approach....draw polygons \> select a number of points from each class (e.g. 500) \> assign the pixels random numbers \> generate a test train split \> extract the values \> train the model....
 
 Thanks to [Ollie Ballinger](https://twitter.com/oballinger) for some of this code...
 
@@ -449,11 +479,11 @@ print('Validation consumer accuracy: ', consumers);
 
 Here:
 
-* Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly precited rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%. 
+-   Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly precited rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%.
 
-* Resubstituion accuracy is where we take the original training data and compare it to the modeled output. Mine is 99%.
+-   Resubstituion accuracy is where we take the original training data and compare it to the modeled output. Mine is 99%.
 
-* The confusion matrix is where we held back our % of the original data calling it our validation or test data. We then trained with the model with our training data, took the model and applied it to our testing data. This matrix compares the output of the model and our validation data (which wasn't used to train it). Mine is 98%.
+-   The confusion matrix is where we held back our % of the original data calling it our validation or test data. We then trained with the model with our training data, took the model and applied it to our testing data. This matrix compares the output of the model and our validation data (which wasn't used to train it). Mine is 98%.
 
 Final output:
 

@@ -1,56 +1,58 @@
 # Corrections
 
-## Reading
+## Resources
 
 ::: callout-tip
 ## This week
 
--   Types of Geometric correction, Chapter 7, p.242
+-   Joyce, K., 2013. [Radiative transfer and atmospheric correction video](https://www.youtube.com/watch?v=qb4yFwzsnU8&t)
 
--   Atmospheric correction, Chapter 6, p.208
+-   Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
 
--   Mosaicking, Chapter 7, p.267
+    -   Atmospheric correction, Chapter 6, p.208
 
--   Image enhancements, Chapter 8, p.273
+    -   Types of Geometric correction, Chapter 7, p.242
 
-Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
+    -   Mosaicking, Chapter 7, p.267
 
--   Data fusion
+    -   Image enhancements, Chapter 8, p.273
 
-Schulte to Bühne, H., Pettorelli, N., 2018. [Better together: Integrating and fusing multispectral and radar satellite imagery to inform biodiversity monitoring, ecological research and conservation science. Methods in Ecology and Evolution 9, 849–865.]( https://doi.org/10.1111/2041-210X.12942)
+-   Schulte to Bühne, H., Pettorelli, N., 2018. [Better together: Integrating and fusing multispectral and radar satellite imagery to inform biodiversity monitoring, ecological research and conservation science. Methods in Ecology and Evolution 9, 849--865.](https://doi.org/10.1111/2041-210X.12942)
+
+    -   [Data fusion video](https://www.youtube.com/watch?v=a4dW5EWbNK4&t=3s) created for the paper
+
 
 :::
 
-
-## Atmosphereic correction 
+## Atmosphereic correction
 
 ### DOS
 
-As described in the lecture, a rather simple method to correct raw satellite (or any other) imagery is called Dark Object Subtraction (DOS). This uses the logic that the darkest pixel within the image should be 0 and therefore any value that it has can be attributed to the atmosphere. 
+As described in the lecture, a rather simple method to correct raw satellite (or any other) imagery is called Dark Object Subtraction (DOS). This uses the logic that the darkest pixel within the image should be 0 and therefore any value that it has can be attributed to the atmosphere.
 
-So in order to remove the effect of the atmosphere we can the subtract the value from the rest of the pixels within the image. 
+So in order to remove the effect of the atmosphere we can the subtract the value from the rest of the pixels within the image.
 
-Here, we will need to download some raw satellite imagery, that is in Digital Number (DN). 
+Here, we will need to download some raw satellite imagery, that is in Digital Number (DN).
 
-Then we will apply the formula to calculate the reluctance of the pixels by removing atmosphere effects.The formula for the cosine of the solar zenith angle correction (COST) is, this is the same as DOS but DOS omits `TAUz`. The following has made use of the [documentation from GIS Ag Maps.com](https://www.gisagmaps.com/landsat-8-atco-guide/) 
+Then we will apply the formula to calculate the reluctance of the pixels by removing atmosphere effects.The formula for the cosine of the solar zenith angle correction (COST) is, this is the same as DOS but DOS omits `TAUz`. The following has made use of the [documentation from GIS Ag Maps.com](https://www.gisagmaps.com/landsat-8-atco-guide/)
 
 $$\rho_{\lambda}= \frac{(Lsat_{rad} - Lhaze1percent_{rad})\pi * d^2}{EO_{\lambda} * cos\theta S * TUAv + TAUz}$$
 
 Where...
 
-* $\rho_{\lambda}$ is the corrected value (DOS applied)
+-   $\rho_{\lambda}$ is the corrected value (DOS applied)
 
 Top line of equation...
 
-* $Lsat_{rad}$ =  at sensor radiance (recall DN goes to radiance through the regression equation we saw!)
+-   $Lsat_{rad}$ = at sensor radiance (recall DN goes to radiance through the regression equation we saw!)
 
-* $Lhaze1percent_{rad}$  = amount of radiance that is due to the atmosphere (atmospheric haze) from path or scatter radiance. Very few surfaces are completely black so it is assume that the darkest surface has a 1% reflectance. Various methods to caclcualte this...
-  * Look up tables
-  * Selecting the darkest pixels (shadow, water)
+-   $Lhaze1percent_{rad}$ = amount of radiance that is due to the atmosphere (atmospheric haze) from path or scatter radiance. Very few surfaces are completely black so it is assume that the darkest surface has a 1% reflectance. Various methods to caclcualte this...
 
+    -   Look up tables
+    -   Selecting the darkest pixels (shadow, water)
 
 When we have the haze amount then deduct 1% from that value per band as few targets are absolutely black.
-  
+
 For COST this this:
 
 $$ 0.01 reflectance = 0.01 *\frac{Eoλ * cosθs^2} {d² * pi}$$
@@ -59,36 +61,36 @@ For DOS it's
 
 $$ 0.01 reflectance = 0.01 *\frac{Eoλ * cosθs} {d² * pi}$$
 
+-   $EO_{\lambda}$ or $ESUN_{\lambda}$ = mean exoatmospheric irradiance
 
-* $EO_{\lambda}$ or $ESUN_{\lambda}$ = mean exoatmospheric irradiance 
-  * irradiance = power per unit area received from the Sun
-  * exoatmospheric = just outside the Earth's atmosphere
-  * These values are available from the Landsat user manual such as [table 5.3 in the Landsat 7 user guide](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/LSDS-1927_L7_Data_Users_Handbook-v2.pdf)
-  
-* $cosθs$ = cosine of the solar azimuth, remember from the lecture that this is 90 - solar elevation.
-  
-* $d$ = the Earth-sun distance and is in the `.MTL` file
+    -   irradiance = power per unit area received from the Sun
+    -   exoatmospheric = just outside the Earth's atmosphere
+    -   These values are available from the Landsat user manual such as [table 5.3 in the Landsat 7 user guide](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/LSDS-1927_L7_Data_Users_Handbook-v2.pdf)
 
-* $pi$ = 3.14159265
+-   $cosθs$ = cosine of the solar azimuth, remember from the lecture that this is 90 - solar elevation.
+
+-   $d$ = the Earth-sun distance and is in the `.MTL` file
+
+-   $pi$ = 3.14159265
 
 Once we have all these values then we can do the following:
 
-  * Compute the haze value for each band (although not beyond NIR) - this is the amount of radiance that is due to the atmosphere (atmospheric haze), see above methods.
-  * Convert DN to radiance 
-  * Compute the 1% reflectance value using the equations above
-  * Subtract the 1% reflectance value from the radiance. Here we are saying that we have a pixel (e.g. darkest pixel), we know what 1% of the total radiance is and we are subtracting that from the darkest pixel (which still has atmospheric effects) to account for most targets not being completely black. 
-  
+-   Compute the haze value for each band (although not beyond NIR) - this is the amount of radiance that is due to the atmosphere (atmospheric haze), see above methods.
+-   Convert DN to radiance
+-   Compute the 1% reflectance value using the equations above
+-   Subtract the 1% reflectance value from the radiance. Here we are saying that we have a pixel (e.g. darkest pixel), we know what 1% of the total radiance is and we are subtracting that from the darkest pixel (which still has atmospheric effects) to account for most targets not being completely black.
+
 We can now plug the values in:
 
 $$\rho_{\lambda}= \frac{(Lsat_{rad} - Lhaze1percent_{rad})\pi * d^2}{EO_{\lambda} * cos\theta S * TUAv + TAUz}$$
 
-Where the $Lhaze1percent_{rad}$ is the haze value (e.g. darkest pixel) **minus** 1% of the total radiance. This 1% was computed from the equations above.  
+Where the $Lhaze1percent_{rad}$ is the haze value (e.g. darkest pixel) **minus** 1% of the total radiance. This 1% was computed from the equations above.
 
 Within this equation:
 
-$TAUv$ = 1.0 for Landsat and $TAUz$ = cosθs for COST method. DOS is the same, but without $TAUz$   
+$TAUv$ = 1.0 for Landsat and $TAUz$ = cosθs for COST method. DOS is the same, but without $TAUz$
 
-Of course we can do this in R (or any other software) with just one function! First we need to download some raw satellite data that comes in the Digital Number (DN) format. This is the exact same process as we saw in week 1, expect this time select the Collection 1, Level-1 bundle. At the moment this process won't work with Landsat 9. However, as this involves a large amount  of data and it's unlikely you will need to do this in the module of data read through the following code and then move to the next section 
+Of course we can do this in R (or any other software) with just one function! First we need to download some raw satellite data that comes in the Digital Number (DN) format. This is the exact same process as we saw in week 1, expect this time select the Collection 1, Level-1 bundle. At the moment this process won't work with Landsat 9. However, as this involves a large amount of data and it's unlikely you will need to do this in the module of data read through the following code and then move to the next section
 
 ```{r eval=FALSE}
 library(terra)
@@ -118,7 +120,6 @@ lsat_rad <- radCor(lsatMeta, metaData = metaData, method = "rad")
 #terra::writeRaster(lsat_rad, datatype="FLT4S", filename = "prac_3/Lsatdata8/lsat_rad.tif", format = "GTiff", overwrite=TRUE)
 ```
 
-
 ```{r, eval=FALSE}
 hazeDN    <- RStoolbox::estimateHaze(lsat, hazeBands = 2:4, darkProp = 0.01, plot = TRUE)
 
@@ -135,30 +136,27 @@ As noted in the lecture there are a wide range of more sophisticated methods (be
 
 Whilst this is a bit beyond the scope of this module, if you look again at the [Landsat 7 Data Users Handbook](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/LSDS-1927_L7_Data_Users_Handbook-v2.pdf) you will see a radiance to **reflectance** calculation that can be used...**"For relatively clear Landsat scenes"**:
 
-$$\rho_{\rho}= \frac{\pi* L_{\lambda} * d ^2}{ESUN_{\lambda} * cos\theta_S}$$
-and...we've seen all these values in the DOS formula, except $\rho_{\rho}$ which is Unitless planetary reflectance 
+$$\rho_{\rho}= \frac{\pi* L_{\lambda} * d ^2}{ESUN_{\lambda} * cos\theta_S}$$ and...we've seen all these values in the DOS formula, except $\rho_{\rho}$ which is Unitless planetary reflectance
 
 ...this method is still used in current research too, for example it's listed in this paper of Land Surface Temperature retrieval by [Sekertekin and Bonafonu, 2020](https://www.mdpi.com/2072-4292/12/2/294). See Appendix C for Landsat 5, 7 (that use the above equation) and Landsat 8, that uses this slight variation...
 
+$$\rho_{\rho}= \frac{M_{p}* Q_{CAL} + A_p}{sin\theta_{SE}}$$ Where...
 
-$$\rho_{\rho}= \frac{M_{p}* Q_{CAL} + A_p}{sin\theta_{SE}}$$
-Where...
+-   $M_p$ is the band-specific multiplicative rescaling factor from the metadata
 
-* $M_p$ is the band-specific multiplicative rescaling factor from the metadata
+-   $A_p$ is the band-specific additive rescaling factor from the metadata
 
-* $A_p$ is the band-specific additive rescaling factor from the metadata
+-   $QCAL$ is the digital number
 
-* $QCAL$ is the digital number
-
-* $\theta_{SE}$ is the sun elevation angle from the metadata file.
+-   $\theta_{SE}$ is the sun elevation angle from the metadata file.
 
 **Although** it's worth noting that this is Top of Atmosphere reflectance (TOA).
 
 Radiance is how much light the sensor sees.
 
-Reflectance is the ratio of light leaving the target to amount striking the target. Here will still have atmopsheric effects in the way of our true **apparent** reflectance. Confusingly all of these can be termed reflectance and indeed sometimes radiance is referred to as reflectance. 
+Reflectance is the ratio of light leaving the target to amount striking the target. Here will still have atmopsheric effects in the way of our true **apparent** reflectance. Confusingly all of these can be termed reflectance and indeed sometimes radiance is referred to as reflectance.
 
-TOA reflectance changes the data from what the sensor sees to the ratio of light leaving compared to striking it. BUT, the atmosphere is still present. If we remove the atmopshere we have apparent reflectance (sometimes called Bottom of Atmosphere reflectance). DOS gives us a **version** of apparent reflectance. 
+TOA reflectance changes the data from what the sensor sees to the ratio of light leaving compared to striking it. BUT, the atmosphere is still present. If we remove the atmopshere we have apparent reflectance (sometimes called Bottom of Atmosphere reflectance). DOS gives us a **version** of apparent reflectance.
 
 ## Accessing data
 
@@ -174,13 +172,13 @@ Before we start with merging we need to download two satellite tiles to merge to
 knitr::include_graphics('prac_3/landsat_search.png') 
 ```
 
-In my example i am going to select two tiles, i know which two to select from looking at the [GADM](https://gadm.org/) boundary for Cape Town. 
+In my example i am going to select two tiles, i know which two to select from looking at the [GADM](https://gadm.org/) boundary for Cape Town.
 
 When doing this:
 
-* Select two images as temporally close to each other as possible
-* Try and make sure there is no (or very little cloud cover)
-* In this case select Landsat Collection 2 level 2 to get surface reflectance.
+-   Select two images as temporally close to each other as possible
+-   Try and make sure there is no (or very little cloud cover)
+-   In this case select Landsat Collection 2 level 2 to get surface reflectance.
 
 Notes on Landsat Collections. The different collections denote a major difference in processing of the data. Where as the levels denote a specific product. There is no clear guide online that explains this, so be careful when reading papers!
 
@@ -188,18 +186,20 @@ For example...
 
 > A primary characteristic of Collection 2 is the substantial improvement in the absolute geolocation accuracy of the global ground reference dataset used in the Landsat Level-1 processing flow
 
-Collection 2 was released in 2020 and has some updates, see [this summary of differences for collection 1 vs collection 2](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf). The collection 2 auxiliary data can also be downloaded from Earth Explorer. 
+Collection 2 was released in 2020 and has some updates, see [this summary of differences for collection 1 vs collection 2](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/Landsat-C1vsC2-2021-0430-LMWS.pdf). The collection 2 auxiliary data can also be downloaded from Earth Explorer.
 
-Whereas levels will provide:  
+Whereas levels will provide:
 
-* Level 1 is delivered as a [Digital Number](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data)
-* Level 2 includes surface reflectance and surface temperature
-* Level 3 science products are specific products generated from the data such as Burned Area, surface water extent 
+-   Level 1 is delivered as a [Digital Number](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data)
 
-* Most of the level datasets are tiered, this is denoted through the file name that might end with T1. Tiers are based on data quality and level of processing. Tier 1 datasets are the best quality, tier 2 are good but might have some cloud that affects radiometric calibration covering ground control points.  
-There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data (Top of Atmosphere (TOA) reflectance, TOA Brightness Temperature, Surface Reflectance , Surface Temperature  and Quality Assessment) in a specific US grid strucutre. This removes the need to process data between the difference stages for applications in the US.
+-   Level 2 includes surface reflectance and surface temperature
 
-To conclude, we have collections, followed by levels, followed by tiers. 
+-   Level 3 science products are specific products generated from the data such as Burned Area, surface water extent
+
+-   Most of the level datasets are tiered, this is denoted through the file name that might end with T1. Tiers are based on data quality and level of processing. Tier 1 datasets are the best quality, tier 2 are good but might have some cloud that affects radiometric calibration covering ground control points.\
+    There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data (Top of Atmosphere (TOA) reflectance, TOA Brightness Temperature, Surface Reflectance , Surface Temperature and Quality Assessment) in a specific US grid strucutre. This removes the need to process data between the difference stages for applications in the US.
+
+To conclude, we have collections, followed by levels, followed by tiers.
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [USGS](https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products)"}
 knitr::include_graphics('prac_3/Landsat-Science-Products-Infotable.jfif') 
@@ -211,15 +211,15 @@ In this case I want to download two tiles from Collection 2, Level 2. You can vi
 knitr::include_graphics('prac_3/landsat_tiles.png') 
 ```
 
-Looking at the options below each tile icon in the search results you can either download the tiles individually or add them to a basked (it's the box icon). After clicking the box on the products you want to download > click the basket (top right) > you will then be presented with this screen where you click start order and then follow the prompts to download multiple tiles at once.
+Looking at the options below each tile icon in the search results you can either download the tiles individually or add them to a basked (it's the box icon). After clicking the box on the products you want to download \> click the basket (top right) \> you will then be presented with this screen where you click start order and then follow the prompts to download multiple tiles at once.
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_3/start_order.png') 
 ```
 
-## Merging imagery 
+## Merging imagery
 
-Open our two tiles, in my case i have move my tiles into two separate folders. So i will do this twice, note that we could automate this if we had a large number of tiles. I have also downloaded one Landsat 8 tile and one Landsat 9 tile. 
+Open our two tiles, in my case i have move my tiles into two separate folders. So i will do this twice, note that we could automate this if we had a large number of tiles. I have also downloaded one Landsat 8 tile and one Landsat 9 tile.
 
 ```{r}
 library(tidyverse)
@@ -251,23 +251,25 @@ listlandsat_9<-dir_info(here::here("prac_3", "Landsat", "Lsat9"))%>%
 ```
 
 This might take about 2 minutes...
+
 ```{r eval=FALSE}
 m1 <- terra::mosaic(listlandsat_8, listlandsat_9, fun="mean")
 
 ```
+
 ```{r eval=FALSE, include=FALSE}
 terra::writeRaster(m1, datatype="FLT4S", filename = "prac_3/mosaic.tif", filetype="GTiff", overwrite=TRUE)
 ```
 
 ## Enhancements
 
-Using our merged Landsat data we can now undertake some basic enhancements to try and emphasize / exaggerate certain features or spectral traits.  
+Using our merged Landsat data we can now undertake some basic enhancements to try and emphasize / exaggerate certain features or spectral traits.
 
 ### Ratio
 
 Ratioing is the difference between two spectral bands that have a certain spectral response meaning it is easier to identify a certain landscape feature...for example...
 
-* The Normalised Difference Vegetation Index is based on the fact that healthy and green vegetation reflects more in the NIR but absorbs in the Red wavelength
+-   The Normalised Difference Vegetation Index is based on the fact that healthy and green vegetation reflects more in the NIR but absorbs in the Red wavelength
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [PhysicsOpenLab](https://physicsopenlab.org/2017/01/30/ndvi-index/)"}
 knitr::include_graphics('prac_3/leaf.jpg') 
@@ -275,15 +277,13 @@ knitr::include_graphics('prac_3/leaf.jpg')
 
 Here, we can visually see the spectral trait:
 
-
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [PhysicsOpenLab](https://physicsopenlab.org/2017/01/30/ndvi-index/)"}
 knitr::include_graphics('prac_3/NDVI.png') 
 ```
 
-We can leverage the fact that healthy vegetation has this spectral trait and use the NDVI index should we wish to highlight areas with healthy vegetation. 
+We can leverage the fact that healthy vegetation has this spectral trait and use the NDVI index should we wish to highlight areas with healthy vegetation.
 
-$$NDVI= \frac{NIR-Red}{NIR+Red}$$
-In R this would be:
+$$NDVI= \frac{NIR-Red}{NIR+Red}$$ In R this would be:
 
 ```{r eval=FALSE}
 
@@ -312,7 +312,6 @@ m1_NDVI %>%
   plot(.)
 ```
 
-
 We can reclassify this to pull out certain areas, for example, only where NDVI is equal to or greater than 0.2
 
 ```{r, eval=TRUE}
@@ -328,8 +327,7 @@ There are many other ratios, all of which are detailed on the [Index Database](h
 
 For Landsat sensors 4-7:
 
-$$NDMI= \frac{Band 4-Band 5}{Band 4 + Band 5}$$
-For Landsat 8, bands are increased by 1.
+$$NDMI= \frac{Band 4-Band 5}{Band 4 + Band 5}$$ For Landsat 8, bands are increased by 1.
 
 ### Filtering
 
@@ -347,15 +345,13 @@ m1_filter <- terra::focal(m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, w=m
 
 ### Texture
 
-The basics of texture were covered in the lecture. To apply texture analysis to data in R, we can use the `glcm` package which has a selection of eight texture measures, and we can apply these per band...for example...Note, to use this you must have [`RTools` installed](https://cran.r-project.org/bin/windows/Rtools/) as it makes use of the C++ language. 
+The basics of texture were covered in the lecture. To apply texture analysis to data in R, we can use the `glcm` package which has a selection of eight texture measures, and we can apply these per band...for example...Note, to use this you must have [`RTools` installed](https://cran.r-project.org/bin/windows/Rtools/) as it makes use of the C++ language.
 
 Below we can specify:
 
-* the size of the moving window
-* the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts
-and return the mean value of the texture for each pixel
-* the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array)%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values,(9%20in%20this%20example).) 
-
+-   the size of the moving window
+-   the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel
+-   the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array)%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values,(9%20in%20this%20example).)
 
 Note, that we commonly don't use the pancrhomatic band in landcover classification, however as it is 15m it can produce some useful outputs.
 
@@ -376,8 +372,7 @@ glcm$glcm_homogeneity %>%
   plot(.)
 ```
 
-Depending on your study area the texture measures might not show much, but in this example from [Lu et al. 2012](https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&lang=en) what does it highlight or make more prominent. 
-
+Depending on your study area the texture measures might not show much, but in this example from [Lu et al. 2012](https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&lang=en) what does it highlight or make more prominent.
 
 ```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [Land use/cover classification in the Brazilian Amazon using satellite images](https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&lang=en)"}
 knitr::include_graphics('prac_3/texture_example.png') 
@@ -385,10 +380,9 @@ knitr::include_graphics('prac_3/texture_example.png')
 
 ### Data fusion
 
-In the simplest form data fusion is appending new raster data to the existing data or making a new raster dataset with different bands...here we can do this with the texture measure we have created (and the original spectral data if you wish). We are getting to the stage now where remote sensing is a merge of science and art. Specifically the science is how we correct and apply methods, the art is about how we select the right data / transform it / alter it to produce an output. There is never a **completely right** answer as we will see in future practicals. 
+In the simplest form data fusion is appending new raster data to the existing data or making a new raster dataset with different bands...here we can do this with the texture measure we have created (and the original spectral data if you wish). We are getting to the stage now where remote sensing is a merge of science and art. Specifically the science is how we correct and apply methods, the art is about how we select the right data / transform it / alter it to produce an output. There is never a **completely right** answer as we will see in future practicals.
 
 To create decision level fusion we append our new datasets to our existing data...
-
 
 ```{r eval=FALSE}
 # for the next step of PCA we need to keep this in a raster (and not terra) format...
@@ -401,8 +395,7 @@ Recall from the lecture there is also object fusion and image fusion.
 
 ### PCA
 
-Principal Component Analysis is designed to reduce the dimensionality of our data. In this case we might want to scale our data, meaning that we can compare data that isn't measured in the same way (as we have spectral and texture data). To do so we can use the function scale, that by default standarize the data by subtracting the mean and dividing by the standard deviation. If we just wanted to subtract the mean we could set `scale=FALSE` as an argument. 
-
+Principal Component Analysis is designed to reduce the dimensionality of our data. In this case we might want to scale our data, meaning that we can compare data that isn't measured in the same way (as we have spectral and texture data). To do so we can use the function scale, that by default standarize the data by subtracting the mean and dividing by the standard deviation. If we just wanted to subtract the mean we could set `scale=FALSE` as an argument.
 
 When we use `rasterPCA()` we can set the number of samples `nsamples` to be used for PCA which are then applied to the rest of the data to try and make this more efficient...
 
@@ -423,15 +416,15 @@ pca <- rasterPCA(Fuse,
 
 Once the `rasterPCA()` has completed run the following code to get the proportion of variance explained by each PCA component and the cumulative proportion of the variance explained. Remember that PCA is trying to:
 
-* Transform multi-spectral data into uncorrelated and smaller dataset
-* Keep most of the original information
-* The first component will (should) capture most of the variance within the dataset
+-   Transform multi-spectral data into uncorrelated and smaller dataset
+-   Keep most of the original information
+-   The first component will (should) capture most of the variance within the dataset
 
 ```{r eval=FALSE}
 summary(pca$model)
 ```
-In my case component 1 (of 10) explains 77.62% of the variance from the entire dataset...how might this be useful in future analysis?
 
+In my case component 1 (of 10) explains 77.62% of the variance from the entire dataset...how might this be useful in future analysis?
 
 ```{r eval=FALSE, include=FALSE}
 writeRaster(pca$map
@@ -457,12 +450,10 @@ PCA1 %>%
   plot(.)
 ```
 
-
 ## Learning diary
 
 Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
 
 ### Useful blogs
 
-* [Texture and PCA in R](https://zia207.github.io/geospatial-r-github.io/texture-analysis.html)
-
+-   [Texture and PCA in R](https://zia207.github.io/geospatial-r-github.io/texture-analysis.html)

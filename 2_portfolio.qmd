@@ -10,6 +10,21 @@ By the end of this week / the practicals you should be able to:
 
 A lot of the concepts have been covered in the lecture (more like a tutorial this week), here some key notes are provided to support and demonstrate the code for creating the slides and book. From using RMarkdown in CASA0005, this should be a little familiar.
 
+## Resources
+
+::: callout-tip
+## This week
+
+-   [Quarto Quick Start](https://quarto.org/docs/books/#quick-start)
+
+-   Grolemund, Y.X., J.J. Allaire, Garrett, 2022. R Markdown: The Definitive Guide.
+
+    -   [xaringan Presentations, Chapter 7](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+-   Kirenz, J.K., n.d. [Build Presentations in R](https://www.kirenz.com/slides/xaringan-demo-slides.html#1) (accessed 1.5.23).
+
+:::
+
 ## Xaringan
 
 `r emo::ji("speak")` shar-in-gen
@@ -165,13 +180,12 @@ Create a small 5 slide presentation and host it on GitHub - place the link in yo
 -   Select a sensor of your choice (any)
 -   Create a short (maximum 9 slide) presentation on the sensor in xaringan
 
-The presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically: 
+The presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically:
 
-* The summary criterion will refer to the summary of the sensor you have selected.
-* The application criterion will refer to examples of studies that have used the data from the sensor and their purpose
-* The reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work. 
-  
+-   The summary criterion will refer to the summary of the sensor you have selected.
+-   The application criterion will refer to examples of studies that have used the data from the sensor and their purpose
+-   The reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work.
+
 ### Quarto learning diary
 
 The production of the Quarto learning diary is not marked, but it is required for component 2. Once you have made your Quarto document update it with your learning diary entry from week 1, and the Xaringan presentation from week 2.
-

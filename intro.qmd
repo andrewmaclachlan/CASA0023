@@ -13,14 +13,20 @@ By the end of this practical you should be able to:
 -   Evaluate the (dis)advantages of each type of software you have used
 -   Pull out and statistically compare spectral signatures
 
-## Reading
+## Resources
 
 ::: callout-tip
 ## This week
 
--   Chapter 2 and Section 4.6.
+-   Tempfli, K., Huurneman, Gc., Bakker, Wh., Janssen, L.L., Feringa, W., Gieske, A., Grabmaier, K., Hecker, C., Horn, J., Kerle, N., others, 2009. [Principles of remote sensing: an introductory textbook. International Institute for Geo-Information Science and Earth Observation](https://webapps.itc.utwente.nl/librarywww/papers_2009/general/principlesremotesensing.pdf)
 
-    Tempfli, K., Huurneman, Gc., Bakker, Wh., Janssen, L.L., Feringa, W., Gieske, A., Grabmaier, K., Hecker, C., Horn, J., Kerle, N., others, 2009. [Principles of remote sensing: an introductory textbook. International Institute for Geo-Information Science and Earth Observation](https://webapps.itc.utwente.nl/librarywww/papers_2009/general/principlesremotesensing.pdf)
+    -   Electromagnetic energy and remote sensing, Chapter 2
+
+    -   Overview of popular spaceborne sensors, Section 4.6.
+
+-   Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.
+
+    -   Remote Sensing and Digital Image Processing, Chapter 1, pages 1-18 and from the bottom of page 23 (Remote Sensing Data Analysis) to the end of page 27.
 
 -   Brady, M., 2021. [Remote Sensing for Dummies](https://storymaps.arcgis.com/stories/cb1577b0f5bc485c974b4ea19d52282d) (accessed 1.4.23).
 :::

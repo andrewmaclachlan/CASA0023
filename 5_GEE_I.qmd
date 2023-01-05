@@ -1,5 +1,35 @@
 # Google Earth Engine I
 
+## Resources
+
+::: callout-tip
+## This week
+
+The original GEE paper
+
+-   Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D., Moore, R., 2017. [Google Earth Engine: Planetary-scale geospatial analysis for everyone. Remote Sensing of Environment, Big Remotely Sensed Data: tools, applications and experiences 202, 18–27.](https://doi.org/10.1016/j.rse.2017.06.031)
+
+This paper is very similar, but focus on SECTION VII.GEE Applications
+
+-   Amani, M., Ghorbanian, A., Ahmadi, S.A., Kakooei, M., Moghimi, A., Mirmazloumi, S.M., Moghaddam, S.H.A., Mahdavi, S., Ghahremanloo, M., Parsian, S., Wu, Q., Brisco, B., 2020. [Google Earth Engine Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing 13, 5326–5350.](https://doi.org/10.1109/JSTARS.2020.3021052)
+
+-   [GEE applications topical collection](https://www.mdpi.com/journal/remotesensing/topical_collections/GEE), search for urban related studies
+
+-   [Cloud-Based Remote Sensing with Google Earth Engine](https://www.eefabook.org/go-to-the-book.html) (accessed 1.5.23).
+
+    -   Section F1 Programming and Remote Sensing Basics
+    -   Section F2.0 Image Manipulation: Bands, Arithmetic, Thresholds, and Masks
+    -   Chapter F3.2 Neighborhood-Based Image Transformation
+    -   Chapter F3.1: Advanced Pixel-Based Image Transformation (PCA and tasselled cap)
+    -   Chapter A1.2 Urban Envrionments
+    -   Chapter A1.3: Built Environments
+
+-   Kochenour, C., 2020. [Introduction — Remote Sensing with Google Earth Engine.](https://calekochenour.github.io/remote-sensing-textbook/introduction.html)
+
+    -   Similar to the GEE book above, with some nice workflows.
+
+:::
+
 For this week we are going to move away form R and focus on Google Earth Engine, which is still quite new for me too.
 
 Google Earth Engine (GEE) is a platform that lets us analyse data that is stored remotely, each time we write some code it is sent to a server to be evaluated and the results are returned to us. As we don't compute locally it speeds all of our processes up!
