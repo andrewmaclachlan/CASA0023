@@ -60,7 +60,7 @@ knitr::include_graphics('prac_1/gitignore.jpg')
     -   Select search icon
     -   Download the S2MSI2A data
 
-```{r echo=FALSE, out.width = "500px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_1/sentinel_data_1.png') 
 ```
 
@@ -82,7 +82,7 @@ You can also use the [Sentinel 2 toolbox to replicate the conversation from TOA 
 
 -   Cloud cover e.g. \[0 TO 5\]
 
-\_ Mu image was from the 15/5/2022
+-   My image was from the 15/5/2022
 
 #### Open
 
