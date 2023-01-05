@@ -14,103 +14,19 @@ There are two main books used in this module.
 
 ## Schedule
 
-<table style="width:83%;">
-<colgroup>
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-<col style="width: 16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><p>Week</p></th>
-<th style="text-align: left;"><p>Lecture</p></th>
-<th style="text-align: center;"><p>Presentation</p></th>
-<th><p>Practical</p></th>
-<th style="text-align: center;"><p>Practical material</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p>1</p></td>
-<td style="text-align: left;"><p>An Introduction to Remote Sensing</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Getting started with remote sensing</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/intro.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="even">
-<td><p>2</p></td>
-<td style="text-align: left;"><p>Portfolio tools: Xaringan and Quarto</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Portfolio</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="odd">
-<td><p>3</p></td>
-<td style="text-align: left;"><p>Remote sensing data</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Corrections</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/3_corrections.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="even">
-<td><p>4</p></td>
-<td style="text-align: left;"><p>Policy applications</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-4/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Policy</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/4_policy.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="odd">
-<td><p>5</p></td>
-<td style="text-align: left;"><p>Google Earth Engine</p></td>
-<td style="text-align: center;"></td>
-<td><p>Google Earth Engine</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="even">
-<td></td>
-<td style="text-align: left;"><p><strong>Reading week</strong></p></td>
-<td style="text-align: center;"></td>
-<td></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td><p>6</p></td>
-<td style="text-align: left;"><p>Classification</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Classification I</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="even">
-<td><p>7</p></td>
-<td style="text-align: left;"><p>Classification the big questions (lecture 5 continued) and accuracy</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Classification II</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="odd">
-<td><p>8</p></td>
-<td style="text-align: left;"><p>Temperature and policy</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>Tempearture</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023/8_temperature.html"><code>r fa("code")</code></a></p></td>
-</tr>
-<tr class="even">
-<td><p>9</p></td>
-<td style="text-align: left;"><p>SAR</p></td>
-<td style="text-align: center;"><p><a href="https://andrewmaclachlan.github.io/CASA0023-lecture-9/#1"><code>r fa("person-chalkboard")</code></a></p></td>
-<td><p>SAR in GEE</p></td>
-<td style="text-align: center;"><p><code>r fa("code")</code></p></td>
-</tr>
-<tr class="odd">
-<td><p>10</p></td>
-<td style="text-align: left;"><p>Learning diary Q and A</p></td>
-<td style="text-align: center;"></td>
-<td><p>Group presentations</p></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
+| Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                   |
+|---------------|:--------------|:-------------:|---------------|:-------------:|
+| 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)        |
+| 2    | Portfolio tools: Xaringan and Quarto                                | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Portfolio                           |     [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html)     |
+| 3    | Remote sensing data                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1) | Corrections                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/3_corrections.html)    |
+| 4    | Policy applications                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-4/#1) | Policy                              |      [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/4_policy.html)       |
+| 5    | Google Earth Engine                                                 |                                                                                         | Google Earth Engine                 |       [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html)       |
+|      | **Reading week**                                                    |                                                                                         |                                     |                                                                                        |
+| 6    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1) | Classification I                    | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |
+| 7    | Classification the big questions (lecture 5 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html) |
+| 8    | Temperature and policy                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Tempearture                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html)    |
+| 9    | SAR                                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-9/#1) | SAR in GEE                          |                                     `r fa("code")`                                     |
+| 10   | Learning diary Q and A                                              |                                                                                         | Group presentations                 |                                                                                        |
 
 ## Intended course learning outcomes
 
