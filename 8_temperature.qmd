@@ -379,23 +379,9 @@ You can also change how the data is exported, although I would now just do some 
 
 To extended our analysis we could explore statistics that will establish if we have a significant increasing or decreasing trend within our data. For example...the [Mann-Kendall trend test](https://developers.google.com/earth-engine/tutorials/community/nonparametric-trends). Once we have identified these pixels or areas we could then investigate them further with Landsat surface temperature data and landcover data.
 
-## Review questions
+## Heat index
 
-For the task this week the task is to make an index from remotely sensed data, for example a heat or pollution index following the example below...
-
-You will need to provide the GEE code and 1-2 paragraphs of text explaining what the code does.
-
-I have used London as my example, and you might see that some of the wards are missing, this is because of the original dataset using a mixture of polygons and polylines After I uploaded and ran the statistics GEE didn't want to export different poly features so i just selected the polygons...
-
-### Guidance
-
-* You should select an area that isn't too cloudy or change the image date search values
-* You might wish to upload the GADM admin boundaries or another 
-
-
-### Context 
-
-From [this BBC article](https://www.bbc.co.uk/news/uk-62243280) it says that:
+In the next part of the practical we are going to replicate a heat index produced by [the BBC ](https://www.bbc.co.uk/news/uk-62243280). Here it says...
 
 > A statistical method published by academics was used to standardise land surface temperatures for each postcode area, which involved combining satellite images for different dates over the past three years.
 
@@ -403,7 +389,7 @@ Further...
 
 > Using satellite data from 4 Earth Intelligence, the BBC mapped how vulnerable postcode areas were to extreme heat in England, Wales and Scotland during periods of hot weather over the past three summers - shown with a heat hazard score.
 
-The temperature was from.,..
+The temperature was from....
 
 > The potential heat hazard score for each postcode area was calculated by 4EI, who measured the average land surface temperature over a sample of days in the past three summers across Britain.
 
@@ -420,7 +406,6 @@ However, feel free to change these assumptions, for example, as noted earlier is
 To calculate the percentile rank of the mean temperature per spatial unit, in my first attempt at this I downloaded my data from GEE and ran it in R....I then consulted Ollie Ballinger who helped me re-create the `case_when()` that you see below from R...First the R attempt...
 
 #### R 
-
 
 First make a quick map of our mean temperature per spatial unit, in my case wards...
 
@@ -618,7 +603,7 @@ Now we have the temperature per ward (or the index), we could explore factors of
 
 * [Google Earth Engine: Analyzing Land Surface Temperature Data](https://docs.google.com/document/d/1WDxMR5UpxqiTB4GsJcdP9AB0hP-Z8oaX-O9akBg2PZ0/edit)
 
-* Following the lecture, could the red lined areas experience higher temperatures?
+* Following the lecture, could red lined areas experience higher temperatures?
 
 * Could a similar analysis be done for other variables? Such as [pollution](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_NO2)  
 * Could we make a pollution index similar to the heat index

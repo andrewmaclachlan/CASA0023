@@ -1,0 +1,29 @@
+# SAR
+
+## Resources
+
+::: callout-tip
+## This week
+
+-   Schulte to Bühne, H., Pettorelli, N., 2018. [Better together: Integrating and fusing multispectral and radar satellite imagery to inform biodiversity monitoring, ecological research and conservation science. Methods in Ecology and Evolution 9, 849--865.](https://doi.org/10.1111/2041-210X.12942)
+
+    -   Sections 1 and 2.
+
+-   Lu, D., Li, G., Moran, E., Dutra, L., Batistella, M., 2011. [A Comparison of Multisensor Integration Methods for Land Cover Classification in the Brazilian Amazon. GIScience & Remote Sensing 48, 345–370.](https://doi.org/10.2747/1548-1603.48.3.345)
+
+    -   Upto page 354.
+
+-   Dabboor, M., Brisco, B., Dabboor, M., Brisco, B., 2018. [Wetland Monitoring and Mapping Using Synthetic Aperture Radar, Wetlands Management - Assessing Risk and Sustainable Solutions. IntechOpen.](https://doi.org/10.5772/intechopen.80224)
+
+    -   Just section 2 on SAR concepts.
+
+-   [ASF SAR userguide](https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/#introduction)
+
+-   [NASA Data Made Easy: Part 2- Introduction to SAR](https://www.youtube.com/watch?v=Zfn7P395O40)
+
+:::
+
+## Learning diary
+
+Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
+

@@ -53,9 +53,9 @@ book:
     - 6_classification_I.qmd
     - 7_classification_II.qmd
     - 8_temperature.qmd
+    - 9_SAR.qmd
     - resources.qmd
-    - summary.qmd
-    - references.qmd
+#    - references.qmd
   favicon: "assets/favicon.ico"	
   reader-mode: true
 
