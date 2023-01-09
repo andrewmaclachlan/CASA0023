@@ -585,7 +585,7 @@ p1 <- means %>%
 p1
 ```
 
-We can also look at a density plot....ideally each land cover has a clear and separate historgram...
+We can also look at a [density plot](https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0)....ideally each land cover has a clear and separate historgram...
 
 ```{r, fig.cap= "Thanks to Sydney Goldstein for [some of this code](https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification)"}
 p2 <- sen_lsat %>%
@@ -642,3 +642,7 @@ If you make plots of reflectance be careful to use the same scale, you can do th
 ## Learning diary
 
 Consult the assignment requirements document and complete your learning diary entry. We cover the tools to make the online learning diary next week, so in this week use a word editor, or markdown document and then add your content to your online diary next week.
+
+## Feedback 
+
+Was anything that we explained unclear this week or was something really clear...let us know using the [feedback form](https://forms.gle/ArGHKA2sSmN29pVLA). It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material.

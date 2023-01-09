@@ -614,3 +614,6 @@ Now we have the temperature per ward (or the index), we could explore factors of
 
 Consult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.
 
+## Feedback 
+
+Was anything that we explained unclear this week or was something really clear...let us know using the [feedback form](https://forms.gle/ArGHKA2sSmN29pVLA). It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material.

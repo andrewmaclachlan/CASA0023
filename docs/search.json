@@ -84,6 +84,13 @@
     "text": "1.5 Learning diary\nConsult the assignment requirements document and complete your learning diary entry. We cover the tools to make the online learning diary next week, so in this week use a word editor, or markdown document and then add your content to your online diary next week."
   },
   {
+    "objectID": "intro.html#feedback",
+    "href": "intro.html#feedback",
+    "title": "\n1  Getting started with remote sensing\n",
+    "section": "\n1.6 Feedback",
+    "text": "1.6 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
+  },
+  {
     "objectID": "2_portfolio.html#learning-outcomes",
     "href": "2_portfolio.html#learning-outcomes",
     "title": "2  Portfolio",
@@ -102,7 +109,7 @@
     "href": "2_portfolio.html#xaringan",
     "title": "2  Portfolio",
     "section": "\n2.3 Xaringan",
-    "text": "2.3 Xaringan\n🙊 shar-in-gen\n\nInstall / load the packages\n\n\nremotes::install_github(\"yihui/xaringan\")\nlibrary(xaringanExtra)\n\n\n2.3.1 Template:\nFile -> New File -> R Markdown -> From Template -> Ninja Presentation\nThe loaded template and lecture had a lot of info, but to get started you need to know the following tools:\n\n2.3.2 Themes\nTo change how the RMarkdown renders you can select a different theme…just change the css argument in the preamble…currently it will be…\ncss: [default, metropolis, metropolis-fonts]\nTo see other themes:\nnames(xaringan:::list_css())\nOr, use the package xaringanthemer. Simply load the package, have a code chunk at the start of the presentation like this…\nChange the preamble to * css: [\"xaringan-themer.css\"] * highlightStyle: solarized-dark or which ever style you selected.\nSee the Xaringan CSS Theme Generator site for more details.\n\n2.3.3 Slide controls:\n\nAdd a new slide = ---\n\nAdd a click to open the next part of a slide = --\n\nAdd a flipped slide (colours reversed and message in centre) = class: inverse, center, middle (after the ---)\n\n2.3.4 Headings / lists:\n\n\n#, ## and so on for sub headings\nLists use * or 1.First item and 1.Second item, it will know to list them 1 and then 2.\n\n2.3.5 Slide sides (e.g. like power point)\n.pull-left[To have things on the left]\n.pull-right[To have things on the right]\n\n2.3.6 Images\n\nknitr::include_graphics('img/Lena-river.jpg')`\n\nto control the figure you can specify options within the chunk e.g.\n{r  echo=FALSE, out.width='60%', fig.align='center'}\n\n2.3.7 Equations\nTo use an equation it’s just placing the values / text in an opening $$ and closing $$e.g.\n$$NDVI= \\frac{NIR-Red}{NIR+Red}$$\nYou may also want to split equations if they are rather long…with \\begin{split} and \\\\ where you want the splits and then \\end{split}\n\\[\\begin{split}\nWetness = 0.1509(B2)+0.1973(B3)\\\\+0.3279(B4)+0.3406(B8)\\\\−\n0.7112(B11)−0.4572(B12)\n\\end{split}\\]\n\n2.3.8 Preview\nLoad the add In “Infinite Moon Reader” from Yihui Xie generates the slides every time you save the .Rmd. Tools > Addins.\n\n2.3.9 xaringanExtra\nxaringanExtra, developed by Garrick Aden-Buie is “a playground of enhancements and extensions”..that are easy to add..for example, to add a search function in your slides just add..see xaringanExtra"
+    "text": "2.3 Xaringan\n🗣 shar-in-gen\n\nInstall / load the packages\n\n\nremotes::install_github(\"yihui/xaringan\")\nlibrary(xaringanExtra)\n\n\n2.3.1 Template:\nFile -> New File -> R Markdown -> From Template -> Ninja Presentation\nThe loaded template and lecture had a lot of info, but to get started you need to know the following tools:\n\n2.3.2 Themes\nTo change how the RMarkdown renders you can select a different theme…just change the css argument in the preamble…currently it will be…\ncss: [default, metropolis, metropolis-fonts]\nTo see other themes:\nnames(xaringan:::list_css())\nOr, use the package xaringanthemer. Simply load the package, have a code chunk at the start of the presentation like this…\nChange the preamble to * css: [\"xaringan-themer.css\"] * highlightStyle: solarized-dark or which ever style you selected.\nSee the Xaringan CSS Theme Generator site for more details.\n\n2.3.3 Slide controls:\n\nAdd a new slide = ---\n\nAdd a click to open the next part of a slide = --\n\nAdd a flipped slide (colours reversed and message in centre) = class: inverse, center, middle (after the ---)\n\n2.3.4 Headings / lists:\n\n\n#, ## and so on for sub headings\nLists use * or 1.First item and 1.Second item, it will know to list them 1 and then 2.\n\n2.3.5 Slide sides (e.g. like power point)\n.pull-left[To have things on the left]\n.pull-right[To have things on the right]\n\n2.3.6 Images\n\nknitr::include_graphics('img/Lena-river.jpg')`\n\nto control the figure you can specify options within the chunk e.g.\n{r  echo=FALSE, out.width='60%', fig.align='center'}\n\n2.3.7 Equations\nTo use an equation it’s just placing the values / text in an opening $$ and closing $$e.g.\n$$NDVI= \\frac{NIR-Red}{NIR+Red}$$\nYou may also want to split equations if they are rather long…with \\begin{split} and \\\\ where you want the splits and then \\end{split}\n\\[\\begin{split}\nWetness = 0.1509(B2)+0.1973(B3)\\\\+0.3279(B4)+0.3406(B8)\\\\−\n0.7112(B11)−0.4572(B12)\n\\end{split}\\]\n\n2.3.8 Preview\nLoad the add In “Infinite Moon Reader” from Yihui Xie generates the slides every time you save the .Rmd. Tools > Addins.\n\n2.3.9 xaringanExtra\nxaringanExtra, developed by Garrick Aden-Buie is “a playground of enhancements and extensions”..that are easy to add..for example, to add a search function in your slides just add..see xaringanExtra"
   },
   {
     "objectID": "2_portfolio.html#quarto",
@@ -124,6 +131,13 @@
     "title": "2  Portfolio",
     "section": "\n2.6 Learning diary",
     "text": "2.6 Learning diary\nThis week for your learning diary you need to create a Xaringan presentation and a your Quarto learning diary.\n\n2.6.1 Xaringan\nCreate a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio\n\nSelect a sensor of your choice (any)\nCreate a short (maximum 9 slide) presentation on the sensor in xaringan\n\nThe presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically:\n\nThe summary criterion will refer to the summary of the sensor you have selected.\nThe application criterion will refer to examples of studies that have used the data from the sensor and their purpose\nThe reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work.\n\n2.6.2 Quarto learning diary\nThe production of the Quarto learning diary is not marked, but it is required for component 2. Once you have made your Quarto document update it with your learning diary entry from week 1, and the Xaringan presentation from week 2."
+  },
+  {
+    "objectID": "2_portfolio.html#feedback",
+    "href": "2_portfolio.html#feedback",
+    "title": "2  Portfolio",
+    "section": "\n2.7 Feedback",
+    "text": "2.7 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
   },
   {
     "objectID": "3_corrections.html#resources",
@@ -168,6 +182,13 @@
     "text": "3.6 Learning diary\nConsult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.\n\n3.6.1 Useful blogs\n\nTexture and PCA in R"
   },
   {
+    "objectID": "3_corrections.html#feedback",
+    "href": "3_corrections.html#feedback",
+    "title": "\n3  Corrections\n",
+    "section": "\n3.7 Feedback",
+    "text": "3.7 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
+  },
+  {
     "objectID": "4_policy.html#resources",
     "href": "4_policy.html#resources",
     "title": "4  Policy",
@@ -201,6 +222,13 @@
     "title": "4  Policy",
     "section": "4.5 Example",
     "text": "4.5 Example\nFor a written example read up to the study area section in my paper on temperature mitigation (first 2 pages). Take note of table 1."
+  },
+  {
+    "objectID": "4_policy.html#feedback",
+    "href": "4_policy.html#feedback",
+    "title": "4  Policy",
+    "section": "4.6 Feedback",
+    "text": "4.6 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
   },
   {
     "objectID": "5_GEE_I.html#resources",
@@ -308,6 +336,13 @@
     "text": "5.15 Learning diary\nConsult the assignment requirements document and complete your learning diary entry in your Quarto learning diary."
   },
   {
+    "objectID": "5_GEE_I.html#feedback",
+    "href": "5_GEE_I.html#feedback",
+    "title": "\n5  Google Earth Engine I\n",
+    "section": "\n5.16 Feedback",
+    "text": "5.16 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
+  },
+  {
     "objectID": "6_classification_I.html#resources",
     "href": "6_classification_I.html#resources",
     "title": "\n6  Classification I\n",
@@ -371,6 +406,13 @@
     "text": "6.9 Learning diary\nConsult the assignment requirements document and complete your learning diary entry in your Quarto learning diary."
   },
   {
+    "objectID": "6_classification_I.html#feedback",
+    "href": "6_classification_I.html#feedback",
+    "title": "\n6  Classification I\n",
+    "section": "\n6.10 Feedback",
+    "text": "6.10 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
+  },
+  {
     "objectID": "7_classification_II.html#resources",
     "href": "7_classification_II.html#resources",
     "title": "\n7  Classification II\n",
@@ -397,6 +439,13 @@
     "title": "\n7  Classification II\n",
     "section": "\n7.4 Learning diary",
     "text": "7.4 Learning diary\nConsult the assignment requirements document and complete your learning diary entry in your Quarto learning diary.\n\n7.4.1 Extra resources\nImage Segmentation and OBIA by Noel Gorelick:\n\npresentation\nvideo\nThe paper: Superpixels and Polygons using Simple Non-Iterative Clustering\nThe original GEE SNIC example"
+  },
+  {
+    "objectID": "7_classification_II.html#feedback",
+    "href": "7_classification_II.html#feedback",
+    "title": "\n7  Classification II\n",
+    "section": "\n7.5 Feedback",
+    "text": "7.5 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
   },
   {
     "objectID": "8_temperature.html#resources",
@@ -469,6 +518,13 @@
     "text": "8.10 Learning diary\nConsult the assignment requirements document and complete your learning diary entry in your Quarto learning diary."
   },
   {
+    "objectID": "8_temperature.html#feedback",
+    "href": "8_temperature.html#feedback",
+    "title": "\n8  Temperature\n",
+    "section": "\n8.11 Feedback",
+    "text": "8.11 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
+  },
+  {
     "objectID": "9_SAR.html#resources",
     "href": "9_SAR.html#resources",
     "title": "9  SAR",
@@ -481,6 +537,13 @@
     "title": "9  SAR",
     "section": "9.2 Learning diary",
     "text": "9.2 Learning diary\nConsult the assignment requirements document and complete your learning diary entry in your Quarto learning diary."
+  },
+  {
+    "objectID": "9_SAR.html#feedback",
+    "href": "9_SAR.html#feedback",
+    "title": "9  SAR",
+    "section": "9.3 Feedback",
+    "text": "9.3 Feedback\nWas anything that we explained unclear this week or was something really clear…let us know using the feedback form. It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material."
   },
   {
     "objectID": "resources.html",

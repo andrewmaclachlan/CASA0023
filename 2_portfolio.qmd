@@ -189,3 +189,7 @@ The presentation will be marked in the same manner set out in mark scheme for th
 ### Quarto learning diary
 
 The production of the Quarto learning diary is not marked, but it is required for component 2. Once you have made your Quarto document update it with your learning diary entry from week 1, and the Xaringan presentation from week 2.
+
+## Feedback 
+
+Was anything that we explained unclear this week or was something really clear...let us know using the [feedback form](https://forms.gle/ArGHKA2sSmN29pVLA). It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material.

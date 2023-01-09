@@ -457,3 +457,7 @@ Consult the assignment requirements document and complete your learning diary en
 ### Useful blogs
 
 -   [Texture and PCA in R](https://zia207.github.io/geospatial-r-github.io/texture-analysis.html)
+
+## Feedback 
+
+Was anything that we explained unclear this week or was something really clear...let us know using the [feedback form](https://forms.gle/ArGHKA2sSmN29pVLA). It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material.

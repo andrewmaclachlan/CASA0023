@@ -473,3 +473,6 @@ Image Segmentation and OBIA by Noel Gorelick:
 * [The paper: Superpixels and Polygons using Simple Non-Iterative Clustering](https://openaccess.thecvf.com/content_cvpr_2017/papers/Achanta_Superpixels_and_Polygons_CVPR_2017_paper.pdf)
 * The [original GEE SNIC example](https://code.earthengine.google.com/c069f07d0e15eb104302fc6360f89301)
 
+## Feedback 
+
+Was anything that we explained unclear this week or was something really clear...let us know using the [feedback form](https://forms.gle/ArGHKA2sSmN29pVLA). It’s anonymous and we’ll use the responses to clear any issues up in the future / adapt the material.
