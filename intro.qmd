@@ -359,6 +359,14 @@ To download the data:
 knitr::include_graphics('prac_1/earthexplorer.png')
 ```
 
+1. Set the search range to similar dates that you used for the Sentinel data, in my case 05/01/2022 to 05/31/2022
+
+1. On the cloud cover tab set the filter to between 0 and 5% (or up to 10% if needed)
+
+1. Click Data Sets and select Landsat Collection 2 Level 2 > Landsat 8-9 OLI/TIRS C2 L2 (more on what this means next week)
+
+1. Click results, my image is: LC09_L2SP_175083_20220509_20220511_02_T1. Download the complete bundle.
+
 Once downloaded unzip the file.
 
 In SNAP go File \> Open Product, navigate to the `.MTL` and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can be explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
