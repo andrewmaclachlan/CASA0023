@@ -29,6 +29,13 @@ By the end of this practical you should be able to:
     -   Remote Sensing and Digital Image Processing, Chapter 1, pages 1-18 and from the bottom of page 23 (Remote Sensing Data Analysis) to the end of page 27.
 
 -   Brady, M., 2021. [Remote Sensing for Dummies](https://storymaps.arcgis.com/stories/cb1577b0f5bc485c974b4ea19d52282d) (accessed 1.4.23).
+
+-   Butcher, G., 2016. [Tour of the electromagnetic spectrum](https://smd-prod.s3.amazonaws.com/science-pink/s3fs-public/atoms/files/Tour-of-the-EMS-TAGGED-v7_0.pdf), Third edition. ed. National Aeronautics and Space Administration, Washington, DC.
+
+    -   Radiation budget
+    
+    -   Reflected near-infrared waves
+
 :::
 
 ## EO dashboard
@@ -74,7 +81,7 @@ Within this image we have:
 
 4.  Sentinel mission selection :
 
--   Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details.
+-   Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details. We cover different products (e.g. BOA or Top of Atmosphere, TOA) in future sessions.
 
 You can also use the [Sentinel 2 toolbox to replicate the conversation from TOA to BOA](https://sentinels.copernicus.eu/ar/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm)
 
@@ -142,9 +149,16 @@ Of course we have only used the 10m bands so far...there are two options that we
 
 Down scaling is quite an intensive process and beyond the scope of this practical. However, it can be achieved using [Sen2Res](https://step.esa.int/main/snap-supported-plugins/sen2res/) that is another plug in for the [SNAP toolbox](https://step.esa.int/main/download/snap-download/). Arguably SNAP is just a difference type of GIS software specific to Sentinel, but we will explore it later as it makes some of these concepts easier to understand.
 
-Upscaling aggregates the images to a more coarse resolution (e.g. 10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g. within the 20m folder there are 10 bands). However, it's not clear what method has been used, the documentation suggests nearest neighbour - https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/.
+Upscaling aggregates the images to a more coarse resolution (e.g. 10m to 20m). The Sentinel user guide states that bands will be resampled and provided (e.g. within the 20m folder there are 10 bands). However, it's not clear what method has been used, the [documentation suggests nearest neighbour](https://docs.sentinel-hub.com/api/latest/data/sentinel-2-l2a/).
 
-This can also be termed resampling, and nearest neighbour simply means taking the new raster resolution and then assiging the value from the closest value in the original data. Others approaches include bilinear or cubic convolution resampling.
+This can also be termed resampling, and nearest neighbour simply means taking the new raster resolution and then assigning the value from the closest value in the original data. You might recall from CASA0005 there are different ways to define this, for example is nearest neighbour based on the distance from the center of a cell or the majority of cells, the latter would be termed majority rule.
+
+```{r echo=FALSE, out.width = "70%", fig.align='center', cache=TRUE, fig.cap="Graphic representation of Nearest Neighbour (NN) and Majority Rule (MR). Source: [David García Álvarez, 2021](https://www.researchgate.net/figure/Graphic-representation-of-Nearest-Neighbour-NN-and-Majority-Rule-MR_fig1_34850544)"}
+knitr::include_graphics('prac_1/NN.png')
+```
+
+
+Others approaches include bilinear or cubic convolution resampling. See [stack exchange for a worked example](https://gis.stackexchange.com/questions/20353/how-does-nearest-neighbor-image-resampling-work-in-arcgis).
 
 #### SNAP
 
@@ -317,6 +331,14 @@ Then compute the tasseled cap transformation (Raster \> Band Maths) with the equ
 The new layers we've created will be added to the bands folder of the product you had selected (remember that we can **only do this with bands that have the same resolution**, hence our up and down sampling). We can now display the bands through the colour guns, R: Brightness, G: Greeness, B: Wetness and also create a scatter plot between Greeness (y) and Brightness (x) like we did earlier.
 
 At this stage it is useful to also have open a true colour composite to compare to our tasseled cap transformation RBG image...what do the values and colours show? The [Tasseled Cap function](https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/tasseled-cap-function.htm) from ArcPro will help explain this further.
+
+The data we have created show:
+
+* Brightness, associated with spectral bands that show bare soil, man made surfaces or bight materials
+* Greenness, associated with *green* vegetation
+* Wetness, associated with moisture
+
+The article states that the Tasseled Cap function is a form or Principal Component Analysis (PCA), covered more next week. This means that we have transformed our original data into a new data set that has reduced the dimensionality. PCA reduces the size of data (dimensions) whilst maximising the variance, there are specific tools for PCA so arguably this isn't PCA as such. I would term this a spectral index which is a combination of two or more bands to highlight certain features of an image. There are *many* different spectral indexes that can be implemented - see the [Index DataBase](https://www.indexdatabase.de/) holds them all or Chapter 8, pages 325 from Jensen. There are specific urban spectral indexes such as the The Normalized Difference Built-up Index (NDBI).
 
 ```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 
