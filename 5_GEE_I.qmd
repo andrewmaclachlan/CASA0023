@@ -59,7 +59,7 @@ print(number, string, list, dictionary)
 
 When you open GEE code editor you will see the following screen composed of these parts:
 
-```{r echo=FALSE, out.width = "900pt", fig.align='center', cache=TRUE, fig.cap="GEE screen: [GEE community Beginner's Cookbook, TC25](https://developers.google.com/earth-engine/tutorials/community/beginners-cookbook)"}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=TRUE, fig.cap="GEE screen: [GEE community Beginner's Cookbook, TC25](https://developers.google.com/earth-engine/tutorials/community/beginners-cookbook)"}
 knitr::include_graphics('prac_5/ee-editor.png')
 ```
 ## Examples
@@ -81,7 +81,7 @@ In this case my city is Dheli, when i enter this code you will get a message ask
 
 Alternatively we can click the point icon on the map and add a new point...> new layer > give an suitable name
 
-```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_5/GEE_points.png') 
 ```
 To center the map on this point...where the second argument is the zoom level
@@ -94,7 +94,7 @@ Map.centerObject(Dheli, 10)
 
 Now we need to load some surface reflectance data > browse data catalogue > click through to a Landsat surface reflectance dataset, Collection 2 and tier 1. You will see the code to import the data to your script and if you click the open window icon you can see an example...
 
-```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_5/GEE_data_catalogue.png') 
 ```
 
@@ -205,6 +205,11 @@ var median = oneimage_study_area_cloud.reduce(ee.Reducer.median());
 print(median, "median")
 ```
 
+Is the median the best image to make though ? **watch from 27:28 to 31:46**
+
+
+{{< video https://www.youtube.com/watch?v=WvaBZbph_cU&t=1650s >}}
+
 ## Better images
 
 Until now we haven't really dealt with the [scaling factors from the Landsat surface reflectance product](https://www.usgs.gov/faqs/how-do-i-use-scale-factor-landsat-level-2-science-products)...
@@ -248,12 +253,12 @@ Map.addLayer(oneimage_study_area_cloud_scale_median, visualization, 'True Color 
 
 You should have produced something like this...
 
-```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_5/GEE_median_SR.png') 
 ```
 Note here that we give this layer a name `'True Color (432)'` this means on the map under the layer button it will have that same name. Here, you can also set the transparency of each layer and even change the bands that display (although this doesn't change the code)
 
-```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_5/GEE_layers.png') 
 ```
 
@@ -275,7 +280,7 @@ Map.addLayer(mosaic, vis_params2, 'spatial mosaic');
 
 In this example i've mosaiced the image collection (before taking the median values). This has taken images according to their order in the collection (last on top).You'll notice there isn't much difference...but you will see the effect of the last on top rule with clear demarcations across where images overlap...making the problem we wanted to resolve worse!
 
-```{r echo=FALSE, out.width = "900px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_5/GEE_mosaic.png') 
 ```
 
@@ -317,7 +322,7 @@ Map.addLayer(clip, vis_params3, 'clip');
 
 As we saw earlier in the module we can compute texture...however, the `glcmTexture()` function requires an interger value and as our values are in surface reflectance this will mean they will be converted to 1 and 0s. To explore this, add the clipped surface reflectance layer to the map (using the code above)...Then use the inspector tab and the list view to query individual pixels....
 
-```{r echo=FALSE, out.width = "400px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "70%", fig.align='center', cache=FALSE}
   knitr::include_graphics('prac_5/GEE_listview.png') 
 ```
 

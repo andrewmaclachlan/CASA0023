@@ -125,8 +125,8 @@ knitr::include_graphics('prac_1/sentinel_merge.png')
 
 Note:
 
--   The input layers are the four 10m bands that I loaded into QGIS
--   The tick box selected meaning each raster file will be it's own layer
+-   The input layers are the four **10m optical bands** (not the AOT band) that I loaded into QGIS. AOT is Aerosol Optical Thickness.
+-   **Tick the box to place each raster file will be it's own band**
 -   The file being saved into a `.tiff` as opposed to memory
 
 Once merged we can created a true colour composite using the BOA data...to do so:

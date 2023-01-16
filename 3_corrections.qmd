@@ -162,13 +162,13 @@ TOA reflectance changes the data from what the sensor sees to the ratio of light
 
 Ok, so we can deal with a single image, but what happens when an image doesn't cover your entire study area. We must select two images are mosaic (or merge) them together. Landsat data (and most satellite data) is collected using some form of Worldwide Reference System. This splits the data based on PATH (columns) and ROWS.
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [Samuel Akande](https://www.researchgate.net/publication/340870377_LANDSAT_PATH_AND_ROW_-_NIGERIA)"}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE, fig.cap= "Source: [Samuel Akande](https://www.researchgate.net/publication/340870377_LANDSAT_PATH_AND_ROW_-_NIGERIA)"}
 knitr::include_graphics('prac_3/path_row.png') 
 ```
 
 Before we start with merging we need to download two satellite tiles to merge together. The problem is that Landsat tiles won't align with administration boundraies (or they might if you are lucky). For my example city of Cape Town i need at least two, possible three Landsat tiles to be merged together. In USGS Earth Explorer you can upload a shapefile or KML so you can search for tiles to cover the area. However, this is rather slow and the shapefile must only contain **one** polygon (cape town includes an island too). You can, however, draw a boundary to search within:
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_3/landsat_search.png') 
 ```
 
@@ -201,19 +201,19 @@ Whereas levels will provide:
 
 To conclude, we have collections, followed by levels, followed by tiers.
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [USGS](https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products)"}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE, fig.cap= "Source: [USGS](https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products)"}
 knitr::include_graphics('prac_3/Landsat-Science-Products-Infotable.jfif') 
 ```
 
 In this case I want to download two tiles from Collection 2, Level 2. You can view the tiles and preview the data in Earth Explorer:
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_3/landsat_tiles.png') 
 ```
 
 Looking at the options below each tile icon in the search results you can either download the tiles individually or add them to a basked (it's the box icon). After clicking the box on the products you want to download \> click the basket (top right) \> you will then be presented with this screen where you click start order and then follow the prompts to download multiple tiles at once.
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_3/start_order.png') 
 ```
 
@@ -221,7 +221,7 @@ knitr::include_graphics('prac_3/start_order.png')
 
 Open our two tiles, in my case i have move my tiles into two separate folders. So i will do this twice, note that we could automate this if we had a large number of tiles. I have also downloaded one Landsat 8 tile and one Landsat 9 tile.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(terra)
 library(fs)
@@ -271,13 +271,13 @@ Ratioing is the difference between two spectral bands that have a certain spectr
 
 -   The Normalised Difference Vegetation Index is based on the fact that healthy and green vegetation reflects more in the NIR but absorbs in the Red wavelength
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [PhysicsOpenLab](https://physicsopenlab.org/2017/01/30/ndvi-index/)"}
+```{r echo=FALSE, out.width = "70%", fig.align='center', cache=FALSE, fig.cap= "Source: [PhysicsOpenLab](https://physicsopenlab.org/2017/01/30/ndvi-index/)"}
 knitr::include_graphics('prac_3/leaf.jpg') 
 ```
 
 Here, we can visually see the spectral trait:
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [PhysicsOpenLab](https://physicsopenlab.org/2017/01/30/ndvi-index/)"}
+```{r echo=FALSE, out.width = "70%", fig.align='center', cache=FALSE, fig.cap= "Source: [PhysicsOpenLab](https://physicsopenlab.org/2017/01/30/ndvi-index/)"}
 knitr::include_graphics('prac_3/NDVI.png') 
 ```
 
@@ -333,7 +333,7 @@ $$NDMI= \frac{Band 4-Band 5}{Band 4 + Band 5}$$ For Landsat 8, bands are increas
 
 Filtering refers to any kind of moving window operation to our data which can be saved as a separate raster file. As we saw in the lecture this can include low or high pass filters.
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [Introduction to Geographic Information Systems in Forest Resources ](http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html)"}
+```{r echo=FALSE, out.width = "70%", fig.align='center', cache=FALSE, fig.cap= "Source: [Introduction to Geographic Information Systems in Forest Resources ](http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html)"}
 knitr::include_graphics('prac_3/focalmean.gif') 
 ```
 
@@ -351,7 +351,7 @@ Below we can specify:
 
 -   the size of the moving window
 -   the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel
--   the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array)%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values,(9%20in%20this%20example).)
+-   the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array)%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values)
 
 Note, that we commonly don't use the pancrhomatic band in landcover classification, however as it is 15m it can produce some useful outputs.
 
@@ -374,7 +374,7 @@ glcm$glcm_homogeneity %>%
 
 Depending on your study area the texture measures might not show much, but in this example from [Lu et al. 2012](https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&lang=en) what does it highlight or make more prominent.
 
-```{r echo=FALSE, out.width = "450px", fig.align='center', cache=FALSE, fig.cap= "Source: [Land use/cover classification in the Brazilian Amazon using satellite images](https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&lang=en)"}
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE, fig.cap= "Source: [Land use/cover classification in the Brazilian Amazon using satellite images](https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&lang=en)"}
 knitr::include_graphics('prac_3/texture_example.png') 
 ```
 

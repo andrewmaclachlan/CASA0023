@@ -145,7 +145,7 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
+    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -437,7 +437,7 @@ This week
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/path_row.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/path_row.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="https://www.researchgate.net/publication/340870377_LANDSAT_PATH_AND_ROW_-_NIGERIA">Samuel Akande</a></figcaption><p></p>
 </figure>
 </div>
@@ -447,7 +447,7 @@ This week
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/landsat_search.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/landsat_search.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -477,7 +477,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/Landsat-Science-Products-Infotable.jfif" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/Landsat-Science-Products-Infotable.jfif" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products">USGS</a></figcaption><p></p>
 </figure>
 </div>
@@ -487,7 +487,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/landsat_tiles.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/landsat_tiles.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -496,7 +496,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/start_order.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/start_order.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -505,28 +505,9 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <span class="header-section-number">3.4</span> Merging imagery</h2>
 <p>Open our two tiles, in my case i have move my tiles into two separate folders. So i will do this twice, note that we could automate this if we had a large number of tiles. I have also downloaded one Landsat 8 tile and one Landsat 9 tile.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-✔ tibble  3.1.8     ✔ dplyr   1.0.9
-✔ tidyr   1.2.0     ✔ stringr 1.4.0
-✔ readr   2.1.2     ✔ forcats 0.5.1
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-</div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>terra 1.6.17
-
-Attaching package: 'terra'
-
-The following object is masked from 'package:tidyr':
-
-    extract</code></pre>
-</div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
 <span><span class="va">listlandsat_8</span><span class="op">&lt;-</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_info</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"prac_3"</span>, <span class="st">"Landsat"</span>, <span class="st">"Lsat8"</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -539,7 +520,7 @@ The following object is masked from 'package:tidyr':
 </div>
 <p>For Landsat 9</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># List your raster files excluding band 8 using the patter argument</span></span>
 <span><span class="va">listlandsat_9</span><span class="op">&lt;-</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html">dir_info</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"prac_3"</span>, <span class="st">"Landsat"</span>, <span class="st">"Lsat9"</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"[1B23456790].TIF"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -550,7 +531,7 @@ The following object is masked from 'package:tidyr':
 </div>
 <p>This might take about 2 minutes…</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/mosaic.html">mosaic</a></span><span class="op">(</span><span class="va">listlandsat_8</span>, <span class="va">listlandsat_9</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/mosaic.html">mosaic</a></span><span class="op">(</span><span class="va">listlandsat_8</span>, <span class="va">listlandsat_9</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="enhancements" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="enhancements">
 <span class="header-section-number">3.5</span> Enhancements</h2>
@@ -564,7 +545,7 @@ The following object is masked from 'package:tidyr':
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/leaf.jpg" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/leaf.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption><p></p>
 </figure>
 </div>
@@ -574,7 +555,7 @@ The following object is masked from 'package:tidyr':
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/NDVI.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/NDVI.png" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption><p></p>
 </figure>
 </div>
@@ -583,14 +564,14 @@ The following object is masked from 'package:tidyr':
 <p>We can leverage the fact that healthy vegetation has this spectral trait and use the NDVI index should we wish to highlight areas with healthy vegetation.</p>
 <p><span class="math display">\[NDVI= \frac{NIR-Red}{NIR+Red}\]</span> In R this would be:</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m1_NDVI</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5</span> <span class="op">-</span> <span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span> <span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5</span> <span class="op">+</span> <span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m1_NDVI</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5</span> <span class="op">-</span> <span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span> <span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5</span> <span class="op">+</span> <span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">m1_NDVI</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can reclassify this to pull out certain areas, for example, only where NDVI is equal to or greater than 0.2</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">veg</span> <span class="op">&lt;-</span> <span class="va">m1_NDVI</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">veg</span> <span class="op">&lt;-</span> <span class="va">m1_NDVI</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/classify.html">classify</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">0.2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">veg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -608,14 +589,14 @@ The following object is masked from 'package:tidyr':
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/focalmean.gif" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/focalmean.gif" class="img-fluid figure-img" style="width:70.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html">Introduction to Geographic Information Systems in Forest Resources</a></figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for a 3 by 3 filter on 1 band</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for a 3 by 3 filter on 1 band</span></span>
 <span><span class="va">m1_filter</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/focal.html">focal</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">9</span>,nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="texture" class="level3" data-number="3.5.3"><h3 data-number="3.5.3" class="anchored" data-anchor-id="texture">
@@ -625,12 +606,12 @@ The following object is masked from 'package:tidyr':
 <ul>
 <li>the size of the moving window</li>
 <li>the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel</li>
-<li>the measures we want, for full equations see <a href="https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&amp;text=ENVI%20computes%20a%20histogram%20that,array">Texture Metrics Background</a>%20of%20the%20occurrence%20values.&amp;text=It%20normalizes%20the%20occurrence%20values,(9%20in%20this%20example).)</li>
+<li>the measures we want, for full equations see <a href="https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&amp;text=ENVI%20computes%20a%20histogram%20that,array">Texture Metrics Background</a>%20of%20the%20occurrence%20values.&amp;text=It%20normalizes%20the%20occurrence%20values)</li>
 </ul>
 <p>Note, that we commonly don’t use the pancrhomatic band in landcover classification, however as it is 15m it can produce some useful outputs.</p>
 <p>Currently the <code>glcm</code> package only accepts raster layers from the <code>raster</code> package so we first need to convert this to a raster layer…this will take 7-10 minutes…increasing the window size and selecting less statistics should speed this up.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.azvoleff.com/glcm">glcm</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.azvoleff.com/glcm">glcm</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">band4_raster</span><span class="op">&lt;-</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span><span class="op">)</span></span>
@@ -647,7 +628,7 @@ The following object is masked from 'package:tidyr':
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="prac_3/texture_example.png" class="img-fluid figure-img" width="450"></p>
+<figure class="figure"><p><img src="prac_3/texture_example.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">Source: <a href="https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&amp;lang=en">Land use/cover classification in the Brazilian Amazon using satellite images</a></figcaption><p></p>
 </figure>
 </div>
@@ -658,7 +639,7 @@ The following object is masked from 'package:tidyr':
 <p>In the simplest form data fusion is appending new raster data to the existing data or making a new raster dataset with different bands…here we can do this with the texture measure we have created (and the original spectral data if you wish). We are getting to the stage now where remote sensing is a merge of science and art. Specifically the science is how we correct and apply methods, the art is about how we select the right data / transform it / alter it to produce an output. There is never a <strong>completely right</strong> answer as we will see in future practicals.</p>
 <p>To create decision level fusion we append our new datasets to our existing data…</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for the next step of PCA we need to keep this in a raster (and not terra) format...</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for the next step of PCA we need to keep this in a raster (and not terra) format...</span></span>
 <span><span class="va">m1_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">Fuse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">m1_raster</span>, <span class="va">glcm.red</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -670,7 +651,7 @@ The following object is masked from 'package:tidyr':
 <p>When we use <code><a href="https://rdrr.io/pkg/RStoolbox/man/rasterPCA.html">rasterPCA()</a></code> we can set the number of samples <code>nsamples</code> to be used for PCA which are then applied to the rest of the data to try and make this more efficient…</p>
 <p>Also note that <code>spca=TRUE</code> which corresponds to centered and scaled input data</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bleutner.github.io/RStoolbox/">RStoolbox</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bleutner.github.io/RStoolbox/">RStoolbox</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">Fuse_3_bands</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">Fuse</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span>, <span class="va">Fuse</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5</span>, <span class="va">Fuse</span><span class="op">$</span><span class="va">glcm_homogeneity</span><span class="op">)</span></span>
 <span></span>
@@ -687,12 +668,12 @@ The following object is masked from 'package:tidyr':
 <li>The first component will (should) capture most of the variance within the dataset</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html">summary</a></span><span class="op">(</span><span class="va">pca</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html">summary</a></span><span class="op">(</span><span class="va">pca</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In my case component 1 (of 10) explains 77.62% of the variance from the entire dataset…how might this be useful in future analysis?</p>
 <p>Finally, to plot one of the PCA bands….</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">pca</span><span class="op">$</span><span class="va">map</span><span class="op">$</span><span class="va">PC1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">pca</span><span class="op">$</span><span class="va">map</span><span class="op">$</span><span class="va">PC1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section id="learning-diary" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="learning-diary">
 <span class="header-section-number">3.6</span> Learning diary</h2>
