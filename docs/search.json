@@ -102,7 +102,7 @@
     "href": "2_portfolio.html#resources",
     "title": "2  Portfolio",
     "section": "\n2.2 Resources",
-    "text": "2.2 Resources\n\n\n\n\n\n\nThis week\n\n\n\n\nQuarto Quick Start\n\nGrolemund, Y.X., J.J. Allaire, Garrett, 2022. R Markdown: The Definitive Guide.\n\nxaringan Presentations, Chapter 7\n\n\nKirenz, J.K., n.d. Build Presentations in R (accessed 1.5.23)."
+    "text": "2.2 Resources\n\n\n\n\n\n\nThis week\n\n\n\n\nQuarto Quick Start\nGrolemund, Y.X., J.J. Allaire, Garrett, 2022. R Markdown: The Definitive Guide.\n\nXie, Y., 2022. [With Quarto Coming, is R Markdown Going Away? No. - Yihui Xie | 谢益辉](https://yihui.org/en/2022/04/quarto-r-markdown/ (accessed 1.19.23).\n\nxaringan Presentations, Chapter 7\n\n\nKirenz, J.K., n.d. Build Presentations in R (accessed 1.5.23)."
   },
   {
     "objectID": "2_portfolio.html#xaringan",
@@ -130,7 +130,7 @@
     "href": "2_portfolio.html#learning-diary",
     "title": "2  Portfolio",
     "section": "\n2.6 Learning diary",
-    "text": "2.6 Learning diary\nThis week for your learning diary you need to create a Xaringan presentation and a your Quarto learning diary.\n\n2.6.1 Xaringan\nCreate a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio\n\nSelect a sensor of your choice (any)\nCreate a short (maximum 9 slide) presentation on the sensor in xaringan\n\nThe presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically:\n\nThe summary criterion will refer to the summary of the sensor you have selected.\nThe application criterion will refer to examples of studies that have used the data from the sensor and their purpose\nThe reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work.\n\n2.6.2 Quarto learning diary\nThe production of the Quarto learning diary is not marked, but it is required for component 2. Once you have made your Quarto document update it with your learning diary entry from week 1, and the Xaringan presentation from week 2."
+    "text": "2.6 Learning diary\nThis week for your learning diary you need to create a Xaringan presentation and a your Quarto learning diary.\n\n2.6.1 Xaringan\nCreate a small 9 slide presentation (not including reference slide(s)) and host it on GitHub - place the link in your Quarto portfolio\n\nSelect a sensor of your choice (any)\nCreate a short (maximum 9 slide, not including reference slide) presentation on the sensor in xaringan\n\nThe presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically:\n\nThe summary criterion will refer to the summary of the sensor you have selected.\nThe application criterion will refer to examples of studies that have used the data from the sensor and their purpose\nThe reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work.\n\n2.6.2 Quarto learning diary\nThe production of the Quarto learning diary is not marked, but it is required for component 2. Once you have made your Quarto document update it with your learning diary entry from week 1, and the Xaringan presentation from week 2."
   },
   {
     "objectID": "2_portfolio.html#feedback",

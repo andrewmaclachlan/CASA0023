@@ -19,6 +19,9 @@ A lot of the concepts have been covered in the lecture (more like a tutorial thi
 
 -   Grolemund, Y.X., J.J. Allaire, Garrett, 2022. R Markdown: The Definitive Guide.
 
+-   Xie, Y., 2022. [With Quarto Coming, is R Markdown Going Away? No. - Yihui Xie | 谢益辉](https://yihui.org/en/2022/04/quarto-r-markdown/ (accessed 1.19.23).
+
+
     -   [xaringan Presentations, Chapter 7](https://bookdown.org/yihui/rmarkdown/xaringan.html)
 
 -   Kirenz, J.K., n.d. [Build Presentations in R](https://www.kirenz.com/slides/xaringan-demo-slides.html#1) (accessed 1.5.23).
@@ -175,10 +178,10 @@ This week for your learning diary you need to create a Xaringan presentation and
 
 ### Xaringan
 
-Create a small 5 slide presentation and host it on GitHub - place the link in your Quarto portfolio
+Create a small 9 slide presentation (not including reference slide(s)) and host it on GitHub - place the link in your Quarto portfolio
 
 -   Select a sensor of your choice (any)
--   Create a short (maximum 9 slide) presentation on the sensor in xaringan
+-   Create a short (maximum 9 slide, not including reference slide) presentation on the sensor in xaringan
 
 The presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically:
 
