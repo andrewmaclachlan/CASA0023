@@ -585,7 +585,8 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <p><span class="math display">\[NDMI= \frac{Band 4-Band 5}{Band 4 + Band 5}\]</span> For Landsat 8, bands are increased by 1.</p>
 </section><section id="filtering" class="level3" data-number="3.5.2"><h3 data-number="3.5.2" class="anchored" data-anchor-id="filtering">
 <span class="header-section-number">3.5.2</span> Filtering</h3>
-<p>Filtering refers to any kind of moving window operation to our data which can be saved as a separate raster file. As we saw in the lecture this can include low or high pass filters.</p>
+<p>Filtering refers to any kind of moving window operation to our data which can be saved as a separate raster file. As we saw in the lecture this can include low or high pass filters. Here <span class="math inline">\(w\)</span> means window. We can also set a weight matrix (as seen in the lecture):</p>
+<p><a href="https://cran.r-project.org/web/packages/terra/terra.pdf"><code>Laplacian filter: matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)</code></a></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -597,7 +598,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for a 3 by 3 filter on 1 band</span></span>
-<span><span class="va">m1_filter</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/focal.html">focal</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">9</span>,nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">m1_filter</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/focal.html">focal</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4</span>, w<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fl">3</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="texture" class="level3" data-number="3.5.3"><h3 data-number="3.5.3" class="anchored" data-anchor-id="texture">
 <span class="header-section-number">3.5.3</span> Texture</h3>
@@ -606,7 +607,8 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <ul>
 <li>the size of the moving window</li>
 <li>the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel</li>
-<li>the measures we want, for full equations see <a href="https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&amp;text=ENVI%20computes%20a%20histogram%20that,array">Texture Metrics Background</a>%20of%20the%20occurrence%20values.&amp;text=It%20normalizes%20the%20occurrence%20values)</li>
+<li>the measures we want, for full equations see <a href="https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&amp;text=ENVI%20computes%20a%20histogram%20that,array%20of%20the%20occurrence%20values.&amp;text=It%20normalizes%20the%20occurrence%20values">Texture Metrics Background</a>
+</li>
 </ul>
 <p>Note, that we commonly don’t use the pancrhomatic band in landcover classification, however as it is 15m it can produce some useful outputs.</p>
 <p>Currently the <code>glcm</code> package only accepts raster layers from the <code>raster</code> package so we first need to convert this to a raster layer…this will take 7-10 minutes…increasing the window size and selecting less statistics should speed this up.</p>
@@ -637,7 +639,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 </section><section id="data-fusion" class="level3" data-number="3.5.4"><h3 data-number="3.5.4" class="anchored" data-anchor-id="data-fusion">
 <span class="header-section-number">3.5.4</span> Data fusion</h3>
 <p>In the simplest form data fusion is appending new raster data to the existing data or making a new raster dataset with different bands…here we can do this with the texture measure we have created (and the original spectral data if you wish). We are getting to the stage now where remote sensing is a merge of science and art. Specifically the science is how we correct and apply methods, the art is about how we select the right data / transform it / alter it to produce an output. There is never a <strong>completely right</strong> answer as we will see in future practicals.</p>
-<p>To create decision level fusion we append our new datasets to our existing data…</p>
+<p>To create decision level (or layer) fusion we append our new datasets to our existing data…</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># for the next step of PCA we need to keep this in a raster (and not terra) format...</span></span>
 <span><span class="va">m1_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/stack.html">stack</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
@@ -661,7 +663,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <span>                 nSamples <span class="op">=</span><span class="fl">100</span>,</span>
 <span>                 spca <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Once the <code><a href="https://rdrr.io/pkg/RStoolbox/man/rasterPCA.html">rasterPCA()</a></code> has completed run the following code to get the proportion of variance explained by each PCA component and the cumulative proportion of the variance explained. Remember that PCA is trying to:</p>
+<p>Once the <code><a href="https://rdrr.io/pkg/RStoolbox/man/rasterPCA.html">rasterPCA()</a></code> has completed run the following code to get the proportion of variance explained by each PCA component and the cumulative proportion of the variance explained (from all the PCA layers compared to the original input data). Remember that PCA is trying to:</p>
 <ul>
 <li>Transform multi-spectral data into uncorrelated and smaller dataset</li>
 <li>Keep most of the original information</li>

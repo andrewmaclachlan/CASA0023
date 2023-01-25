@@ -331,7 +331,10 @@ $$NDMI= \frac{Band 4-Band 5}{Band 4 + Band 5}$$ For Landsat 8, bands are increas
 
 ### Filtering
 
-Filtering refers to any kind of moving window operation to our data which can be saved as a separate raster file. As we saw in the lecture this can include low or high pass filters.
+Filtering refers to any kind of moving window operation to our data which can be saved as a separate raster file. As we saw in the lecture this can include low or high pass filters. Here $w$ means window. We can also set a weight matrix (as seen in the lecture):
+
+[`Laplacian filter: matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)`](https://cran.r-project.org/web/packages/terra/terra.pdf)
+
 
 ```{r echo=FALSE, out.width = "70%", fig.align='center', cache=FALSE, fig.cap= "Source: [Introduction to Geographic Information Systems in Forest Resources ](http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html)"}
 knitr::include_graphics('prac_3/focalmean.gif') 
@@ -339,7 +342,7 @@ knitr::include_graphics('prac_3/focalmean.gif')
 
 ```{r eval=FALSE}
 # for a 3 by 3 filter on 1 band
-m1_filter <- terra::focal(m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, w=matrix(1/9,nrow=3,ncol=3))
+m1_filter <- terra::focal(m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, w=matrix(nrow=3,ncol=3))
 
 ```
 
@@ -351,7 +354,7 @@ Below we can specify:
 
 -   the size of the moving window
 -   the shift for co-occurrency (or second order) as seen in the lecture. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel
--   the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array)%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values)
+-   the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values)
 
 Note, that we commonly don't use the pancrhomatic band in landcover classification, however as it is 15m it can produce some useful outputs.
 
@@ -382,7 +385,7 @@ knitr::include_graphics('prac_3/texture_example.png')
 
 In the simplest form data fusion is appending new raster data to the existing data or making a new raster dataset with different bands...here we can do this with the texture measure we have created (and the original spectral data if you wish). We are getting to the stage now where remote sensing is a merge of science and art. Specifically the science is how we correct and apply methods, the art is about how we select the right data / transform it / alter it to produce an output. There is never a **completely right** answer as we will see in future practicals.
 
-To create decision level fusion we append our new datasets to our existing data...
+To create decision level (or layer) fusion we append our new datasets to our existing data...
 
 ```{r eval=FALSE}
 # for the next step of PCA we need to keep this in a raster (and not terra) format...
@@ -414,7 +417,7 @@ pca <- rasterPCA(Fuse,
 
 ```
 
-Once the `rasterPCA()` has completed run the following code to get the proportion of variance explained by each PCA component and the cumulative proportion of the variance explained. Remember that PCA is trying to:
+Once the `rasterPCA()` has completed run the following code to get the proportion of variance explained by each PCA component and the cumulative proportion of the variance explained (from all the PCA layers compared to the original input data). Remember that PCA is trying to:
 
 -   Transform multi-spectral data into uncorrelated and smaller dataset
 -   Keep most of the original information
