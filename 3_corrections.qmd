@@ -90,7 +90,7 @@ Within this equation:
 
 $TAUv$ = 1.0 for Landsat and $TAUz$ = cosθs for COST method. DOS is the same, but without $TAUz$
 
-Of course we can do this in R (or any other software) with just one function! First we need to download some raw satellite data that comes in the Digital Number (DN) format. This is the exact same process as we saw in week 1, expect this time select the Collection 1, Level-1 bundle. At the moment this process won't work with Landsat 9. However, as this involves a large amount of data and it's unlikely you will need to do this in the module of data read through the following code and then move to the next section
+Of course we can do this in R (or any other software) with just one function! First we need to download some raw satellite data that comes in the Digital Number (DN) format. This is the exact same process as we saw in week 1, expect this time select the Collection 1 (or 2), Level-1 bundle. At the moment this process won't work with Landsat 9. However, as this involves a large amount of data and it's unlikely you will need to do this in the module of data read through the following code and then move to the next section
 
 ```{r eval=FALSE}
 library(terra)
