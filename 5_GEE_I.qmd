@@ -248,7 +248,7 @@ var vis_params = {
 };
 
 // add a layer to the map
-Map.addLayer(oneimage_study_area_cloud_scale_median, visualization, 'True Color (432)');
+Map.addLayer(oneimage_study_area_cloud_scale_median, vis_params, 'True Color (432)');
 ```
 
 You should have produced something like this...
@@ -355,9 +355,9 @@ Here note:
 
 PCA in GEE is somewhat more complex that it was in R, by just using the one function. Most of this code is take from the [GEE Eigen Analysis guide](https://developers.google.com/earth-engine/guides/arrays_eigen_analysis) ....to start with set the:
 
-Scale: 30 meters
-Band names: from the texture and original bands collection
-Region: the geometry points (x,y coordinates) of the study area
+* Scale: 30 meters
+* Band names: from the texture and original bands collection
+* Region: the geometry points (x,y coordinates) of the study area
 
 We then center the data to the mean (in the code below) and divide by the standard deviation that happens in the next section
 
@@ -382,7 +382,7 @@ var meanDict = clip.reduceRegion({
     maxPixels: 1e9
 });
 var means = ee.Image.constant(meanDict.values(bandNames));
-var centered = clip.subtract(means);
+var centered = glcm.subtract(means);
 
 ```
 

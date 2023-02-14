@@ -517,7 +517,7 @@ This week
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>};</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add a layer to the map</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(oneimage_study_area_cloud_scale_median, visualization, <span class="st">'True Color (432)'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(oneimage_study_area_cloud_scale_median, vis_params, <span class="st">'True Color (432)'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should have produced something like this…</p>
 <div class="cell" data-layout-align="center">
@@ -620,7 +620,11 @@ This week
 </ul></section><section id="pca" class="level2" data-number="5.10"><h2 data-number="5.10" class="anchored" data-anchor-id="pca">
 <span class="header-section-number">5.10</span> PCA</h2>
 <p>PCA in GEE is somewhat more complex that it was in R, by just using the one function. Most of this code is take from the <a href="https://developers.google.com/earth-engine/guides/arrays_eigen_analysis">GEE Eigen Analysis guide</a> ….to start with set the:</p>
-<p>Scale: 30 meters Band names: from the texture and original bands collection Region: the geometry points (x,y coordinates) of the study area</p>
+<ul>
+<li>Scale: 30 meters</li>
+<li>Band names: from the texture and original bands collection</li>
+<li>Region: the geometry points (x,y coordinates) of the study area</li>
+</ul>
 <p>We then center the data to the mean (in the code below) and divide by the standard deviation that happens in the next section</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> scale and band names</span>
@@ -643,7 +647,7 @@ This week
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    maxPixels<span class="sc">:</span> <span class="fl">1e9</span></span>
 <span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>});</span>
 <span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>var means <span class="ot">=</span> <span class="fu">ee.Image.constant</span>(<span class="fu">meanDict.values</span>(bandNames));</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>var centered <span class="ot">=</span> <span class="fu">clip.subtract</span>(means);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>var centered <span class="ot">=</span> <span class="fu">glcm.subtract</span>(means);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can use this function to sort out our bandnames</p>
 <div class="cell">

@@ -25,8 +25,8 @@ There are two main books used in this module.
 | 6    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification I                    | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |
 | 7    | Classification the big questions (lecture 6 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html) |
 | 8    | Temperature and policy                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-8/#1) | Tempearture                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html)    |
-| 9    | SAR                                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-9/#1) | SAR in GEE                          |                                     `r fa("code")`                                     |
-| 10   | Learning diary Q and A                                              |                                                                                         | Group presentations                 |                                                                                        |
+| 9    | Presentation / learning diary review                                   | `r fa("person-chalkboard")` | SAR in GEE                          |                                     [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-9/#1)                                      |
+| 10   | Group presentations              |                                                                                         | Group presentations                 |                                                                                        |
 
 ## Intended course learning outcomes
 
