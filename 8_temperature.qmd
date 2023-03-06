@@ -11,6 +11,9 @@
 
 -   Li, D., Newman, G.D., Wilson, B., Zhang, Y., Brown, R.D., 2022. [Modeling the relationships between historical redlining, urban heat, and heat-related emergency department visits: An examination of 11 Texas cities. Environment and Planning B: Urban Analytics and City Science 49, 933–952.](https://doi.org/10.1177/23998083211039854)
 
+-   Nowak, D.J., Ellis, A., Greenfield, E.J., 2022. [The disparity in tree cover and ecosystem service values among redlining classes in the United States. Landscape and Urban Planning 221, 104370.](https://doi.org/10.1016/j.landurbplan.2022.104370)
+
+
 -   [Cloud-Based Remote Sensing with Google Earth Engine](https://www.eefabook.org/go-to-the-book.html) (accessed 1.5.23).
 
     -   Chapter A1.5 Heat Islands
