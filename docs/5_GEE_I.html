@@ -640,7 +640,7 @@ This week
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> mean center the data and SD strech the princapal components </span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> and an SD stretch of the principal components.</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>var meanDict <span class="ot">=</span> <span class="fu">clip.reduceRegion</span>({</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>var meanDict <span class="ot">=</span> <span class="fu">glcm.reduceRegion</span>({</span>
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    geometry<span class="sc">:</span> region,</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    scale<span class="sc">:</span> scale,</span>

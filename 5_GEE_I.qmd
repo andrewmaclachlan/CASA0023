@@ -375,7 +375,7 @@ print(region, "india_geometry")
 
 // mean center the data and SD strech the princapal components 
 // and an SD stretch of the principal components.
-var meanDict = clip.reduceRegion({
+var meanDict = glcm.reduceRegion({
     reducer: ee.Reducer.mean(),
     geometry: region,
     scale: scale,
