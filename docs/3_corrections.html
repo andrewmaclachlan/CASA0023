@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>CASA0023 Remotely Sensing Cities and Environments - 3&nbsp; Corrections</title>
 <style>
@@ -14,9 +14,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -43,43 +44,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -126,7 +97,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
-</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 <body class="nav-sidebar floating nav-fixed">
 
@@ -139,143 +110,155 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
     <span class="navbar-title">CASA0023 Remotely Sensing Cities and Environments</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/andrewmaclachlan/CASA0023"><i class="bi bi-github" role="img" aria-label="Source Code">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-</ul>
-<div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto"></ul>
+<div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/andrewmaclachlan/CASA0023" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_corrections.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-course_info.html" class="sidebar-item-text sidebar-link">Hello Remote Sensing</a>
+  <a href="./00-course_info.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hello Remote Sensing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting started with remote sensing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_portfolio.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Portfolio</span></a>
+  <a href="./2_portfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Portfolio</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_corrections.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></a>
+  <a href="./3_corrections.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_policy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Policy</span></a>
+  <a href="./4_policy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Policy</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_GEE_I.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Google Earth Engine I</span></a>
+  <a href="./5_GEE_I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Google Earth Engine I</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_classification_I.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification I</span></a>
+  <a href="./6_classification_I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification I</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_classification_II.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification II</span></a>
+  <a href="./7_classification_II.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification II</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_temperature.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Temperature</span></a>
+  <a href="./8_temperature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Temperature</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_SAR.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SAR</span></a>
+  <a href="./9_SAR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SAR</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Resources</span></a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Resources</span></span></a>
   </div>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources"><span class="toc-section-number">3.1</span>  Resources</a></li>
+<li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources"><span class="header-section-number">3.1</span> Resources</a></li>
   <li>
-<a href="#atmosphereic-correction" id="toc-atmosphereic-correction" class="nav-link" data-scroll-target="#atmosphereic-correction"><span class="toc-section-number">3.2</span>  Atmosphereic correction</a>
+<a href="#atmosphereic-correction" id="toc-atmosphereic-correction" class="nav-link" data-scroll-target="#atmosphereic-correction"><span class="header-section-number">3.2</span> Atmosphereic correction</a>
   <ul class="collapse">
-<li><a href="#dos" id="toc-dos" class="nav-link" data-scroll-target="#dos"><span class="toc-section-number">3.2.1</span>  DOS</a></li>
-  <li><a href="#radiance-or-dn-to-reflectance" id="toc-radiance-or-dn-to-reflectance" class="nav-link" data-scroll-target="#radiance-or-dn-to-reflectance"><span class="toc-section-number">3.2.2</span>  Radiance (or DN) to Reflectance</a></li>
+<li><a href="#dos" id="toc-dos" class="nav-link" data-scroll-target="#dos"><span class="header-section-number">3.2.1</span> DOS</a></li>
+  <li><a href="#radiance-or-dn-to-reflectance" id="toc-radiance-or-dn-to-reflectance" class="nav-link" data-scroll-target="#radiance-or-dn-to-reflectance"><span class="header-section-number">3.2.2</span> Radiance (or DN) to Reflectance</a></li>
   </ul>
 </li>
-  <li><a href="#accessing-data" id="toc-accessing-data" class="nav-link" data-scroll-target="#accessing-data"><span class="toc-section-number">3.3</span>  Accessing data</a></li>
-  <li><a href="#merging-imagery" id="toc-merging-imagery" class="nav-link" data-scroll-target="#merging-imagery"><span class="toc-section-number">3.4</span>  Merging imagery</a></li>
+  <li><a href="#accessing-data" id="toc-accessing-data" class="nav-link" data-scroll-target="#accessing-data"><span class="header-section-number">3.3</span> Accessing data</a></li>
+  <li><a href="#merging-imagery" id="toc-merging-imagery" class="nav-link" data-scroll-target="#merging-imagery"><span class="header-section-number">3.4</span> Merging imagery</a></li>
   <li>
-<a href="#enhancements" id="toc-enhancements" class="nav-link" data-scroll-target="#enhancements"><span class="toc-section-number">3.5</span>  Enhancements</a>
+<a href="#enhancements" id="toc-enhancements" class="nav-link" data-scroll-target="#enhancements"><span class="header-section-number">3.5</span> Enhancements</a>
   <ul class="collapse">
-<li><a href="#ratio" id="toc-ratio" class="nav-link" data-scroll-target="#ratio"><span class="toc-section-number">3.5.1</span>  Ratio</a></li>
-  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering"><span class="toc-section-number">3.5.2</span>  Filtering</a></li>
-  <li><a href="#texture" id="toc-texture" class="nav-link" data-scroll-target="#texture"><span class="toc-section-number">3.5.3</span>  Texture</a></li>
-  <li><a href="#data-fusion" id="toc-data-fusion" class="nav-link" data-scroll-target="#data-fusion"><span class="toc-section-number">3.5.4</span>  Data fusion</a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="toc-section-number">3.5.5</span>  PCA</a></li>
+<li><a href="#ratio" id="toc-ratio" class="nav-link" data-scroll-target="#ratio"><span class="header-section-number">3.5.1</span> Ratio</a></li>
+  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering"><span class="header-section-number">3.5.2</span> Filtering</a></li>
+  <li><a href="#texture" id="toc-texture" class="nav-link" data-scroll-target="#texture"><span class="header-section-number">3.5.3</span> Texture</a></li>
+  <li><a href="#data-fusion" id="toc-data-fusion" class="nav-link" data-scroll-target="#data-fusion"><span class="header-section-number">3.5.4</span> Data fusion</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">3.5.5</span> PCA</a></li>
   </ul>
 </li>
   <li>
-<a href="#learning-diary" id="toc-learning-diary" class="nav-link" data-scroll-target="#learning-diary"><span class="toc-section-number">3.6</span>  Learning diary</a>
+<a href="#learning-diary" id="toc-learning-diary" class="nav-link" data-scroll-target="#learning-diary"><span class="header-section-number">3.6</span> Learning diary</a>
   <ul class="collapse">
-<li><a href="#useful-blogs" id="toc-useful-blogs" class="nav-link" data-scroll-target="#useful-blogs"><span class="toc-section-number">3.6.1</span>  Useful blogs</a></li>
+<li><a href="#useful-blogs" id="toc-useful-blogs" class="nav-link" data-scroll-target="#useful-blogs"><span class="header-section-number">3.6.1</span> Useful blogs</a></li>
   </ul>
 </li>
-  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback"><span class="toc-section-number">3.7</span>  Feedback</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback"><span class="header-section-number">3.7</span> Feedback</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/andrewmaclachlan/CASA0023/edit/main/3_corrections.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/andrewmaclachlan/CASA0023/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
+<h1 class="title">
 <span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Corrections</span>
 </h1>
 </div>
@@ -292,12 +275,12 @@ gtag('config', 'G-5LZK055F2X', { 'anonymize_ip': true});
 
 </header><section id="resources" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="resources">
 <span class="header-section-number">3.1</span> Resources</h2>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 This week
 </div>
 </div>
@@ -438,8 +421,7 @@ This week
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="prac_3/path_row.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://www.researchgate.net/publication/340870377_LANDSAT_PATH_AND_ROW_-_NIGERIA">Samuel Akande</a></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Source: <a href="https://www.researchgate.net/publication/340870377_LANDSAT_PATH_AND_ROW_-_NIGERIA">Samuel Akande</a></figcaption></figure>
 </div>
 </div>
 </div>
@@ -478,8 +460,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="prac_3/Landsat-Science-Products-Infotable.jfif" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products">USGS</a></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Source: <a href="https://www.usgs.gov/media/images/landsat-level-2-and-level-3-science-products">USGS</a></figcaption></figure>
 </div>
 </div>
 </div>
@@ -546,8 +527,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="prac_3/leaf.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption></figure>
 </div>
 </div>
 </div>
@@ -556,8 +536,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="prac_3/NDVI.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Source: <a href="https://physicsopenlab.org/2017/01/30/ndvi-index/">PhysicsOpenLab</a></figcaption></figure>
 </div>
 </div>
 </div>
@@ -591,8 +570,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="prac_3/focalmean.gif" class="img-fluid figure-img" style="width:70.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html">Introduction to Geographic Information Systems in Forest Resources</a></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Source: <a href="http://courses.washington.edu/gis250/lessons/raster_analysis1/index.html">Introduction to Geographic Information Systems in Forest Resources</a></figcaption></figure>
 </div>
 </div>
 </div>
@@ -631,8 +609,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="prac_3/texture_example.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Source: <a href="https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&amp;lang=en">Land use/cover classification in the Brazilian Amazon using satellite images</a></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Source: <a href="https://www.scielo.br/j/pab/a/xzLvPmRfZ7nmTWCNP9t5yMf/?format=pdf&amp;lang=en">Land use/cover classification in the Brazilian Amazon using satellite images</a></figcaption></figure>
 </div>
 </div>
 </div>
@@ -831,9 +808,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -898,6 +889,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

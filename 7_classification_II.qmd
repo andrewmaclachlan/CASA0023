@@ -5,6 +5,8 @@
 ::: callout-tip
 ## This week
 
+- Matarira, D., Mutanga, O., Naidu, M., Vizzari, M., 2023. [Object-Based Informal Settlement Mapping in Google Earth Engine Using the Integration of Sentinel-1, Sentinel-2, and PlanetScope Satellite Data. Land 12, 99.](https://doi.org/10.3390/land12010099)
+
 -   Foody, G.M., 2004. [Sub-Pixel Methods in Remote Sensing, in: Jong, S.M.D., Meer, F.D.V. der (Eds.), Remote Sensing Image Analysis: Including The Spatial Domain, Remote Sensing and Digital Image Processing. Springer Netherlands, Dordrecht, pp. 37–49.]( https://doi.org/10.1007/978-1-4020-2560-0_3)
 
 -   Jensen, J.R., 2015. [Introductory digital image processing: a remote sensing perspective.](https://read.kortext.com/reader/pdf/1872407/Cover) Prentice-Hall Inc.

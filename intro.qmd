@@ -60,36 +60,42 @@ knitr::include_graphics('prac_1/gitignore.jpg')
 
 -   Go to the [Copernicus Open Access Hub](https://scihub.copernicus.eu/dhus/#/home)
 
--   You will need to make a free account
+-   You will need to make a free account and access **Copernicus Browser**. 
 
-    -   Draw around the study area
-    -   Select image filter criteria
-    -   Select search icon
-    -   Download the S2MSI2A data
+-   Once you have loaded the browser you first need to search for an area and example image using the **VISUALIZE** tab...for example...
 
 ```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
-knitr::include_graphics('prac_1/sentinel_data_1.png') 
+knitr::include_graphics('prac_1/24_copernicus_1.png') 
 ```
 
-Within this image we have:
+-   Here I have:
 
-1.  Allows you to either move around the global or draw a study area
+    -   Drawn around the study area using the tools on the right
+    -   Selected the date box and reduced the cloud cover to 0%
+    -   Selected Sentinel-2 L2A
 
-2.  An example of a study area
+At this point there are some pre-processed layers you can add to the map and explore (e.g. False color composite)
 
-3.  How to sort the image results
+-   Now we can move to the **SEARCH** tab...
 
-4.  Sentinel mission selection :
+    -   Set the data source as Sentinel-2, MSI, L2A
+    -   Set cloud cover as 0%
+    -   Set a date range (my image is from the 15/5/2022)
+    -   Search...
+    
+```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
+knitr::include_graphics('prac_1/24_copernicus_2.png') 
+```
 
--   Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. S2MSI2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinel.esa.int/documents/247904/685211/sentinel-2-products-specification-document) for more details. We cover different products (e.g. BOA or Top of Atmosphere, TOA) in future sessions.
+Images are distriubred as "tiles", here you can visualise the tile you want and download it.
+
+
+Sentinel product types refer to the amount of processing that has been undertaken on the multi-spectral imagery. Level 2A = Bottom of Atmosphere (BOA) or otherwise known as surface reflectance. Consult the [product specification](https://sentinels.copernicus.eu/web/sentinel/sentinel-data-access/sentinel-products/sentinel-2-data-products/collection-1-level-2a) for more details. We cover different products (e.g. BOA or Top of Atmosphere, TOA) in future sessions.
 
 You can also use the [Sentinel 2 toolbox to replicate the conversation from TOA to BOA](https://sentinels.copernicus.eu/ar/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm)
 
--   The platform refers to either sentinel 2A or 2B. Theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017.
+If you see sentinel 2A or 2B theses are the same sensors but they operate at 180 degrees from each other reducing the revisit time from 10 to 5 days. 2A was launched first in 2015 followed by 2B in 2017.
 
--   Cloud cover e.g. \[0 TO 5\]
-
--   My image was from the 15/5/2022
 
 #### Open
 
@@ -221,9 +227,9 @@ There are a variety of other band combinations that we can use to show certain a
 
 For other band colour combinations [consult gisgeogrpahy](https://gisgeography.com/sentinel-2-bands-combinations/)
 
-##### Creating a project
+##### Creating a session
 
-Before we go any further we should create a project, that way all our processed outputs will be stored within the projected and loaded again when we open it in future - like projects in any other software such as QGIS or R. Go File \> Project \> Save project. A project tab next to the product explorer tab will appear, but not you can't access the bands from within the project that must be done through the product explorer.
+Before we go any further we should save our session, this is the collection of all products and image views open in the Sentinel Toolbox, including any layers added to a view. Go File \> Session \> Save Session As. 
 
 ##### Image statistics
 
