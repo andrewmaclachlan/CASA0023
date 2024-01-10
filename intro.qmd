@@ -485,17 +485,12 @@ names(landsat) <- bands
 
 Here i have chosen to use `terra`, this is because i want to extract the pixel values from within the polygons and at the moment `stars` will only permit aggregation - e.g. the mean of the pixels in the polygons. This is fine unless you want to explore the variation in signatures! then you will need the values.
 
-To use a vector layer in `terra` it needs to be in a SpatVector (in `terra` the raster is a SpatRaster). Now there are two ways we can do this...the first is with the `vect()` function from `terra`:
+To use a vector layer in `terra` it needs to be in a SpatVector (in `terra` the raster is a SpatRaster)...
 
 ```{r, eval=FALSE}
 urban <- vect(urban)
 ```
 
-In the second we can actually convert the SpatRaster to a raster and then just use the `sf` object! I know, i know, how many formats do we need here! **But** this will mean we have a raster brick as we have all of our bands and a raster brick won't work here.
-
-```{r, eval=FALSE}
-landsat <- as(landsat, "Raster")
-```
 
 Of course, we can just do this straight from loading the data with the pipe...
 
@@ -527,19 +522,32 @@ Now let's pull out those values, and get the mean and standard deviation, starti
 
 ```{r, message=FALSE, results='hide'}
 library(tidyverse)
+# extract the values from sentinel for urban landcover
 sen_urban<- terra::extract(sentinel, urban, progress = F)%>%
+  # make to tibble
   as_tibble()%>%
+  # columns are bands so pivot all the bands (2 to 7) longer
+  # giving a column of band number and another of band values
   pivot_longer(cols = 2:7, 
                names_to="bands", 
                values_to="band_values")%>%
+  # add a column to identify this as sentinel
   add_column(sensor="sentinel")%>%
+  # add column to identify as urban
   add_column(land="urban")
 
 ```
 
-Now, because this process will be the same for the other landcover types we can make a function...this is the **exact** same code as above but i've replaced two arguments with sensor and lancover that i can now change for each version (e.g. bare earth in Landsat or forest in Sentinel)
+Now, because this process will be the same for the other landcover types we can make a function...this is the **exact** same code as above but i've replaced two arguments with sensor and land cover that i can now change for each version (e.g. bare earth in Landsat or forest in Sentinel).
+
+Below i have used `substitue()` and `deparse()` this is because when i provide the sensor to the function is must be a character type (e.g. `"sentinel"` **not** just `sentinel`).
+
+-   `substitue()` gives an expression, in this case it looks the same as `sentinel`
+
+-   `deparse()` turns this into a character vector - which is what we need.
 
 ```{r}
+
 band_fun <- function(sensor, landcover) {
   col_sensor <- deparse(substitute(sensor))
   col_land <- deparse(substitute(landcover))
@@ -558,6 +566,7 @@ band_fun <- function(sensor, landcover) {
 Later on we will also create a density plot, so let's write a function for all the values...it's very similar...we will call this one when we need it later...
 
 ```{r}
+
 band_fun_all_values <- function(sensor, landcover) {
   col_sensor <- deparse(substitute(sensor))
   col_land <- deparse(substitute(landcover))
@@ -599,7 +608,7 @@ sen_lsat <- bind_rows(sen_urban, sen_bare, sen_grass,
                       lsat_forest, lsat_high_urban)
 ```
 
-The next stage is to get the mean (and standard deviation) values for each band per sensor and land cover type:
+Now, get the mean (and standard deviation) values for each band per sensor and land cover type:
 
 ```{r, eval=TRUE, message=FALSE}
 means<- sen_lsat%>%
@@ -621,7 +630,7 @@ p1 <- means %>%
 p1
 ```
 
-We can also look at a [density plot](https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0)....ideally each land cover has a clear and separate historgram...
+We can also look at a [density plot](https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0) which is a continuous and smoothed histogram allowing multiple histograms to be plotted over each other ....More specifically this uses kernel density estimation to draw a curve at each point, with all the curves then joined up.
 
 ```{r, fig.cap= "Thanks to Sydney Goldstein for [some of this code](https://urbanspatial.github.io/classifying_satellite_imagery_in_R/#Supervised_Classification)"}
 p2 <- sen_lsat %>%
