@@ -14,22 +14,19 @@ There are two main books used in this module.
 
 ## Schedule
 
-## Schedule
-
 | Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                    |
 |---------------|:--------------|:-------------:|---------------|:-------------:|
 | 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)         |
 | 2    | Portfolio tools: Xaringan and Quarto                                | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-2/#1) | Portfolio                           |     [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/2_portfolio.html)      |
 | 3    | Remote sensing data                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-3/#1) | Corrections                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/3_corrections.html)     |
 | 4    | Policy applications                                                 | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-4/#1) | Policy                              |       [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/4_policy.html)       |
-| 5    | Temperature and policy                                          | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-8/#1) | Presentation / learning diary review		                 |       `r fa("code")`        |
+| 5    | An introduction to Google Earth Engine                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1) | Google Earth Engine                 |       [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html)        |
 |      | **Reading week**                                                    |                                                                                         |                                     |                                                                                         |
-| 6    | An introduction to Google Earth Engine                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-5/#1) | Google Earth Engine	                    |  [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/5_GEE_I.html)  |
-| 7    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification I                    |  [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |
-| 8    | Classification the big questions (lecture 6 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html)  |
-| 9    | SAR in GEE                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-9/#1) | Temperature or SAR                        |    [`r  fa("temperature-high")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html) [`r fa("satellite-dish")`](https://bellingcat.github.io/RS4OSINT/C3_Blast.html)     |
+| 6    | Classification                                                      | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-6/#1) | Classification I                    |  [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/6_classification_I.html)  |
+| 7    | Classification the big questions (lecture 6 continued) and accuracy | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-7/#1) | Classification II                   | [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/7_classification_II.html)  |
+| 8    | Temperature and policy                                              | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-8/#1) | Tempearture                         |    [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/8_temperature.html)     |
+| 9    | Presentation / learning diary review                                |                               `r fa("person-chalkboard")`                               | SAR in GEE                          | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-9/#1) |
 | 10   | Group presentations                                                 |                                                                                         | Group presentations                 |                                                                                         |
-
 
 ## Intended course learning outcomes
 
