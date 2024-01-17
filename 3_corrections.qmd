@@ -166,7 +166,7 @@ Ok, so we can deal with a single image, but what happens when an image doesn't c
 knitr::include_graphics('prac_3/path_row.png') 
 ```
 
-Before we start with merging we need to download two satellite tiles to merge together. The problem is that Landsat tiles won't align with administration boundraies (or they might if you are lucky). For my example city of Cape Town i need at least two, possible three Landsat tiles to be merged together. In USGS Earth Explorer you can upload a shapefile or KML so you can search for tiles to cover the area. However, this is rather slow and the shapefile must only contain **one** polygon (cape town includes an island too). You can, however, draw a boundary to search within:
+Before we start with merging we need to download two satellite tiles to merge together. The problem is that Landsat tiles won't align with administration boundaries (or they might if you are lucky). For my example city of Cape Town i need at least two, possible three Landsat tiles to be merged together. In USGS Earth Explorer you can upload a shapefile or KML so you can search for tiles to cover the area. However, this is rather slow and the shapefile must only contain **one** polygon (cape town includes an island too). You can, however, draw a boundary to search within:
 
 ```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_3/landsat_search.png') 

@@ -14,8 +14,6 @@ There are two main books used in this module.
 
 ## Schedule
 
-## Schedule
-
 | Week | Lecture                                                             |                                      Presentation                                       | Practical                           |                                   Practical material                                    |
 |---------------|:--------------|:-------------:|---------------|:-------------:|
 | 1    | An Introduction to Remote Sensing                                   | [`r fa("person-chalkboard")`](https://andrewmaclachlan.github.io/CASA0023-lecture-1/#1) | Getting started with remote sensing |        [`r fa("code")`](https://andrewmaclachlan.github.io/CASA0023/intro.html)         |
