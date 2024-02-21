@@ -357,9 +357,9 @@ This week
 <p>We can make a new point in the code editor with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Construct a point from coordinates.</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>var point <span class="ot">=</span> <span class="fu">ee.Geometry.Point</span>([<span class="fl">77.216721</span>, <span class="fl">28.644800</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>var Delhi_point <span class="ot">=</span> <span class="fu">ee.Geometry.Point</span>([<span class="fl">77.216721</span>, <span class="fl">28.644800</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In this case my city is Dheli, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports…</p>
+<p>In this case my city is Delhi, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports…</p>
 <p>Alternatively we can click the point icon on the map and add a new point…&gt; new layer &gt; give an suitable name</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -371,7 +371,7 @@ This week
 </div>
 <p>To center the map on this point…where the second argument is the zoom level</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Map.centerObject</span><span class="op">(</span><span class="va">Dheli</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Map.centerObject</span><span class="op">(</span><span class="va">Delhi_point</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="landsat-data" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="landsat-data">
 <span class="header-section-number">5.4</span> Landsat data</h2>
@@ -401,20 +401,20 @@ This week
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2020-01-01'</span>, <span class="st">'2022-10-10'</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">/</span><span class="er">/</span> <span class="fu">.filter</span>(<span class="fu">ee.Filter.calendarRange</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'month'</span>))  <span class="sc">/</span><span class="er">/</span> Jan and Feb images</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Dheli)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi_point)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(dataset, <span class="st">"datasetprint"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="problems" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="problems">
 <span class="header-section-number">5.5</span> Problems</h2>
-<p>In my case this provides three images…and if we wanted to export the metadata of these images we could using…</p>
+<p>In my case this provides six images…and if we wanted to export the metadata of these images we could using…</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Export.table.toDrive</span><span class="op">(</span><span class="va">dataset</span>, <span class="st">'exportAsCSV'</span>, <span class="st">'GEE'</span>, <span class="st">'CSVexport'</span>, <span class="st">'CSV'</span><span class="op">)</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now I have two problems:</p>
 <ul>
-<li><p>The collection has three images within it and when i display it <code>Map.addLayer(filtered, {bands: ["SR_B4", "SR_B3", "SR_B2"]})</code> we get the top most image.</p></li>
+<li><p>The collection has six images within it and when i display it <code>Map.addLayer(filtered, {bands: ["SR_B4", "SR_B3", "SR_B2"]})</code> we get the top most image.</p></li>
 <li><p>The image only covers my single point and not the whole of Dehli / the administration area.</p></li>
 </ul>
 <section id="polygons" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="polygons">
@@ -424,22 +424,22 @@ This week
 <li><p>I could change my point to a shape that i can draw. Next to the point icon (in the map/layer window) there is a polygon icon.</p></li>
 <li><p>I could also add another point to my current single point where i want the next tile to be</p></li>
 <li><p>I could filter based on tiles from the image collection</p></li>
-<li><p>I can upload a file, such as one from <a href="https://gadm.org/index.html">GADM</a>. To do so, download the appropraite GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile <code>gadm41_IND_2</code> and I need to filter (in GEE or other software) the <code>GID_1</code> column for the row <code>IND.25_1</code>.</p></li>
+<li><p>I can upload a file, such as one from <a href="https://gadm.org/index.html">GADM</a>. To do so, download the appropriate GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile <code>gadm41_IND_2</code> and I need to filter (in GEE or other software) the <code>GID_1</code> column for the row <code>IND.25_1</code>.</p></li>
 </ul>
 <p>On GEE there is an assets button where you can upload data, upload your shapefile. Next we load it and filter what you need…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var india <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">'users/andrewmaclachlan/india'</span>)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var Delhi <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">'users/andrewmaclachlan/india'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.filter</span>(<span class="st">'GID_1 == "IND.25_1"'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To now filter based on this we include it as our filter bounds. At the time of writing there weren’t enough cloud free Landsat 9 scenes over Delhi to create a complete image, so I have changed to Landsat 8…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2021-06-01'</span>, <span class="st">'2022-10-10'</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(india)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Within the Landsat 8 filename we can see which path and rows our tiles are on…<code>LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127</code></p>
-<p>Using these dates I have 1 image from path 146, row 40, 1 image from path 146, row 41 and 4 images from path 147, row 40. See the <a href="https://landsat.usgs.gov/landsat_acq#convertPathRow">Landsat Acquisition Tool</a> to check your path and row</p>
+<p>Using these dates I have 4 images from path 146, row 40, 3 image from path 146, row 41 and 4 images from path 147, row 40. See the <a href="https://landsat.usgs.gov/landsat_acq#convertPathRow">Landsat Acquisition Tool</a> to check your path and row</p>
 </section><section id="single-images" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="single-images">
 <span class="header-section-number">5.5.2</span> Single images</h3>
 <p>Now problem one…</p>
@@ -450,7 +450,7 @@ This week
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var oneimage <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2022-04-03'</span>, <span class="st">'2022-04-04'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(india);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>I can load the specific image(s) i want…</li>
@@ -462,9 +462,11 @@ This week
 <li>I can <strong>reduce</strong> the collection to a single image through taking the mean, median, max or min using the <code>imageCollection.reduce()</code> function…</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>var median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> print the image info</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(median, <span class="st">"median"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>oneimage_study_area_cloud is the image collection we made</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>var median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> print the image info</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(median, <span class="st">"median"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Is the median the best image to make though ? <strong>watch from 27:28 to 31:46</strong></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/WvaBZbph_cU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
@@ -543,7 +545,7 @@ This week
 </div>
 </div>
 </div>
-<p>The best <strong>easy</strong> solution we have here is to take a mean of all overlapping pixels…</p>
+<p>The best <strong>easy</strong> solution we have here is to take a mean of all overlapping pixels…or if we had a larger collection the median would yield better results.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>var meanImage <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mean</span>();</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -558,7 +560,7 @@ This week
 <p>Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i’m also just selecting the bands i want.</p>
 <p>We could also visualise this with, where have used the interactive visulisation box to select my min and max values…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>var clip <span class="ot">=</span> <span class="fu">meanImage.clip</span>(india)</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>var clip <span class="ot">=</span> <span class="fu">meanImage.clip</span>(Delhi)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>([<span class="st">'SR_B1'</span>, <span class="st">'SR_B2'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B4'</span>, <span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>]);</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>var vis_params3 <span class="ot">=</span> {</span>
@@ -572,7 +574,7 @@ This week
 </div>
 </section><section id="texture-measures" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="texture-measures">
 <span class="header-section-number">5.9</span> Texture measures</h2>
-<p>As we saw earlier in the module we can compute texture…however, the <code>glcmTexture()</code> function requires an interger value and as our values are in surface reflectance this will mean they will be converted to 1 and 0s. To explore this, add the clipped surface reflectance layer to the map (using the code above)…Then use the inspector tab and the list view to query individual pixels….</p>
+<p>As we saw earlier in the module we can compute texture…however, the <code>glcmTexture()</code> function requires an integer value and as our values are in surface reflectance this will mean they will be converted to 1 and 0s. To explore this, add the clipped surface reflectance layer to the map (using the code above)…Then use the inspector tab and the list view to query individual pixels….</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -589,10 +591,11 @@ This week
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.toUint16</span>()</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.glcmTexture</span>({size<span class="sc">:</span> <span class="dv">1</span>})</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>(<span class="st">'SR_.._contrast|SR_.._diss'</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.addBands</span>(clip);</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add to the map, but change the range values  </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(glcm, {min<span class="sc">:</span><span class="dv">14</span>, max<span class="sc">:</span> <span class="dv">650</span>}, <span class="st">'glcm'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> you don<span class="st">'t need this line as well as clip just has 7 bands in it.</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">  .addBands(clip);</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="st">// add to the map, but change the range values  </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="st">Map.addLayer(glcm, {min:14, max: 650}, '</span>glcm<span class="st">');</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here note:</p>
 <ul>
@@ -614,11 +617,11 @@ This week
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>var scale <span class="ot">=</span> <span class="dv">30</span>;</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>var bandNames <span class="ot">=</span> <span class="fu">glcm.bandNames</span>();</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>var region <span class="ot">=</span> <span class="fu">india.geometry</span>();</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>var region <span class="ot">=</span> <span class="fu">Delhi.geometry</span>();</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(region, <span class="dv">10</span>);</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(<span class="fu">ee.Image</span>()<span class="fu">.paint</span>(region, <span class="dv">0</span>, <span class="dv">2</span>), {}, <span class="st">'Region'</span>);</span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(region, <span class="st">"india_geometry"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(region, <span class="st">"Delhi_geometry"</span>)</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> mean center the data and SD strech the princapal components </span>
@@ -717,7 +720,7 @@ This week
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Map.addLayer</span>(<span class="fu">pcImage.select</span>([band]), {min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, band);</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In my case i can see that the first component explains 81% of the variance within the collection and the second component 12%….we can just add these bands instead of the entire image.</p>
+<p>In my case i can see that the first component explains 79% of the variance within the collection and the second component 13%….we can just add these bands instead of the entire image.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(pcImage, {bands<span class="sc">:</span> [<span class="st">'pc2'</span>, <span class="st">'pc1'</span>], min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, <span class="st">'PCA bands 1 and 2'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -732,12 +735,12 @@ This week
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>var projection <span class="ot">=</span> <span class="fu">PCA_out.select</span>(<span class="st">'pc1'</span>)<span class="fu">.projection</span>()<span class="fu">.getInfo</span>();</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(projection, <span class="st">"output_projection"</span>)</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>var bounds <span class="ot">=</span> <span class="fu">india.geometry</span>();</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>var bounds <span class="ot">=</span> <span class="fu">Delhi.geometry</span>();</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Export the image, specifying the CRS, transform, and region.</span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Export.image.toDrive</span>({</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  image<span class="sc">:</span> PCA_out,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  description<span class="sc">:</span> <span class="st">'PCA_india'</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  description<span class="sc">:</span> <span class="st">'PCA_Delhi'</span>,</span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span><span class="dv">30</span>,</span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  crs<span class="sc">:</span> projection.crs,</span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  maxPixels<span class="sc">:</span> <span class="fl">100E10</span>,</span>

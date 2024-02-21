@@ -73,11 +73,11 @@ To start with GEE i want to pull up the same image from a specific date for a ci
 We can make a new point in the code editor with:
 ```{r, eval=FALSE}
 // Construct a point from coordinates.
-var point = ee.Geometry.Point([77.216721, 28.644800]);
+var Delhi_point = ee.Geometry.Point([77.216721, 28.644800]);
 
 ```
 
-In this case my city is Dheli, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports...
+In this case my city is Delhi, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports...
 
 Alternatively we can click the point icon on the map and add a new point...> new layer > give an suitable name
 
@@ -87,7 +87,7 @@ knitr::include_graphics('prac_5/GEE_points.png')
 To center the map on this point...where the second argument is the zoom level
 
 ```{r, eval=FALSE}
-Map.centerObject(Dheli, 10)
+Map.centerObject(Delhi_point, 10)
 ```
 
 ## Landsat data
@@ -123,7 +123,7 @@ At the moment we aren't sure exactly what images we are using or how much cloud 
 var dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
   .filterDate('2020-01-01', '2022-10-10')
  // .filter(ee.Filter.calendarRange(1, 2, 'month'))  // Jan and Feb images
-  .filterBounds(Dheli)  // Intersecting ROI
+  .filterBounds(Delhi_point)  // Intersecting ROI
   .filter(ee.Filter.lt("CLOUD_COVER", 0.1));
   
   print(dataset, "datasetprint")
@@ -132,7 +132,7 @@ var dataset = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
 
 ## Problems
 
-In my case this provides three images...and if we wanted to export the metadata of these images we could using...
+In my case this provides six images...and if we wanted to export the metadata of these images we could using...
 
 ```{r, eval=FALSE}
 Export.table.toDrive(dataset, 'exportAsCSV', 'GEE', 'CSVexport', 'CSV');
@@ -140,7 +140,7 @@ Export.table.toDrive(dataset, 'exportAsCSV', 'GEE', 'CSVexport', 'CSV');
 
 Now I have two problems:
 
-* The collection has three images within it and when i display it `Map.addLayer(filtered, {bands: ["SR_B4", "SR_B3", "SR_B2"]})` we get the top most image.
+* The collection has six images within it and when i display it `Map.addLayer(filtered, {bands: ["SR_B4", "SR_B3", "SR_B2"]})` we get the top most image.
 
 * The image only covers my single point and not the whole of Dehli / the administration area.
 
@@ -154,12 +154,12 @@ Let's deal with problem two first...
 
 * I could filter based on tiles from the image collection
 
-* I can upload a file, such as one from [GADM](https://gadm.org/index.html). To do so, download the appropraite GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile `gadm41_IND_2` and I need to filter (in GEE or other software) the `GID_1` column for the row `IND.25_1`.
+* I can upload a file, such as one from [GADM](https://gadm.org/index.html). To do so, download the appropriate GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile `gadm41_IND_2` and I need to filter (in GEE or other software) the `GID_1` column for the row `IND.25_1`.
 
 On GEE there is an assets button where you can upload data, upload your shapefile. Next we load it and filter what you need...
 
 ```{r, eval=FALSE}
-var india = ee.FeatureCollection('users/andrewmaclachlan/india')
+var Delhi = ee.FeatureCollection('users/andrewmaclachlan/india')
     .filter('GID_1 == "IND.25_1"');
 ```
 
@@ -169,14 +169,14 @@ To now filter based on this we include it as our filter bounds. At the time of w
 ```{r, eval=FALSE}
 var oneimage_study_area_cloud = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
   .filterDate('2021-06-01', '2022-10-10')
-  .filterBounds(india)  // Intersecting ROI
+  .filterBounds(Delhi)  // Intersecting ROI
   .filter(ee.Filter.lt("CLOUD_COVER", 0.1));
 
 ```
 
 Within the Landsat 8 filename we can see which path and rows our tiles are on...`LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127`
 
-Using these dates I have 1 image from path 146, row 40, 1 image from path 146, row 41 and 4 images from path 147, row 40. See the [Landsat Acquisition Tool](https://landsat.usgs.gov/landsat_acq#convertPathRow) to check your path and row
+Using these dates I have 4 images from path 146, row 40, 3 image from path 146, row 41 and 4 images from path 147, row 40. See the [Landsat Acquisition Tool](https://landsat.usgs.gov/landsat_acq#convertPathRow) to check your path and row
 
 
 ### Single images 
@@ -188,7 +188,7 @@ Now problem one...
 ```{r, eval=FALSE}
 var oneimage = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
   .filterDate('2022-04-03', '2022-04-04')
-  .filterBounds(india);  // Intersecting ROI
+  .filterBounds(Delhi);  // Intersecting ROI
 ```
 
 * I can load the specific image(s) i want...
@@ -200,6 +200,8 @@ var image_146_40 = ee.Image('LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127')
 * I can **reduce** the collection to a single image through taking the mean, median, max or min using the `imageCollection.reduce()` function...
 
 ```{r eval=FALSE}
+//oneimage_study_area_cloud is the image collection we made
+
 var median = oneimage_study_area_cloud.reduce(ee.Reducer.median());
 // print the image info
 print(median, "median")
@@ -284,7 +286,7 @@ In this example i've mosaiced the image collection (before taking the median val
 knitr::include_graphics('prac_5/GEE_mosaic.png') 
 ```
 
-The best **easy** solution we have here is to take a mean of all overlapping pixels...
+The best **easy** solution we have here is to take a mean of all overlapping pixels...or if we had a larger collection the median would yield better results.
 
 ```{r eval=FALSE}
 var meanImage = oneimage_study_area_cloud_scale.mean();
@@ -304,7 +306,7 @@ We could also visualise this with, where have used the interactive visulisation 
 
 ```{r, eval=FALSE}
 
-var clip = meanImage.clip(india)
+var clip = meanImage.clip(Delhi)
   .select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7']);
 
 var vis_params3 = {
@@ -320,7 +322,7 @@ Map.addLayer(clip, vis_params3, 'clip');
 
 ## Texture measures
 
-As we saw earlier in the module we can compute texture...however, the `glcmTexture()` function requires an interger value and as our values are in surface reflectance this will mean they will be converted to 1 and 0s. To explore this, add the clipped surface reflectance layer to the map (using the code above)...Then use the inspector tab and the list view to query individual pixels....
+As we saw earlier in the module we can compute texture...however, the `glcmTexture()` function requires an integer value and as our values are in surface reflectance this will mean they will be converted to 1 and 0s. To explore this, add the clipped surface reflectance layer to the map (using the code above)...Then use the inspector tab and the list view to query individual pixels....
 
 ```{r echo=FALSE, out.width = "70%", fig.align='center', cache=FALSE}
   knitr::include_graphics('prac_5/GEE_listview.png') 
@@ -336,6 +338,7 @@ var glcm = clip.select(['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'S
   .toUint16()
   .glcmTexture({size: 1})
   .select('SR_.._contrast|SR_.._diss')
+  // you don't need this line as well as clip just has 7 bands in it.
   .addBands(clip);
   
 // add to the map, but change the range values  
@@ -366,11 +369,11 @@ We then center the data to the mean (in the code below) and divide by the standa
 var scale = 30;
 var bandNames = glcm.bandNames();
 
-var region = india.geometry();
+var region = Delhi.geometry();
 Map.centerObject(region, 10);
 Map.addLayer(ee.Image().paint(region, 0, 2), {}, 'Region');
 
-print(region, "india_geometry")
+print(region, "Delhi_geometry")
 
 
 // mean center the data and SD strech the princapal components 
@@ -480,7 +483,7 @@ for (var i = 0; i < bandNames.length().getInfo(); i++) {
 
 ```
 
-In my case i can see that the first component explains 81% of the variance within the collection and the second component 12%....we can just add these bands instead of the entire image.
+In my case i can see that the first component explains 79% of the variance within the collection and the second component 13%....we can just add these bands instead of the entire image.
 
 ```{r, eval=FALSE}
 Map.addLayer(pcImage, {bands: ['pc2', 'pc1'], min: -2, max: 2}, 'PCA bands 1 and 2');
@@ -500,12 +503,12 @@ var PCA_out = pcImage.select(['pc1', 'pc2'])
 var projection = PCA_out.select('pc1').projection().getInfo();
 print(projection, "output_projection")
 
-var bounds = india.geometry();
+var bounds = Delhi.geometry();
 
 // Export the image, specifying the CRS, transform, and region.
 Export.image.toDrive({
   image: PCA_out,
-  description: 'PCA_india',
+  description: 'PCA_Delhi',
   scale:30,
   crs: projection.crs,
   maxPixels: 100E10,
