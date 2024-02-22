@@ -353,13 +353,14 @@ This week
 <p>Before we begin explore some of the examples in the script editor, start with the user interface ones..</p>
 </section><section id="points" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="points">
 <span class="header-section-number">5.3</span> Points</h2>
-<p>To start with GEE i want to pull up the same image from a specific date for a city, i will use</p>
-<p>We can make a new point in the code editor with:</p>
+<p>We can make a new point and center the map to it in code editor with</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Construct a point from coordinates.</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>var Delhi_point <span class="ot">=</span> <span class="fu">ee.Geometry.Point</span>([<span class="fl">77.216721</span>, <span class="fl">28.644800</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>var Delhi_point <span class="ot">=</span> <span class="fu">ee.Geometry.Point</span>([<span class="fl">77.216721</span>, <span class="fl">28.644800</span>]);</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(Delhi_point, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In this case my city is Delhi, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports…</p>
+<p>In this case my city is Delhi, <strong>when i enter this code you will get a message asking if you want to convert it to an imported record</strong>, click convert and it will appear in the imports and also as a point on the map!</p>
 <p>Alternatively we can click the point icon on the map and add a new point…&gt; new layer &gt; give an suitable name</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -368,10 +369,6 @@ This week
 </figure>
 </div>
 </div>
-</div>
-<p>To center the map on this point…where the second argument is the zoom level</p>
-<div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Map.centerObject</span><span class="op">(</span><span class="va">Delhi_point</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="landsat-data" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="landsat-data">
 <span class="header-section-number">5.4</span> Landsat data</h2>
@@ -386,31 +383,31 @@ This week
 </div>
 <p>Here through let’s just load some data…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-02-01'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-02-01'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This doesn’t do anything until we actually add it to our map….the final Landsat 9 here is what the layer will be called on the map.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset, {bands<span class="sc">:</span> [<span class="st">"SR_B4"</span>, <span class="st">"SR_B3"</span>, <span class="st">"SR_B2"</span>]}, <span class="st">"Landsat 9"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset, {bands<span class="sc">:</span> [<span class="st">"SR_B4"</span>, <span class="st">"SR_B3"</span>, <span class="st">"SR_B2"</span>]}, <span class="st">"Landsat 9"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What has this actually done? Try zooming out and inspecting the image. On the right hand side click inspector and click around the image…</p>
 <p>At the moment we aren’t sure exactly what images we are using or how much cloud cover is in them…to sort this…</p>
 <p><strong>Note</strong>, that in GEE <code>//</code> comments out a line of code…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Load Landsat <span class="dv">9</span> data, filter by date, month, and bounds.</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2020-01-01'</span>, <span class="st">'2022-10-10'</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">/</span><span class="er">/</span> <span class="fu">.filter</span>(<span class="fu">ee.Filter.calendarRange</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'month'</span>))  <span class="sc">/</span><span class="er">/</span> Jan and Feb images</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi_point)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(dataset, <span class="st">"datasetprint"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Load Landsat <span class="dv">9</span> data, filter by date, month, and bounds.</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2020-01-01'</span>, <span class="st">'2022-10-10'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">/</span><span class="er">/</span> <span class="fu">.filter</span>(<span class="fu">ee.Filter.calendarRange</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">'month'</span>))  <span class="sc">/</span><span class="er">/</span> Jan and Feb images</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi_point)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(dataset, <span class="st">"datasetprint"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="problems" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="problems">
 <span class="header-section-number">5.5</span> Problems</h2>
 <p>In my case this provides six images…and if we wanted to export the metadata of these images we could using…</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Export.table.toDrive</span><span class="op">(</span><span class="va">dataset</span>, <span class="st">'exportAsCSV'</span>, <span class="st">'GEE'</span>, <span class="st">'CSVexport'</span>, <span class="st">'CSV'</span><span class="op">)</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">Export.table.toDrive</span><span class="op">(</span><span class="va">dataset</span>, <span class="st">'exportAsCSV'</span>, <span class="st">'GEE'</span>, <span class="st">'CSVexport'</span>, <span class="st">'CSV'</span><span class="op">)</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now I have two problems:</p>
 <ul>
@@ -424,19 +421,19 @@ This week
 <li><p>I could change my point to a shape that i can draw. Next to the point icon (in the map/layer window) there is a polygon icon.</p></li>
 <li><p>I could also add another point to my current single point where i want the next tile to be</p></li>
 <li><p>I could filter based on tiles from the image collection</p></li>
-<li><p>I can upload a file, such as one from <a href="https://gadm.org/index.html">GADM</a>. To do so, download the appropriate GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile <code>gadm41_IND_2</code> and I need to filter (in GEE or other software) the <code>GID_1</code> column for the row <code>IND.25_1</code>.</p></li>
+<li><p>I can upload a file, such as one from <a href="https://gadm.org/index.html">GADM</a>. To do so, download the appropriate GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile <strong><code>gadm41_IND_2</code></strong> (just upload this .shp and associated files, not all the others) and I need to filter (in GEE or other software) the <code>GID_1</code> column for the row <code>IND.25_1</code>.</p></li>
 </ul>
 <p>On GEE there is an assets button where you can upload data, upload your shapefile. Next we load it and filter what you need…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var Delhi <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">'users/andrewmaclachlan/india'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.filter</span>(<span class="st">'GID_1 == "IND.25_1"'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>var Delhi <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">'users/andrewmaclachlan/india'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.filter</span>(<span class="st">'GID_1 == "IND.25_1"'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To now filter based on this we include it as our filter bounds. At the time of writing there weren’t enough cloud free Landsat 9 scenes over Delhi to create a complete image, so I have changed to Landsat 8…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2021-06-01'</span>, <span class="st">'2022-10-10'</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2021-06-01'</span>, <span class="st">'2022-10-10'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">"CLOUD_COVER"</span>, <span class="fl">0.1</span>));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Within the Landsat 8 filename we can see which path and rows our tiles are on…<code>LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127</code></p>
 <p>Using these dates I have 4 images from path 146, row 40, 3 image from path 146, row 41 and 4 images from path 147, row 40. See the <a href="https://landsat.usgs.gov/landsat_acq#convertPathRow">Landsat Acquisition Tool</a> to check your path and row</p>
@@ -448,25 +445,25 @@ This week
 </li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var oneimage <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2022-04-03'</span>, <span class="st">'2022-04-04'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var oneimage <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'LANDSAT/LC09/C02/T1_L2'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterDate</span>(<span class="st">'2022-04-03'</span>, <span class="st">'2022-04-04'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.filterBounds</span>(Delhi);  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>I can load the specific image(s) i want…</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>var image_146_40 <span class="ot">=</span> <span class="fu">ee.Image</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var image_146_40 <span class="ot">=</span> <span class="fu">ee.Image</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2/LC08_146040_20211127'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>I can <strong>reduce</strong> the collection to a single image through taking the mean, median, max or min using the <code>imageCollection.reduce()</code> function…</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>oneimage_study_area_cloud is the image collection we made</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>var median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> print the image info</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(median, <span class="st">"median"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>oneimage_study_area_cloud is the image collection we made</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>var median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> print the image info</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(median, <span class="st">"median"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Is the median the best image to make though ? <strong>watch from 27:28 to 31:46</strong></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/WvaBZbph_cU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
@@ -478,31 +475,31 @@ This week
 </blockquote>
 <p>We do this through making a function and then calling our collection to the function</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Applies scaling factors <span class="cf">in</span> a <span class="cf">function</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">applyScaleFactors</span>(image) {</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  var opticalBands <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'SR_B.'</span>)<span class="fu">.multiply</span>(<span class="fl">0.0000275</span>)<span class="fu">.add</span>(<span class="sc">-</span><span class="fl">0.2</span>);</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  var thermalBands <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'ST_B.*'</span>)<span class="fu">.multiply</span>(<span class="fl">0.00341802</span>)<span class="fu">.add</span>(<span class="fl">149.0</span>);</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">image.addBands</span>(opticalBands, null, true)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">.addBands</span>(thermalBands, null, true);</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> call our collection to the <span class="cf">function</span> and assign it to a new variable </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>oneimage_study_area_cloud_scale <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.map</span>(applyScaleFactors);</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> apply the median reducer</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud_scale_median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Applies scaling factors <span class="cf">in</span> a <span class="cf">function</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">applyScaleFactors</span>(image) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  var opticalBands <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'SR_B.'</span>)<span class="fu">.multiply</span>(<span class="fl">0.0000275</span>)<span class="fu">.add</span>(<span class="sc">-</span><span class="fl">0.2</span>);</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  var thermalBands <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'ST_B.*'</span>)<span class="fu">.multiply</span>(<span class="fl">0.00341802</span>)<span class="fu">.add</span>(<span class="fl">149.0</span>);</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">image.addBands</span>(opticalBands, null, true)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">.addBands</span>(thermalBands, null, true);</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> call our collection to the <span class="cf">function</span> and assign it to a new variable </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud_scale <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud.map</span>(applyScaleFactors);</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> apply the median reducer</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>var oneimage_study_area_cloud_scale_median <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.reduce</span>(<span class="fu">ee.Reducer.median</span>());</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can then map this…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> set up some of the visualisation paramters </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>var vis_params <span class="ot">=</span> {</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4_median'</span>, <span class="st">'SR_B3_median'</span>, <span class="st">'SR_B2_median'</span>],</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add a layer to the map</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(oneimage_study_area_cloud_scale_median, vis_params, <span class="st">'True Color (432)'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> set up some of the visualisation paramters </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>var vis_params <span class="ot">=</span> {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4_median'</span>, <span class="st">'SR_B3_median'</span>, <span class="st">'SR_B2_median'</span>],</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add a layer to the map</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(oneimage_study_area_cloud_scale_median, vis_params, <span class="st">'True Color (432)'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should have produced something like this…</p>
 <div class="cell" data-layout-align="center">
@@ -526,15 +523,15 @@ This week
 <span class="header-section-number">5.7</span> Mosaic images</h2>
 <p>When we look at these images there might be very apparent differences between the tiles - this is probably due to the date of collection and the atmospheric correction applied (remember that it’s a model of the atmosphere).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>var mosaic <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mosaic</span>();</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>var vis_params2 <span class="ot">=</span> {</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B2'</span>],</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mosaic, vis_params2, <span class="st">'spatial mosaic'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>var mosaic <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mosaic</span>();</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>var vis_params2 <span class="ot">=</span> {</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B2'</span>],</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(mosaic, vis_params2, <span class="st">'spatial mosaic'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this example i’ve mosaiced the image collection (before taking the median values). This has taken images according to their order in the collection (last on top).You’ll notice there isn’t much difference…but you will see the effect of the last on top rule with clear demarcations across where images overlap…making the problem we wanted to resolve worse!</p>
 <div class="cell" data-layout-align="center">
@@ -547,9 +544,9 @@ This week
 </div>
 <p>The best <strong>easy</strong> solution we have here is to take a mean of all overlapping pixels…or if we had a larger collection the median would yield better results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>var meanImage <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mean</span>();</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(meanImage, vis_params2, <span class="st">'mean'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>var meanImage <span class="ot">=</span> <span class="fu">oneimage_study_area_cloud_scale.mean</span>();</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(meanImage, vis_params2, <span class="st">'mean'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, as noted in the lectures we could also match the histograms of the images, this is beyond the scope of the practical but more details are:</p>
 <ul>
@@ -560,17 +557,17 @@ This week
 <p>Currently our analysis has spanned the tiles that cover the study area - in my case this is three tiles. So we should clip them to our current study area. After the clip i’m also just selecting the bands i want.</p>
 <p>We could also visualise this with, where have used the interactive visulisation box to select my min and max values…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>var clip <span class="ot">=</span> <span class="fu">meanImage.clip</span>(Delhi)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>([<span class="st">'SR_B1'</span>, <span class="st">'SR_B2'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B4'</span>, <span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>]);</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>var vis_params3 <span class="ot">=</span> {</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B2'</span>],</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="dv">0</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> map the layer</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(clip, vis_params3, <span class="st">'clip'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>var clip <span class="ot">=</span> <span class="fu">meanImage.clip</span>(Delhi)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>([<span class="st">'SR_B1'</span>, <span class="st">'SR_B2'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B4'</span>, <span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>]);</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>var vis_params3 <span class="ot">=</span> {</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'SR_B4'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B2'</span>],</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="dv">0</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> map the layer</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(clip, vis_params3, <span class="st">'clip'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="texture-measures" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="texture-measures">
 <span class="header-section-number">5.9</span> Texture measures</h2>
@@ -586,16 +583,16 @@ This week
 <p>To resolve this we need to multiple our surface reflectance so we can compute texture. If we didn’t do this our texture would just be 1s and 0s. ….</p>
 <p><strong>Note</strong>, that we are selecting a <strong>lot</strong> of data here…if GEE shows as unresponsive click wait and it should process, otherwise reduce the number of bands.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>var glcm <span class="ot">=</span> <span class="fu">clip.select</span>([<span class="st">'SR_B1'</span>, <span class="st">'SR_B2'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B4'</span>, <span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>])</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.multiply</span>(<span class="dv">1000</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.toUint16</span>()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.glcmTexture</span>({size<span class="sc">:</span> <span class="dv">1</span>})</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>(<span class="st">'SR_.._contrast|SR_.._diss'</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> you don<span class="st">'t need this line as well as clip just has 7 bands in it.</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">  .addBands(clip);</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="st">// add to the map, but change the range values  </span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="st">Map.addLayer(glcm, {min:14, max: 650}, '</span>glcm<span class="st">');</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>var glcm <span class="ot">=</span> <span class="fu">clip.select</span>([<span class="st">'SR_B1'</span>, <span class="st">'SR_B2'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B4'</span>, <span class="st">'SR_B5'</span>, <span class="st">'SR_B6'</span>, <span class="st">'SR_B7'</span>])</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.multiply</span>(<span class="dv">1000</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.toUint16</span>()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.glcmTexture</span>({size<span class="sc">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.select</span>(<span class="st">'SR_.._contrast|SR_.._diss'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> you don<span class="st">'t need this line as well as clip just has 7 bands in it.</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="st">  .addBands(clip);</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="st">// add to the map, but change the range values  </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="st">Map.addLayer(glcm, {min:14, max: 650}, '</span>glcm<span class="st">');</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here note:</p>
 <ul>
@@ -613,140 +610,140 @@ This week
 </ul>
 <p>We then center the data to the mean (in the code below) and divide by the standard deviation that happens in the next section</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> scale and band names</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>var scale <span class="ot">=</span> <span class="dv">30</span>;</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>var bandNames <span class="ot">=</span> <span class="fu">glcm.bandNames</span>();</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>var region <span class="ot">=</span> <span class="fu">Delhi.geometry</span>();</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(region, <span class="dv">10</span>);</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(<span class="fu">ee.Image</span>()<span class="fu">.paint</span>(region, <span class="dv">0</span>, <span class="dv">2</span>), {}, <span class="st">'Region'</span>);</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(region, <span class="st">"Delhi_geometry"</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> mean center the data and SD strech the princapal components </span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> and an SD stretch of the principal components.</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>var meanDict <span class="ot">=</span> <span class="fu">glcm.reduceRegion</span>({</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    geometry<span class="sc">:</span> region,</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    scale<span class="sc">:</span> scale,</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    maxPixels<span class="sc">:</span> <span class="fl">1e9</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>var means <span class="ot">=</span> <span class="fu">ee.Image.constant</span>(<span class="fu">meanDict.values</span>(bandNames));</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>var centered <span class="ot">=</span> <span class="fu">glcm.subtract</span>(means);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> scale and band names</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>var scale <span class="ot">=</span> <span class="dv">30</span>;</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>var bandNames <span class="ot">=</span> <span class="fu">glcm.bandNames</span>();</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>var region <span class="ot">=</span> <span class="fu">Delhi.geometry</span>();</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(region, <span class="dv">10</span>);</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(<span class="fu">ee.Image</span>()<span class="fu">.paint</span>(region, <span class="dv">0</span>, <span class="dv">2</span>), {}, <span class="st">'Region'</span>);</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(region, <span class="st">"Delhi_geometry"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> mean center the data and SD strech the princapal components </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> and an SD stretch of the principal components.</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>var meanDict <span class="ot">=</span> <span class="fu">glcm.reduceRegion</span>({</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    reducer<span class="sc">:</span> <span class="fu">ee.Reducer.mean</span>(),</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    geometry<span class="sc">:</span> region,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    scale<span class="sc">:</span> scale,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    maxPixels<span class="sc">:</span> <span class="fl">1e9</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>var means <span class="ot">=</span> <span class="fu">ee.Image.constant</span>(<span class="fu">meanDict.values</span>(bandNames));</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>var centered <span class="ot">=</span> <span class="fu">glcm.subtract</span>(means);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can use this function to sort out our bandnames</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This helper <span class="cf">function</span> returns a list of new band names.</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>var getNewBandNames <span class="ot">=</span> <span class="cf">function</span>(prefix) {</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  var seq <span class="ot">=</span> <span class="fu">ee.List.sequence</span>(<span class="dv">1</span>, <span class="fu">bandNames.length</span>());</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">seq.map</span>(<span class="cf">function</span>(b) {</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">ee.String</span>(prefix)<span class="fu">.cat</span>(<span class="fu">ee.Number</span>(b)<span class="fu">.int</span>());</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  });</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>};</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This helper <span class="cf">function</span> returns a list of new band names.</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>var getNewBandNames <span class="ot">=</span> <span class="cf">function</span>(prefix) {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  var seq <span class="ot">=</span> <span class="fu">ee.List.sequence</span>(<span class="dv">1</span>, <span class="fu">bandNames.length</span>());</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">seq.map</span>(<span class="cf">function</span>(b) {</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">ee.String</span>(prefix)<span class="fu">.cat</span>(<span class="fu">ee.Number</span>(b)<span class="fu">.int</span>());</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  });</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>};</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then we can pass our centered data to the PCA function, here i have added some code from <a href="https://chowdera.com/2021/11/20211126170055724x.html">Guo Qiqu</a> that will display the % variance explained by each component. <strong>Note</strong> i have just used this function to get what i need here, and that is the PCA output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This <span class="cf">function</span> accepts mean centered imagery, a scale and</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> a region <span class="cf">in</span> which to perform the analysis.  It returns the</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Principal <span class="fu">Components</span> (PC) <span class="cf">in</span> the region as a new image.</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>var getPrincipalComponents <span class="ot">=</span> <span class="cf">function</span>(centered, scale, region) {</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Collapse the bands of the image into a 1D array per pixel.</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  var arrays <span class="ot">=</span> <span class="fu">centered.toArray</span>();</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Compute the covariance of the bands within the region.</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  var covar <span class="ot">=</span> <span class="fu">arrays.reduceRegion</span>({</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    reducer<span class="sc">:</span> <span class="fu">ee.Reducer.centeredCovariance</span>(),</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    geometry<span class="sc">:</span> region,</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    scale<span class="sc">:</span> scale,</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    maxPixels<span class="sc">:</span> <span class="fl">1e9</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  });</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Get the <span class="st">'array'</span> covariance result and cast to an array.</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> This represents the band<span class="sc">-</span>to<span class="sc">-</span>band covariance within the region.</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  var covarArray <span class="ot">=</span> <span class="fu">ee.Array</span>(<span class="fu">covar.get</span>(<span class="st">'array'</span>));</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Perform an eigen analysis and slice apart the values and vectors.</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  var eigens <span class="ot">=</span> <span class="fu">covarArray.eigen</span>();</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> This is a P<span class="sc">-</span>length vector of Eigenvalues.</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  var eigenValues <span class="ot">=</span> <span class="fu">eigens.slice</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>);</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> This is a PxP matrix with eigenvectors <span class="cf">in</span> rows.</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  var eigenValuesList <span class="ot">=</span> <span class="fu">eigenValues.toList</span>()<span class="fu">.flatten</span>()</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  var total <span class="ot">=</span> <span class="fu">eigenValuesList.reduce</span>(<span class="fu">ee.Reducer.sum</span>())</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  var percentageVariance <span class="ot">=</span> <span class="fu">eigenValuesList.map</span>(<span class="cf">function</span>(item) {</span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">ee.Number</span>(item)<span class="fu">.divide</span>(total))<span class="fu">.multiply</span>(<span class="dv">100</span>)<span class="fu">.format</span>(<span class="st">'%.2f'</span>)</span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"percentageVariance"</span>, percentageVariance)  </span>
-<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>  var eigenVectors <span class="ot">=</span> <span class="fu">eigens.slice</span>(<span class="dv">1</span>, <span class="dv">1</span>);</span>
-<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Convert the array image to 2D arrays <span class="cf">for</span> matrix computations.</span>
-<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  var arrayImage <span class="ot">=</span> <span class="fu">arrays.toArray</span>(<span class="dv">1</span>);</span>
-<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Left multiply the image array by the matrix of eigenvectors.</span>
-<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>  var principalComponents <span class="ot">=</span> <span class="fu">ee.Image</span>(eigenVectors)<span class="fu">.matrixMultiply</span>(arrayImage);</span>
-<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Turn the square roots of the Eigenvalues into a P<span class="sc">-</span>band image.</span>
-<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>  var sdImage <span class="ot">=</span> <span class="fu">ee.Image</span>(<span class="fu">eigenValues.sqrt</span>())</span>
-<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.arrayProject</span>([<span class="dv">0</span>])<span class="fu">.arrayFlatten</span>([<span class="fu">getNewBandNames</span>(<span class="st">'sd'</span>)]);</span>
-<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Turn the PCs into a P<span class="sc">-</span>band image, normalized by SD.</span>
-<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>  return principalComponents</span>
-<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Throw out an an unneeded dimension, [[]] <span class="ot">-&gt;</span> [].</span>
-<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.arrayProject</span>([<span class="dv">0</span>])</span>
-<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Make the one band array image a multi<span class="sc">-</span>band image, [] <span class="ot">-&gt;</span> image.</span>
-<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.arrayFlatten</span>([<span class="fu">getNewBandNames</span>(<span class="st">'pc'</span>)])</span>
-<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Normalize the PCs by their SDs.</span>
-<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.divide</span>(sdImage);</span>
-<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Get the PCs at the specified scale and <span class="cf">in</span> the specified region</span>
-<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>var pcImage <span class="ot">=</span> <span class="fu">getPrincipalComponents</span>(centered, scale, region);</span>
-<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Plot each PC as a new layer</span>
-<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="at">i =</span> <span class="dv">0</span>; i <span class="sc">&lt;</span> <span class="fu">bandNames.length</span>()<span class="fu">.getInfo</span>(); i<span class="sc">++</span>) {</span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>  var band <span class="ot">=</span> <span class="fu">pcImage.bandNames</span>()<span class="fu">.get</span>(i)<span class="fu">.getInfo</span>();</span>
-<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Map.addLayer</span>(<span class="fu">pcImage.select</span>([band]), {min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, band);</span>
-<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> This <span class="cf">function</span> accepts mean centered imagery, a scale and</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> a region <span class="cf">in</span> which to perform the analysis.  It returns the</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Principal <span class="fu">Components</span> (PC) <span class="cf">in</span> the region as a new image.</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>var getPrincipalComponents <span class="ot">=</span> <span class="cf">function</span>(centered, scale, region) {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Collapse the bands of the image into a 1D array per pixel.</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  var arrays <span class="ot">=</span> <span class="fu">centered.toArray</span>();</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Compute the covariance of the bands within the region.</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  var covar <span class="ot">=</span> <span class="fu">arrays.reduceRegion</span>({</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    reducer<span class="sc">:</span> <span class="fu">ee.Reducer.centeredCovariance</span>(),</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    geometry<span class="sc">:</span> region,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    scale<span class="sc">:</span> scale,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    maxPixels<span class="sc">:</span> <span class="fl">1e9</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  });</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Get the <span class="st">'array'</span> covariance result and cast to an array.</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> This represents the band<span class="sc">-</span>to<span class="sc">-</span>band covariance within the region.</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  var covarArray <span class="ot">=</span> <span class="fu">ee.Array</span>(<span class="fu">covar.get</span>(<span class="st">'array'</span>));</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Perform an eigen analysis and slice apart the values and vectors.</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  var eigens <span class="ot">=</span> <span class="fu">covarArray.eigen</span>();</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> This is a P<span class="sc">-</span>length vector of Eigenvalues.</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  var eigenValues <span class="ot">=</span> <span class="fu">eigens.slice</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>);</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> This is a PxP matrix with eigenvectors <span class="cf">in</span> rows.</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  var eigenValuesList <span class="ot">=</span> <span class="fu">eigenValues.toList</span>()<span class="fu">.flatten</span>()</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  var total <span class="ot">=</span> <span class="fu">eigenValuesList.reduce</span>(<span class="fu">ee.Reducer.sum</span>())</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  var percentageVariance <span class="ot">=</span> <span class="fu">eigenValuesList.map</span>(<span class="cf">function</span>(item) {</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">ee.Number</span>(item)<span class="fu">.divide</span>(total))<span class="fu">.multiply</span>(<span class="dv">100</span>)<span class="fu">.format</span>(<span class="st">'%.2f'</span>)</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"percentageVariance"</span>, percentageVariance)  </span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  var eigenVectors <span class="ot">=</span> <span class="fu">eigens.slice</span>(<span class="dv">1</span>, <span class="dv">1</span>);</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Convert the array image to 2D arrays <span class="cf">for</span> matrix computations.</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  var arrayImage <span class="ot">=</span> <span class="fu">arrays.toArray</span>(<span class="dv">1</span>);</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Left multiply the image array by the matrix of eigenvectors.</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  var principalComponents <span class="ot">=</span> <span class="fu">ee.Image</span>(eigenVectors)<span class="fu">.matrixMultiply</span>(arrayImage);</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Turn the square roots of the Eigenvalues into a P<span class="sc">-</span>band image.</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  var sdImage <span class="ot">=</span> <span class="fu">ee.Image</span>(<span class="fu">eigenValues.sqrt</span>())</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.arrayProject</span>([<span class="dv">0</span>])<span class="fu">.arrayFlatten</span>([<span class="fu">getNewBandNames</span>(<span class="st">'sd'</span>)]);</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Turn the PCs into a P<span class="sc">-</span>band image, normalized by SD.</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  return principalComponents</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Throw out an an unneeded dimension, [[]] <span class="ot">-&gt;</span> [].</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.arrayProject</span>([<span class="dv">0</span>])</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Make the one band array image a multi<span class="sc">-</span>band image, [] <span class="ot">-&gt;</span> image.</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.arrayFlatten</span>([<span class="fu">getNewBandNames</span>(<span class="st">'pc'</span>)])</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span><span class="er">/</span> Normalize the PCs by their SDs.</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.divide</span>(sdImage);</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Get the PCs at the specified scale and <span class="cf">in</span> the specified region</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>var pcImage <span class="ot">=</span> <span class="fu">getPrincipalComponents</span>(centered, scale, region);</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Plot each PC as a new layer</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="at">i =</span> <span class="dv">0</span>; i <span class="sc">&lt;</span> <span class="fu">bandNames.length</span>()<span class="fu">.getInfo</span>(); i<span class="sc">++</span>) {</span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>  var band <span class="ot">=</span> <span class="fu">pcImage.bandNames</span>()<span class="fu">.get</span>(i)<span class="fu">.getInfo</span>();</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Map.addLayer</span>(<span class="fu">pcImage.select</span>([band]), {min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, band);</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can then plot each component with a for loop:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Plot each PC as a new layer</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="at">i =</span> <span class="dv">0</span>; i <span class="sc">&lt;</span> <span class="fu">bandNames.length</span>()<span class="fu">.getInfo</span>(); i<span class="sc">++</span>) {</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  var band <span class="ot">=</span> <span class="fu">pcImage.bandNames</span>()<span class="fu">.get</span>(i)<span class="fu">.getInfo</span>();</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Map.addLayer</span>(<span class="fu">pcImage.select</span>([band]), {min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, band);</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Plot each PC as a new layer</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (var <span class="at">i =</span> <span class="dv">0</span>; i <span class="sc">&lt;</span> <span class="fu">bandNames.length</span>()<span class="fu">.getInfo</span>(); i<span class="sc">++</span>) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  var band <span class="ot">=</span> <span class="fu">pcImage.bandNames</span>()<span class="fu">.get</span>(i)<span class="fu">.getInfo</span>();</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Map.addLayer</span>(<span class="fu">pcImage.select</span>([band]), {min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, band);</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In my case i can see that the first component explains 79% of the variance within the collection and the second component 13%….we can just add these bands instead of the entire image.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(pcImage, {bands<span class="sc">:</span> [<span class="st">'pc2'</span>, <span class="st">'pc1'</span>], min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, <span class="st">'PCA bands 1 and 2'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(pcImage, {bands<span class="sc">:</span> [<span class="st">'pc2'</span>, <span class="st">'pc1'</span>], min<span class="sc">:</span> <span class="sc">-</span><span class="dv">2</span>, max<span class="sc">:</span> <span class="dv">2</span>}, <span class="st">'PCA bands 1 and 2'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="exporting" class="level2" data-number="5.11"><h2 data-number="5.11" class="anchored" data-anchor-id="exporting">
 <span class="header-section-number">5.11</span> Exporting</h2>
 <p>There are a number of ways you can export data from GEE, to your Google Drive, Cloud storage or as an Asset for future use.</p>
 <p>To export it to your drive…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> select the bands you want</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>var PCA_out <span class="ot">=</span> <span class="fu">pcImage.select</span>([<span class="st">'pc1'</span>, <span class="st">'pc2'</span>])</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>var projection <span class="ot">=</span> <span class="fu">PCA_out.select</span>(<span class="st">'pc1'</span>)<span class="fu">.projection</span>()<span class="fu">.getInfo</span>();</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(projection, <span class="st">"output_projection"</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>var bounds <span class="ot">=</span> <span class="fu">Delhi.geometry</span>();</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Export the image, specifying the CRS, transform, and region.</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Export.image.toDrive</span>({</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  image<span class="sc">:</span> PCA_out,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  description<span class="sc">:</span> <span class="st">'PCA_Delhi'</span>,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span><span class="dv">30</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  crs<span class="sc">:</span> projection.crs,</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  maxPixels<span class="sc">:</span> <span class="fl">100E10</span>,</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  region<span class="sc">:</span> bounds</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> select the bands you want</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>var PCA_out <span class="ot">=</span> <span class="fu">pcImage.select</span>([<span class="st">'pc1'</span>, <span class="st">'pc2'</span>])</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>var projection <span class="ot">=</span> <span class="fu">PCA_out.select</span>(<span class="st">'pc1'</span>)<span class="fu">.projection</span>()<span class="fu">.getInfo</span>();</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(projection, <span class="st">"output_projection"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>var bounds <span class="ot">=</span> <span class="fu">Delhi.geometry</span>();</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Export the image, specifying the CRS, transform, and region.</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Export.image.toDrive</span>({</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  image<span class="sc">:</span> PCA_out,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  description<span class="sc">:</span> <span class="st">'PCA_Delhi'</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span><span class="dv">30</span>,</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  crs<span class="sc">:</span> projection.crs,</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  maxPixels<span class="sc">:</span> <span class="fl">100E10</span>,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  region<span class="sc">:</span> bounds</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now when you run the script a task will appear in the task menu, to export your file click Run and then it will save into your Google Drive so you can download it locally.</p>
 <p><strong>Note</strong> that setting the region here will mean that if you haven’t performed a clip it will just export the region you have set.</p>
@@ -754,15 +751,15 @@ This week
 <span class="header-section-number">5.12</span> Band math</h2>
 <p>It is also possible to quickly calculate indices in GEE…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>NDVI</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>var NDVI_1 <span class="ot">=</span> <span class="fu">clip.select</span>(<span class="st">'SR_B5'</span>)<span class="fu">.subtract</span>(<span class="fu">clip.select</span>(<span class="st">'SR_B4'</span>))</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.divide</span>(<span class="fu">clip.select</span>(<span class="st">'SR_5'</span>)<span class="fu">.add</span>(<span class="fu">clip.select</span>(<span class="st">'SR_B4'</span>)));</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(NDVI_1, { min<span class="sc">:</span> <span class="sc">-</span><span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">1</span>, palette<span class="sc">:</span> [<span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'green'</span>]}, <span class="st">'NDVI'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>NDVI</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>var NDVI_1 <span class="ot">=</span> <span class="fu">clip.select</span>(<span class="st">'SR_B5'</span>)<span class="fu">.subtract</span>(<span class="fu">clip.select</span>(<span class="st">'SR_B4'</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.divide</span>(<span class="fu">clip.select</span>(<span class="st">'SR_5'</span>)<span class="fu">.add</span>(<span class="fu">clip.select</span>(<span class="st">'SR_B4'</span>)));</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(NDVI_1, { min<span class="sc">:</span> <span class="sc">-</span><span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">1</span>, palette<span class="sc">:</span> [<span class="st">'blue'</span>, <span class="st">'white'</span>, <span class="st">'green'</span>]}, <span class="st">'NDVI'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>NDVI/ the formula to compute it even has it’s own function…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>var NDVI_2 <span class="ot">=</span> <span class="fu">clip.normalizedDifference</span>([SR_B5, SR_B4]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>var NDVI_2 <span class="ot">=</span> <span class="fu">clip.normalizedDifference</span>([SR_B5, SR_B4]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="gee-apps" class="level2" data-number="5.13"><h2 data-number="5.13" class="anchored" data-anchor-id="gee-apps">
 <span class="header-section-number">5.13</span> GEE apps</h2>

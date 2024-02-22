@@ -68,27 +68,22 @@ Before we begin explore some of the examples in the script editor, start with th
 
 ## Points
 
-To start with GEE i want to pull up the same image from a specific date for a city, i will use 
-
-We can make a new point in the code editor with:
+We can make a new point and center the map to it in code editor with
 ```{r, eval=FALSE}
 // Construct a point from coordinates.
 var Delhi_point = ee.Geometry.Point([77.216721, 28.644800]);
 
+Map.centerObject(Delhi_point, 10)
 ```
 
-In this case my city is Delhi, when i enter this code you will get a message asking if you want to convert it to an imported record, click convert and it will appear in the imports...
+In this case my city is Delhi, **when i enter this code you will get a message asking if you want to convert it to an imported record**, click convert and it will appear in the imports and also as a point on the map! 
 
 Alternatively we can click the point icon on the map and add a new point...> new layer > give an suitable name
 
 ```{r echo=FALSE, out.width = "100%", fig.align='center', cache=FALSE}
 knitr::include_graphics('prac_5/GEE_points.png') 
 ```
-To center the map on this point...where the second argument is the zoom level
 
-```{r, eval=FALSE}
-Map.centerObject(Delhi_point, 10)
-```
 
 ## Landsat data
 
@@ -154,7 +149,7 @@ Let's deal with problem two first...
 
 * I could filter based on tiles from the image collection
 
-* I can upload a file, such as one from [GADM](https://gadm.org/index.html). To do so, download the appropriate GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile `gadm41_IND_2` and I need to filter (in GEE or other software) the `GID_1` column for the row `IND.25_1`.
+* I can upload a file, such as one from [GADM](https://gadm.org/index.html). To do so, download the appropriate GADM boundary for your city, query it in QGIS to get a city outline. For me this was the shapefile **`gadm41_IND_2`** (just upload this .shp and associated files, not all the others) and I need to filter (in GEE or other software) the `GID_1` column for the row `IND.25_1`.
 
 On GEE there is an assets button where you can upload data, upload your shapefile. Next we load it and filter what you need...
 
@@ -230,7 +225,7 @@ function applyScaleFactors(image) {
 }
 
 // call our collection to the function and assign it to a new variable 
-oneimage_study_area_cloud_scale = oneimage_study_area_cloud.map(applyScaleFactors);
+var oneimage_study_area_cloud_scale = oneimage_study_area_cloud.map(applyScaleFactors);
 
 // apply the median reducer
 var oneimage_study_area_cloud_scale_median = oneimage_study_area_cloud_scale.reduce(ee.Reducer.median());
