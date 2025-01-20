@@ -375,7 +375,7 @@ knitr::include_graphics('prac_1/earthexplorer.png')
 
 Once downloaded unzip the file.
 
-In SNAP go File \> Open Product, navigate to the `.MTL` and open it. The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can be explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
+In SNAP go File \> Open Product, navigate to the file ending with `MTL` and open it. This might look like a text file in your file explorer (e.g. `MTL.txt`). The product should appear. This is a real benefit of SNAP, having data from multiple sensors in the same software that can be explored together - when you move around on the Landsat image then the Sentinel image will also move to the same location.
 
 To see the bands (or RGB images) side by side use the window dividers in the top right and also ensure the views are linked in the bottom left window.
 

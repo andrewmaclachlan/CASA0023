@@ -185,9 +185,16 @@ Create a small 9 slide presentation (not including reference slide(s)) and host 
 
 The presentation will be marked in the same manner set out in mark scheme for the learning diary. Specifically:
 
--   The summary criterion will refer to the summary of the sensor you have selected.
--   The application criterion will refer to examples of studies that have used the data from the sensor and their purpose
--   The reflection criterion will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work.
+-   The **summary criterion** will refer to the summary of the sensor you have selected.it will include independent thought 
+-   The **application criterion** will refer to and comment on examples of studies that have used the data from the sensor and their purpose
+-   The **reflection criterion** will refer to what you have learnt in relation to the sensor, its use and how the data might be used in future work/a broader context.
+
+The code below will embed your Xaringan presentation (URL) into your Quarto learning diary.
+
+```{r, eval=FALSE}
+xaringanExtra::embed_xaringan(url = "URL of your presentation",
+                              ratio = "16:9")
+```
 
 ### Quarto learning diary
 

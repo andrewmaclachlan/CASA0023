@@ -1,6 +1,6 @@
 Andy MacLachlan[^index-1]
 
-[^index-1]: The Bartlett Centre for Advanced Spatial Analysis, https://twitter.com/andymaclachlan
+[^index-1]: The Bartlett Centre for Advanced Spatial Analysis, https://www.andymac.uk/
 
 ```{r}
 ```
