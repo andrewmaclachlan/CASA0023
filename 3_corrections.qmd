@@ -90,18 +90,24 @@ $TAUv$ = 1.0 for Landsat and $TAUz$ = cosθs for COST method. DOS is the same, b
 
 Of course we can do this in R (or any other software) with just one function! First we need to download some raw satellite data that comes in the Digital Number (DN) format. This is the exact same process as we saw in week 1, expect this time select the Collection 1 (or 2), Level-1 bundle. At the moment this process won't work with Landsat 9. However, as this involves a large amount of data and it's unlikely you will need to do this in the module of data read through the following code and then move to the next section
 
+**Note** if you installed PostGIS it is likely the your computer system properties have defaulted to the PostGIS Proj_lib folder (e.g. `C:\Program Files\PostgreSQL\15\share\contrib\postgis-3.3\proj`). The Proj_lib folder that contains data for the PROJ library used by `sf`, `terra` and `RStoolbox`. To change it:
+
+* Win key + R, type SystemPropertiesAdvanced
+* Click Envrionmental variables 
+* Look for PROJ_LIB
+* Change it to `C:\OSGeo4W\share\proj` or delete it and restart R.
+
+
 ```{r eval=FALSE}
 library(terra)
-library(raster)
 library(RStoolbox)
 library(tidyverse)
 library(fs)
-library(rgdal)
 
 ## Import meta-data and bands based on MTL file
 # MUST BE LEVEL 1 not LEVEL 2 - see more info later.
-mtlFile  <- ("prac_3/Lsatdata8/LC08_L1TP_175083_20211005_20211013_01_T1_MTL.txt")
-                        
+mtlFile  <- ("prac_3/Landsat/Lsat8/LC08_L1TP_175083_20211005_20211013_01_T1_MTL.txt")
+
 metaData <- readMeta(mtlFile)
 
 lsatMeta  <- stackMeta(metaData)
@@ -155,7 +161,7 @@ Radiance is how much light the sensor sees.
 
 Reflectance is the ratio of light leaving the target to amount striking the target. Here will still have atmopsheric effects in the way of our true **apparent** reflectance. Confusingly all of these can be termed reflectance and indeed sometimes radiance is referred to as reflectance.
 
-TOA reflectance changes the data from what the sensor sees to the ratio of light leaving compared to striking it. BUT, the atmosphere is still present. If we remove the atmopshere we have apparent reflectance (sometimes called Bottom of Atmosphere reflectance). DOS gives us a **version** of apparent reflectance.
+TOA reflectance changes the data from what the sensor sees to the ratio of light leaving compared to striking it. BUT, the atmosphere is still present. If we remove the atmosphere we have apparent reflectance (sometimes called Bottom of Atmosphere reflectance). DOS gives us a **version** of apparent reflectance.
 
 ## Accessing data
 
@@ -224,6 +230,8 @@ Open our two tiles, in my case i have move my tiles into two separate folders. S
 library(tidyverse)
 library(terra)
 library(fs)
+library(sf)
+
 
 # List your raster files excluding band 8 using the patter argument
 listlandsat_8<-dir_info(here::here("prac_3", "Landsat", "Lsat8"))%>%
@@ -249,20 +257,54 @@ listlandsat_9<-dir_info(here::here("prac_3", "Landsat", "Lsat9"))%>%
   terra::rast()
 ```
 
-This might take about 2 minutes...
+This might take about 2 minutes...If this doesn't process on your machine just proceed with 1 tile.
 
 ```{r eval=FALSE}
 m1 <- terra::mosaic(listlandsat_8, listlandsat_9, fun="mean")
 
 ```
 
+To save that raster it's....
+
 ```{r eval=FALSE, include=FALSE}
 terra::writeRaster(m1, datatype="FLT4S", filename = "prac_3/mosaic.tif", filetype="GTiff", overwrite=TRUE)
 ```
 
+
 ## Enhancements
 
-Using our merged Landsat data we can now undertake some basic enhancements to try and emphasize / exaggerate certain features or spectral traits.
+**Note** at this point the mosaiced file might cover a large area. As we are about to do some intensive processing of texture and principal component analysis you might want to select a smaller study area from [GADM](https://gadm.org/index.html) or make your own.
+
+I have made a study area polygon in QGIS that i will use to clip my raster to, in order to reduce processing time.
+
+```{r eval=FALSE}
+
+study_area <- st_read("prac_3/study_area.shp")%>%
+  st_transform(., 32634)
+  
+m1_clip<-m1%>%
+  terra::crop(., study_area)%>%
+  terra::mask(., study_area)
+
+```
+Alternatively use GADM...
+
+```{r eval=FALSE}
+SA <- st_read("prac_3/GADM/gadm41_ZAF.gpkg", 
+                      layer='ADM_ADM_4')
+
+cape_town <- SA %>%
+  filter(GID_4 =="ZAF.9.3.1.87_1")%>%
+  st_transform(., 32634)
+
+m1_clip<-m1%>%
+  terra::crop(., cape_town)%>%
+  terra::mask(., cape_town)
+
+```
+
+We can now undertake some basic enhancements to try and emphasize / exaggerate certain features or spectral traits.
+
 
 ### Ratio
 
@@ -286,16 +328,20 @@ $$NDVI= \frac{NIR-Red}{NIR+Red}$$ In R this would be:
 
 ```{r eval=FALSE}
 
-m1_NDVI <- (m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5 - m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4 ) / (m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5 + m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4)
+m1_NDVI <- (m1_clip$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5 - m1_clip$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4 ) / (m1_clip$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B5 + m1_clip$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4)
 
 m1_NDVI %>%
   plot(.)
 ```
 
+To write this raster out, it's...
+
 ```{r eval=FALSE, include=FALSE}
 library(terra)
 terra::writeRaster(m1_NDVI, datatype="FLT4S", filename = "prac_3/NDVI/NDVI.tif", filetype="GTiff", overwrite=TRUE)
 ```
+
+We can then read again...
 
 ```{r eval=TRUE, include=FALSE}
 # List your raster files excluding band 8 using the pattern argument
@@ -311,7 +357,7 @@ m1_NDVI %>%
   plot(.)
 ```
 
-We can reclassify this to pull out certain areas, for example, only where NDVI is equal to or greater than 0.2
+Finally, we can reclassify this to pull out certain areas, for example, only where NDVI is equal to or greater than 0.2
 
 ```{r, eval=TRUE}
 
@@ -342,30 +388,14 @@ knitr::include_graphics('prac_3/focalmean.gif')
 ```{r eval=FALSE}
 # for a 3 by 3 filter on 1 band, w means the window and 3 means a 3 by 3 square.
 
-m1_filter <- terra::focal(m1$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, w=3)
+m1_filter <- terra::focal(m1_clip$LC08_L2SP_175083_20220501_20220504_02_T1_SR_B4, w=3)
 
 ```
 
 ### Texture
 
-For the purposes of this part of the practical i have made a study area polygon in QGIS that i will use to clip my raster to, in order to reduce processing time.
 
-
-```{r eval=FALSE}
-library(sf)
-
-study_area <- st_read("prac_3/study_area.shp")%>%
-  st_transform(., 32634)
-  
-m1_clip<-m1%>%
-  terra::crop(., study_area)%>%
-  terra::mask(., study_area)
-
-```
-
-
-
-The basics of texture were covered in the lecture. **Note** in 2024 this was updated to the `terra` package due to the retirement of rgdal, rgeos and maptools of which the `raster` package relies on. Prior to 2024 we used the `glcm` which needed the data to be loaded with the `raster` package. This has been appended to the bottom of the practical
+The basics of texture were covered in the lecture. **Note** in 2024 this was updated to the `terra` package due to the retirement of rgdal, rgeos and maptools of which the `raster` package relies on. Prior to 2024 we used the `glcm` which needed the data to be loaded with the `raster` package. This has been appended to the bottom of the practical for reference only.
 
 Why bother with texture?
 
@@ -376,12 +406,12 @@ When dealing with satellite data (e.g. Landsat) it is often provided as a scaled
 In the code below we can specify:
 
 -   the size of the moving window (e.g. 7,7)
--   the shift for co-occurrency (or second order) as seen in the lecture, the defaul is in all directions. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel
+-   the shift for co-occurrency (or second order) as seen in the lecture, the default is in all directions. If multiple shifts are supplied, glcm will calculate each texture statistic using all the specified shifts and return the mean value of the texture for each pixel
 -   the measures we want, for full equations see [Texture Metrics Background](https://www.l3harrisgeospatial.com/docs/backgroundtexturemetrics.html#:~:text=Process%20for%20Computing%20Texture%20Metrics,-A%20moving%20window&text=ENVI%20computes%20a%20histogram%20that,array%20of%20the%20occurrence%20values.&text=It%20normalizes%20the%20occurrence%20values)
 
 For more infomration on texture and a simple worked example read [the GLCM calculations guide by Mryja Hall-Beyer](https://prism.ucalgary.ca/server/api/core/bitstreams/8f9de234-cc94-401d-b701-f08ceee6cfdf/content) from page 11.
 
-**This code may take a while to run**, if it does consider taking a subset of your study area...it will be almost instant when we use Google Earth Engine later in the term.
+**This code may take a while to run**, if it does consider taking a smaller subset of your study area...it will instant when we use Google Earth Engine later in the term.
 
 ```{r eval=FALSE}
 library(GLCMTextures)
@@ -395,9 +425,10 @@ textures1<- glcm_textures(
   # levels means divide the data into 4 "bins" e.g. a range of 0-20
   # would be 0-5, 5-10, 10-15,15-20
   n_levels = 4,
-  # raster data might not be grater than 0
+  # raster data might not be greater than 0
   # convert it to a discrete number of grey levels (e.g. 4)
-  quantization = "equal range",
+  # the data is equally divided between the 4 levels by using "range"
+  quant_method = "range",
   #co-occurence (second order) matrix (1,0) = one pixel to the right
   # default is all directions as below
   shift = list(c(1, 0), c(1, 1), c(0, 1), c(-1, 1)),
@@ -494,7 +525,7 @@ Consult the assignment requirements document and complete your learning diary en
 -   [Texture and PCA in R](https://zia207.github.io/geospatial-r-github.io/texture-analysis.html)
 
 
-## glcm
+## glcm (raster package retired)
 
 To apply texture analysis to data in R, we can use the `glcm` package which has a selection of eight texture measures, and we can apply these per band...for example...Note, to use this you must have [`RTools` installed](https://cran.r-project.org/bin/windows/Rtools/) as it makes use of the C++ language.
 
