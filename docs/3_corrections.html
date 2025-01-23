@@ -404,8 +404,8 @@ This week
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Import meta-data and bands based on MTL file</span></span>
-<span><span class="co"># MUST BE LEVEL 1 not LEVEL 2 - see more info later.</span></span>
-<span><span class="va">mtlFile</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="st">"prac_3/Landsat/Lsat8/LC08_L1TP_175083_20211005_20211013_01_T1_MTL.txt"</span><span class="op">)</span></span>
+<span><span class="co"># MUST BE LEVEL 1 (digital number) not LEVEL 2 (surface reflectance) - see more info later.</span></span>
+<span><span class="va">mtlFile</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="st">"prac_3/Landsat/Lsat8/DN/LC08_L1TP_175083_20211005_20211013_02_T1_MTL.txt"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">metaData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://bleutner.github.io/RStoolbox/reference/readMeta.html">readMeta</a></span><span class="op">(</span><span class="va">mtlFile</span><span class="op">)</span></span>
 <span></span>

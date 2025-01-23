@@ -105,8 +105,8 @@ library(tidyverse)
 library(fs)
 
 ## Import meta-data and bands based on MTL file
-# MUST BE LEVEL 1 not LEVEL 2 - see more info later.
-mtlFile  <- ("prac_3/Landsat/Lsat8/LC08_L1TP_175083_20211005_20211013_01_T1_MTL.txt")
+# MUST BE LEVEL 1 (digital number) not LEVEL 2 (surface reflectance) - see more info later.
+mtlFile  <- ("prac_3/Landsat/Lsat8/DN/LC08_L1TP_175083_20211005_20211013_02_T1_MTL.txt")
 
 metaData <- readMeta(mtlFile)
 
