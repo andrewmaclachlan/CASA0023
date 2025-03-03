@@ -39,6 +39,9 @@ In the last practical we uploaded our own admin boundary dataset from GADM. GEE 
 To load in the level 2 Global Administrative Unit Layers (GAUL) data we can use the example code....
 
 ```{r, eval=FALSE}
+
+//--------------------- Load vector data --------------------------------
+
 var dataset = ee.FeatureCollection("FAO/GAUL/2015/level2");
 
 Map.setCenter(12.876, 42.682, 5);
@@ -103,6 +106,9 @@ var divide10000 = function(image) {
 1.  Let's load the imagery with minimal cloud cover, now depending on your study area and the propesnity for it to be cloudy (like the UK) you will need to change the dates and compromise on the less than % of cloud cover per tile...i wanted just to get 2022 data for this composite, with less than .1% cloud cover...the latter limited the images i could select from so i changed it to 1%
 
 ```{r, eval=FALSE}
+//--------------------- Load Sentinel data on low cloud cover --------------------------------
+
+
 var wayone = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
                   .filterDate('2022-01-01', '2022-10-31')
                   .filterBounds(shenzhen)  // Intersecting ROI
@@ -141,6 +147,9 @@ In my case this gives me 13 images...now what about increasing the cloud coverag
 2.  First we need another function to mask the cloudy pixels and do the division...
 
 ```{r, eval=FALSE}
+
+// // --------------------- cloud mask --------------------------------
+
 function maskS2clouds(image) {
   var qa = image.select('QA60');
 
@@ -161,6 +170,9 @@ Then load and filter the collection with a cloud mask.**Note** a very similar me
 Or https://developers.google.com/earth-engine/apidocs/ee-algorithms-landsat-simplecomposite
 
 ```{r, eval=FALSE}
+
+//--------------------- Load Sentinel data with cloud mask -----------------------
+
 var waytwo = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
                   .filterDate('2022-01-01', '2022-10-31')
                   .filterBounds(shenzhen)  // Intersecting ROI
@@ -203,6 +215,7 @@ To start we need some training data within our study area. I'm going to clip my 
 ### Clip
 
 ```{r, eval=FALSE}
+// // --------------------- clip image to study area --------------------------------
 
 var waytwo_clip = waytwo.clip(shenzhen)
 
@@ -245,6 +258,9 @@ var classProperty = 'class';
 Now, we need to pull out the data from our training areas...
 
 ```{r, eval=FALSE}
+
+// // --------------------- train data --------------------------------
+
 // Sample the composite to generate training data.  Note that the
 // class label is stored in the 'landcover' property.
 var training = waytwo_clip.select(bands).sampleRegions({
@@ -270,7 +286,8 @@ knitr::include_graphics('prac_6/GEE_pixel_values.png')
 To train our classifier...
 
 ```{r, eval=FALSE}
-// Train a CART classifier.
+//--------------------- train CART -----------------------
+
 var classifier = ee.Classifier.smileCart().train({
   features: training,
   classProperty: classProperty,
@@ -292,7 +309,8 @@ knitr::include_graphics('prac_5/DT.png')
 Then we can classify the image...
 
 ```{r, eval=FALSE}
-// Classify the image.
+//--------------------- classify image -----------------------
+  
 var classified = waytwo_clip.classify(classifier);
 
 ```
@@ -327,14 +345,15 @@ In my case:
 
 ## Train test split
 
-Not the problem with this is that we didn't retain a % of the data to test the model...we can fix this...this time i am going to use a Random Forest classifier, which is just many (or in this case 100) decison trees....read the code and comment after before you run this...
+Now the problem with this is that we didn't retain a % of the data to test the model...we can fix this...this time i am going to use a Random Forest classifier, which is just many (or in this case 100) decision trees....read the code and comment after before you run this...
 
 ```{r, eval=FALSE}
 
-// Optionally, do some accuracy assessment.  Fist, add a column of
-// random uniforms to the training dataset.
+// Fist, add a column of random units to the training dataset (values between 0 and 1).
+
 var withRandom = polygons.randomColumn('random');
 
+// // --------------------- train, test split --------------------------------
 
 // We want to reserve some of the data for testing, to avoid overfitting the model.
 var split = 0.5;  // Roughly 70% training, 30% testing.
@@ -359,18 +378,20 @@ var validation = waytwo_clip.select(bands).sampleRegions({
   scale: 10
 });
 
-// Random Forest Classification
+//--------------------- train RF -----------------------
 
 var rf1 = ee.Classifier.smileRandomForest(100)
     .train(training, 'class');
     
 
-////classify//////
+// // --------------------- classify --------------------------------
     
 var rf2 = waytwo_clip.classify(rf1);
 
 // Classify the test FeatureCollection.
 var test = validation.classify(rf1);
+
+// // --------------------- accuracy --------------------------------
 
 var testAccuracy = test.errorMatrix('class', 'classification');
 var consumers=testAccuracy.consumersAccuracy()
@@ -381,7 +402,6 @@ print('Validation consumer accuracy: ', consumers);
 
 Map.addLayer(rf2, {min: 1, max: 5, palette: ['d99282', '466b9f', 'ab0000', 'dfdfc2', 'b3ac9f', '1c5f2c']}, "RF");
 
-
 ```
 
 However, when i plot this map it gives a worse looking result and the accuracy doesn't make sense. Can you think why this is in this case? If not keep reading to find out...
@@ -390,12 +410,12 @@ However, when i plot this map it gives a worse looking result and the accuracy d
 
 The problem above was that the train test split was done on the polygons and i didn't draw that many in my original training data....So the process went.... draw polygons \> make a feature collection (where i assigned the land cover classes values) \> select a test train split of the polygons using random numbers \> extract the values \> train the model....
 
-Now i can get around this by using a pixel approach....draw polygons \> select a number of points from each class (e.g. 500) \> assign the pixels random numbers \> generate a test train split \> extract the values \> train the model....
+Now i can get around this by using a pixel approach....draw polygons \> select a number of points from each class (e.g. 1,000) \> assign the pixels random numbers \> generate a test train split \> extract the values \> train the model....
 
 Thanks to [Ollie Ballinger](https://twitter.com/oballinger) for some of this code...
 
 ```{r, eval=FALSE}
-////Pixel approach/////////////
+// // --------------------- pixel level --------------------------------
 
 var pixel_number= 1000;
 
@@ -417,6 +437,7 @@ var bare_earth_points=ee.FeatureCollection.randomPoints(bare_earth, pixel_number
 var forest_points=ee.FeatureCollection.randomPoints(forest, pixel_number).map(function(i){
   return i.set({'class': 6})})
 
+// add a random column for test and traning split with values between 0 and 1
 var point_sample=ee.FeatureCollection([urban_low_points,
                                   water_points,
                                   urban_high_points,
@@ -426,7 +447,8 @@ var point_sample=ee.FeatureCollection([urban_low_points,
                                   .flatten()
                                   .randomColumn();
 
-// assign 70% of training points to validation 
+// --------------------- train, test split --------------------------------
+                                    
 var split=0.7
 var training_sample = point_sample.filter(ee.Filter.lt('random', split));
 var validation_sample = point_sample.filter(ee.Filter.gte('random', split));
@@ -444,7 +466,7 @@ var validation = waytwo_clip.select(bands).sampleRegions({
   scale: 10
 });
 
-// Random Forest Classification
+// // --------------------- train model --------------------------------
 
 var rf1_pixel = ee.Classifier.smileRandomForest(100)
     .train(training, 'class');
@@ -453,14 +475,14 @@ var rf1_pixel = ee.Classifier.smileRandomForest(100)
 print('Results of RF trained classifier', rf1_pixel.explain());
 
 
-// // --------------------- Step 3: Conduct classification --------------------------------
+// // ---------------------  Conduct classification --------------------------------
     
 var rf2_pixel = waytwo_clip.classify(rf1_pixel);
 
 Map.addLayer(rf2_pixel, {min: 1, max: 5, 
   palette: ['d99282', '466b9f', 'ab0000', 'dfdfc2', 'b3ac9f', '1c5f2c']},
   "RF_pixel");
-// // --------------------- Step 4: Assess Accuracy --------------------------------
+// // --------------------- Assess Accuracy --------------------------------
 
 var trainAccuracy = rf1_pixel.confusionMatrix();
 print('Resubstitution error matrix: ', trainAccuracy);
@@ -479,7 +501,7 @@ print('Validation consumer accuracy: ', consumers);
 
 Here:
 
--   Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly precited rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%.
+-   Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly predicted rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%.
 
 -   Resubstituion accuracy is where we take the original training data and compare it to the modeled output. Mine is 99%.
 

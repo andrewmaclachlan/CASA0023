@@ -485,7 +485,7 @@ pca <- prcomp(as.data.frame(raster_and_texture, na.rm=TRUE),
 summary(pca)
 ```
 
-If we were just to print `pca` then this would give us the "loadings" - the covariances/correlations between the original variables and the new principal components. Loadings interpret the association between original vairables and components 
+If we were just to print `pca` then this would give us the "loadings" - the covariances/correlations between the original variables and the new principal components. Loadings interpret the association between original variables and components 
 
 We can also get rotations `pca$rotatation` which is adjustment of the locations on a plot. Rotations are transformations used to compute loadings. A common method is varimax which adjusts the rotations to make loading high or zero. Imagine a 3D plot and trying to move around the plot to line the data up we have maximum variance on the x-axis. See: 
   

@@ -319,20 +319,22 @@ This week
 <span class="header-section-number">6.3</span> Vector data</h2>
 <p>To load in the level 2 Global Administrative Unit Layers (GAUL) data we can use the example code….</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>);</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">---------------------</span> Load vector data <span class="sc">--------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.setCenter</span>(<span class="fl">12.876</span>, <span class="fl">42.682</span>, <span class="dv">5</span>);</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>var dataset <span class="ot">=</span> <span class="fu">ee.FeatureCollection</span>(<span class="st">"FAO/GAUL/2015/level2"</span>);</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>var styleParams <span class="ot">=</span> {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  fillColor<span class="sc">:</span> <span class="st">'b5ffb4'</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> <span class="st">'00909F'</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  width<span class="sc">:</span> <span class="fl">1.0</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> comment this out otherwise it will just display as RBG data</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>dataset <span class="ot">=</span> <span class="fu">dataset.style</span>(styleParams);</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset, {}, <span class="st">'Second Level Administrative Units'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.setCenter</span>(<span class="fl">12.876</span>, <span class="fl">42.682</span>, <span class="dv">5</span>);</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>var styleParams <span class="ot">=</span> {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  fillColor<span class="sc">:</span> <span class="st">'b5ffb4'</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  color<span class="sc">:</span> <span class="st">'00909F'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  width<span class="sc">:</span> <span class="fl">1.0</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> comment this out otherwise it will just display as RBG data</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span>dataset <span class="ot">=</span> <span class="fu">dataset.style</span>(styleParams);</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(dataset, {}, <span class="st">'Second Level Administrative Units'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Make a new script and copy this code in, then use the inspector to select a study area and filter the vector data to just that area. Note, that level 2 is different between different countries.</p>
 <p>I am going to focus on Shenzhen, but select any city. My inspector shows….</p>
@@ -378,23 +380,26 @@ This week
 <li>Let’s load the imagery with minimal cloud cover, now depending on your study area and the propesnity for it to be cloudy (like the UK) you will need to change the dates and compromise on the less than % of cloud cover per tile…i wanted just to get 2022 data for this composite, with less than .1% cloud cover…the latter limited the images i could select from so i changed it to 1%</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>var wayone <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'COPERNICUS/S2_SR_HARMONIZED'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-10-31'</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterBounds</span>(shenzhen)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">/</span><span class="er">/</span> Pre<span class="sc">-</span>filter to get less cloudy granules.</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span>,<span class="dv">1</span>));</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>var wayone_divide <span class="ot">=</span> <span class="fu">wayone.map</span>(divide10000);</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>var visualization <span class="ot">=</span> {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'B4'</span>, <span class="st">'B3'</span>, <span class="st">'B2'</span>],</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(shenzhen, <span class="dv">10</span>);</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(wayone_divide, visualization, <span class="st">'wayoneRGB'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">---------------------</span> Load Sentinel data on low cloud cover <span class="sc">--------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>var wayone <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'COPERNICUS/S2_SR_HARMONIZED'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-10-31'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterBounds</span>(shenzhen)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">/</span><span class="er">/</span> Pre<span class="sc">-</span>filter to get less cloudy granules.</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span>,<span class="dv">1</span>));</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>var wayone_divide <span class="ot">=</span> <span class="fu">wayone.map</span>(divide10000);</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>var visualization <span class="ot">=</span> {</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  min<span class="sc">:</span> <span class="fl">0.0</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  max<span class="sc">:</span> <span class="fl">0.3</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  bands<span class="sc">:</span> [<span class="st">'B4'</span>, <span class="st">'B3'</span>, <span class="st">'B2'</span>],</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.centerObject</span>(shenzhen, <span class="dv">10</span>);</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(wayone_divide, visualization, <span class="st">'wayoneRGB'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Remember that if we wanted to see all the files we have here, we can export it to a <code>.csv</code></p>
 <div class="cell">
@@ -414,31 +419,35 @@ This week
 <li>First we need another function to mask the cloudy pixels and do the division…</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">maskS2clouds</span>(image) {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  var qa <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'QA60'</span>);</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Bits <span class="dv">10</span> and <span class="dv">11</span> are clouds and cirrus, respectively.</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  var cloudBitMask <span class="ot">=</span> <span class="dv">1</span> <span class="sc">&lt;</span><span class="er">&lt;</span> <span class="dv">10</span>;</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  var cirrusBitMask <span class="ot">=</span> <span class="dv">1</span> <span class="sc">&lt;</span><span class="er">&lt;</span> <span class="dv">11</span>;</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Both flags should be set to zero, indicating clear conditions.</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  var mask <span class="ot">=</span> <span class="fu">qa.bitwiseAnd</span>(cloudBitMask)<span class="fu">.eq</span>(<span class="dv">0</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.and</span>(<span class="fu">qa.bitwiseAnd</span>(cirrusBitMask)<span class="fu">.eq</span>(<span class="dv">0</span>));</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">image.updateMask</span>(mask)<span class="fu">.divide</span>(<span class="dv">10000</span>);</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> cloud mask <span class="sc">--------------------------------</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">maskS2clouds</span>(image) {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  var qa <span class="ot">=</span> <span class="fu">image.select</span>(<span class="st">'QA60'</span>);</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Bits <span class="dv">10</span> and <span class="dv">11</span> are clouds and cirrus, respectively.</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  var cloudBitMask <span class="ot">=</span> <span class="dv">1</span> <span class="sc">&lt;</span><span class="er">&lt;</span> <span class="dv">10</span>;</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  var cirrusBitMask <span class="ot">=</span> <span class="dv">1</span> <span class="sc">&lt;</span><span class="er">&lt;</span> <span class="dv">11</span>;</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="sc">/</span><span class="er">/</span> Both flags should be set to zero, indicating clear conditions.</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  var mask <span class="ot">=</span> <span class="fu">qa.bitwiseAnd</span>(cloudBitMask)<span class="fu">.eq</span>(<span class="dv">0</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">.and</span>(<span class="fu">qa.bitwiseAnd</span>(cirrusBitMask)<span class="fu">.eq</span>(<span class="dv">0</span>));</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">image.updateMask</span>(mask)<span class="fu">.divide</span>(<span class="dv">10000</span>);</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then load and filter the collection with a cloud mask.<strong>Note</strong> a very similar method can be used for Landsat data</p>
 <p>Or https://developers.google.com/earth-engine/apidocs/ee-algorithms-landsat-simplecomposite</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>var waytwo <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'COPERNICUS/S2_SR_HARMONIZED'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-10-31'</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterBounds</span>(shenzhen)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">/</span><span class="er">/</span> Pre<span class="sc">-</span>filter to get less cloudy granules.</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span>,<span class="dv">20</span>))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.map</span>(maskS2clouds);</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                  </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(waytwo, visualization, <span class="st">'waytwoRGB'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">---------------------</span> Load Sentinel data with cloud mask <span class="sc">-----------------------</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>var waytwo <span class="ot">=</span> <span class="fu">ee.ImageCollection</span>(<span class="st">'COPERNICUS/S2_SR_HARMONIZED'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterDate</span>(<span class="st">'2022-01-01'</span>, <span class="st">'2022-10-31'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filterBounds</span>(shenzhen)  <span class="sc">/</span><span class="er">/</span> Intersecting ROI</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">/</span><span class="er">/</span> Pre<span class="sc">-</span>filter to get less cloudy granules.</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'CLOUDY_PIXEL_PERCENTAGE'</span>,<span class="dv">20</span>))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">.map</span>(maskS2clouds);</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                  </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(waytwo, visualization, <span class="st">'waytwoRGB'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In my case this produces a mixed result. I now have 62 images, but evidently the cloud mask hasn’t worked perfectly…</p>
 <div class="cell" data-layout-align="center">
@@ -472,9 +481,11 @@ This week
 <section id="clip" class="level3" data-number="6.5.1"><h3 data-number="6.5.1" class="anchored" data-anchor-id="clip">
 <span class="header-section-number">6.5.1</span> Clip</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>var waytwo_clip <span class="ot">=</span> <span class="fu">waytwo.clip</span>(shenzhen)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> clip image to study area <span class="sc">--------------------------------</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(waytwo_clip, visualization, <span class="st">'waytwoRGB_clip'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>var waytwo_clip <span class="ot">=</span> <span class="fu">waytwo.clip</span>(shenzhen)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(waytwo_clip, visualization, <span class="st">'waytwoRGB_clip'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="training-data" class="level3" data-number="6.5.2"><h3 data-number="6.5.2" class="anchored" data-anchor-id="training-data">
 <span class="header-section-number">6.5.2</span> Training data</h3>
@@ -509,13 +520,15 @@ This week
 </div>
 <p>Now, we need to pull out the data from our training areas…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Sample the composite to generate training data.  Note that the</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> class label is stored <span class="cf">in</span> the <span class="st">'landcover'</span> property.</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> polygons,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [classProperty],</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> train data <span class="sc">--------------------------------</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> Sample the composite to generate training data.  Note that the</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> class label is stored <span class="cf">in</span> the <span class="st">'landcover'</span> property.</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> polygons,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [classProperty],</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>});</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When i print this variable you can see the values that have been pullout out of the data</p>
 <div class="cell">
@@ -533,13 +546,14 @@ This week
 <span class="header-section-number">6.6</span> Classify</h2>
 <p>To train our classifier…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Train a CART classifier.</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>var classifier <span class="ot">=</span> <span class="fu">ee.Classifier.smileCart</span>()<span class="fu">.train</span>({</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  features<span class="sc">:</span> training,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  classProperty<span class="sc">:</span> classProperty,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Print some info about the <span class="fu">classifier</span> (specific to CART).</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'CART, explained'</span>, <span class="fu">classifier.explain</span>());</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">---------------------</span> train CART <span class="sc">-----------------------</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>var classifier <span class="ot">=</span> <span class="fu">ee.Classifier.smileCart</span>()<span class="fu">.train</span>({</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  features<span class="sc">:</span> training,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  classProperty<span class="sc">:</span> classProperty,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Print some info about the <span class="fu">classifier</span> (specific to CART).</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'CART, explained'</span>, <span class="fu">classifier.explain</span>());</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When you print out the classifier you will see:</p>
 <ul>
@@ -557,8 +571,9 @@ This week
 </div>
 <p>Then we can classify the image…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Classify the image.</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>var classified <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(classifier);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">---------------------</span> classify image <span class="sc">-----------------------</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>var classified <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(classifier);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And plot the output…</p>
 <div class="cell">
@@ -586,66 +601,69 @@ This week
 <li><p>Forest</p></li>
 </ol></section><section id="train-test-split" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="train-test-split">
 <span class="header-section-number">6.7</span> Train test split</h2>
-<p>Not the problem with this is that we didn’t retain a % of the data to test the model…we can fix this…this time i am going to use a Random Forest classifier, which is just many (or in this case 100) decison trees….read the code and comment after before you run this…</p>
+<p>Now the problem with this is that we didn’t retain a % of the data to test the model…we can fix this…this time i am going to use a Random Forest classifier, which is just many (or in this case 100) decision trees….read the code and comment after before you run this…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Optionally, do some accuracy assessment.  Fist, add a column of</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> random uniforms to the training dataset.</span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Fist, add a column of random units to the training <span class="fu">dataset</span> (values between <span class="dv">0</span> and <span class="dv">1</span>).</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>var withRandom <span class="ot">=</span> <span class="fu">polygons.randomColumn</span>(<span class="st">'random'</span>);</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> We want to reserve some of the data <span class="cf">for</span> testing, to avoid overfitting the model.</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>var split <span class="ot">=</span> <span class="fl">0.5</span>;  <span class="sc">/</span><span class="er">/</span> Roughly <span class="dv">70</span><span class="sc">% training, 30%</span> testing.</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>var trainingPartition <span class="ot">=</span> <span class="fu">withRandom.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'random'</span>, split));</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>var testingPartition <span class="ot">=</span> <span class="fu">withRandom.filter</span>(<span class="fu">ee.Filter.gte</span>(<span class="st">'random'</span>, split));</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(trainingPartition, <span class="st">"train"</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(testingPartition, <span class="st">"test"</span>)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> train, test split <span class="sc">--------------------------------</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="er">//</span> We want to reserve some of the data <span class="cf">for</span> testing, to avoid overfitting the model.</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>var split <span class="ot">=</span> <span class="fl">0.5</span>;  <span class="sc">/</span><span class="er">/</span> Roughly <span class="dv">70</span><span class="sc">% training, 30%</span> testing.</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>var trainingPartition <span class="ot">=</span> <span class="fu">withRandom.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>var testingPartition <span class="ot">=</span> <span class="fu">withRandom.filter</span>(<span class="fu">ee.Filter.gte</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(trainingPartition, <span class="st">"train"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(testingPartition, <span class="st">"test"</span>)</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> take samples from image <span class="cf">for</span> training and validation  </span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> trainingPartition,</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span>,</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> take samples from image <span class="cf">for</span> training and validation  </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> trainingPartition,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>});</span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>var validation <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> testingPartition,</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Random Forest Classification</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>var rf1 <span class="ot">=</span> <span class="fu">ee.Classifier.smileRandomForest</span>(<span class="dv">100</span>)</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.train</span>(training, <span class="st">'class'</span>);</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">///</span>classify<span class="sc">/</span><span class="er">/////</span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>var rf2 <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(rf1);</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Classify the test FeatureCollection.</span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>var test <span class="ot">=</span> <span class="fu">validation.classify</span>(rf1);</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>var testAccuracy <span class="ot">=</span> <span class="fu">test.errorMatrix</span>(<span class="st">'class'</span>, <span class="st">'classification'</span>);</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>var consumers<span class="ot">=</span><span class="fu">testAccuracy.consumersAccuracy</span>()</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>var validation <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> testingPartition,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span><span class="sc">---------------------</span> train RF <span class="sc">-----------------------</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>var rf1 <span class="ot">=</span> <span class="fu">ee.Classifier.smileRandomForest</span>(<span class="dv">100</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.train</span>(training, <span class="st">'class'</span>);</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> classify <span class="sc">--------------------------------</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>var rf2 <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(rf1);</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Classify the test FeatureCollection.</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>var test <span class="ot">=</span> <span class="fu">validation.classify</span>(rf1);</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> accuracy <span class="sc">--------------------------------</span></span>
 <span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span>, testAccuracy);</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span>, <span class="fu">testAccuracy.accuracy</span>())</span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation consumer accuracy: '</span>, consumers);</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(rf2, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]}, <span class="st">"RF"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>var testAccuracy <span class="ot">=</span> <span class="fu">test.errorMatrix</span>(<span class="st">'class'</span>, <span class="st">'classification'</span>);</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>var consumers<span class="ot">=</span><span class="fu">testAccuracy.consumersAccuracy</span>()</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span>, testAccuracy);</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span>, <span class="fu">testAccuracy.accuracy</span>())</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation consumer accuracy: '</span>, consumers);</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(rf2, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]}, <span class="st">"RF"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, when i plot this map it gives a worse looking result and the accuracy doesn’t make sense. Can you think why this is in this case? If not keep reading to find out…</p>
 </section><section id="train-test-split-pixel" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="train-test-split-pixel">
 <span class="header-section-number">6.8</span> Train test split pixel</h2>
 <p>The problem above was that the train test split was done on the polygons and i didn’t draw that many in my original training data….So the process went…. draw polygons &gt; make a feature collection (where i assigned the land cover classes values) &gt; select a test train split of the polygons using random numbers &gt; extract the values &gt; train the model….</p>
-<p>Now i can get around this by using a pixel approach….draw polygons &gt; select a number of points from each class (e.g.&nbsp;500) &gt; assign the pixels random numbers &gt; generate a test train split &gt; extract the values &gt; train the model….</p>
+<p>Now i can get around this by using a pixel approach….draw polygons &gt; select a number of points from each class (e.g.&nbsp;1,000) &gt; assign the pixels random numbers &gt; generate a test train split &gt; extract the values &gt; train the model….</p>
 <p>Thanks to <a href="https://twitter.com/oballinger">Ollie Ballinger</a> for some of this code…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">///</span>Pixel approach<span class="sc">/</span><span class="er">////////////</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> pixel level <span class="sc">--------------------------------</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>var pixel_number<span class="ot">=</span> <span class="dv">1000</span>;</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -667,67 +685,69 @@ This week
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>var forest_points<span class="ot">=</span><span class="fu">ee.FeatureCollection.randomPoints</span>(forest, pixel_number)<span class="fu">.map</span>(<span class="cf">function</span>(i){</span>
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">i.set</span>({<span class="st">'class'</span><span class="sc">:</span> <span class="dv">6</span>})})</span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>var point_sample<span class="ot">=</span><span class="fu">ee.FeatureCollection</span>([urban_low_points,</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>                                  water_points,</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>                                  urban_high_points,</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>                                  grass_points,</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>                                  bare_earth_points,</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                                  forest_points])</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">.flatten</span>()</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">.randomColumn</span>();</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> assign <span class="dv">70</span>% of training points to validation </span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>var split<span class="ot">=</span><span class="fl">0.7</span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>var training_sample <span class="ot">=</span> <span class="fu">point_sample.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'random'</span>, split));</span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>var validation_sample <span class="ot">=</span> <span class="fu">point_sample.filter</span>(<span class="fu">ee.Filter.gte</span>(<span class="st">'random'</span>, split));</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> take samples from image <span class="cf">for</span> training and validation  </span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> training_sample,</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span>,</span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>var validation <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> validation_sample,</span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>});</span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Random Forest Classification</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> add a random column <span class="cf">for</span> test and traning split with values between <span class="dv">0</span> and <span class="dv">1</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>var point_sample<span class="ot">=</span><span class="fu">ee.FeatureCollection</span>([urban_low_points,</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>                                  water_points,</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>                                  urban_high_points,</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>                                  grass_points,</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                                  bare_earth_points,</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>                                  forest_points])</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">.flatten</span>()</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">.randomColumn</span>();</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="sc">---------------------</span> train, test split <span class="sc">--------------------------------</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>                                    </span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>var split<span class="ot">=</span><span class="fl">0.7</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>var training_sample <span class="ot">=</span> <span class="fu">point_sample.filter</span>(<span class="fu">ee.Filter.lt</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>var validation_sample <span class="ot">=</span> <span class="fu">point_sample.filter</span>(<span class="fu">ee.Filter.gte</span>(<span class="st">'random'</span>, split));</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> take samples from image <span class="cf">for</span> training and validation  </span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>var training <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> training_sample,</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span>,</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>});</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>var validation <span class="ot">=</span> <span class="fu">waytwo_clip.select</span>(bands)<span class="fu">.sampleRegions</span>({</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  collection<span class="sc">:</span> validation_sample,</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  properties<span class="sc">:</span> [<span class="st">'class'</span>],</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  scale<span class="sc">:</span> <span class="dv">10</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>});</span>
 <span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>var rf1_pixel <span class="ot">=</span> <span class="fu">ee.Classifier.smileRandomForest</span>(<span class="dv">100</span>)</span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.train</span>(training, <span class="st">'class'</span>);</span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Get information about the trained classifier.</span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Results of RF trained classifier'</span>, <span class="fu">rf1_pixel.explain</span>());</span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> Step <span class="dv">3</span><span class="sc">:</span> Conduct classification <span class="sc">--------------------------------</span></span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>var rf2_pixel <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(rf1_pixel);</span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(rf2_pixel, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, </span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]},</span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RF_pixel"</span>);</span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> Step <span class="dv">4</span><span class="sc">:</span> Assess Accuracy <span class="sc">--------------------------------</span></span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>var trainAccuracy <span class="ot">=</span> <span class="fu">rf1_pixel.confusionMatrix</span>();</span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Resubstitution error matrix: '</span>, trainAccuracy);</span>
-<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Training overall accuracy: '</span>, <span class="fu">trainAccuracy.accuracy</span>());</span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>var validated <span class="ot">=</span> <span class="fu">validation.classify</span>(rf1_pixel);</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> train model <span class="sc">--------------------------------</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>var rf1_pixel <span class="ot">=</span> <span class="fu">ee.Classifier.smileRandomForest</span>(<span class="dv">100</span>)</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.train</span>(training, <span class="st">'class'</span>);</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> Get information about the trained classifier.</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Results of RF trained classifier'</span>, <span class="fu">rf1_pixel.explain</span>());</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span>  Conduct classification <span class="sc">--------------------------------</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>var rf2_pixel <span class="ot">=</span> <span class="fu">waytwo_clip.classify</span>(rf1_pixel);</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="fu">Map.addLayer</span>(rf2_pixel, {min<span class="sc">:</span> <span class="dv">1</span>, max<span class="sc">:</span> <span class="dv">5</span>, </span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  palette<span class="sc">:</span> [<span class="st">'d99282'</span>, <span class="st">'466b9f'</span>, <span class="st">'ab0000'</span>, <span class="st">'dfdfc2'</span>, <span class="st">'b3ac9f'</span>, <span class="st">'1c5f2c'</span>]},</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RF_pixel"</span>);</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> <span class="er">//</span> <span class="sc">---------------------</span> Assess Accuracy <span class="sc">--------------------------------</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>var trainAccuracy <span class="ot">=</span> <span class="fu">rf1_pixel.confusionMatrix</span>();</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Resubstitution error matrix: '</span>, trainAccuracy);</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Training overall accuracy: '</span>, <span class="fu">trainAccuracy.accuracy</span>());</span>
 <span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>var testAccuracy <span class="ot">=</span> <span class="fu">validated.errorMatrix</span>(<span class="st">'class'</span>, <span class="st">'classification'</span>);</span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>var consumers<span class="ot">=</span><span class="fu">testAccuracy.consumersAccuracy</span>()</span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span>, testAccuracy);</span>
-<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span>, <span class="fu">testAccuracy.accuracy</span>())</span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation consumer accuracy: '</span>, consumers);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>var validated <span class="ot">=</span> <span class="fu">validation.classify</span>(rf1_pixel);</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>var testAccuracy <span class="ot">=</span> <span class="fu">validated.errorMatrix</span>(<span class="st">'class'</span>, <span class="st">'classification'</span>);</span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>var consumers<span class="ot">=</span><span class="fu">testAccuracy.consumersAccuracy</span>()</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation error matrix: '</span>, testAccuracy);</span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation overall accuracy: '</span>, <span class="fu">testAccuracy.accuracy</span>())</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Validation consumer accuracy: '</span>, consumers);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here:</p>
 <ul>
-<li><p>Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly precited rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%.</p></li>
+<li><p>Random Forest Out of Bag Error Estimate. Remember that a RF is a collection of decision trees, in each tree not all the data is used and the left over data is termed the out of bag sample (OOB).After the DTs have been trained the OOB data is then applied to all the DTs that did not use it within the training data. Each DT predicts the outcome using the unseen data and the score is created through the correctly predicted rows from the OOB sample across the trees. Here my error is about 1.2% which matches my accuracy of 98%.</p></li>
 <li><p>Resubstituion accuracy is where we take the original training data and compare it to the modeled output. Mine is 99%.</p></li>
 <li><p>The confusion matrix is where we held back our % of the original data calling it our validation or test data. We then trained with the model with our training data, took the model and applied it to our testing data. This matrix compares the output of the model and our validation data (which wasn’t used to train it). Mine is 98%.</p></li>
 </ul>

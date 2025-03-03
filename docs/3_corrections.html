@@ -726,7 +726,7 @@ There is also a U.S. Analysis Read Dataset (ARD) that includes a bundle of data 
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html">summary</a></span><span class="op">(</span><span class="va">pca</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If we were just to print <code>pca</code> then this would give us the “loadings” - the covariances/correlations between the original variables and the new principal components. Loadings interpret the association between original vairables and components</p>
+<p>If we were just to print <code>pca</code> then this would give us the “loadings” - the covariances/correlations between the original variables and the new principal components. Loadings interpret the association between original variables and components</p>
 <p>We can also get rotations <code>pca$rotatation</code> which is adjustment of the locations on a plot. Rotations are transformations used to compute loadings. A common method is varimax which adjusts the rotations to make loading high or zero. Imagine a 3D plot and trying to move around the plot to line the data up we have maximum variance on the x-axis. See:</p>
 <ul>
 <li>https://grantkim94.medium.com/cracking-principal-components-analysis-pca-part-1-1372736ebac7</li>
